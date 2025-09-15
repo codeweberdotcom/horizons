@@ -170,8 +170,15 @@ function add_service_category_fields($taxonomy)
 ?>
    <div class="form-field term-color-wrap">
       <label for="service_category_color">Category Color</label>
+
+      <!-- Color preview box for add form -->
+      <div class="color-preview-container">
+         <span class="color-preview-label">Selected Color Preview:</span>
+         <div class="color-preview-box primary"></div>
+      </div>
+
       <select name="service_category_color" id="service_category_color" class="color-select">
-         <option value="primary">Primary (#FEBE10)</option>
+         <option value="primary" selected>Primary (#FEBE10)</option>
          <option value="vintage-burgundy">Vintage Burgundy (#893B41)</option>
          <option value="slate-gray">Slate Gray (#86909B)</option>
          <option value="olive-green">Olive Green (#738D50)</option>
@@ -181,18 +188,7 @@ function add_service_category_fields($taxonomy)
       </select>
       <p>Select color for service category display</p>
    </div>
-
-   <div class="form-field term-alt-title-wrap">
-      <label for="service_category_alt_title">Alternative Title</label>
-      <input type="text" name="service_category_alt_title" id="service_category_alt_title" value="" />
-      <p>Alternative title to replace the main one (used in preget_post)</p>
-   </div>
-
-   <div class="form-field term-order-wrap">
-      <label for="service_category_order">Order Number</label>
-      <input type="number" name="service_category_order" id="service_category_order" value="0" min="0" step="1" />
-      <p>Number for sorting categories when displaying in a loop</p>
-   </div>
+   <!-- ... остальные поля ... -->
 <?php
 }
 
@@ -208,6 +204,12 @@ function edit_service_category_fields($term, $taxonomy)
          <label for="service_category_color">Category Color</label>
       </th>
       <td>
+         <!-- Color preview box -->
+         <div class="color-preview-container">
+            <span class="color-preview-label">Selected Color Preview:</span>
+            <div class="color-preview-box <?php echo esc_attr($color ? $color : ''); ?>"></div>
+         </div>
+
          <select name="service_category_color" id="service_category_color" class="color-select">
             <option value="primary" <?php selected($color, 'primary'); ?>>Primary (#FEBE10)</option>
             <option value="vintage-burgundy" <?php selected($color, 'vintage-burgundy'); ?>>Vintage Burgundy (#893B41)</option>
@@ -220,26 +222,7 @@ function edit_service_category_fields($term, $taxonomy)
          <p class="description">Select color for service category display</p>
       </td>
    </tr>
-
-   <tr class="form-field term-alt-title-wrap">
-      <th scope="row">
-         <label for="service_category_alt_title">Alternative Title</label>
-      </th>
-      <td>
-         <input type="text" name="service_category_alt_title" id="service_category_alt_title" value="<?php echo esc_attr($alt_title); ?>" />
-         <p class="description">Alternative title to replace the main one (used in preget_post)</p>
-      </td>
-   </tr>
-
-   <tr class="form-field term-order-wrap">
-      <th scope="row">
-         <label for="service_category_order">Order Number</label>
-      </th>
-      <td>
-         <input type="number" name="service_category_order" id="service_category_order" value="<?php echo esc_attr($order); ?>" min="0" step="1" />
-         <p class="description">Number for sorting categories when displaying in a loop</p>
-      </td>
-   </tr>
+   <!-- ... остальные поля ... -->
 <?php
 }
 
@@ -253,12 +236,12 @@ function save_service_category_meta($term_id)
       );
    }
 
-   
+
    if (isset($_POST['service_category_alt_title'])) {
       update_term_meta(
          $term_id,
          'service_category_alt_title',
-        $_POST['service_category_alt_title']
+         $_POST['service_category_alt_title']
       );
    }
 
@@ -271,12 +254,13 @@ function save_service_category_meta($term_id)
    }
 }
 
-add_action('admin_enqueue_scripts', 'service_category_admin_styles');
-function service_category_admin_styles()
+add_action('admin_enqueue_scripts', 'service_category_admin_styles_scripts');
+function service_category_admin_styles_scripts()
 {
    $screen = get_current_screen();
 
    if ($screen->taxonomy === 'service_category') {
+      // Styles
       echo '
         <style>
         .color-select {
@@ -304,7 +288,79 @@ function service_category_admin_styles()
         .color-option-preview.muted-teal { background-color: #47878F; }
         .color-option-preview.charcoal-blue { background-color: #303C42; }
         .color-option-preview.dusty-navy { background-color: #3D5567; }
+        
+        /* Styles for color preview above select */
+        .color-preview-container {
+            margin-bottom: 8px;
+        }
+        
+        .color-preview-label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+            color: #1d2327;
+        }
+        
+        .color-preview-box {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .color-preview-box.primary { background-color: #FEBE10; }
+        .color-preview-box.vintage-burgundy { background-color: #893B41; }
+        .color-preview-box.slate-gray { background-color: #86909B; }
+        .color-preview-box.olive-green { background-color: #738D50; }
+        .color-preview-box.muted-teal { background-color: #47878F; }
+        .color-preview-box.charcoal-blue { background-color: #303C42; }
+        .color-preview-box.dusty-navy { background-color: #3D5567; }
+        
+        .color-select-wrapper {
+            position: relative;
+            display: inline-block;
+            max-width: 250px;
+            width: 100%;
+        }
         </style>
+        ';
+
+      // JavaScript for color preview
+      echo '
+        <script>
+        jQuery(document).ready(function($) {
+            // Function to update color preview
+            function updateColorPreview() {
+                $(".color-select").each(function() {
+                    var $select = $(this);
+                    var selectedValue = $select.val();
+                    var $previewBox = $select.closest("td").find(".color-preview-box");
+                    
+                    if ($previewBox.length) {
+                        // Remove all color classes
+                        $previewBox.removeClass("primary vintage-burgundy slate-gray olive-green muted-teal charcoal-blue dusty-navy");
+                        
+                        // Add current color class
+                        if (selectedValue) {
+                            $previewBox.addClass(selectedValue);
+                        }
+                    }
+                });
+            }
+            
+            // Initialize color preview
+            updateColorPreview();
+            
+            // Update preview on select change
+            $(".color-select").on("change", updateColorPreview);
+            
+            // Also update when form is loaded (for edit pages)
+            $(document).on("ajaxComplete", function() {
+                setTimeout(updateColorPreview, 100);
+            });
+        });
+        </script>
         ';
    }
 }
