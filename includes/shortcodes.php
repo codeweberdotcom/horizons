@@ -85,19 +85,23 @@ add_shortcode('staff_grid', 'codeweber_staff_shortcode');
 //--------------------------------
 //SERVICES
 //--------------------------------
-// functions.php
+
 add_shortcode('service_categories_cards', 'service_categories_cards_shortcode');
 
 function service_categories_cards_shortcode($atts)
 {
     $atts = shortcode_atts(array(
         'posts_per_page' => -1,
-        'orderby' => 'name',
+        'orderby' => 'meta_value_num', // Changed default to meta_value_num for ordering by our custom field
         'order' => 'ASC',
-        'columns' => '3'
+        'columns' => '3',
+        'use_alt_title' => 'true' // New parameter to control title display
     ), $atts);
 
-    // Получаем термины с правильными параметрами
+    // Convert string to boolean
+    $use_alt_title = filter_var($atts['use_alt_title'], FILTER_VALIDATE_BOOLEAN);
+
+    // Get terms with proper parameters
     $args = array(
         'taxonomy' => 'service_category',
         'hide_empty' => false,
@@ -105,20 +109,42 @@ function service_categories_cards_shortcode($atts)
         'order' => $atts['order'],
     );
 
-    // Добавляем number только если не -1
+    // Add meta_key if ordering by meta_value or meta_value_num
+    if ($atts['orderby'] === 'meta_value_num' || $atts['orderby'] === 'meta_value') {
+        $args['meta_key'] = 'service_category_order';
+    }
+
+    // Add number only if not -1
     if ($atts['posts_per_page'] != -1) {
         $args['number'] = $atts['posts_per_page'];
     }
 
     $terms = get_terms($args);
 
-    // Проверяем ошибки и пустой результат
+    // Check for errors and empty results
     if (is_wp_error($terms)) {
-        return '<p>Ошибка загрузки категорий: ' . $terms->get_error_message() . '</p>';
+        return '<p>Error loading categories: ' . $terms->get_error_message() . '</p>';
     }
 
     if (empty($terms)) {
-        return '<p>Категории не найдены</p>';
+        return '<p>No categories found</p>';
+    }
+
+    // Manual sorting if terms don't have order meta
+    if ($atts['orderby'] === 'meta_value_num' || $atts['orderby'] === 'meta_value') {
+        usort($terms, function ($a, $b) use ($atts) {
+            $order_a = get_term_meta($a->term_id, 'service_category_order', true);
+            $order_b = get_term_meta($b->term_id, 'service_category_order', true);
+
+            $order_a = empty($order_a) ? 0 : intval($order_a);
+            $order_b = empty($order_b) ? 0 : intval($order_b);
+
+            if ($atts['order'] === 'ASC') {
+                return $order_a <=> $order_b;
+            } else {
+                return $order_b <=> $order_a;
+            }
+        });
     }
 
     $column_class = 'col-md-' . (12 / intval($atts['columns']));
@@ -130,7 +156,16 @@ function service_categories_cards_shortcode($atts)
             $color_class = $color ? 'bg-' . $color : '';
             $term_link = get_term_link($term);
 
-            // Проверяем ссылку на ошибки
+            // Get alternative title if enabled
+            $display_title = $term->name;
+            if ($use_alt_title) {
+                $alt_title = get_term_meta($term->term_id, 'service_category_alt_title', true);
+                if (!empty($alt_title)) {
+                    $display_title = $alt_title;
+                }
+            }
+
+            // Check link for errors
             if (is_wp_error($term_link)) {
                 $term_link = '#';
             }
@@ -142,7 +177,7 @@ function service_categories_cards_shortcode($atts)
                         <div class="pe-none mb-5">
                             <div class="practice-card-hover brand-square-md <?php echo esc_attr($color_class); ?>"></div>
                         </div>
-                        <h3 class="h4"><?php echo esc_html($term->name); ?></h3>
+                        <h3 class="h4"><?php echo wp_kses_post($display_title); ?></h3>
                     </div>
                 </a>
             </div>

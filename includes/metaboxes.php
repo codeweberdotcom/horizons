@@ -158,17 +158,18 @@ add_filter('manage_edit-staff_sortable_columns', 'codeweber_make_staff_additiona
 //--------------------------------
 //SERVICES
 //--------------------------------
-add_action('service_category_add_form_fields', 'add_service_category_color_field', 10, 2);
-add_action('service_category_edit_form_fields', 'edit_service_category_color_field', 10, 2);
-add_action('created_service_category', 'save_service_category_color_meta', 10, 2);
-add_action('edited_service_category', 'save_service_category_color_meta', 10, 2);
 
-// Добавляем поле при создании термина
-function add_service_category_color_field($taxonomy)
+add_action('service_category_add_form_fields', 'add_service_category_fields', 10, 2);
+add_action('service_category_edit_form_fields', 'edit_service_category_fields', 10, 2);
+add_action('created_service_category', 'save_service_category_meta', 10, 2);
+add_action('edited_service_category', 'save_service_category_meta', 10, 2);
+
+// Add fields when creating term
+function add_service_category_fields($taxonomy)
 {
 ?>
    <div class="form-field term-color-wrap">
-      <label for="service_category_color">Цвет категории</label>
+      <label for="service_category_color">Category Color</label>
       <select name="service_category_color" id="service_category_color" class="color-select">
          <option value="primary">Primary (#FEBE10)</option>
          <option value="vintage-burgundy">Vintage Burgundy (#893B41)</option>
@@ -178,19 +179,33 @@ function add_service_category_color_field($taxonomy)
          <option value="charcoal-blue">Charcoal Blue (#303C42)</option>
          <option value="dusty-navy">Dusty Navy (#3D5567)</option>
       </select>
-      <p>Выберите цвет для отображения категории услуг</p>
+      <p>Select color for service category display</p>
+   </div>
+
+   <div class="form-field term-alt-title-wrap">
+      <label for="service_category_alt_title">Alternative Title</label>
+      <input type="text" name="service_category_alt_title" id="service_category_alt_title" value="" />
+      <p>Alternative title to replace the main one (used in preget_post)</p>
+   </div>
+
+   <div class="form-field term-order-wrap">
+      <label for="service_category_order">Order Number</label>
+      <input type="number" name="service_category_order" id="service_category_order" value="0" min="0" step="1" />
+      <p>Number for sorting categories when displaying in a loop</p>
    </div>
 <?php
 }
 
-// Добавляем поле при редактировании термина
-function edit_service_category_color_field($term, $taxonomy)
+function edit_service_category_fields($term, $taxonomy)
 {
    $color = get_term_meta($term->term_id, 'service_category_color', true);
+   $alt_title = get_term_meta($term->term_id, 'service_category_alt_title', true);
+   $order = get_term_meta($term->term_id, 'service_category_order', true);
+   $order = $order ? $order : 0;
 ?>
    <tr class="form-field term-color-wrap">
       <th scope="row">
-         <label for="service_category_color">Цвет категории</label>
+         <label for="service_category_color">Category Color</label>
       </th>
       <td>
          <select name="service_category_color" id="service_category_color" class="color-select">
@@ -202,14 +217,33 @@ function edit_service_category_color_field($term, $taxonomy)
             <option value="charcoal-blue" <?php selected($color, 'charcoal-blue'); ?>>Charcoal Blue (#303C42)</option>
             <option value="dusty-navy" <?php selected($color, 'dusty-navy'); ?>>Dusty Navy (#3D5567)</option>
          </select>
-         <p class="description">Выберите цвет для отображения категории услуг</p>
+         <p class="description">Select color for service category display</p>
+      </td>
+   </tr>
+
+   <tr class="form-field term-alt-title-wrap">
+      <th scope="row">
+         <label for="service_category_alt_title">Alternative Title</label>
+      </th>
+      <td>
+         <input type="text" name="service_category_alt_title" id="service_category_alt_title" value="<?php echo esc_attr($alt_title); ?>" />
+         <p class="description">Alternative title to replace the main one (used in preget_post)</p>
+      </td>
+   </tr>
+
+   <tr class="form-field term-order-wrap">
+      <th scope="row">
+         <label for="service_category_order">Order Number</label>
+      </th>
+      <td>
+         <input type="number" name="service_category_order" id="service_category_order" value="<?php echo esc_attr($order); ?>" min="0" step="1" />
+         <p class="description">Number for sorting categories when displaying in a loop</p>
       </td>
    </tr>
 <?php
 }
 
-// Сохраняем метаданные
-function save_service_category_color_meta($term_id)
+function save_service_category_meta($term_id)
 {
    if (isset($_POST['service_category_color'])) {
       update_term_meta(
@@ -218,10 +252,25 @@ function save_service_category_color_meta($term_id)
          sanitize_text_field($_POST['service_category_color'])
       );
    }
+
+   
+   if (isset($_POST['service_category_alt_title'])) {
+      update_term_meta(
+         $term_id,
+         'service_category_alt_title',
+        $_POST['service_category_alt_title']
+      );
+   }
+
+   if (isset($_POST['service_category_order'])) {
+      update_term_meta(
+         $term_id,
+         'service_category_order',
+         intval($_POST['service_category_order'])
+      );
+   }
 }
 
-
-// functions.php
 add_action('admin_enqueue_scripts', 'service_category_admin_styles');
 function service_category_admin_styles()
 {
@@ -260,18 +309,18 @@ function service_category_admin_styles()
    }
 }
 
+add_filter('manage_edit-service_category_columns', 'add_service_category_columns');
+add_filter('manage_service_category_custom_column', 'show_service_category_columns', 10, 3);
 
-
-add_filter('manage_edit-service_category_columns', 'add_service_category_color_column');
-add_filter('manage_service_category_custom_column', 'show_service_category_color_column', 10, 3);
-
-function add_service_category_color_column($columns)
+function add_service_category_columns($columns)
 {
-   $columns['color'] = 'Цвет';
+   $columns['color'] = 'Color';
+   $columns['alt_title'] = 'Alt. Title';
+   $columns['order'] = 'Order';
    return $columns;
 }
 
-function show_service_category_color_column($content, $column_name, $term_id)
+function show_service_category_columns($content, $column_name, $term_id)
 {
    if ($column_name === 'color') {
       $color = get_term_meta($term_id, 'service_category_color', true);
@@ -290,20 +339,63 @@ function show_service_category_color_column($content, $column_name, $term_id)
             '<span style="font-size: 12px;">' . $color_names[$color] . '</span>';
       }
    }
+
+   if ($column_name === 'alt_title') {
+      $alt_title = get_term_meta($term_id, 'service_category_alt_title', true);
+      return $alt_title ? esc_html($alt_title) : '—';
+   }
+
+   if ($column_name === 'order') {
+      $order = get_term_meta($term_id, 'service_category_order', true);
+      return $order ? intval($order) : '0';
+   }
+
    return $content;
 }
 
+// Function to get terms sorted by order number
+function get_service_categories_ordered($args = array())
+{
+   $defaults = array(
+      'taxonomy' => 'service_category',
+      'hide_empty' => false,
+      'meta_key' => 'service_category_order',
+      'orderby' => 'meta_value_num',
+      'order' => 'ASC'
+   );
+
+   $args = wp_parse_args($args, $defaults);
+   return get_terms($args);
+}
+
+// Pre-get posts filter to replace title
+add_action('pre_get_posts', 'service_category_alt_title_pre_get_posts');
+function service_category_alt_title_pre_get_posts($query)
+{
+   if ($query->is_main_query() && $query->is_tax('service_category')) {
+      $term = $query->get_queried_object();
+      if ($term) {
+         $alt_title = get_term_meta($term->term_id, 'service_category_alt_title', true);
+         if (!empty($alt_title)) {
+            // Set alternative title for use in theme
+            add_filter('single_term_title', function ($title) use ($alt_title) {
+               return $alt_title;
+            });
+         }
+      }
+   }
+}
 
 function get_service_category_color_html($term_id = null)
 {
-   // Если term_id не передан, пытаемся получить автоматически
+   // If term_id is not provided, try to get it automatically
    if ($term_id === null) {
-      // Для архивов и таксономий - получаем текущий термин
+      // For archives and taxonomies - get current term
       if (is_tax('service_category') || is_category()) {
          $term = get_queried_object();
          $term_id = $term->term_id;
       }
-      // Для одиночных записей - получаем первый термин
+      // For single posts - get first term
       elseif (is_singular('services')) {
          $terms = get_the_terms(get_the_ID(), 'service_category');
          if ($terms && !is_wp_error($terms)) {
@@ -312,7 +404,7 @@ function get_service_category_color_html($term_id = null)
       }
    }
 
-   // Если term_id так и не нашли, возвращаем дефолтный
+   // If term_id still not found, return default
    if (!$term_id) {
       return '<div class="brand-square-md"></div>';
    }
@@ -321,4 +413,22 @@ function get_service_category_color_html($term_id = null)
    $color_class = $color ? 'bg-' . $color : '';
 
    return '<div class="brand-square-md ' . $color_class . '"></div>';
+}
+
+// Function to get alternative term title
+function get_service_category_alt_title($term_id = null)
+{
+   if (!$term_id) {
+      if (is_tax('service_category')) {
+         $term = get_queried_object();
+         $term_id = $term->term_id;
+      }
+   }
+
+   if ($term_id) {
+      $alt_title = get_term_meta($term_id, 'service_category_alt_title', true);
+      return !empty($alt_title) ? $alt_title : '';
+   }
+
+   return '';
 }
