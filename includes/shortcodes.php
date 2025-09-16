@@ -179,6 +179,16 @@ function service_categories_cards_shortcode($atts)
             </a>
         </div>
     <?php endforeach; ?>
+    <div class="col-md-4">
+        <a href="/services" class="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
+            <div class="card-body align-content-center text-center">
+                <span class="hover-4 link-body label-s text-sub-white"><?php _e('All Practice', 'codeweber'); ?></span>
+            </div>
+            <!--/.card-body -->
+        </a>
+        <!--/.card -->
+    </div>
+    <!--/column -->
     <?php
     return ob_get_clean();
 }
@@ -222,8 +232,8 @@ function awards_grid_shortcode($atts)
         ?>
             <div class="col">
                 <a href="<?php echo esc_url($permalink); ?>" class="card hover-scale h-100 align-items-center">
-                    <div class="card-body align-items-center d-flex px-3 py-6 p-md-8">
-                        <figure class="px-md-3 px-xl-0 px-xxl-3 mb-0">
+                    <div class="card-body align-items-center d-flex p-0">
+                        <figure class="p-0 mb-0">
                             <?php if ($image_url) : ?>
                                 <img decoding="async" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
                             <?php else : ?>
@@ -238,6 +248,16 @@ function awards_grid_shortcode($atts)
                 <!--/.card -->
             </div>
         <?php endwhile; ?>
+        <div class="col">
+            <a href="/awards" class="card h-100 bg-dusty-navy">
+                <div class="card-body align-content-center text-center">
+                    <span class="hover-4 link-body label-s text-sub-white"><?php _e('All Awards', 'codeweber'); ?>
+                    </span>
+                </div>
+                <!--/.card-body -->
+            </a>
+            <!--/.card -->
+        </div>
 <?php
     else :
         echo '<p>' . __('No awards found.', 'codeweber') . '</p>';
