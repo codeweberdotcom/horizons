@@ -4,38 +4,38 @@
 function create_awards_cpt() {
 
     $labels = array(
-        'name'                  => _x( 'Awards', 'Post Type General Name', 'textdomain' ),
-        'singular_name'         => _x( 'Award', 'Post Type Singular Name', 'textdomain' ),
-        'menu_name'             => __( 'Awards', 'textdomain' ),
-        'name_admin_bar'        => __( 'Award', 'textdomain' ),
-        'archives'              => __( 'Award Archives', 'textdomain' ),
-        'attributes'            => __( 'Award Attributes', 'textdomain' ),
-        'parent_item_colon'     => __( 'Parent Award:', 'textdomain' ),
-        'all_items'             => __( 'All Awards', 'textdomain' ),
-        'add_new_item'          => __( 'Add New Award', 'textdomain' ),
-        'add_new'               => __( 'Add New', 'textdomain' ),
-        'new_item'              => __( 'New Award', 'textdomain' ),
-        'edit_item'             => __( 'Edit Award', 'textdomain' ),
-        'update_item'           => __( 'Update Award', 'textdomain' ),
-        'view_item'             => __( 'View Award', 'textdomain' ),
-        'view_items'            => __( 'View Awards', 'textdomain' ),
-        'search_items'          => __( 'Search Award', 'textdomain' ),
-        'not_found'             => __( 'Not found', 'textdomain' ),
-        'not_found_in_trash'    => __( 'Not found in Trash', 'textdomain' ),
-        'featured_image'        => __( 'Award Image', 'textdomain' ),
-        'set_featured_image'    => __( 'Set award image', 'textdomain' ),
-        'remove_featured_image' => __( 'Remove award image', 'textdomain' ),
-        'use_featured_image'    => __( 'Use as award image', 'textdomain' ),
-        'insert_into_item'      => __( 'Insert into award', 'textdomain' ),
-        'uploaded_to_this_item' => __( 'Uploaded to this award', 'textdomain' ),
-        'items_list'            => __( 'Awards list', 'textdomain' ),
-        'items_list_navigation' => __( 'Awards list navigation', 'textdomain' ),
-        'filter_items_list'     => __( 'Filter awards list', 'textdomain' ),
+        'name'                  => _x( 'Awards', 'Post Type General Name', 'horizons' ),
+        'singular_name'         => _x( 'Award', 'Post Type Singular Name', 'horizons' ),
+        'menu_name'             => __( 'Awards', 'horizons' ),
+        'name_admin_bar'        => __( 'Award', 'horizons' ),
+        'archives'              => __( 'Award Archives', 'horizons' ),
+        'attributes'            => __( 'Award Attributes', 'horizons' ),
+        'parent_item_colon'     => __( 'Parent Award:', 'horizons' ),
+        'all_items'             => __( 'All Awards', 'horizons' ),
+        'add_new_item'          => __( 'Add New Award', 'horizons' ),
+        'add_new'               => __( 'Add New', 'horizons' ),
+        'new_item'              => __( 'New Award', 'horizons' ),
+        'edit_item'             => __( 'Edit Award', 'horizons' ),
+        'update_item'           => __( 'Update Award', 'horizons' ),
+        'view_item'             => __( 'View Award', 'horizons' ),
+        'view_items'            => __( 'View Awards', 'horizons' ),
+        'search_items'          => __( 'Search Award', 'horizons' ),
+        'not_found'             => __( 'Not found', 'horizons' ),
+        'not_found_in_trash'    => __( 'Not found in Trash', 'horizons' ),
+        'featured_image'        => __( 'Award Image', 'horizons' ),
+        'set_featured_image'    => __( 'Set award image', 'horizons' ),
+        'remove_featured_image' => __( 'Remove award image', 'horizons' ),
+        'use_featured_image'    => __( 'Use as award image', 'horizons' ),
+        'insert_into_item'      => __( 'Insert into award', 'horizons' ),
+        'uploaded_to_this_item' => __( 'Uploaded to this award', 'horizons' ),
+        'items_list'            => __( 'Awards list', 'horizons' ),
+        'items_list_navigation' => __( 'Awards list navigation', 'horizons' ),
+        'filter_items_list'     => __( 'Filter awards list', 'horizons' ),
     );
     
     $args = array(
-        'label'                 => __( 'Award', 'textdomain' ),
-        'description'           => __( 'Company awards and achievements', 'textdomain' ),
+        'label'                 => __( 'Award', 'horizons' ),
+        'description'           => __( 'Company awards and achievements', 'horizons' ),
         'labels'                => $labels,
         'supports'              => array( 'title', 'editor', 'thumbnail'),
         'taxonomies'            => array( 'award_category', 'award_year', 'award_tags' ),
@@ -65,26 +65,26 @@ add_action( 'init', 'create_awards_cpt', 0 );
 function create_award_category_taxonomy() {
 
     $labels = array(
-        'name'                       => _x( 'Award Categories', 'Taxonomy General Name', 'textdomain' ),
-        'singular_name'              => _x( 'Award Category', 'Taxonomy Singular Name', 'textdomain' ),
-        'menu_name'                  => __( 'Categories', 'textdomain' ),
-        'all_items'                  => __( 'All Categories', 'textdomain' ),
-        'parent_item'                => __( 'Parent Category', 'textdomain' ),
-        'parent_item_colon'          => __( 'Parent Category:', 'textdomain' ),
-        'new_item_name'              => __( 'New Category Name', 'textdomain' ),
-        'add_new_item'               => __( 'Add New Category', 'textdomain' ),
-        'edit_item'                  => __( 'Edit Category', 'textdomain' ),
-        'update_item'                => __( 'Update Category', 'textdomain' ),
-        'view_item'                  => __( 'View Category', 'textdomain' ),
-        'separate_items_with_commas' => __( 'Separate categories with commas', 'textdomain' ),
-        'add_or_remove_items'        => __( 'Add or remove categories', 'textdomain' ),
-        'choose_from_most_used'      => __( 'Choose from the most used', 'textdomain' ),
-        'popular_items'              => __( 'Popular Categories', 'textdomain' ),
-        'search_items'               => __( 'Search Categories', 'textdomain' ),
-        'not_found'                  => __( 'Not Found', 'textdomain' ),
-        'no_terms'                   => __( 'No categories', 'textdomain' ),
-        'items_list'                 => __( 'Categories list', 'textdomain' ),
-        'items_list_navigation'      => __( 'Categories list navigation', 'textdomain' ),
+        'name'                       => _x( 'Award Categories', 'Taxonomy General Name', 'horizons' ),
+        'singular_name'              => _x( 'Award Category', 'Taxonomy Singular Name', 'horizons' ),
+        'menu_name'                  => __( 'Categories', 'horizons' ),
+        'all_items'                  => __( 'All Categories', 'horizons' ),
+        'parent_item'                => __( 'Parent Category', 'horizons' ),
+        'parent_item_colon'          => __( 'Parent Category:', 'horizons' ),
+        'new_item_name'              => __( 'New Category Name', 'horizons' ),
+        'add_new_item'               => __( 'Add New Category', 'horizons' ),
+        'edit_item'                  => __( 'Edit Category', 'horizons' ),
+        'update_item'                => __( 'Update Category', 'horizons' ),
+        'view_item'                  => __( 'View Category', 'horizons' ),
+        'separate_items_with_commas' => __( 'Separate categories with commas', 'horizons' ),
+        'add_or_remove_items'        => __( 'Add or remove categories', 'horizons' ),
+        'choose_from_most_used'      => __( 'Choose from the most used', 'horizons' ),
+        'popular_items'              => __( 'Popular Categories', 'horizons' ),
+        'search_items'               => __( 'Search Categories', 'horizons' ),
+        'not_found'                  => __( 'Not Found', 'horizons' ),
+        'no_terms'                   => __( 'No categories', 'horizons' ),
+        'items_list'                 => __( 'Categories list', 'horizons' ),
+        'items_list_navigation'      => __( 'Categories list navigation', 'horizons' ),
     );
     
     $args = array(
@@ -108,26 +108,26 @@ add_action( 'init', 'create_award_category_taxonomy', 0 );
 function create_award_year_taxonomy() {
 
     $labels = array(
-        'name'                       => _x( 'Award Years', 'Taxonomy General Name', 'textdomain' ),
-        'singular_name'              => _x( 'Award Year', 'Taxonomy Singular Name', 'textdomain' ),
-        'menu_name'                  => __( 'Years', 'textdomain' ),
-        'all_items'                  => __( 'All Years', 'textdomain' ),
-        'parent_item'                => __( 'Parent Year', 'textdomain' ),
-        'parent_item_colon'          => __( 'Parent Year:', 'textdomain' ),
-        'new_item_name'              => __( 'New Year', 'textdomain' ),
-        'add_new_item'               => __( 'Add New Year', 'textdomain' ),
-        'edit_item'                  => __( 'Edit Year', 'textdomain' ),
-        'update_item'                => __( 'Update Year', 'textdomain' ),
-        'view_item'                  => __( 'View Year', 'textdomain' ),
-        'separate_items_with_commas' => __( 'Separate years with commas', 'textdomain' ),
-        'add_or_remove_items'        => __( 'Add or remove years', 'textdomain' ),
-        'choose_from_most_used'      => __( 'Choose from the most used', 'textdomain' ),
-        'popular_items'              => __( 'Popular Years', 'textdomain' ),
-        'search_items'               => __( 'Search Years', 'textdomain' ),
-        'not_found'                  => __( 'Not Found', 'textdomain' ),
-        'no_terms'                   => __( 'No years', 'textdomain' ),
-        'items_list'                 => __( 'Years list', 'textdomain' ),
-        'items_list_navigation'      => __( 'Years list navigation', 'textdomain' ),
+        'name'                       => _x( 'Award Years', 'Taxonomy General Name', 'horizons' ),
+        'singular_name'              => _x( 'Award Year', 'Taxonomy Singular Name', 'horizons' ),
+        'menu_name'                  => __( 'Years', 'horizons' ),
+        'all_items'                  => __( 'All Years', 'horizons' ),
+        'parent_item'                => __( 'Parent Year', 'horizons' ),
+        'parent_item_colon'          => __( 'Parent Year:', 'horizons' ),
+        'new_item_name'              => __( 'New Year', 'horizons' ),
+        'add_new_item'               => __( 'Add New Year', 'horizons' ),
+        'edit_item'                  => __( 'Edit Year', 'horizons' ),
+        'update_item'                => __( 'Update Year', 'horizons' ),
+        'view_item'                  => __( 'View Year', 'horizons' ),
+        'separate_items_with_commas' => __( 'Separate years with commas', 'horizons' ),
+        'add_or_remove_items'        => __( 'Add or remove years', 'horizons' ),
+        'choose_from_most_used'      => __( 'Choose from the most used', 'horizons' ),
+        'popular_items'              => __( 'Popular Years', 'horizons' ),
+        'search_items'               => __( 'Search Years', 'horizons' ),
+        'not_found'                  => __( 'Not Found', 'horizons' ),
+        'no_terms'                   => __( 'No years', 'horizons' ),
+        'items_list'                 => __( 'Years list', 'horizons' ),
+        'items_list_navigation'      => __( 'Years list navigation', 'horizons' ),
     );
     
     $args = array(
@@ -151,26 +151,26 @@ add_action( 'init', 'create_award_year_taxonomy', 0 );
 function create_award_tags_taxonomy() {
 
     $labels = array(
-        'name'                       => _x( 'Award Tags', 'Taxonomy General Name', 'textdomain' ),
-        'singular_name'              => _x( 'Award Tag', 'Taxonomy Singular Name', 'textdomain' ),
-        'menu_name'                  => __( 'Tags', 'textdomain' ),
-        'all_items'                  => __( 'All Tags', 'textdomain' ),
-        'parent_item'                => __( 'Parent Tag', 'textdomain' ),
-        'parent_item_colon'          => __( 'Parent Tag:', 'textdomain' ),
-        'new_item_name'              => __( 'New Tag Name', 'textdomain' ),
-        'add_new_item'               => __( 'Add New Tag', 'textdomain' ),
-        'edit_item'                  => __( 'Edit Tag', 'textdomain' ),
-        'update_item'                => __( 'Update Tag', 'textdomain' ),
-        'view_item'                  => __( 'View Tag', 'textdomain' ),
-        'separate_items_with_commas' => __( 'Separate tags with commas', 'textdomain' ),
-        'add_or_remove_items'        => __( 'Add or remove tags', 'textdomain' ),
-        'choose_from_most_used'      => __( 'Choose from the most used', 'textdomain' ),
-        'popular_items'              => __( 'Popular Tags', 'textdomain' ),
-        'search_items'               => __( 'Search Tags', 'textdomain' ),
-        'not_found'                  => __( 'Not Found', 'textdomain' ),
-        'no_terms'                   => __( 'No tags', 'textdomain' ),
-        'items_list'                 => __( 'Tags list', 'textdomain' ),
-        'items_list_navigation'      => __( 'Tags list navigation', 'textdomain' ),
+        'name'                       => _x( 'Award Tags', 'Taxonomy General Name', 'horizons' ),
+        'singular_name'              => _x( 'Award Tag', 'Taxonomy Singular Name', 'horizons' ),
+        'menu_name'                  => __( 'Tags', 'horizons' ),
+        'all_items'                  => __( 'All Tags', 'horizons' ),
+        'parent_item'                => __( 'Parent Tag', 'horizons' ),
+        'parent_item_colon'          => __( 'Parent Tag:', 'horizons' ),
+        'new_item_name'              => __( 'New Tag Name', 'horizons' ),
+        'add_new_item'               => __( 'Add New Tag', 'horizons' ),
+        'edit_item'                  => __( 'Edit Tag', 'horizons' ),
+        'update_item'                => __( 'Update Tag', 'horizons' ),
+        'view_item'                  => __( 'View Tag', 'horizons' ),
+        'separate_items_with_commas' => __( 'Separate tags with commas', 'horizons' ),
+        'add_or_remove_items'        => __( 'Add or remove tags', 'horizons' ),
+        'choose_from_most_used'      => __( 'Choose from the most used', 'horizons' ),
+        'popular_items'              => __( 'Popular Tags', 'horizons' ),
+        'search_items'               => __( 'Search Tags', 'horizons' ),
+        'not_found'                  => __( 'Not Found', 'horizons' ),
+        'no_terms'                   => __( 'No tags', 'horizons' ),
+        'items_list'                 => __( 'Tags list', 'horizons' ),
+        'items_list_navigation'      => __( 'Tags list navigation', 'horizons' ),
     );
     
     $args = array(
@@ -194,7 +194,7 @@ add_action( 'init', 'create_award_tags_taxonomy', 0 );
 function add_awards_meta_boxes() {
     add_meta_box(
         'award_details',
-        __( 'Award Details', 'textdomain' ),
+        __( 'Award Details', 'horizons' ),
         'award_details_meta_box_callback',
         'awards',
         'normal',
@@ -234,17 +234,17 @@ function award_details_meta_box_callback( $post ) {
         <div>
             <p>
                 <label for="award_organization" style="display: block; margin-bottom: 5px; font-weight: bold;">
-                    <?php _e( 'Organization', 'textdomain' ); ?>
+                    <?php _e( 'Organization', 'horizons' ); ?>
                 </label>
                 <input type="text" id="award_organization" name="award_organization" 
                        value="<?php echo esc_attr( $award_organization ); ?>" 
                        style="width: 100%; padding: 8px;" 
-                       placeholder="<?php _e( 'e.g., International Design Awards', 'textdomain' ); ?>">
+                       placeholder="<?php _e( 'e.g., International Design Awards', 'horizons' ); ?>">
             </p>
             
             <p>
                 <label for="award_date" style="display: block; margin-bottom: 5px; font-weight: bold;">
-                    <?php _e( 'Award Date', 'textdomain' ); ?>
+                    <?php _e( 'Award Date', 'horizons' ); ?>
                 </label>
                 <input type="date" id="award_date" name="award_date" 
                        value="<?php echo esc_attr( $award_date ); ?>" 
@@ -255,17 +255,17 @@ function award_details_meta_box_callback( $post ) {
         <div>
             <p>
                 <label for="award_url" style="display: block; margin-bottom: 5px; font-weight: bold;">
-                    <?php _e( 'Award URL', 'textdomain' ); ?>
+                    <?php _e( 'Award URL', 'horizons' ); ?>
                 </label>
                 <input type="url" id="award_url" name="award_url" 
                        value="<?php echo esc_url( $award_url ); ?>" 
                        style="width: 100%; padding: 8px;" 
-                       placeholder="<?php _e( 'https://example.com/award', 'textdomain' ); ?>">
+                       placeholder="<?php _e( 'https://example.com/award', 'horizons' ); ?>">
             </p>
             
             <p>
                 <label for="award_staff" style="display: block; margin-bottom: 5px; font-weight: bold;">
-                    <?php _e( 'Associated Staff Members', 'textdomain' ); ?>
+                    <?php _e( 'Associated Staff Members', 'horizons' ); ?>
                 </label>
                 <select id="award_staff" name="award_staff[]" multiple="multiple" style="width: 100%; padding: 8px; height: 120px;">
                     <?php foreach ( $staff_members as $staff ) : ?>
@@ -274,7 +274,7 @@ function award_details_meta_box_callback( $post ) {
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <p class="description"><?php _e( 'Hold Ctrl/Cmd to select multiple staff members', 'textdomain' ); ?></p>
+                <p class="description"><?php _e( 'Hold Ctrl/Cmd to select multiple staff members', 'horizons' ); ?></p>
             </p>
         </div>
     </div>
