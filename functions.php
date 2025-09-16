@@ -17,9 +17,15 @@ function horizons_enqueue_styles()
     );
 }
 
-//
+// Загрузка переводов
+function horizons_theme_setup()
+{
+    // Загрузка переводов дочерней темы
+    load_child_theme_textdomain('horizons', get_stylesheet_directory() . '/languages');
+}
+add_action('after_setup_theme', 'horizons_theme_setup'); // ← ДОБАВЬТЕ ЭТУ СТРОЧКУ!
 
-// Или подключение нескольких файлов в цикле
+// Подключение дополнительных файлов
 $theme_includes = array(
     '/includes/metaboxes.php',
     '/includes/shortcodes.php',
@@ -28,5 +34,8 @@ $theme_includes = array(
 );
 
 foreach ($theme_includes as $file) {
-    require_once get_stylesheet_directory() . $file;
+    $file_path = get_stylesheet_directory() . $file;
+    if (file_exists($file_path)) {
+        require_once $file_path;
+    }
 }

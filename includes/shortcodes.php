@@ -182,7 +182,7 @@ function service_categories_cards_shortcode($atts)
     <div class="col-md-4">
         <a href="/services" class="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
             <div class="card-body align-content-center text-center">
-                <span class="hover-4 link-body label-s text-sub-white"><?php _e('All Practice', 'codeweber'); ?></span>
+                <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Practice', 'horizons'); ?></span>
             </div>
             <!--/.card-body -->
         </a>
@@ -238,7 +238,7 @@ function awards_grid_shortcode($atts)
                                 <img decoding="async" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
                             <?php else : ?>
                                 <div style="width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-                                    <span><?php _e('No image', 'codeweber'); ?></span>
+                                    <span><?php _e('No image', 'horizons'); ?></span>
                                 </div>
                             <?php endif; ?>
                         </figure>
@@ -251,7 +251,7 @@ function awards_grid_shortcode($atts)
         <div class="col">
             <a href="/awards" class="card h-100 bg-dusty-navy">
                 <div class="card-body align-content-center text-center">
-                    <span class="hover-4 link-body label-s text-sub-white"><?php _e('All Awards', 'codeweber'); ?>
+                    <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?>
                     </span>
                 </div>
                 <!--/.card-body -->
