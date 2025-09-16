@@ -2,9 +2,6 @@
 //--------------------------------
 //STAFF
 //--------------------------------
-/**
- * Шорткод для вывода сотрудников (staff) с сортировкой по дате создания
- */
 function codeweber_staff_shortcode($atts)
 {
     // Атрибуты шорткода
@@ -50,7 +47,7 @@ function codeweber_staff_shortcode($atts)
             if ($thumbnail) {
                 $output .= '<img src="' . esc_url($thumbnail) . '" alt="' . esc_attr($full_name) . '" />';
             } else {
-                $output .= '<img src="/wp-content/uploads/placeholder.jpg" alt="' . esc_attr($full_name) . '" />';
+                $output .= '<img src="' . esc_url(get_template_directory_uri() . '/assets/img/placeholder.jpg') . '" alt="' . esc_attr($full_name) . '" />';
             }
 
             $output .= '
@@ -74,7 +71,7 @@ function codeweber_staff_shortcode($atts)
         $output .= '</div>';
         wp_reset_postdata();
     } else {
-        $output = '<p>No employees found</p>';
+        $output = '<p>' . __('No employees found', 'codeweber') . '</p>';
     }
 
     return $output;
@@ -123,11 +120,11 @@ function service_categories_cards_shortcode($atts)
 
     // Check for errors and empty results
     if (is_wp_error($terms)) {
-        return '<p>Error loading categories: ' . $terms->get_error_message() . '</p>';
+        return '<p>' . sprintf(__('Error loading categories: %s', 'codeweber'), $terms->get_error_message()) . '</p>';
     }
 
     if (empty($terms)) {
-        return '<p>No categories found</p>';
+        return '<p>' . __('No categories found', 'codeweber') . '</p>';
     }
 
     // Manual sorting if terms don't have order meta
@@ -151,37 +148,102 @@ function service_categories_cards_shortcode($atts)
 
     ob_start();
 ?>
-        <?php foreach ($terms as $term):
-            $color = get_term_meta($term->term_id, 'service_category_color', true);
-            $color_class = $color ? 'bg-' . $color : '';
-            $term_link = get_term_link($term);
+    <?php foreach ($terms as $term):
+        $color = get_term_meta($term->term_id, 'service_category_color', true);
+        $color_class = $color ? 'bg-' . $color : '';
+        $term_link = get_term_link($term);
 
-            // Get alternative title if enabled
-            $display_title = $term->name;
-            if ($use_alt_title) {
-                $alt_title = get_term_meta($term->term_id, 'service_category_alt_title', true);
-                if (!empty($alt_title)) {
-                    $display_title = $alt_title;
-                }
+        // Get alternative title if enabled
+        $display_title = $term->name;
+        if ($use_alt_title) {
+            $alt_title = get_term_meta($term->term_id, 'service_category_alt_title', true);
+            if (!empty($alt_title)) {
+                $display_title = $alt_title;
             }
+        }
 
-            // Check link for errors
-            if (is_wp_error($term_link)) {
-                $term_link = '#';
-            }
-        ?>
-            <div class="<?php echo esc_attr($column_class); ?>">
-                <a href="<?php echo esc_url($term_link); ?>" class="card h-100 practice-card" data-cue="slideInDown">
-                    <div class="brand-square-xs <?php echo esc_attr($color_class); ?> opacity-0 position-absolute top-0 start-0"></div>
-                    <div class="card-body d-flex flex-column justify-content-between">
-                        <div class="pe-none mb-5">
-                            <div class="practice-card-hover brand-square-md <?php echo esc_attr($color_class); ?>"></div>
-                        </div>
-                        <h3 class="h4"><?php echo wp_kses_post($display_title); ?></h3>
+        // Check link for errors
+        if (is_wp_error($term_link)) {
+            $term_link = '#';
+        }
+    ?>
+        <div class="<?php echo esc_attr($column_class); ?>">
+            <a href="<?php echo esc_url($term_link); ?>" class="card h-100 practice-card" data-cue="slideInDown">
+                <div class="brand-square-xs <?php echo esc_attr($color_class); ?> opacity-0 position-absolute top-0 start-0"></div>
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div class="pe-none mb-5">
+                        <div class="practice-card-hover brand-square-md <?php echo esc_attr($color_class); ?>"></div>
                     </div>
+                    <h3 class="h4"><?php echo wp_kses_post($display_title); ?></h3>
+                </div>
+            </a>
+        </div>
+    <?php endforeach; ?>
+    <?php
+    return ob_get_clean();
+}
+
+
+//--------------------------------
+//AWARDS
+//--------------------------------
+
+// Добавляем шорткод для вывода awards
+add_shortcode('awards_grid', 'awards_grid_shortcode');
+
+function awards_grid_shortcode($atts)
+{
+    // Параметры по умолчанию
+    $atts = shortcode_atts(array(
+        'posts_per_page' => 6, // Количество записей для вывода
+        'orderby' => 'date',   // Сортировка по дате
+        'order' => 'DESC'      // Сначала свежие (DESC - по убыванию)
+    ), $atts);
+
+    // Аргументы для WP_Query
+    $args = array(
+        'post_type' => 'awards',
+        'posts_per_page' => intval($atts['posts_per_page']),
+        'orderby' => $atts['orderby'],
+        'order' => $atts['order'],
+        'post_status' => 'publish'
+    );
+
+    $awards_query = new WP_Query($args);
+
+    ob_start();
+
+    if ($awards_query->have_posts()) :
+    ?>
+        <?php while ($awards_query->have_posts()) : $awards_query->the_post();
+            $image_id = get_post_thumbnail_id();
+            $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'full') : '';
+            $permalink = get_permalink();
+        ?>
+            <div class="col">
+                <a href="<?php echo esc_url($permalink); ?>" class="card hover-scale h-100 align-items-center">
+                    <div class="card-body align-items-center d-flex px-3 py-6 p-md-8">
+                        <figure class="px-md-3 px-xl-0 px-xxl-3 mb-0">
+                            <?php if ($image_url) : ?>
+                                <img decoding="async" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                            <?php else : ?>
+                                <div style="width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                    <span><?php _e('No image', 'codeweber'); ?></span>
+                                </div>
+                            <?php endif; ?>
+                        </figure>
+                    </div>
+                    <!--/.card-body -->
                 </a>
+                <!--/.card -->
             </div>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
 <?php
+    else :
+        echo '<p>' . __('No awards found.', 'codeweber') . '</p>';
+    endif;
+
+    wp_reset_postdata();
+
     return ob_get_clean();
 }

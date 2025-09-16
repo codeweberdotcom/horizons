@@ -23,6 +23,8 @@ function horizons_enqueue_styles()
 $theme_includes = array(
     '/includes/metaboxes.php',
     '/includes/shortcodes.php',
+    '/includes/custom-cpt.php',
+    '/includes/add_image_sizes.php',
 );
 
 foreach ($theme_includes as $file) {
