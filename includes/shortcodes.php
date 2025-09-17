@@ -263,7 +263,7 @@ function awards_grid_shortcode($atts)
 
         $args = array(
             'post_type'      => 'awards',
-            'posts_per_page' => -1,
+            'posts_per_page' => intval($atts['posts_per_page']),
             'post__in'       => $selected_awards,
             'orderby'        => 'post__in', // Сохраняем порядок выбора
             'post_status'    => 'publish'
