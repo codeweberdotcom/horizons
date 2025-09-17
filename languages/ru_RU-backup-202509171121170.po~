@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-17 13:41+0000\n"
+"PO-Revision-Date: 2025-09-16 10:03+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -181,10 +181,6 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
-#: functions.php:142
-msgid "Languages"
-msgstr "Языки"
-
 #: includes/custom-cpt.php:17
 msgid "New Award"
 msgstr ""
@@ -262,10 +258,6 @@ msgstr ""
 msgid "Parent Year:"
 msgstr ""
 
-#: includes/sidebars.php:20
-msgid "Partners"
-msgstr "Партнеры"
-
 #: includes/custom-cpt.php:82
 msgid "Popular Categories"
 msgstr ""
@@ -287,10 +279,6 @@ msgstr ""
 msgctxt "Post Type Singular Name"
 msgid "Award"
 msgstr ""
-
-#: functions.php:152
-msgid "Regions"
-msgstr "Регионы"
 
 #: includes/custom-cpt.php:27
 msgid "Remove award image"

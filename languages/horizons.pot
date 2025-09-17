@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-16 10:02+0000\n"
+"POT-Creation-Date: 2025-09-17 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -181,6 +181,10 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
+#: functions.php:142
+msgid "Languages"
+msgstr ""
+
 #: includes/custom-cpt.php:17
 msgid "New Award"
 msgstr ""
@@ -258,6 +262,10 @@ msgstr ""
 msgid "Parent Year:"
 msgstr ""
 
+#: includes/sidebars.php:20
+msgid "Partners"
+msgstr ""
+
 #: includes/custom-cpt.php:82
 msgid "Popular Categories"
 msgstr ""
@@ -278,6 +286,10 @@ msgstr ""
 #: includes/custom-cpt.php:8
 msgctxt "Post Type Singular Name"
 msgid "Award"
+msgstr ""
+
+#: functions.php:152
+msgid "Regions"
 msgstr ""
 
 #: includes/custom-cpt.php:27

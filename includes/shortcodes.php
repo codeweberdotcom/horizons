@@ -198,25 +198,44 @@ function service_categories_cards_shortcode($atts)
 //AWARDS
 //--------------------------------
 
-// Добавляем шорткод для вывода awards
+/**
+ * Шорткод для вывода сетки наград (awards)
+ * 
+ * Примеры использования:
+ * [awards_grid] - выведет 6 записей в 3 колонки
+ * [awards_grid posts_per_page="4" columns="2"] - 4 записи в 2 колонки
+ * [awards_grid posts_per_page="8" columns="4" columns_md="3" columns_sm="1"] - кастомные колонки
+ * [awards_grid orderby="title" order="ASC"] - сортировка по названию по возрастанию
+ * 
+ * Параметры:
+ * @param int    $posts_per_page - Количество записей для вывода (по умолчанию: 6)
+ * @param string $orderby        - Поле для сортировки (date, title, menu_order etc.)
+ * @param string $order          - Направление сортировки (ASC, DESC)
+ * @param int    $columns        - Количество колонок на больших экранах (lg)
+ * @param int    $columns_md     - Количество колонок на средних экранах (md)
+ * @param int    $columns_sm     - Количество колонок на маленьких экранах (sm)
+ */
 add_shortcode('awards_grid', 'awards_grid_shortcode');
 
 function awards_grid_shortcode($atts)
 {
     // Параметры по умолчанию
     $atts = shortcode_atts(array(
-        'posts_per_page' => 6, // Количество записей для вывода
-        'orderby' => 'date',   // Сортировка по дате
-        'order' => 'DESC'      // Сначала свежие (DESC - по убыванию)
+        'posts_per_page' => 6,     // Количество записей для вывода
+        'orderby'        => 'date', // Сортировка по дате
+        'order'          => 'DESC', // Сначала свежие (DESC - по убыванию)
+        'columns'        => 4,      // Количество колонок на больших экранах
+        'columns_md'     => 4,      // Количество колонок на средних экранах
+        'columns_sm'     => 1       // Количество колонок на маленьких экранах
     ), $atts);
 
     // Аргументы для WP_Query
     $args = array(
-        'post_type' => 'awards',
+        'post_type'      => 'awards',
         'posts_per_page' => intval($atts['posts_per_page']),
-        'orderby' => $atts['orderby'],
-        'order' => $atts['order'],
-        'post_status' => 'publish'
+        'orderby'        => $atts['orderby'],
+        'order'          => $atts['order'],
+        'post_status'    => 'publish'
     );
 
     $awards_query = new WP_Query($args);
@@ -224,39 +243,48 @@ function awards_grid_shortcode($atts)
     ob_start();
 
     if ($awards_query->have_posts()) :
+        // Формируем классы для колонок
+        $column_classes = sprintf(
+            'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-1 gy-1',
+            intval($atts['columns_sm']),
+            intval($atts['columns_md']),
+            intval($atts['columns'])
+        );
     ?>
-        <?php while ($awards_query->have_posts()) : $awards_query->the_post();
-            $image_id = get_post_thumbnail_id();
-            $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'full') : '';
-            $permalink = get_permalink();
-        ?>
+        <div class="<?php echo esc_attr($column_classes); ?>">
+            <?php while ($awards_query->have_posts()) : $awards_query->the_post();
+                $image_id = get_post_thumbnail_id();
+                $image_url = $image_id ? wp_get_attachment_image_url($image_id, 'full') : '';
+                $permalink = get_permalink();
+            ?>
+                <div class="col">
+                    <a href="<?php echo esc_url($permalink); ?>" class="card hover-scale h-100 align-items-center">
+                        <div class="card-body align-items-center d-flex p-0">
+                            <figure class="p-0 mb-0">
+                                <?php if ($image_url) : ?>
+                                    <img decoding="async" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+                                <?php else : ?>
+                                    <div style="width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
+                                        <span><?php _e('No image', 'horizons'); ?></span>
+                                    </div>
+                                <?php endif; ?>
+                            </figure>
+                        </div>
+                        <!--/.card-body -->
+                    </a>
+                    <!--/.card -->
+                </div>
+            <?php endwhile; ?>
+
             <div class="col">
-                <a href="<?php echo esc_url($permalink); ?>" class="card hover-scale h-100 align-items-center">
-                    <div class="card-body align-items-center d-flex p-0">
-                        <figure class="p-0 mb-0">
-                            <?php if ($image_url) : ?>
-                                <img decoding="async" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-                            <?php else : ?>
-                                <div style="width: 100%; height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center;">
-                                    <span><?php _e('No image', 'horizons'); ?></span>
-                                </div>
-                            <?php endif; ?>
-                        </figure>
+                <a href="/awards" class="card h-100 bg-dusty-navy">
+                    <div class="card-body align-content-center text-center">
+                        <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
                     </div>
                     <!--/.card-body -->
                 </a>
                 <!--/.card -->
             </div>
-        <?php endwhile; ?>
-        <div class="col">
-            <a href="/awards" class="card h-100 bg-dusty-navy">
-                <div class="card-body align-content-center text-center">
-                    <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?>
-                    </span>
-                </div>
-                <!--/.card-body -->
-            </a>
-            <!--/.card -->
         </div>
 <?php
     else :

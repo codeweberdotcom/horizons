@@ -1,14 +1,14 @@
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-17 13:41+0000\n"
-"Last-Translator: Codeweber\n"
-"Language-Team: Русский\n"
-"Language: ru_RU\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
-"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
+"POT-Creation-Date: 2025-09-17 11:21+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -50,7 +50,7 @@ msgstr ""
 
 #: includes/custom-cpt.php:14 includes/shortcodes.php:254
 msgid "All Awards"
-msgstr "Все Награды"
+msgstr ""
 
 #: includes/custom-cpt.php:71
 msgid "All Categories"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: includes/shortcodes.php:185
 msgid "All Practice"
-msgstr "Все практики"
+msgstr ""
 
 #: includes/custom-cpt.php:157
 msgid "All Tags"
@@ -74,7 +74,7 @@ msgstr ""
 
 #: includes/custom-cpt.php:10 includes/custom-cpt.php:37
 msgid "Award"
-msgstr "Награды"
+msgstr ""
 
 #: includes/custom-cpt.php:11
 msgid "Award Archives"
@@ -181,10 +181,6 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
-#: functions.php:142
-msgid "Languages"
-msgstr "Языки"
-
 #: includes/custom-cpt.php:17
 msgid "New Award"
 msgstr ""
@@ -264,7 +260,7 @@ msgstr ""
 
 #: includes/sidebars.php:20
 msgid "Partners"
-msgstr "Партнеры"
+msgstr ""
 
 #: includes/custom-cpt.php:82
 msgid "Popular Categories"
@@ -287,10 +283,6 @@ msgstr ""
 msgctxt "Post Type Singular Name"
 msgid "Award"
 msgstr ""
-
-#: functions.php:152
-msgid "Regions"
-msgstr "Регионы"
 
 #: includes/custom-cpt.php:27
 msgid "Remove award image"
