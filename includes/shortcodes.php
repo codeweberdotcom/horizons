@@ -203,6 +203,7 @@ function service_categories_cards_shortcode($atts)
  * 
  * Примеры использования:
  * [awards_grid] - выведет 6 записей в 3 колонки
+ * [awards_grid staff_awards="true"] - выведет награды текущего сотрудника
  * [awards_grid posts_per_page="4" columns="2"] - 4 записи в 2 колонки
  * [awards_grid posts_per_page="8" columns="4" columns_md="3" columns_sm="1"] - кастомные колонки
  * [awards_grid orderby="title" order="ASC"] - сортировка по названию по возрастанию
@@ -214,6 +215,7 @@ function service_categories_cards_shortcode($atts)
  * @param int    $columns        - Количество колонок на больших экранах (lg)
  * @param int    $columns_md     - Количество колонок на средних экранах (md)
  * @param int    $columns_sm     - Количество колонок на маленьких экранах (sm)
+ * @param bool   $staff_awards   - Если true, выводит награды текущего сотрудника
  */
 add_shortcode('awards_grid', 'awards_grid_shortcode');
 
@@ -221,22 +223,61 @@ function awards_grid_shortcode($atts)
 {
     // Параметры по умолчанию
     $atts = shortcode_atts(array(
-        'posts_per_page' => 6,     // Количество записей для вывода
-        'orderby'        => 'date', // Сортировка по дате
-        'order'          => 'DESC', // Сначала свежие (DESC - по убыванию)
-        'columns'        => 4,      // Количество колонок на больших экранах
-        'columns_md'     => 4,      // Количество колонок на средних экранах
-        'columns_sm'     => 1       // Количество колонок на маленьких экранах
+        'posts_per_page' => 6,
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+        'columns'        => 4,
+        'columns_md'     => 4,
+        'columns_sm'     => 1,
+        'staff_awards'   => false
     ), $atts);
 
-    // Аргументы для WP_Query
-    $args = array(
-        'post_type'      => 'awards',
-        'posts_per_page' => intval($atts['posts_per_page']),
-        'orderby'        => $atts['orderby'],
-        'order'          => $atts['order'],
-        'post_status'    => 'publish'
-    );
+    // Если запрашиваем награды сотрудника
+    if ($atts['staff_awards'] === 'true' && is_singular('staff')) {
+        global $post;
+
+        // Get selected awards for this staff member
+        $selected_awards = get_post_meta($post->ID, '_staff_awards', true);
+        if (!is_array($selected_awards)) {
+            $selected_awards = array();
+        }
+
+        // Если нет выбранных наград, выводим только кнопку "Все награды"
+        if (empty($selected_awards)) {
+            ob_start();
+    ?>
+            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 row-cols-lg-4 gx-3 gy-3">
+                <div class="col">
+                    <a href="/awards" class="card h-100 bg-dusty-navy" style="min-height: 191.3px">
+                        <div class="card-body align-content-center text-center">
+                            <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
+                        </div>
+                        <!--/.card-body -->
+                    </a>
+                    <!--/.card -->
+                </div>
+            </div>
+        <?php
+            return ob_get_clean();
+        }
+
+        $args = array(
+            'post_type'      => 'awards',
+            'posts_per_page' => -1,
+            'post__in'       => $selected_awards,
+            'orderby'        => 'post__in', // Сохраняем порядок выбора
+            'post_status'    => 'publish'
+        );
+    } else {
+        // Обычный вывод
+        $args = array(
+            'post_type'      => 'awards',
+            'posts_per_page' => intval($atts['posts_per_page']),
+            'orderby'        => $atts['orderby'],
+            'order'          => $atts['order'],
+            'post_status'    => 'publish'
+        );
+    }
 
     $awards_query = new WP_Query($args);
 
@@ -245,12 +286,12 @@ function awards_grid_shortcode($atts)
     if ($awards_query->have_posts()) :
         // Формируем классы для колонок
         $column_classes = sprintf(
-            'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
+            'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3 mb-5',
             intval($atts['columns_sm']),
             intval($atts['columns_md']),
             intval($atts['columns'])
         );
-    ?>
+        ?>
         <div class="<?php echo esc_attr($column_classes); ?>">
             <?php while ($awards_query->have_posts()) : $awards_query->the_post();
                 $image_id = get_post_thumbnail_id();
@@ -276,6 +317,22 @@ function awards_grid_shortcode($atts)
                 </div>
             <?php endwhile; ?>
 
+            <!-- Кнопка "All Awards" отображается ВСЕГДА -->
+            <div class="col">
+                <a href="/awards" class="card h-100 bg-dusty-navy" style="min-height: 191.3px">
+                    <div class="card-body align-content-center text-center">
+                        <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
+                    </div>
+                    <!--/.card-body -->
+                </a>
+                <!--/.card -->
+            </div>
+        </div>
+    <?php
+    else :
+        // Если нет записей, все равно выводим кнопку "Все награды"
+    ?>
+        <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 row-cols-lg-4 gx-3 gy-3">
             <div class="col">
                 <a href="/awards" class="card h-100 bg-dusty-navy" style="min-height: 191.3px">
                     <div class="card-body align-content-center text-center">
@@ -287,8 +344,6 @@ function awards_grid_shortcode($atts)
             </div>
         </div>
 <?php
-    else :
-        echo '<p>' . __('No awards found.', 'codeweber') . '</p>';
     endif;
 
     wp_reset_postdata();
