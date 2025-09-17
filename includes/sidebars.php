@@ -2,7 +2,7 @@
 
 add_action('codeweber_after_widget', function ($sidebar_id) {
    if ($sidebar_id === 'staff') {
-      // Проверяем, существует ли тип записи 'legal'
+      // Проверяем, существует ли тип записи 'staff'
       if (!post_type_exists('staff')) {
          return; // Прекращаем выполнение, если тип записи не существует
       }
@@ -11,13 +11,13 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
          'post_type'      => 'staff',
          'posts_per_page' => -1,
          'post_status'    => 'publish',
-         'orderby'        => 'menu_order',
-         'order'          => 'ASC',
+         'orderby'        => 'date',          // Сортировка по дате создания
+         'order'          => 'ASC',          // По убыванию (новые сначала)
       ]);
 
       if ($legal_posts) {
          echo '<div class="widget">
-         <div class="text-line-after label-u mb-6">'.__('Partners', 'horizons').'</div>
+         <div class="text-line-after label-u mb-6">' . __('Partners', 'horizons') . '</div>
                     <nav id="sidebar-nav">
                         <ul class="list-unstyled">';
 
