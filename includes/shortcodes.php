@@ -277,7 +277,7 @@ function awards_grid_shortcode($atts)
             <?php endwhile; ?>
 
             <div class="col">
-                <a href="/awards" class="card h-100 bg-dusty-navy">
+                <a href="/awards" class="card h-100 bg-dusty-navy" style="min-height: 191.3px">
                     <div class="card-body align-content-center text-center">
                         <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
                     </div>
