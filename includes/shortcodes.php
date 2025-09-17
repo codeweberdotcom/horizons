@@ -290,7 +290,6 @@ function awards_grid_shortcode($atts)
     else :
         echo '<p>' . __('No awards found.', 'codeweber') . '</p>';
     endif;
-
     wp_reset_postdata();
 
     return ob_get_clean();
