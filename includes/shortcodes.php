@@ -245,7 +245,7 @@ function awards_grid_shortcode($atts)
     if ($awards_query->have_posts()) :
         // Формируем классы для колонок
         $column_classes = sprintf(
-            'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-1 gy-1',
+            'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
             intval($atts['columns_sm']),
             intval($atts['columns_md']),
             intval($atts['columns'])
@@ -290,7 +290,7 @@ function awards_grid_shortcode($atts)
     else :
         echo '<p>' . __('No awards found.', 'codeweber') . '</p>';
     endif;
-    
+
     wp_reset_postdata();
 
     return ob_get_clean();
