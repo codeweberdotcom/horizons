@@ -48,7 +48,7 @@ while (have_posts()) :
 					}
 					?>
 					<?php if ($single_pageheader_id !== 'disabled') : ?>
-						<nav class="nav">
+						<nav class="nav mt-8">
 							<?php
 							// Предыдущий пост
 							$previous_post = get_adjacent_post(false, '', true);
