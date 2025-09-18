@@ -14,7 +14,7 @@ function my_child_theme_allowed_sizes($sizes)
 {
    // Для нового типа записи 'awards'
    $sizes['awards'] = ['codeweber_awards'];
-  //$sizes['testimonials'] = ['codeweber_staff', 'thumbnail'];
+   $sizes['post'] = ['codeweber_staff', 'codeweber_awards', 'thumbnail'];
    return $sizes;
 }
 add_filter('codeweber_allowed_image_sizes', 'my_child_theme_allowed_sizes');
