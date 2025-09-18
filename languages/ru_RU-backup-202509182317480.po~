@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-17 11:21+0000\n"
+"PO-Revision-Date: 2025-09-18 11:26+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -48,7 +48,12 @@ msgstr ""
 msgid "Add or remove years"
 msgstr ""
 
-#: includes/custom-cpt.php:14 includes/shortcodes.php:254
+#: includes/metaboxes.php:10
+msgid "Additional Information"
+msgstr ""
+
+#: includes/custom-cpt.php:14 includes/shortcodes.php:253
+#: includes/shortcodes.php:324 includes/shortcodes.php:339
 msgid "All Awards"
 msgstr "Все Награды"
 
@@ -66,6 +71,18 @@ msgstr ""
 
 #: includes/custom-cpt.php:114
 msgid "All Years"
+msgstr ""
+
+#: includes/metaboxes.php:469
+msgid "Alt. Title"
+msgstr ""
+
+#: includes/metaboxes.php:259 includes/metaboxes.php:305
+msgid "Alternative Title"
+msgstr ""
+
+#: includes/metaboxes.php:309
+msgid "Alternative title for display purposes"
 msgstr ""
 
 #: includes/custom-cpt.php:268
@@ -100,7 +117,7 @@ msgstr ""
 msgid "Award URL"
 msgstr ""
 
-#: includes/custom-cpt.php:9
+#: includes/custom-cpt.php:9 includes/metaboxes.php:163
 msgid "Awards"
 msgstr ""
 
@@ -110,6 +127,14 @@ msgstr ""
 
 #: includes/custom-cpt.php:32
 msgid "Awards list navigation"
+msgstr ""
+
+#: includes/metaboxes.php:84
+msgid "Awards:"
+msgstr ""
+
+#: includes/metaboxes.php:72
+msgid "Brief information about the employee"
 msgstr ""
 
 #: includes/custom-cpt.php:70
@@ -124,13 +149,37 @@ msgstr ""
 msgid "Categories list navigation"
 msgstr ""
 
+#: includes/metaboxes.php:238 includes/metaboxes.php:281
+msgid "Category Color"
+msgstr ""
+
+#: includes/metaboxes.php:485
+msgid "Charcoal Blue"
+msgstr ""
+
+#: includes/metaboxes.php:252 includes/metaboxes.php:296
+msgid "Charcoal Blue (#303C42)"
+msgstr ""
+
 #: includes/custom-cpt.php:81 includes/custom-cpt.php:124
 #: includes/custom-cpt.php:167
 msgid "Choose from the most used"
 msgstr ""
 
+#: includes/metaboxes.php:468
+msgid "Color"
+msgstr ""
+
 #: includes/custom-cpt.php:38
 msgid "Company awards and achievements"
+msgstr ""
+
+#: includes/metaboxes.php:486
+msgid "Dusty Navy"
+msgstr ""
+
+#: includes/metaboxes.php:253 includes/metaboxes.php:297
+msgid "Dusty Navy (#3D5567)"
 msgstr ""
 
 #: includes/custom-cpt.php:242
@@ -157,8 +206,36 @@ msgstr ""
 msgid "Filter awards list"
 msgstr ""
 
+#: includes/metaboxes.php:79
+msgid "For example: English (C1), German (B2), French (A2)"
+msgstr ""
+
+#: includes/metaboxes.php:60
+msgid "For example: Europe, Asia, North America"
+msgstr ""
+
+#: includes/metaboxes.php:66
+msgid "For example: New York, USA"
+msgstr ""
+
+#: includes/metaboxes.php:54
+msgid "For example: Senior Financial Analyst and Investment Advisor"
+msgstr ""
+
+#: includes/metaboxes.php:159
+msgid "Full Position"
+msgstr ""
+
+#: includes/metaboxes.php:52
+msgid "Full Position Title:"
+msgstr ""
+
 #. Author of the theme
 msgid "Gladkov Denis"
+msgstr ""
+
+#: includes/metaboxes.php:94
+msgid "Hold Ctrl/Cmd to select multiple awards"
 msgstr ""
 
 #: includes/custom-cpt.php:277
@@ -181,6 +258,30 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
+#: includes/metaboxes.php:77
+msgid "Language Skills:"
+msgstr ""
+
+#: includes/metaboxes.php:162 includes/staff.php:69
+msgid "Languages"
+msgstr "Языки"
+
+#: includes/metaboxes.php:161
+msgid "Location"
+msgstr "Адрес"
+
+#: includes/metaboxes.php:64
+msgid "Location:"
+msgstr "Адрес:"
+
+#: includes/metaboxes.php:484
+msgid "Muted Teal"
+msgstr ""
+
+#: includes/metaboxes.php:251 includes/metaboxes.php:295
+msgid "Muted Teal (#47878F)"
+msgstr ""
+
 #: includes/custom-cpt.php:17
 msgid "New Award"
 msgstr ""
@@ -201,7 +302,7 @@ msgstr ""
 msgid "No categories"
 msgstr ""
 
-#: includes/shortcodes.php:241
+#: includes/shortcodes.php:309
 msgid "No image"
 msgstr ""
 
@@ -224,6 +325,22 @@ msgstr ""
 
 #: includes/custom-cpt.php:24
 msgid "Not found in Trash"
+msgstr ""
+
+#: includes/metaboxes.php:483
+msgid "Olive Green"
+msgstr ""
+
+#: includes/metaboxes.php:250 includes/metaboxes.php:294
+msgid "Olive Green (#738D50)"
+msgstr ""
+
+#: includes/metaboxes.php:470
+msgid "Order"
+msgstr ""
+
+#: includes/metaboxes.php:265 includes/metaboxes.php:315
+msgid "Order Number"
 msgstr ""
 
 #: includes/custom-cpt.php:237
@@ -284,6 +401,22 @@ msgctxt "Post Type Singular Name"
 msgid "Award"
 msgstr ""
 
+#: includes/metaboxes.php:480
+msgid "Primary"
+msgstr ""
+
+#: includes/metaboxes.php:247 includes/metaboxes.php:291
+msgid "Primary (#FEBE10)"
+msgstr ""
+
+#: includes/metaboxes.php:160 includes/staff.php:80
+msgid "Regions"
+msgstr "Регионы"
+
+#: includes/metaboxes.php:58
+msgid "Regions:"
+msgstr ""
+
 #: includes/custom-cpt.php:27
 msgid "Remove award image"
 msgstr ""
@@ -304,6 +437,14 @@ msgstr ""
 msgid "Search Years"
 msgstr ""
 
+#: includes/metaboxes.php:255 includes/metaboxes.php:299
+msgid "Select color for service category display"
+msgstr ""
+
+#: includes/metaboxes.php:242 includes/metaboxes.php:286
+msgid "Selected Color Preview:"
+msgstr ""
+
 #: includes/custom-cpt.php:79
 msgid "Separate categories with commas"
 msgstr ""
@@ -318,6 +459,22 @@ msgstr ""
 
 #: includes/custom-cpt.php:26
 msgid "Set award image"
+msgstr ""
+
+#: includes/metaboxes.php:267 includes/metaboxes.php:319
+msgid "Set order for category display (lower numbers first)"
+msgstr ""
+
+#: includes/metaboxes.php:70
+msgid "Short Description:"
+msgstr ""
+
+#: includes/metaboxes.php:482
+msgid "Slate Gray"
+msgstr ""
+
+#: includes/metaboxes.php:249 includes/metaboxes.php:293
+msgid "Slate Gray (#86909B)"
 msgstr ""
 
 #: includes/custom-cpt.php:156
@@ -404,6 +561,14 @@ msgstr ""
 
 #: includes/custom-cpt.php:121
 msgid "View Year"
+msgstr ""
+
+#: includes/metaboxes.php:481
+msgid "Vintage Burgundy"
+msgstr ""
+
+#: includes/metaboxes.php:248 includes/metaboxes.php:292
+msgid "Vintage Burgundy (#893B41)"
 msgstr ""
 
 #: includes/custom-cpt.php:113

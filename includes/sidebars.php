@@ -17,7 +17,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
       if ($legal_posts) {
          echo '<div class="widget">
-         <div class="text-line-after label-u mb-6">' . __('Partners', 'horizons') . '</div>
+         <div class="text-line-after label-u mb-6">' . __('Partner Biographies', 'horizons') . '</div>
                     <nav id="sidebar-nav">
                         <ul class="list-unstyled">';
 

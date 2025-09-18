@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-18 11:26+0000\n"
+"PO-Revision-Date: 2025-09-18 23:18+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -376,8 +376,8 @@ msgid "Parent Year:"
 msgstr ""
 
 #: includes/sidebars.php:20
-msgid "Partners"
-msgstr "Партнеры"
+msgid "Partner Biographies"
+msgstr "Биография Партнеров"
 
 #: includes/custom-cpt.php:82
 msgid "Popular Categories"
@@ -407,6 +407,10 @@ msgstr ""
 
 #: includes/metaboxes.php:247 includes/metaboxes.php:291
 msgid "Primary (#FEBE10)"
+msgstr ""
+
+#: includes/blog.php:159
+msgid "Read"
 msgstr ""
 
 #: includes/metaboxes.php:160 includes/staff.php:80

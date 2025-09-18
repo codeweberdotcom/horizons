@@ -124,35 +124,40 @@ function codeweber_blog_posts_slider_shortcode($atts)
                   <div class="mb-1">
                      <article>
                         <div class="post-col">
-                           <figure class="post-figure">
-                              <?php if (has_post_thumbnail()) : ?>
+                           <figure class="post-figure overlay overlay-1 hover-scale rounded mb-5">
+                              <a href="<?php the_permalink(); ?>">
+                                 <?php if (has_post_thumbnail()) : ?>
                                  <?php
-                                 $image_size = $atts['image_size'];
-                                 $thumbnail = get_the_post_thumbnail(get_the_ID(), $image_size, array(
-                                    'decoding' => 'async',
-                                    'alt' => esc_attr(get_the_title()),
-                                    'class' => 'post-image swiper-lazy'
-                                 ));
-                                 echo $thumbnail;
+                                    $image_size = $atts['image_size'];
+                                    $thumbnail = get_the_post_thumbnail(get_the_ID(), $image_size, array(
+                                       'decoding' => 'async',
+                                       'alt' => esc_attr(get_the_title()),
+                                       'class' => 'post-image swiper-lazy'
+                                    ));
+                                    echo $thumbnail;
                                  ?>
-                              <?php else : ?>
+                                 <?php else : ?>
                                  <img decoding="async"
-                                    src="<?php echo esc_url(get_template_directory_uri() . '/dist/assets/img/placeholder_400x400.jpg'); ?>"
-                                    alt="<?php echo esc_attr(get_the_title()); ?>"
-                                    class="post-image swiper-lazy" />
-                              <?php endif; ?>
+                                 src="<?php echo esc_url(get_template_directory_uri() . '/dist/assets/img/placeholder_400x400.jpg'); ?>"
+                                 alt="<?php echo esc_attr(get_the_title()); ?>"
+                                 class="post-image swiper-lazy" />
+                           <?php endif; ?>
 
-                              <!-- Всегда отображаем основную категорию -->
-                              <div class="caption-wrapper p-7">
-                                 <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">
-                                    <?php
-                                    $categories = get_the_category();
-                                    if (!empty($categories)) {
-                                       echo esc_html($categories[0]->name);
-                                    }
-                                    ?>
-                                 </div>
+                           <!-- Всегда отображаем основную категорию -->
+                           <div class="caption-wrapper p-7">
+                              <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">
+                                 <?php
+                                 $categories = get_the_category();
+                                 if (!empty($categories)) {
+                                    echo esc_html($categories[0]->name);
+                                 }
+                                 ?>
                               </div>
+                           </div><span class="bg"></span>
+                           </a>
+                           <figcaption>
+                              <div class="from-top mb-0 label-u"><?php echo __('Read', 'horizons'); ?></div>
+                           </figcaption>
                            </figure>
 
                            <div class="post-body mt-4">
