@@ -7,7 +7,7 @@ function codeweber_add_staff_additional_meta_boxes()
 {
    add_meta_box(
       'staff_additional_details',
-      __('Additional Information', 'codeweber'),
+      __('Additional Information', 'horizons'),
       'codeweber_staff_additional_meta_box_callback',
       'staff',
       'normal',
@@ -27,6 +27,7 @@ function codeweber_staff_additional_meta_box_callback($post)
    // Get existing field values
    $full_position = get_post_meta($post->ID, '_staff_full_position', true);
    $regions = get_post_meta($post->ID, '_staff_regions', true);
+   $location = get_post_meta($post->ID, '_staff_location', true);
    $short_description = get_post_meta($post->ID, '_staff_short_description', true);
    $language_skills = get_post_meta($post->ID, '_staff_language_skills', true);
 
@@ -48,33 +49,39 @@ function codeweber_staff_additional_meta_box_callback($post)
 
    <div style="display: grid; gap: 16px;">
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
-         <label for="staff_full_position"><strong><?php _e('Full Position Title:', 'codeweber'); ?></strong></label>
+         <label for="staff_full_position"><strong><?php _e('Full Position Title:', 'horizons'); ?></strong></label>
          <input type="text" id="staff_full_position" name="staff_full_position" value="<?php echo esc_attr($full_position); ?>"
-            placeholder="<?php esc_attr_e('For example: Senior Financial Analyst and Investment Advisor', 'codeweber'); ?>" style="width: 100%; padding: 8px;">
+            placeholder="<?php esc_attr_e('For example: Senior Financial Analyst and Investment Advisor', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
-         <label for="staff_regions"><strong><?php _e('Regions:', 'codeweber'); ?></strong></label>
+         <label for="staff_regions"><strong><?php _e('Regions:', 'horizons'); ?></strong></label>
          <input type="text" id="staff_regions" name="staff_regions" value="<?php echo esc_attr($regions); ?>"
-            placeholder="<?php esc_attr_e('For example: Europe, Asia, North America', 'codeweber'); ?>" style="width: 100%; padding: 8px;">
+            placeholder="<?php esc_attr_e('For example: Europe, Asia, North America', 'horizons'); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="staff_location"><strong><?php _e('Location:', 'horizons'); ?></strong></label>
+         <input type="text" id="staff_location" name="staff_location" value="<?php echo esc_attr($location); ?>"
+            placeholder="<?php esc_attr_e('For example: New York, USA', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="staff_short_description"><strong><?php _e('Short Description:', 'codeweber'); ?></strong></label>
+         <label for="staff_short_description"><strong><?php _e('Short Description:', 'horizons'); ?></strong></label>
          <textarea id="staff_short_description" name="staff_short_description"
-            placeholder="<?php esc_attr_e('Brief information about the employee', 'codeweber'); ?>"
+            placeholder="<?php esc_attr_e('Brief information about the employee', 'horizons'); ?>"
             style="width: 100%; padding: 8px; min-height: 80px; resize: vertical;"><?php echo esc_textarea($short_description); ?></textarea>
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="staff_language_skills"><strong><?php _e('Language Skills:', 'codeweber'); ?></strong></label>
+         <label for="staff_language_skills"><strong><?php _e('Language Skills:', 'horizons'); ?></strong></label>
          <textarea id="staff_language_skills" name="staff_language_skills"
-            placeholder="<?php esc_attr_e('For example: English (C1), German (B2), French (A2)', 'codeweber'); ?>"
+            placeholder="<?php esc_attr_e('For example: English (C1), German (B2), French (A2)', 'horizons'); ?>"
             style="width: 100%; padding: 8px; min-height: 60px; resize: vertical;"><?php echo esc_textarea($language_skills); ?></textarea>
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="staff_awards"><strong><?php _e('Awards:', 'codeweber'); ?></strong></label>
+         <label for="staff_awards"><strong><?php _e('Awards:', 'horizons'); ?></strong></label>
          <select id="staff_awards" name="staff_awards[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
             <?php foreach ($awards as $award) : ?>
                <option value="<?php echo esc_attr($award->ID); ?>"
@@ -84,7 +91,7 @@ function codeweber_staff_additional_meta_box_callback($post)
             <?php endforeach; ?>
          </select>
          <p class="description" style="margin-top: 5px; font-size: 12px; color: #666;">
-            <?php _e('Hold Ctrl/Cmd to select multiple awards', 'codeweber'); ?>
+            <?php _e('Hold Ctrl/Cmd to select multiple awards', 'horizons'); ?>
          </p>
       </div>
    </div>
@@ -112,7 +119,7 @@ function codeweber_save_staff_additional_meta($post_id)
    }
 
    // Save fields from the second metabox
-   $additional_fields = ['staff_full_position', 'staff_regions', 'staff_short_description', 'staff_language_skills'];
+   $additional_fields = ['staff_full_position', 'staff_regions', 'staff_location', 'staff_short_description', 'staff_language_skills'];
 
    foreach ($additional_fields as $field) {
       if (isset($_POST[$field])) {
@@ -149,10 +156,11 @@ function codeweber_add_staff_additional_admin_columns($columns)
 
       // Insert after "Phone" column
       if ($key === 'staff_phone') {
-         $new_columns['staff_full_position'] = __('Full Position', 'codeweber');
-         $new_columns['staff_regions'] = __('Regions', 'codeweber');
-         $new_columns['staff_language_skills'] = __('Languages', 'codeweber');
-         $new_columns['staff_awards'] = __('Awards', 'codeweber');
+         $new_columns['staff_full_position'] = __('Full Position', 'horizons');
+         $new_columns['staff_regions'] = __('Regions', 'horizons');
+         $new_columns['staff_location'] = __('Location', 'horizons');
+         $new_columns['staff_language_skills'] = __('Languages', 'horizons');
+         $new_columns['staff_awards'] = __('Awards', 'horizons');
       }
    }
 
@@ -171,6 +179,9 @@ function codeweber_fill_staff_additional_admin_columns($column, $post_id)
          break;
       case 'staff_regions':
          echo esc_html(get_post_meta($post_id, '_staff_regions', true));
+         break;
+      case 'staff_location':
+         echo esc_html(get_post_meta($post_id, '_staff_location', true));
          break;
       case 'staff_language_skills':
          $languages = get_post_meta($post_id, '_staff_language_skills', true);
@@ -202,6 +213,7 @@ function codeweber_make_staff_additional_columns_sortable($columns)
 {
    $columns['staff_full_position'] = 'staff_full_position';
    $columns['staff_regions'] = 'staff_regions';
+   $columns['staff_location'] = 'staff_location';
    $columns['staff_language_skills'] = 'staff_language_skills';
    $columns['staff_awards'] = 'staff_awards';
    return $columns;
@@ -223,36 +235,36 @@ function add_service_category_fields($taxonomy)
 {
 ?>
    <div class="form-field term-color-wrap">
-      <label for="service_category_color"><?php _e('Category Color', 'codeweber'); ?></label>
+      <label for="service_category_color"><?php _e('Category Color', 'horizons'); ?></label>
 
       <!-- Color preview box for add form -->
       <div class="color-preview-container">
-         <span class="color-preview-label"><?php _e('Selected Color Preview:', 'codeweber'); ?></span>
+         <span class="color-preview-label"><?php _e('Selected Color Preview:', 'horizons'); ?></span>
          <div class="color-preview-box primary"></div>
       </div>
 
       <select name="service_category_color" id="service_category_color" class="color-select">
-         <option value="primary" selected><?php _e('Primary (#FEBE10)', 'codeweber'); ?></option>
-         <option value="vintage-burgundy"><?php _e('Vintage Burgundy (#893B41)', 'codeweber'); ?></option>
-         <option value="slate-gray"><?php _e('Slate Gray (#86909B)', 'codeweber'); ?></option>
-         <option value="olive-green"><?php _e('Olive Green (#738D50)', 'codeweber'); ?></option>
-         <option value="muted-teal"><?php _e('Muted Teal (#47878F)', 'codeweber'); ?></option>
-         <option value="charcoal-blue"><?php _e('Charcoal Blue (#303C42)', 'codeweber'); ?></option>
-         <option value="dusty-navy"><?php _e('Dusty Navy (#3D5567)', 'codeweber'); ?></option>
+         <option value="primary" selected><?php _e('Primary (#FEBE10)', 'horizons'); ?></option>
+         <option value="vintage-burgundy"><?php _e('Vintage Burgundy (#893B41)', 'horizons'); ?></option>
+         <option value="slate-gray"><?php _e('Slate Gray (#86909B)', 'horizons'); ?></option>
+         <option value="olive-green"><?php _e('Olive Green (#738D50)', 'horizons'); ?></option>
+         <option value="muted-teal"><?php _e('Muted Teal (#47878F)', 'horizons'); ?></option>
+         <option value="charcoal-blue"><?php _e('Charcoal Blue (#303C42)', 'horizons'); ?></option>
+         <option value="dusty-navy"><?php _e('Dusty Navy (#3D5567)', 'horizons'); ?></option>
       </select>
-      <p><?php _e('Select color for service category display', 'codeweber'); ?></p>
+      <p><?php _e('Select color for service category display', 'horizons'); ?></p>
    </div>
 
    <div class="form-field term-alt-title-wrap">
-      <label for="service_category_alt_title"><?php _e('Alternative Title', 'codeweber'); ?></label>
+      <label for="service_category_alt_title"><?php _e('Alternative Title', 'horizons'); ?></label>
       <input type="text" name="service_category_alt_title" id="service_category_alt_title" value="">
       <p><?php _e('Alternative title for display purposes', 'codweber'); ?></p>
    </div>
 
    <div class="form-field term-order-wrap">
-      <label for="service_category_order"><?php _e('Order Number', 'codeweber'); ?></label>
+      <label for="service_category_order"><?php _e('Order Number', 'horizons'); ?></label>
       <input type="number" name="service_category_order" id="service_category_order" value="0" min="0">
-      <p><?php _e('Set order for category display (lower numbers first)', 'codeweber'); ?></p>
+      <p><?php _e('Set order for category display (lower numbers first)', 'horizons'); ?></p>
    </div>
 <?php
 }
@@ -266,45 +278,45 @@ function edit_service_category_fields($term, $taxonomy)
 ?>
    <tr class="form-field term-color-wrap">
       <th scope="row">
-         <label for="service_category_color"><?php _e('Category Color', 'codeweber'); ?></label>
+         <label for="service_category_color"><?php _e('Category Color', 'horizons'); ?></label>
       </th>
       <td>
          <!-- Color preview box -->
          <div class="color-preview-container">
-            <span class="color-preview-label"><?php _e('Selected Color Preview:', 'codeweber'); ?></span>
+            <span class="color-preview-label"><?php _e('Selected Color Preview:', 'horizons'); ?></span>
             <div class="color-preview-box <?php echo esc_attr($color ? $color : ''); ?>"></div>
          </div>
 
          <select name="service_category_color" id="service_category_color" class="color-select">
-            <option value="primary" <?php selected($color, 'primary'); ?>><?php _e('Primary (#FEBE10)', 'codeweber'); ?></option>
-            <option value="vintage-burgundy" <?php selected($color, 'vintage-burgundy'); ?>><?php _e('Vintage Burgundy (#893B41)', 'codeweber'); ?></option>
-            <option value="slate-gray" <?php selected($color, 'slate-gray'); ?>><?php _e('Slate Gray (#86909B)', 'codeweber'); ?></option>
-            <option value="olive-green" <?php selected($color, 'olive-green'); ?>><?php _e('Olive Green (#738D50)', 'codeweber'); ?></option>
-            <option value="muted-teal" <?php selected($color, 'muted-teal'); ?>><?php _e('Muted Teal (#47878F)', 'codeweber'); ?></option>
-            <option value="charcoal-blue" <?php selected($color, 'charcoal-blue'); ?>><?php _e('Charcoal Blue (#303C42)', 'codeweber'); ?></option>
-            <option value="dusty-navy" <?php selected($color, 'dusty-navy'); ?>><?php _e('Dusty Navy (#3D5567)', 'codeweber'); ?></option>
+            <option value="primary" <?php selected($color, 'primary'); ?>><?php _e('Primary (#FEBE10)', 'horizons'); ?></option>
+            <option value="vintage-burgundy" <?php selected($color, 'vintage-burgundy'); ?>><?php _e('Vintage Burgundy (#893B41)', 'horizons'); ?></option>
+            <option value="slate-gray" <?php selected($color, 'slate-gray'); ?>><?php _e('Slate Gray (#86909B)', 'horizons'); ?></option>
+            <option value="olive-green" <?php selected($color, 'olive-green'); ?>><?php _e('Olive Green (#738D50)', 'horizons'); ?></option>
+            <option value="muted-teal" <?php selected($color, 'muted-teal'); ?>><?php _e('Muted Teal (#47878F)', 'horizons'); ?></option>
+            <option value="charcoal-blue" <?php selected($color, 'charcoal-blue'); ?>><?php _e('Charcoal Blue (#303C42)', 'horizons'); ?></option>
+            <option value="dusty-navy" <?php selected($color, 'dusty-navy'); ?>><?php _e('Dusty Navy (#3D5567)', 'horizons'); ?></option>
          </select>
-         <p class="description"><?php _e('Select color for service category display', 'codeweber'); ?></p>
+         <p class="description"><?php _e('Select color for service category display', 'horizons'); ?></p>
       </td>
    </tr>
 
    <tr class="form-field term-alt-title-wrap">
       <th scope="row">
-         <label for="service_category_alt_title"><?php _e('Alternative Title', 'codeweber'); ?></label>
+         <label for="service_category_alt_title"><?php _e('Alternative Title', 'horizons'); ?></label>
       </th>
       <td>
          <input type="text" name="service_category_alt_title" id="service_category_alt_title" value="<?php echo esc_attr($alt_title); ?>">
-         <p class="description"><?php _e('Alternative title for display purposes', 'codeweber'); ?></p>
+         <p class="description"><?php _e('Alternative title for display purposes', 'horizons'); ?></p>
       </td>
    </tr>
 
    <tr class="form-field term-order-wrap">
       <th scope="row">
-         <label for="service_category_order"><?php _e('Order Number', 'codeweber'); ?></label>
+         <label for="service_category_order"><?php _e('Order Number', 'horizons'); ?></label>
       </th>
       <td>
          <input type="number" name="service_category_order" id="service_category_order" value="<?php echo esc_attr($order); ?>" min="0">
-         <p class="description"><?php _e('Set order for category display (lower numbers first)', 'codeweber'); ?></p>
+         <p class="description"><?php _e('Set order for category display (lower numbers first)', 'horizons'); ?></p>
       </td>
    </tr>
 <?php
@@ -453,9 +465,9 @@ add_filter('manage_service_category_custom_column', 'show_service_category_colum
 
 function add_service_category_columns($columns)
 {
-   $columns['color'] = __('Color', 'codeweber');
-   $columns['alt_title'] = __('Alt. Title', 'codeweber');
-   $columns['order'] = __('Order', 'codeweber');
+   $columns['color'] = __('Color', 'horizons');
+   $columns['alt_title'] = __('Alt. Title', 'horizons');
+   $columns['order'] = __('Order', 'horizons');
    return $columns;
 }
 
@@ -465,13 +477,13 @@ function show_service_category_columns($content, $column_name, $term_id)
       $color = get_term_meta($term_id, 'service_category_color', true);
       if ($color) {
          $color_names = [
-            'primary' => __('Primary', 'codeweber'),
-            'vintage-burgundy' => __('Vintage Burgundy', 'codeweber'),
-            'slate-gray' => __('Slate Gray', 'codeweber'),
-            'olive-green' => __('Olive Green', 'codeweber'),
-            'muted-teal' => __('Muted Teal', 'codeweber'),
-            'charcoal-blue' => __('Charcoal Blue', 'codeweber'),
-            'dusty-navy' => __('Dusty Navy', 'codeweber')
+            'primary' => __('Primary', 'horizons'),
+            'vintage-burgundy' => __('Vintage Burgundy', 'horizons'),
+            'slate-gray' => __('Slate Gray', 'horizons'),
+            'olive-green' => __('Olive Green', 'horizons'),
+            'muted-teal' => __('Muted Teal', 'horizons'),
+            'charcoal-blue' => __('Charcoal Blue', 'horizons'),
+            'dusty-navy' => __('Dusty Navy', 'horizons')
          ];
 
          return '<div class="color-option-preview ' . esc_attr($color) . '"></div>' .

@@ -497,8 +497,6 @@ function codeweber_enqueue_select2() {
 add_action('admin_enqueue_scripts', 'codeweber_enqueue_select2');
 
 
-
-
 add_filter('use_block_editor_for_post_type', 'disable_gutenberg_for_awards', 10, 2);
 function disable_gutenberg_for_awards($current_status, $post_type)
 {
