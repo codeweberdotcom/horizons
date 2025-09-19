@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-19 16:13+0000\n"
+"PO-Revision-Date: 2025-09-19 16:09+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -576,17 +576,9 @@ msgstr "Награда"
 msgid "Practice"
 msgstr "Практика"
 
-#: functions/cpt/cpt-practices.php:75 functions/cpt/cpt-practices.php:80
-msgid "Practice Categories"
-msgstr "Категории практики"
-
-#: functions/cpt/cpt-practices.php:76
-msgid "Practice Category"
-msgstr "Категория Практики"
-
 #: includes/metaboxes.php:1276
 msgid "Practice Details"
-msgstr "Подробности Практики"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:23
 msgid "Practice Image"
@@ -594,19 +586,19 @@ msgstr "Изображение практики"
 
 #: functions/cpt/cpt-practices.php:30
 msgid "Practice published"
-msgstr "Практика опубликована"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:31
 msgid "Practice reverted to draft"
-msgstr "Практика перемещена в черновик"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:32
 msgid "Practice scheduled"
-msgstr "Практика запланирована"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:33
 msgid "Practice updated"
-msgstr "Практика обновлена"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
 #: functions/cpt/cpt-practices.php:38
@@ -615,11 +607,11 @@ msgstr "Практики"
 
 #: functions/cpt/cpt-practices.php:27
 msgid "Practices archive"
-msgstr "Архив практик"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:28
 msgid "Practices list"
-msgstr "Список практик"
+msgstr ""
 
 #: includes/metaboxes.php:451 includes/metaboxes.php:1159
 msgid "Primary"
@@ -660,7 +652,7 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:25
 msgid "Remove practice image"
-msgstr "Удалить изображение Практики"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"
@@ -676,7 +668,7 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:19
 msgid "Search Practices"
-msgstr "Поиск Практики"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:170
 msgid "Search Tags"
@@ -688,7 +680,7 @@ msgstr "Выбрать Год"
 
 #: includes/metaboxes.php:934 includes/metaboxes.php:978
 msgid "Select color for practice category display"
-msgstr "Выберите цвет для отображения категории практики"
+msgstr ""
 
 #: includes/metaboxes.php:226 includes/metaboxes.php:270
 msgid "Select color for service category display"
@@ -803,14 +795,6 @@ msgctxt "Taxonomy Singular Name"
 msgid "Award Year"
 msgstr "Год Награды"
 
-#: functions/cpt/cpt-practices.php:112
-msgid "Type"
-msgstr ""
-
-#: functions/cpt/cpt-practices.php:111 functions/cpt/cpt-practices.php:116
-msgid "Types"
-msgstr ""
-
 #: functions/cpt/cpt-awards.php:20
 msgid "Update Award"
 msgstr "Обновить Награду"
@@ -841,7 +825,7 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:26
 msgid "Use as practice image"
-msgstr "Использовать изображение Практики"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:21
 msgid "View Award"
@@ -865,11 +849,11 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:17
 msgid "View Practice"
-msgstr "Посмотреть Практику"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:18
 msgid "View Practices"
-msgstr "Посмотреть Практики"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:165
 msgid "View Tag"

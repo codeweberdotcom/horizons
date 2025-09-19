@@ -72,12 +72,12 @@ function cptui_register_my_taxes_practice_category()
 	 * Taxonomy: Practice Categories.
 	 */
 	$labels = [
-		"name" => __("Practice Categories", "codeweber"),
-		"singular_name" => __("Practice Category", "codeweber"),
+		"name" => __("Practice Categories", "horizons"),
+		"singular_name" => __("Practice Category", "horizons"),
 	];
 
 	$args = [
-		"label" => __("Practice Categories", "codeweber"),
+		"label" => __("Practice Categories", "horizons"),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
@@ -108,12 +108,12 @@ function cptui_register_my_taxes_types_of_practices()
 	 * Taxonomy: Types.
 	 */
 	$labels = [
-		"name" => __("Types", "codeweber"),
-		"singular_name" => __("Type", "codeweber"),
+		"name" => __("Types", "horizons"),
+		"singular_name" => __("Type", "horizons"),
 	];
 
 	$args = [
-		"label" => __("Types", "codeweber"),
+		"label" => __("Types", "horizons"),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
