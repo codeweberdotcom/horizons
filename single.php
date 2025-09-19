@@ -17,7 +17,7 @@ while (have_posts()) :
 	$show_universal_title = ($single_pageheader_id !== 'disabled');
 ?>
 
-	<section class="wrapper bg-light">
+	<section class="wrapper">
 		<div class="container">
 			<?php do_action('before_single_content', $post_type); ?>
 			<div class="row gx-lg-8 gx-xl-12">
