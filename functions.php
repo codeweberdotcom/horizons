@@ -32,6 +32,7 @@ $theme_includes = array(
     '/includes/add_image_sizes.php',
     '/includes/sidebars.php',
     '/includes/partners.php',
+    '/includes/practices.php',
     '/includes/blog.php'
 );
 

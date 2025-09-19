@@ -147,7 +147,7 @@ function add_news_section_after_partner($post_type)
             </div>
             <div class="row">
                <div class="col-12">
-                  <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_partner" excerpt_length="15"]'); ?>
+                  <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_staff" excerpt_length="15"]'); ?>
                </div>
             </div>
          </div>
