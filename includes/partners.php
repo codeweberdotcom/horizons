@@ -10,21 +10,21 @@ function add_custom_single_banner_partners($post_type)
    if ($post_type === 'partners') {
 
       // Получаем данные
-      $name = get_post_meta($post->ID, '_partner_name', true);
-      $surname = get_post_meta($post->ID, '_partner_surname', true);
+      $name = get_post_meta($post->ID, '_partners_name', true);
+      $surname = get_post_meta($post->ID, '_partners_surname', true);
 
-      $full_position = get_post_meta($post->ID, '_partner_full_position', true);
-      $regions = get_post_meta($post->ID, '_partner_regions', true);
-      $short_description = get_post_meta($post->ID, '_partner_short_description', true);
-      $language_skills = get_post_meta($post->ID, '_partner_language_skills', true);
-      $email = get_post_meta($post->ID, '_partner_email', true);
-      $phone = get_post_meta($post->ID, '_partner_phone', true);
-      $location = get_post_meta($post->ID, '_partner_location', true);
+      $full_position = get_post_meta($post->ID, '_partners_full_position', true);
+      $regions = get_post_meta($post->ID, '_partners_regions', true);
+      $short_description = get_post_meta($post->ID, '_partners_short_description', true);
+      $language_skills = get_post_meta($post->ID, '_partners_language_skills', true);
+      $email = get_post_meta($post->ID, '_partners_email', true);
+      $phone = get_post_meta($post->ID, '_partners_phone', true);
+      $location = get_post_meta($post->ID, '_partners_location', true);
 
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
       if (has_post_thumbnail($post->ID)) {
-         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'large');
+         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'codeweber_staff');
       }
 
       // Запасное изображение
