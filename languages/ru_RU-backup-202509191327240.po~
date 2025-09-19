@@ -1,14 +1,14 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-19 12:48+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"POT-Creation-Date: 2025-09-16 09:59+0000\n"
+"PO-Revision-Date: 2025-09-19 13:26+0000\n"
+"Last-Translator: Codeweber\n"
+"Language-Team: Русский\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,168 +18,168 @@ msgstr ""
 
 #: includes/custom-cpt.php:16
 msgid "Add New"
-msgstr ""
+msgstr "Добавить"
 
 #: includes/custom-cpt.php:15
 msgid "Add New Award"
-msgstr ""
+msgstr "Добавить Награду"
 
 #: includes/custom-cpt.php:75
 msgid "Add New Category"
-msgstr ""
+msgstr "Добавить Категорию"
 
 #: functions/cpt/cpt-partners.php:14
 msgid "Add New Partner"
-msgstr ""
+msgstr "Добавить Партнера"
 
 #: functions/cpt/cpt-practices.php:14
 msgid "Add New Practice"
-msgstr ""
+msgstr "Добавить Практику"
 
 #: includes/custom-cpt.php:161
 msgid "Add New Tag"
-msgstr ""
+msgstr "Добавить Метку"
 
 #: includes/custom-cpt.php:118
 msgid "Add New Year"
-msgstr ""
+msgstr "Добавить Год"
 
 #: includes/custom-cpt.php:80
 msgid "Add or remove categories"
-msgstr ""
+msgstr "Добавить или удалить Категорию"
 
 #: includes/custom-cpt.php:166
 msgid "Add or remove tags"
-msgstr ""
+msgstr "Добавить или удалить Метку"
 
 #: includes/custom-cpt.php:123
 msgid "Add or remove years"
-msgstr ""
+msgstr "Добавить или удалить Год"
 
 #: functions/cpt/cpt-partners.php:13
 msgid "Add Partner"
-msgstr ""
+msgstr "Добавить Партнера"
 
 #: functions/cpt/cpt-practices.php:13
 msgid "Add Practice"
-msgstr ""
+msgstr "Добавить Практику"
 
 #: includes/metaboxes.php:10
 msgid "Additional Information"
-msgstr ""
+msgstr "Дополнительная информация"
 
 #: includes/custom-cpt.php:14 includes/shortcodes.php:296
 #: includes/shortcodes.php:367 includes/shortcodes.php:382
 msgid "All Awards"
-msgstr ""
+msgstr "Все Награды"
 
 #: includes/custom-cpt.php:71
 msgid "All Categories"
-msgstr ""
+msgstr "Все Категории"
 
 #: includes/partners.php:144
 msgid "All News"
-msgstr ""
+msgstr "Все новости"
 
 #: functions/cpt/cpt-partners.php:12
 msgid "All Partners"
-msgstr ""
+msgstr "Все Партнеры"
 
 #: includes/shortcodes.php:227
 msgid "All Practice"
-msgstr ""
+msgstr "Все практики"
 
 #: functions/cpt/cpt-practices.php:12
 msgid "All Practices"
-msgstr ""
+msgstr "Все Практики"
 
 #: includes/custom-cpt.php:157
 msgid "All Tags"
-msgstr ""
+msgstr "Все Метки"
 
 #: includes/custom-cpt.php:114
 msgid "All Years"
-msgstr ""
+msgstr "Все Года"
 
 #: includes/metaboxes.php:440
 msgid "Alt. Title"
-msgstr ""
+msgstr "Альтернативный Заголовок"
 
 #: includes/metaboxes.php:230 includes/metaboxes.php:276
 msgid "Alternative Title"
-msgstr ""
+msgstr "Альтернативный Заголовок"
 
 #: includes/metaboxes.php:280
 msgid "Alternative title for display purposes"
-msgstr ""
+msgstr "Альтернативное название для отображения"
 
 #: includes/metaboxes.php:640
 msgid "Associated partners Members"
-msgstr ""
+msgstr "Ассоциированные Партнеры"
 
 #: includes/custom-cpt.php:10 includes/custom-cpt.php:37
 msgid "Award"
-msgstr ""
+msgstr "Награды"
 
 #: includes/custom-cpt.php:11
 msgid "Award Archives"
-msgstr ""
+msgstr "Архив наград"
 
 #: includes/custom-cpt.php:12
 msgid "Award Attributes"
-msgstr ""
+msgstr "Атрибуты награды"
 
 #: includes/metaboxes.php:619
 msgid "Award Date"
-msgstr ""
+msgstr "Дата Награды"
 
 #: includes/metaboxes.php:568
 msgid "Award Details"
-msgstr ""
+msgstr "Подробности Награды"
 
 #: includes/custom-cpt.php:25
 msgid "Award Image"
-msgstr ""
+msgstr "Изображение Награды"
 
 #: includes/metaboxes.php:630
 msgid "Award URL"
-msgstr ""
+msgstr "URL-адрес Награды"
 
 #: includes/custom-cpt.php:9
 msgid "Awards"
-msgstr ""
+msgstr "Награды"
 
 #: includes/custom-cpt.php:31
 msgid "Awards list"
-msgstr ""
+msgstr "Список Наград"
 
 #: includes/custom-cpt.php:32
 msgid "Awards list navigation"
-msgstr ""
+msgstr "Навигация по списку наград"
 
 #: includes/metaboxes.php:118
 msgid "Awards:"
-msgstr ""
+msgstr "Награды:"
 
 #: includes/metaboxes.php:106
 msgid "Brief information about the employee"
-msgstr ""
+msgstr "Краткая информация о сотруднике"
 
 #: includes/custom-cpt.php:70
 msgid "Categories"
-msgstr ""
+msgstr "Категории:"
 
 #: includes/custom-cpt.php:86
 msgid "Categories list"
-msgstr ""
+msgstr "Список Категорий"
 
 #: includes/custom-cpt.php:87
 msgid "Categories list navigation"
-msgstr ""
+msgstr "Навигация по списку категорий"
 
 #: includes/metaboxes.php:209 includes/metaboxes.php:252
 msgid "Category Color"
-msgstr ""
+msgstr "Цвет Категории"
 
 #: includes/metaboxes.php:456
 msgid "Charcoal Blue"
@@ -192,15 +192,15 @@ msgstr ""
 #: includes/custom-cpt.php:81 includes/custom-cpt.php:124
 #: includes/custom-cpt.php:167
 msgid "Choose from the most used"
-msgstr ""
+msgstr "Выбрать из часто используемых"
 
 #: includes/metaboxes.php:439
 msgid "Color"
-msgstr ""
+msgstr "Цвет"
 
 #: includes/custom-cpt.php:38
 msgid "Company awards and achievements"
-msgstr ""
+msgstr "Награды и достижения компании"
 
 #: includes/metaboxes.php:457
 msgid "Dusty Navy"
@@ -212,79 +212,79 @@ msgstr ""
 
 #: includes/metaboxes.php:75
 msgid "E-Mail:"
-msgstr ""
+msgstr "E-Mail:"
 
 #: includes/metaboxes.php:614
 msgid "e.g., International Design Awards"
-msgstr ""
+msgstr "например, Международная премия в области дизайна"
 
 #: includes/custom-cpt.php:18
 msgid "Edit Award"
-msgstr ""
+msgstr "Редактировать Награду"
 
 #: includes/custom-cpt.php:76
 msgid "Edit Category"
-msgstr ""
+msgstr "Редактировать Категорию"
 
 #: functions/cpt/cpt-partners.php:15
 msgid "Edit Partner"
-msgstr ""
+msgstr "Редактировать Партнера"
 
 #: functions/cpt/cpt-practices.php:15
 msgid "Edit Practice"
-msgstr ""
+msgstr "Редактировать Практику"
 
 #: includes/custom-cpt.php:162
 msgid "Edit Tag"
-msgstr ""
+msgstr "Редактировать Метку"
 
 #: includes/custom-cpt.php:119
 msgid "Edit Year"
-msgstr ""
+msgstr "Редактировать Год"
 
 #: includes/custom-cpt.php:33
 msgid "Filter awards list"
-msgstr ""
+msgstr "Фильтровать список наград"
 
 #: includes/metaboxes.php:113
 msgid "For example: English (C1), German (B2), French (A2)"
-msgstr ""
+msgstr "Например: Английский (C1), Немецкий (B2), Французский (A2)"
 
 #: includes/metaboxes.php:94
 msgid "For example: Europe, Asia, North America"
-msgstr ""
+msgstr "Например: Европа, Азия, Северная Америка"
 
 #: includes/metaboxes.php:100
 msgid "For example: New York, USA"
-msgstr ""
+msgstr "Например: Нью-Йорк, США"
 
 #: includes/metaboxes.php:88
 msgid "For example: Senior Financial Analyst and Investment Advisor"
-msgstr ""
+msgstr "Например: Старший финансовый аналитик и Инвестиционный консультант"
 
 #: includes/metaboxes.php:86
 msgid "Full Position Title:"
-msgstr ""
+msgstr "Заголовок Полной Должности"
 
 #. Author of the theme
 msgid "Gladkov Denis"
-msgstr ""
+msgstr "Гладков Денис"
 
 #: includes/metaboxes.php:128
 msgid "Hold Ctrl/Cmd to select multiple awards"
-msgstr ""
+msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать несколько Наград."
 
 #: includes/metaboxes.php:649
 msgid "Hold Ctrl/Cmd to select multiple partners members"
-msgstr ""
+msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескольких Партнеров."
 
 #. Name of the theme
 msgid "horizons"
-msgstr ""
+msgstr "horizons"
 
 #. Author URI of the theme
 msgid "https://codeweber.com"
-msgstr ""
+msgstr "https://codeweber.ru"
 
 #: includes/metaboxes.php:635
 msgid "https://example.com/award"
@@ -292,19 +292,19 @@ msgstr ""
 
 #: includes/custom-cpt.php:29
 msgid "Insert into award"
-msgstr ""
+msgstr "Вставить в награду"
 
 #: includes/metaboxes.php:111
 msgid "Language Skills:"
-msgstr ""
+msgstr "Языковые навыки:"
 
 #: includes/partners.php:69
 msgid "Languages"
-msgstr ""
+msgstr "Языки"
 
 #: includes/metaboxes.php:98
 msgid "Location:"
-msgstr ""
+msgstr "Адрес:"
 
 #: includes/metaboxes.php:455
 msgid "Muted Teal"
@@ -316,80 +316,80 @@ msgstr ""
 
 #: includes/metaboxes.php:65
 msgid "Name:"
-msgstr ""
+msgstr "Имя:"
 
 #: includes/custom-cpt.php:17
 msgid "New Award"
-msgstr ""
+msgstr "Новая Награда"
 
 #: includes/custom-cpt.php:74
 msgid "New Category Name"
-msgstr ""
+msgstr "Новое имя Категории"
 
 #: functions/cpt/cpt-partners.php:16
 msgid "New Partner"
-msgstr ""
+msgstr "Новый Партнер"
 
 #: functions/cpt/cpt-practices.php:16
 msgid "New Practice"
-msgstr ""
+msgstr "Новая Практика"
 
 #: includes/custom-cpt.php:160
 msgid "New Tag Name"
-msgstr ""
+msgstr "Новое имя Метки"
 
 #: includes/custom-cpt.php:117
 msgid "New Year"
-msgstr ""
+msgstr "Новый Год"
 
 #: includes/partners.php:139
 msgid "News"
-msgstr ""
+msgstr "Новости"
 
 #: includes/custom-cpt.php:85
 msgid "No categories"
-msgstr ""
+msgstr "Нет категорий"
 
 #: includes/shortcodes.php:352
 msgid "No image"
-msgstr ""
+msgstr "Нет изображения"
 
 #: functions/cpt/cpt-partners.php:20
 msgid "No Partners found"
-msgstr ""
+msgstr "Нет Партнеров"
 
 #: functions/cpt/cpt-partners.php:21
 msgid "No Partners found in Trash"
-msgstr ""
+msgstr "Нет Партнеров в корзине"
 
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
-msgstr ""
+msgstr "Не Практик"
 
 #: functions/cpt/cpt-practices.php:21
 msgid "No Practices found in Trash"
-msgstr ""
+msgstr "Нет практик в корзине"
 
 #: includes/custom-cpt.php:171
 msgid "No tags"
-msgstr ""
+msgstr "Нет меток"
 
 #: includes/custom-cpt.php:128
 msgid "No years"
-msgstr ""
+msgstr "Нет Годов"
 
 #: includes/custom-cpt.php:84 includes/custom-cpt.php:127
 #: includes/custom-cpt.php:170
 msgid "Not Found"
-msgstr ""
+msgstr "Не Существует"
 
 #: includes/custom-cpt.php:23
 msgid "Not found"
-msgstr ""
+msgstr "Не существует"
 
 #: includes/custom-cpt.php:24
 msgid "Not found in Trash"
-msgstr ""
+msgstr "Не найдено в корзине"
 
 #: includes/metaboxes.php:454
 msgid "Olive Green"
@@ -401,104 +401,104 @@ msgstr ""
 
 #: includes/metaboxes.php:441
 msgid "Order"
-msgstr ""
+msgstr "Номер"
 
 #: includes/metaboxes.php:236 includes/metaboxes.php:286
 msgid "Order Number"
-msgstr ""
+msgstr "Порядковый номер"
 
 #: includes/metaboxes.php:609
 msgid "Organization"
-msgstr ""
+msgstr "Организация"
 
 #: includes/custom-cpt.php:13
 msgid "Parent Award:"
-msgstr ""
+msgstr "Родительская Награда"
 
 #: includes/custom-cpt.php:72
 msgid "Parent Category"
-msgstr ""
+msgstr "Родительская Категория"
 
 #: includes/custom-cpt.php:73
 msgid "Parent Category:"
-msgstr ""
+msgstr "Родительская Категория:"
 
 #: functions/cpt/cpt-partners.php:22 functions/cpt/cpt-partners.php:34
 msgid "Parent Partner"
-msgstr ""
+msgstr "Родительский Партнер"
 
 #: functions/cpt/cpt-practices.php:22 functions/cpt/cpt-practices.php:34
 msgid "Parent Practice"
-msgstr ""
+msgstr "Родительская Практика"
 
 #: includes/custom-cpt.php:158
 msgid "Parent Tag"
-msgstr ""
+msgstr "Родительская Метка"
 
 #: includes/custom-cpt.php:159
 msgid "Parent Tag:"
-msgstr ""
+msgstr "Родительская Метка:"
 
 #: includes/custom-cpt.php:115
 msgid "Parent Year"
-msgstr ""
+msgstr "Родительский Год"
 
 #: includes/custom-cpt.php:116
 msgid "Parent Year:"
-msgstr ""
+msgstr "Родительский Год"
 
 #: functions/cpt/cpt-partners.php:10 functions/cpt/cpt-partners.php:29
 msgid "Partner"
-msgstr ""
+msgstr "Партнер"
 
 #: includes/sidebars.php:20
 msgid "Partner Biographies"
-msgstr ""
+msgstr "Биография Партнеров"
 
 #: functions/cpt/cpt-partners.php:23
 msgid "Partner Image"
-msgstr ""
+msgstr "Фото партнера"
 
 #: functions/cpt/cpt-partners.php:30
 msgid "Partner published"
-msgstr ""
+msgstr "Партнер опубликован"
 
 #: functions/cpt/cpt-partners.php:31
 msgid "Partner reverted to draft"
-msgstr ""
+msgstr "Партнер переведен в черновик"
 
 #: functions/cpt/cpt-partners.php:32
 msgid "Partner scheduled"
-msgstr ""
+msgstr "Партнер запланирован"
 
 #: functions/cpt/cpt-partners.php:33
 msgid "Partner updated"
-msgstr ""
+msgstr "Партнер обновлен"
 
 #: functions/cpt/cpt-partners.php:9 functions/cpt/cpt-partners.php:11
 #: functions/cpt/cpt-partners.php:38
 msgid "Partners"
-msgstr ""
+msgstr "Партнеры"
 
 #: functions/cpt/cpt-partners.php:27
 msgid "Partners archive"
-msgstr ""
+msgstr "Архив партнеров"
 
 #: functions/cpt/cpt-partners.php:28
 msgid "Partners list"
-msgstr ""
+msgstr "Список партнеров"
 
 #: includes/metaboxes.php:80
 msgid "Phone:"
-msgstr ""
+msgstr "Телефон:"
 
 #: includes/custom-cpt.php:82
 msgid "Popular Categories"
-msgstr ""
+msgstr "Популярные Категории"
 
 #: includes/custom-cpt.php:168
 msgid "Popular Tags"
-msgstr ""
+msgstr "Популярные метки"
 
 #: includes/custom-cpt.php:125
 msgid "Popular Years"
@@ -506,25 +506,25 @@ msgstr ""
 
 #: includes/metaboxes.php:60
 msgid "Position:"
-msgstr ""
+msgstr "Должность:"
 
 #: includes/custom-cpt.php:7
 msgctxt "Post Type General Name"
 msgid "Awards"
-msgstr ""
+msgstr "Награды"
 
 #: includes/custom-cpt.php:8
 msgctxt "Post Type Singular Name"
 msgid "Award"
-msgstr ""
+msgstr "Награды"
 
 #: functions/cpt/cpt-practices.php:10 functions/cpt/cpt-practices.php:29
 msgid "Practice"
-msgstr ""
+msgstr "Практика"
 
 #: functions/cpt/cpt-practices.php:23
 msgid "Practice Image"
-msgstr ""
+msgstr "Изображение практики"
 
 #: functions/cpt/cpt-practices.php:30
 msgid "Practice published"
@@ -545,7 +545,7 @@ msgstr ""
 #: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
 #: functions/cpt/cpt-practices.php:38
 msgid "Practices"
-msgstr ""
+msgstr "Практики"
 
 #: functions/cpt/cpt-practices.php:27
 msgid "Practices archive"
@@ -565,19 +565,19 @@ msgstr ""
 
 #: includes/blog.php:159
 msgid "Read"
-msgstr ""
+msgstr "Читать"
 
 #: includes/partners.php:80
 msgid "Regions"
-msgstr ""
+msgstr "Регионы"
 
 #: includes/metaboxes.php:92
 msgid "Regions:"
-msgstr ""
+msgstr "Регионы:"
 
 #: includes/partners.php:140
 msgid "Related news"
-msgstr ""
+msgstr "Рекомендуемые новости"
 
 #: includes/custom-cpt.php:27
 msgid "Remove award image"
@@ -613,47 +613,47 @@ msgstr ""
 
 #: includes/custom-cpt.php:126
 msgid "Search Years"
-msgstr ""
+msgstr "Выбрать Год"
 
 #: includes/metaboxes.php:226 includes/metaboxes.php:270
 msgid "Select color for service category display"
-msgstr ""
+msgstr "Выберите цвет для отображения категории услуг"
 
 #: includes/metaboxes.php:213 includes/metaboxes.php:257
 msgid "Selected Color Preview:"
-msgstr ""
+msgstr "Предварительный просмотр выбранного цвета:"
 
 #: includes/custom-cpt.php:79
 msgid "Separate categories with commas"
-msgstr ""
+msgstr "Разделяйте категории запятыми."
 
 #: includes/custom-cpt.php:165
 msgid "Separate tags with commas"
-msgstr ""
+msgstr "Разделяйте теги запятыми."
 
 #: includes/custom-cpt.php:122
 msgid "Separate years with commas"
-msgstr ""
+msgstr "Разделяйте годы запятыми"
 
 #: includes/custom-cpt.php:26
 msgid "Set award image"
-msgstr ""
+msgstr "Установить изображение награды"
 
 #: includes/metaboxes.php:238 includes/metaboxes.php:290
 msgid "Set order for category display (lower numbers first)"
-msgstr ""
+msgstr "Установить порядок отображения категорий (сначала меньшие номера)"
 
 #: functions/cpt/cpt-partners.php:24
 msgid "Set partner image"
-msgstr ""
+msgstr "Установить изображение Партнера"
 
 #: functions/cpt/cpt-practices.php:24
 msgid "Set practice image"
-msgstr ""
+msgstr "Установить изображение Практики"
 
 #: includes/metaboxes.php:104
 msgid "Short Description:"
-msgstr ""
+msgstr "Краткое описание:"
 
 #: includes/metaboxes.php:453
 msgid "Slate Gray"
@@ -665,11 +665,11 @@ msgstr ""
 
 #: includes/metaboxes.php:70
 msgid "Surname:"
-msgstr ""
+msgstr "Фамилия:"
 
 #: includes/custom-cpt.php:156
 msgid "Tags"
-msgstr ""
+msgstr "Метки"
 
 #: includes/custom-cpt.php:172
 msgid "Tags list"
@@ -682,48 +682,48 @@ msgstr ""
 #: includes/custom-cpt.php:68
 msgctxt "Taxonomy General Name"
 msgid "Award Categories"
-msgstr ""
+msgstr "Категории Награды"
 
 #: includes/custom-cpt.php:154
 msgctxt "Taxonomy General Name"
 msgid "Award Tags"
-msgstr ""
+msgstr "Метки Награды"
 
 #: includes/custom-cpt.php:111
 msgctxt "Taxonomy General Name"
 msgid "Award Years"
-msgstr ""
+msgstr "Года Награды"
 
 #: includes/custom-cpt.php:69
 msgctxt "Taxonomy Singular Name"
 msgid "Award Category"
-msgstr ""
+msgstr "Категория Награды"
 
 #: includes/custom-cpt.php:155
 msgctxt "Taxonomy Singular Name"
 msgid "Award Tag"
-msgstr ""
+msgstr "Метка Награды"
 
 #: includes/custom-cpt.php:112
 msgctxt "Taxonomy Singular Name"
 msgid "Award Year"
-msgstr ""
+msgstr "Год Награды"
 
 #: includes/custom-cpt.php:19
 msgid "Update Award"
-msgstr ""
+msgstr "Обновить Награду"
 
 #: includes/custom-cpt.php:77
 msgid "Update Category"
-msgstr ""
+msgstr "Обновить Категорию"
 
 #: includes/custom-cpt.php:163
 msgid "Update Tag"
-msgstr ""
+msgstr "Обновить Метку"
 
 #: includes/custom-cpt.php:120
 msgid "Update Year"
-msgstr ""
+msgstr "Обновить Год"
 
 #: includes/custom-cpt.php:30
 msgid "Uploaded to this award"
@@ -743,15 +743,15 @@ msgstr ""
 
 #: includes/custom-cpt.php:20
 msgid "View Award"
-msgstr ""
+msgstr "Показать Награду"
 
 #: includes/custom-cpt.php:21
 msgid "View Awards"
-msgstr ""
+msgstr "Показать Награды"
 
 #: includes/custom-cpt.php:78
 msgid "View Category"
-msgstr ""
+msgstr "Показать Категорию"
 
 #: functions/cpt/cpt-partners.php:17
 msgid "View Partner"
@@ -771,11 +771,11 @@ msgstr ""
 
 #: includes/custom-cpt.php:164
 msgid "View Tag"
-msgstr ""
+msgstr "Показать Метку"
 
 #: includes/custom-cpt.php:121
 msgid "View Year"
-msgstr ""
+msgstr "Показать Год"
 
 #: includes/metaboxes.php:452
 msgid "Vintage Burgundy"
@@ -787,11 +787,11 @@ msgstr ""
 
 #: includes/custom-cpt.php:113
 msgid "Years"
-msgstr ""
+msgstr "Года"
 
 #: includes/custom-cpt.php:129
 msgid "Years list"
-msgstr ""
+msgstr "Список Лет"
 
 #: includes/custom-cpt.php:130
 msgid "Years list navigation"
