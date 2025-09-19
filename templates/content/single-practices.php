@@ -1,8 +1,10 @@
-<div class="mb-3" id="partners_section_1">
-   <div class="body-l-r mb-7">
-      <?php the_content(); ?>
+<?php if (get_the_content()): ?>
+   <div class="mb-3" id="partners_section_1">
+      <div class="body-l-r mb-7">
+         <?php the_content(); ?>
+      </div>
    </div>
-</div>
+<?php endif; ?>
 
 <?php
 // Проверяем что мы на странице записи типа practices
