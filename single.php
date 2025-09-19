@@ -80,7 +80,7 @@ while (have_posts()) :
 			</div>
 		</div>
 	</section> <!-- #content-wrapper -->
-
+	<?php do_action('after_single_post', $post_type); ?>
 <?php
 endwhile;
 get_footer();

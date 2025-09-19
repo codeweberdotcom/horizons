@@ -122,6 +122,38 @@ function add_custom_single_banner($post_type)
          </div>
          <!-- /.container -->
       </section>
-<?php
+   <?php
    }
 }
+
+
+
+function add_news_section_after_staff($post_type)
+{
+   if ($post_type === 'staff') {
+      ob_start(); ?>
+      <section class="wrapper blog-section" id="news">
+         <div class="container pb-14 pb-md-16">
+            <div class="row align-items-center mb-8">
+               <div class="col-md-8">
+                  <div class="text-line-before label-u mb-2"><?php echo esc_html__('News', 'horizons'); ?></div>
+                  <h2 class="h2"><?php echo esc_html__('Related news', 'horizons'); ?></h2>
+               </div>
+               <div class="col text-md-end">
+                  <a href="<?php echo esc_url(home_url('/blog')); ?>" class="hover-5 label-u right text-charcoal-blue mb-5">
+                     <?php echo esc_html__('All News', 'horizons'); ?>
+                  </a>
+               </div>
+            </div>
+            <div class="row">
+               <div class="col-12">
+                  <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_staff" excerpt_length="15"]'); ?>
+               </div>
+            </div>
+         </div>
+      </section>
+<?php
+      echo ob_get_clean();
+   }
+}
+add_action('after_single_post', 'add_news_section_after_staff', 10, 1);
