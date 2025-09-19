@@ -31,7 +31,7 @@ function add_custom_single_banner_partners($post_type)
       $background_image = $thumbnail_url ?: get_template_directory_uri() . '/assets/images/default-staff.jpg';
 ?>
 
-      <section class="partner-banner">
+      <section class="partners-banner">
          <div class="col-12">
             <div class="row  wrapper g-0">
                <div class="col-md-12 col-xl-5 ">
