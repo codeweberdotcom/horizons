@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-19 21:48+0000\n"
+"POT-Creation-Date: 2025-09-19 16:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,15 +16,15 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
 "X-Domain: horizons"
 
-#: includes/metaboxes.php:970
+#: includes/metaboxes.php:1333
 msgid "\"Advantages\" text:"
 msgstr ""
 
-#: includes/metaboxes.php:964
+#: includes/metaboxes.php:1327
 msgid "\"Our solution\" text:"
 msgstr ""
 
-#: includes/metaboxes.php:958
+#: includes/metaboxes.php:1321
 msgid "\"Your task\" text:"
 msgstr ""
 
@@ -80,12 +80,12 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
-#: templates/content/single-practices.php:39
+#: templates/content/single-practices.php:37
 msgid "Advantages"
 msgstr ""
 
-#: includes/shortcodes.php:297 includes/shortcodes.php:368
-#: includes/shortcodes.php:383 functions/cpt/cpt-awards.php:15
+#: includes/shortcodes.php:458 includes/shortcodes.php:529
+#: includes/shortcodes.php:544 functions/cpt/cpt-awards.php:15
 msgid "All Awards"
 msgstr ""
 
@@ -101,7 +101,7 @@ msgstr ""
 msgid "All Partners"
 msgstr ""
 
-#: includes/shortcodes.php:228
+#: includes/shortcodes.php:227 includes/shortcodes.php:389
 msgid "All Practice"
 msgstr ""
 
@@ -117,19 +117,20 @@ msgstr ""
 msgid "All Years"
 msgstr ""
 
-#: includes/metaboxes.php:785
+#: includes/metaboxes.php:440 includes/metaboxes.php:1148
 msgid "Alt. Title"
 msgstr ""
 
-#: includes/metaboxes.php:575 includes/metaboxes.php:621
+#: includes/metaboxes.php:230 includes/metaboxes.php:276
+#: includes/metaboxes.php:938 includes/metaboxes.php:984
 msgid "Alternative Title"
 msgstr ""
 
-#: includes/metaboxes.php:625
+#: includes/metaboxes.php:280 includes/metaboxes.php:988
 msgid "Alternative title for display purposes"
 msgstr ""
 
-#: includes/metaboxes.php:277
+#: includes/metaboxes.php:640
 msgid "Associated partners Members"
 msgstr ""
 
@@ -145,11 +146,11 @@ msgstr ""
 msgid "Award Attributes"
 msgstr ""
 
-#: includes/metaboxes.php:256
+#: includes/metaboxes.php:619
 msgid "Award Date"
 msgstr ""
 
-#: includes/metaboxes.php:205
+#: includes/metaboxes.php:568
 msgid "Award Details"
 msgstr ""
 
@@ -157,7 +158,7 @@ msgstr ""
 msgid "Award Image"
 msgstr ""
 
-#: includes/metaboxes.php:267
+#: includes/metaboxes.php:630
 msgid "Award URL"
 msgstr ""
 
@@ -177,11 +178,11 @@ msgstr ""
 msgid "Awards:"
 msgstr ""
 
-#: includes/metaboxes.php:976
+#: includes/metaboxes.php:1339
 msgid "Blog article categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:992
+#: includes/metaboxes.php:1355
 msgid "Blog article tags for display:"
 msgstr ""
 
@@ -201,15 +202,17 @@ msgstr ""
 msgid "Categories list navigation"
 msgstr ""
 
-#: includes/metaboxes.php:554 includes/metaboxes.php:597
+#: includes/metaboxes.php:209 includes/metaboxes.php:252
+#: includes/metaboxes.php:917 includes/metaboxes.php:960
 msgid "Category Color"
 msgstr ""
 
-#: includes/metaboxes.php:801
+#: includes/metaboxes.php:456 includes/metaboxes.php:1164
 msgid "Charcoal Blue"
 msgstr ""
 
-#: includes/metaboxes.php:568 includes/metaboxes.php:612
+#: includes/metaboxes.php:223 includes/metaboxes.php:267
+#: includes/metaboxes.php:931 includes/metaboxes.php:975
 msgid "Charcoal Blue (#303C42)"
 msgstr ""
 
@@ -218,7 +221,7 @@ msgstr ""
 msgid "Choose from the most used"
 msgstr ""
 
-#: includes/metaboxes.php:784
+#: includes/metaboxes.php:439 includes/metaboxes.php:1147
 msgid "Color"
 msgstr ""
 
@@ -226,11 +229,12 @@ msgstr ""
 msgid "Company awards and achievements"
 msgstr ""
 
-#: includes/metaboxes.php:802
+#: includes/metaboxes.php:457 includes/metaboxes.php:1165
 msgid "Dusty Navy"
 msgstr ""
 
-#: includes/metaboxes.php:569 includes/metaboxes.php:613
+#: includes/metaboxes.php:224 includes/metaboxes.php:268
+#: includes/metaboxes.php:932 includes/metaboxes.php:976
 msgid "Dusty Navy (#3D5567)"
 msgstr ""
 
@@ -238,7 +242,7 @@ msgstr ""
 msgid "E-Mail:"
 msgstr ""
 
-#: includes/metaboxes.php:251
+#: includes/metaboxes.php:614
 msgid "e.g., International Design Awards"
 msgstr ""
 
@@ -266,7 +270,7 @@ msgstr ""
 msgid "Edit Year"
 msgstr ""
 
-#: includes/metaboxes.php:953
+#: includes/metaboxes.php:1316
 msgid "Filled in the standard WordPress editor above."
 msgstr ""
 
@@ -298,7 +302,7 @@ msgstr ""
 msgid "Gladkov Denis"
 msgstr ""
 
-#: includes/metaboxes.php:988 includes/metaboxes.php:1004
+#: includes/metaboxes.php:1351 includes/metaboxes.php:1367
 msgid "Hold Ctrl (Cmd on Mac) for multiple selection."
 msgstr ""
 
@@ -306,7 +310,7 @@ msgstr ""
 msgid "Hold Ctrl/Cmd to select multiple awards"
 msgstr ""
 
-#: includes/metaboxes.php:286
+#: includes/metaboxes.php:649
 msgid "Hold Ctrl/Cmd to select multiple partners members"
 msgstr ""
 
@@ -318,7 +322,7 @@ msgstr ""
 msgid "https://codeweber.com"
 msgstr ""
 
-#: includes/metaboxes.php:272
+#: includes/metaboxes.php:635
 msgid "https://example.com/award"
 msgstr ""
 
@@ -338,15 +342,12 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
-#: includes/shortcodes.php:219
-msgid "More details"
-msgstr ""
-
-#: includes/metaboxes.php:800
+#: includes/metaboxes.php:455 includes/metaboxes.php:1163
 msgid "Muted Teal"
 msgstr ""
 
-#: includes/metaboxes.php:567 includes/metaboxes.php:611
+#: includes/metaboxes.php:222 includes/metaboxes.php:266
+#: includes/metaboxes.php:930 includes/metaboxes.php:974
 msgid "Muted Teal (#47878F)"
 msgstr ""
 
@@ -386,7 +387,7 @@ msgstr ""
 msgid "No categories"
 msgstr ""
 
-#: includes/shortcodes.php:353
+#: includes/shortcodes.php:514
 msgid "No image"
 msgstr ""
 
@@ -427,38 +428,40 @@ msgstr ""
 msgid "Not found in Trash"
 msgstr ""
 
-#: includes/metaboxes.php:1006
+#: includes/metaboxes.php:1369
 msgid "Note:"
 msgstr ""
 
-#: includes/metaboxes.php:799
+#: includes/metaboxes.php:454 includes/metaboxes.php:1162
 msgid "Olive Green"
 msgstr ""
 
-#: includes/metaboxes.php:566 includes/metaboxes.php:610
+#: includes/metaboxes.php:221 includes/metaboxes.php:265
+#: includes/metaboxes.php:929 includes/metaboxes.php:973
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1006
+#: includes/metaboxes.php:1369
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
 
-#: includes/metaboxes.php:786
+#: includes/metaboxes.php:441 includes/metaboxes.php:1149
 msgid "Order"
 msgstr ""
 
-#: includes/metaboxes.php:581 includes/metaboxes.php:631
+#: includes/metaboxes.php:236 includes/metaboxes.php:286
+#: includes/metaboxes.php:944 includes/metaboxes.php:994
 msgid "Order Number"
 msgstr ""
 
-#: includes/metaboxes.php:246
+#: includes/metaboxes.php:609
 msgid "Organization"
 msgstr ""
 
-#: templates/content/single-practices.php:32
+#: templates/content/single-practices.php:30
 msgid "Our Solution"
 msgstr ""
 
@@ -581,11 +584,7 @@ msgstr ""
 msgid "Practice Category"
 msgstr ""
 
-#: includes/metaboxes.php:952
-msgid "Practice description (main content)"
-msgstr ""
-
-#: includes/metaboxes.php:913
+#: includes/metaboxes.php:1276
 msgid "Practice Details"
 msgstr ""
 
@@ -622,11 +621,12 @@ msgstr ""
 msgid "Practices list"
 msgstr ""
 
-#: includes/metaboxes.php:796
+#: includes/metaboxes.php:451 includes/metaboxes.php:1159
 msgid "Primary"
 msgstr ""
 
-#: includes/metaboxes.php:563 includes/metaboxes.php:607
+#: includes/metaboxes.php:218 includes/metaboxes.php:262
+#: includes/metaboxes.php:926 includes/metaboxes.php:970
 msgid "Primary (#FEBE10)"
 msgstr ""
 
@@ -642,7 +642,7 @@ msgstr ""
 msgid "Regions:"
 msgstr ""
 
-#: templates/content/single-practices.php:73
+#: templates/content/single-practices.php:71
 msgid "Related Blog Posts"
 msgstr ""
 
@@ -686,23 +686,28 @@ msgstr ""
 msgid "Search Years"
 msgstr ""
 
-#: includes/metaboxes.php:571 includes/metaboxes.php:615
+#: includes/metaboxes.php:934 includes/metaboxes.php:978
 msgid "Select color for practice category display"
 msgstr ""
 
-#: includes/metaboxes.php:977
+#: includes/metaboxes.php:226 includes/metaboxes.php:270
+msgid "Select color for service category display"
+msgstr ""
+
+#: includes/metaboxes.php:1340
 msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:993
+#: includes/metaboxes.php:1356
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
 msgstr ""
 
-#: includes/metaboxes.php:558 includes/metaboxes.php:602
+#: includes/metaboxes.php:213 includes/metaboxes.php:257
+#: includes/metaboxes.php:921 includes/metaboxes.php:965
 msgid "Selected Color Preview:"
 msgstr ""
 
@@ -718,11 +723,16 @@ msgstr ""
 msgid "Separate years with commas"
 msgstr ""
 
+#: includes/metaboxes.php:1315
+msgid "Service description (main content)"
+msgstr ""
+
 #: functions/cpt/cpt-awards.php:27
 msgid "Set award image"
 msgstr ""
 
-#: includes/metaboxes.php:583 includes/metaboxes.php:635
+#: includes/metaboxes.php:238 includes/metaboxes.php:290
+#: includes/metaboxes.php:946 includes/metaboxes.php:998
 msgid "Set order for category display (lower numbers first)"
 msgstr ""
 
@@ -738,11 +748,12 @@ msgstr ""
 msgid "Short Description:"
 msgstr ""
 
-#: includes/metaboxes.php:798
+#: includes/metaboxes.php:453 includes/metaboxes.php:1161
 msgid "Slate Gray"
 msgstr ""
 
-#: includes/metaboxes.php:565 includes/metaboxes.php:609
+#: includes/metaboxes.php:220 includes/metaboxes.php:264
+#: includes/metaboxes.php:928 includes/metaboxes.php:972
 msgid "Slate Gray (#86909B)"
 msgstr ""
 
@@ -868,11 +879,12 @@ msgstr ""
 msgid "View Year"
 msgstr ""
 
-#: includes/metaboxes.php:797
+#: includes/metaboxes.php:452 includes/metaboxes.php:1160
 msgid "Vintage Burgundy"
 msgstr ""
 
-#: includes/metaboxes.php:564 includes/metaboxes.php:608
+#: includes/metaboxes.php:219 includes/metaboxes.php:263
+#: includes/metaboxes.php:927 includes/metaboxes.php:971
 msgid "Vintage Burgundy (#893B41)"
 msgstr ""
 
@@ -888,6 +900,6 @@ msgstr ""
 msgid "Years list navigation"
 msgstr ""
 
-#: templates/content/single-practices.php:25
+#: templates/content/single-practices.php:23
 msgid "Your Task"
 msgstr ""

@@ -216,6 +216,7 @@ function practice_categories_cards_shortcode($atts)
                             <div class="practice-card-hover brand-square-md <?php echo esc_attr($color_class); ?>"></div>
                         </div>
                         <h3 class="h4"><?php echo wp_kses_post($display_title); ?></h3>
+                        <div class="icontext right label-u text-white opacity-0 position-absolute" style="transition: all .8s ease; top: 45px; left: 45px;"><?php echo __('More details', 'horizons'); ?></div>
                     </div>
                 </a>
             </div>
