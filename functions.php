@@ -29,7 +29,6 @@ add_action('after_setup_theme', 'horizons_theme_setup'); // ← ДОБАВЬТЕ
 $theme_includes = array(
     '/includes/metaboxes.php',
     '/includes/shortcodes.php',
-    '/includes/custom-cpt.php',
     '/includes/add_image_sizes.php',
     '/includes/sidebars.php',
     '/includes/partners.php',

@@ -886,7 +886,6 @@ function disable_gutenberg_for_awards($current_status, $post_type)
 
 
 
-
 //--------------------------------
 //PRACTICES
 //--------------------------------
@@ -1002,7 +1001,7 @@ function save_practice_category_meta($term_id)
       update_term_meta(
          $term_id,
          'practice_category_alt_title',
-         sanitize_text_field($_POST['practice_category_alt_title'])
+         $_POST['practice_category_alt_title']
       );
    }
 
