@@ -9,7 +9,7 @@ while (have_posts()) :
 	$sidebar_position = get_sidebar_position($opt_name);
 
 	// Определяем класс контента
-	$content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-9';
+	$content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 	$pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
 
 	// Проверяем, не отключен ли заголовок для этого типа записи

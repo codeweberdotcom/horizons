@@ -850,7 +850,7 @@ function codeweber_enqueue_select2()
    $screen = get_current_screen();
 
    // Load only on awards and partners edit pages
-   if ($screen->post_type === 'awards' || $screen->post_type === 'partners') {
+   if ($screen->post_type === 'awards' || $screen->post_type === 'partners' || $screen->post_type === 'practices') {
       wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0-rc.0', true);
       wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0-rc.0');
 
@@ -865,6 +865,18 @@ function codeweber_enqueue_select2()
                 // Initialize Select2 for award partners
                 $("#award_partners").select2({
                     placeholder: "' . __('Select partners members...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                 // Initialize Select2 for award partners
+                $("#related_blog_categories").select2({
+                    placeholder: "' . __('Select related blog categories...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                // Initialize Select2 for award partners
+                $("#related_blog_tags").select2({
+                    placeholder: "' . __('Select related blog tags...', 'codeweber') . '",
                     allowClear: true
                 });
             });
@@ -889,6 +901,8 @@ function disable_gutenberg_for_awards($current_status, $post_type)
 //--------------------------------
 //PRACTICES
 //--------------------------------
+
+//Category
 
 add_action('practice_category_add_form_fields', 'add_practice_category_fields', 10, 2);
 add_action('practice_category_edit_form_fields', 'edit_practice_category_fields', 10, 2);
@@ -1248,3 +1262,163 @@ function get_practice_category_alt_title($term_id = null)
 
    return '';
 }
+
+
+
+// Practice Post
+
+/**
+ * Регистрируем метабоксы для типа записи "Practices"
+ */
+function add_practices_meta_boxes() {
+    add_meta_box(
+        'practices_details',
+        __('Practice Details', 'horizons'),
+        'render_practices_meta_box',
+        'practices',
+        'normal',
+        'high'
+    );
+}
+add_action('add_meta_boxes', 'add_practices_meta_boxes');
+
+/**
+ * Функция отрисовки метабокса
+ */
+function render_practices_meta_box($post) {
+    // Добавляем nonce для безопасности
+    wp_nonce_field('practices_meta_save', 'practices_meta_nonce');
+
+    // Получаем существующие значения из базы данных
+    $your_task_text = get_post_meta($post->ID, 'your_task_text', true);
+    $our_solution_text = get_post_meta($post->ID, 'our_solution_text', true);
+    $advantages_text = get_post_meta($post->ID, 'advantages_text', true);
+    $selected_categories = get_post_meta($post->ID, 'related_blog_categories', true);
+    $selected_tags = get_post_meta($post->ID, 'related_blog_tags', true);
+
+    // Если это массив, работаем с ним, если нет, создаем пустой массив
+    $selected_categories = is_array($selected_categories) ? $selected_categories : array();
+    $selected_tags = is_array($selected_tags) ? $selected_tags : array();
+
+    // Получаем все категории и теги из таксономий для блога
+    $blog_categories = get_terms(array(
+        'taxonomy' => 'category',
+        'hide_empty' => false,
+    ));
+
+    $blog_tags = get_terms(array(
+        'taxonomy' => 'post_tag',
+        'hide_empty' => false,
+    ));
+    ?>
+
+    <p><strong><?php _e('Service description (main content)', 'horizons'); ?></strong><br>
+    <em><?php _e('Filled in the standard WordPress editor above.', 'horizons'); ?></em>
+    </p>
+    <hr>
+
+    <p>
+        <label for="your_task_text"><strong><?php _e('"Your task" text:', 'horizons'); ?></strong></label>
+        <textarea id="your_task_text" name="your_task_text" rows="5" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($your_task_text); ?></textarea>
+    </p>
+    <hr>
+
+    <p>
+        <label for="our_solution_text"><strong><?php _e('"Our solution" text:', 'horizons'); ?></strong></label>
+        <textarea id="our_solution_text" name="our_solution_text" rows="10" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($our_solution_text); ?></textarea>
+    </p>
+    <hr>
+
+    <p>
+        <label for="advantages_text"><strong><?php _e('"Advantages" text:', 'horizons'); ?></strong></label>
+        <textarea id="advantages_text" name="advantages_text" rows="10" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($advantages_text); ?></textarea>
+    </p>
+    <hr>
+
+    <p>
+        <label for="related_blog_categories[]"><strong><?php _e('Blog article categories for display:', 'horizons'); ?></strong></label><br>
+        <em><?php _e('Select one or more categories. Articles that belong to ANY of the selected categories will be shown.', 'horizons'); ?></em>
+        <select id="related_blog_categories" name="related_blog_categories[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
+            <?php
+            if (!empty($blog_categories) && !is_wp_error($blog_categories)) {
+                foreach ($blog_categories as $category) {
+                    $selected = in_array($category->term_id, $selected_categories) ? 'selected="selected"' : '';
+                    echo '<option value="' . esc_attr($category->term_id) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+                }
+            }
+            ?>
+        </select>
+        <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
+    </p>
+
+    <p>
+        <label for="related_blog_tags[]"><strong><?php _e('Blog article tags for display:', 'horizons'); ?></strong></label><br>
+        <em><?php _e('Select one or more tags. Articles that have ANY of the selected tags will be shown.', 'horizons'); ?></em>
+        <select id="related_blog_tags" name="related_blog_tags[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
+            <?php
+            if (!empty($blog_tags) && !is_wp_error($blog_tags)) {
+                foreach ($blog_tags as $tag) {
+                    $selected = in_array($tag->term_id, $selected_tags) ? 'selected="selected"' : '';
+                    echo '<option value="' . esc_attr($tag->term_id) . '" ' . $selected . '>' . esc_html($tag->name) . '</option>';
+                }
+            }
+            ?>
+        </select>
+        <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
+    </p>
+    <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, articles will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
+
+    <?php
+}
+
+/**
+ * Функция сохранения метаполей
+ */
+function save_practices_meta($post_id) {
+    // Проверяем nonce
+    if (!isset($_POST['practices_meta_nonce']) || !wp_verify_nonce($_POST['practices_meta_nonce'], 'practices_meta_save')) {
+        return;
+    }
+
+    // Проверяем права пользователя
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
+
+    // Проверяем, что это не автосохранение
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
+
+    // Массив полей для сохранения
+    $meta_fields = array(
+        'your_task_text',
+        'our_solution_text',
+        'advantages_text'
+    );
+
+    // Сохраняем каждое текстовое поле
+    foreach ($meta_fields as $field) {
+        if (isset($_POST[$field])) {
+            $value = sanitize_textarea_field($_POST[$field]);
+            update_post_meta($post_id, $field, $value);
+        }
+    }
+
+    // Сохраняем выбранные категории (массив)
+    if (isset($_POST['related_blog_categories'])) {
+        $categories = array_map('intval', $_POST['related_blog_categories']);
+        update_post_meta($post_id, 'related_blog_categories', $categories);
+    } else {
+        update_post_meta($post_id, 'related_blog_categories', array());
+    }
+
+    // Сохраняем выбранные теги (массив)
+    if (isset($_POST['related_blog_tags'])) {
+        $tags = array_map('intval', $_POST['related_blog_tags']);
+        update_post_meta($post_id, 'related_blog_tags', $tags);
+    } else {
+        update_post_meta($post_id, 'related_blog_tags', array());
+    }
+}
+add_action('save_post_practices', 'save_practices_meta');
