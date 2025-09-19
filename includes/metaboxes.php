@@ -1,35 +1,42 @@
 <?php
 //--------------------------------
-//STAFF
+//PARTNERS
 //--------------------------------
 
-function codeweber_add_staff_additional_meta_boxes()
+function codeweber_add_partners_additional_meta_boxes()
 {
    add_meta_box(
-      'staff_additional_details',
+      'partners_additional_details',
       __('Additional Information', 'horizons'),
-      'codeweber_staff_additional_meta_box_callback',
-      'staff',
+      'codeweber_partners_additional_meta_box_callback',
+      'partners',
       'normal',
       'default'
    );
 }
-add_action('add_meta_boxes', 'codeweber_add_staff_additional_meta_boxes');
+add_action('add_meta_boxes', 'codeweber_add_partners_additional_meta_boxes');
 
 /**
  * Callback function for displaying the second metabox
  */
-function codeweber_staff_additional_meta_box_callback($post)
+function codeweber_partners_additional_meta_box_callback($post)
 {
    // Add nonce for security
-   wp_nonce_field('staff_additional_meta_box', 'staff_additional_meta_box_nonce');
+   wp_nonce_field('partners_additional_meta_box', 'partners_additional_meta_box_nonce');
+
+   // ДОБАВЛЕННЫЕ ПОЛЯ
+   $position = get_post_meta($post->ID, '_partners_position', true);
+   $name = get_post_meta($post->ID, '_partners_name', true);
+   $surname = get_post_meta($post->ID, '_partners_surname', true);
+   $email = get_post_meta($post->ID, '_partners_email', true);
+   $phone = get_post_meta($post->ID, '_partners_phone', true); // Исправлено: было _partnersr_phone
 
    // Get existing field values
-   $full_position = get_post_meta($post->ID, '_staff_full_position', true);
-   $regions = get_post_meta($post->ID, '_staff_regions', true);
-   $location = get_post_meta($post->ID, '_staff_location', true);
-   $short_description = get_post_meta($post->ID, '_staff_short_description', true);
-   $language_skills = get_post_meta($post->ID, '_staff_language_skills', true);
+   $full_position = get_post_meta($post->ID, '_partners_full_position', true);
+   $regions = get_post_meta($post->ID, '_partners_regions', true);
+   $location = get_post_meta($post->ID, '_partners_location', true);
+   $short_description = get_post_meta($post->ID, '_partners_short_description', true);
+   $language_skills = get_post_meta($post->ID, '_partners_language_skills', true);
 
    // Get all awards
    $awards = get_posts(array(
@@ -40,49 +47,76 @@ function codeweber_staff_additional_meta_box_callback($post)
       'post_status' => 'publish'
    ));
 
-   // Get selected awards for this staff member
-   $selected_awards = get_post_meta($post->ID, '_staff_awards', true);
+   // Get selected awards for this partners member
+   $selected_awards = get_post_meta($post->ID, '_partners_awards', true);
    if (!is_array($selected_awards)) {
       $selected_awards = array();
    }
 ?>
 
    <div style="display: grid; gap: 16px;">
+      <!-- ДОБАВЛЕННЫЕ ПОЛЯ -->
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
-         <label for="staff_full_position"><strong><?php _e('Full Position Title:', 'horizons'); ?></strong></label>
-         <input type="text" id="staff_full_position" name="staff_full_position" value="<?php echo esc_attr($full_position); ?>"
+         <label for="partners_position"><strong><?php _e('Position:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_position" name="partners_position" value="<?php echo esc_attr($position); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_name"><strong><?php _e('Name:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_name" name="partners_name" value="<?php echo esc_attr($name); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_surname"><strong><?php _e('Surname:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_surname" name="partners_surname" value="<?php echo esc_attr($surname); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_email"><strong><?php _e('E-Mail:', 'horizons'); ?></strong></label>
+         <input type="email" id="partners_email" name="partners_email" value="<?php echo esc_attr($email); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_phone"><strong><?php _e('Phone:', 'horizons'); ?></strong></label>
+         <input type="tel" id="partners_phone" name="partners_phone" value="<?php echo esc_attr($phone); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <!-- СУЩЕСТВУЮЩИЕ ПОЛЯ -->
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_full_position"><strong><?php _e('Full Position Title:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_full_position" name="partners_full_position" value="<?php echo esc_attr($full_position); ?>"
             placeholder="<?php esc_attr_e('For example: Senior Financial Analyst and Investment Advisor', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
-         <label for="staff_regions"><strong><?php _e('Regions:', 'horizons'); ?></strong></label>
-         <input type="text" id="staff_regions" name="staff_regions" value="<?php echo esc_attr($regions); ?>"
+         <label for="partners_regions"><strong><?php _e('Regions:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_regions" name="partners_regions" value="<?php echo esc_attr($regions); ?>"
             placeholder="<?php esc_attr_e('For example: Europe, Asia, North America', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
-         <label for="staff_location"><strong><?php _e('Location:', 'horizons'); ?></strong></label>
-         <input type="text" id="staff_location" name="staff_location" value="<?php echo esc_attr($location); ?>"
+         <label for="partners_location"><strong><?php _e('Location:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_location" name="partners_location" value="<?php echo esc_attr($location); ?>"
             placeholder="<?php esc_attr_e('For example: New York, USA', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="staff_short_description"><strong><?php _e('Short Description:', 'horizons'); ?></strong></label>
-         <textarea id="staff_short_description" name="staff_short_description"
+         <label for="partners_short_description"><strong><?php _e('Short Description:', 'horizons'); ?></strong></label>
+         <textarea id="partners_short_description" name="partners_short_description"
             placeholder="<?php esc_attr_e('Brief information about the employee', 'horizons'); ?>"
             style="width: 100%; padding: 8px; min-height: 80px; resize: vertical;"><?php echo esc_textarea($short_description); ?></textarea>
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="staff_language_skills"><strong><?php _e('Language Skills:', 'horizons'); ?></strong></label>
-         <textarea id="staff_language_skills" name="staff_language_skills"
+         <label for="partners_language_skills"><strong><?php _e('Language Skills:', 'horizons'); ?></strong></label>
+         <textarea id="partners_language_skills" name="partners_language_skills"
             placeholder="<?php esc_attr_e('For example: English (C1), German (B2), French (A2)', 'horizons'); ?>"
             style="width: 100%; padding: 8px; min-height: 60px; resize: vertical;"><?php echo esc_textarea($language_skills); ?></textarea>
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="staff_awards"><strong><?php _e('Awards:', 'horizons'); ?></strong></label>
-         <select id="staff_awards" name="staff_awards[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
+         <label for="partners_awards"><strong><?php _e('Awards:', 'horizons'); ?></strong></label>
+         <select id="partners_awards" name="partners_awards[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
             <?php foreach ($awards as $award) : ?>
                <option value="<?php echo esc_attr($award->ID); ?>"
                   <?php selected(in_array($award->ID, $selected_awards), true); ?>>
@@ -98,13 +132,14 @@ function codeweber_staff_additional_meta_box_callback($post)
 <?php
 }
 
+
 /**
  * Save data from the second metabox
  */
-function codeweber_save_staff_additional_meta($post_id)
+function codeweber_save_partners_additional_meta($post_id)
 {
    // Check nonce
-   if (!isset($_POST['staff_additional_meta_box_nonce']) || !wp_verify_nonce($_POST['staff_additional_meta_box_nonce'], 'staff_additional_meta_box')) {
+   if (!isset($_POST['partners_additional_meta_box_nonce']) || !wp_verify_nonce($_POST['partners_additional_meta_box_nonce'], 'partners_additional_meta_box')) {
       return;
    }
 
@@ -118,107 +153,43 @@ function codeweber_save_staff_additional_meta($post_id)
       return;
    }
 
-   // Save fields from the second metabox
-   $additional_fields = ['staff_full_position', 'staff_regions', 'staff_location', 'staff_short_description', 'staff_language_skills'];
+   // Save ALL fields with partners_ prefix
+   $additional_fields = [
+      'partners_position',
+      'partners_name',
+      'partners_surname',
+      'partners_email',
+      'partners_phone',
+      'partners_full_position',
+      'partners_regions',
+      'partners_location',
+      'partners_short_description',
+      'partners_language_skills'
+   ];
 
    foreach ($additional_fields as $field) {
       if (isset($_POST[$field])) {
-         if ($field === 'staff_short_description' || $field === 'staff_language_skills') {
+         if ($field === 'partners_short_description' || $field === 'partners_language_skills') {
             // Use sanitize_textarea_field for text areas
             update_post_meta($post_id, '_' . $field, sanitize_textarea_field($_POST[$field]));
          } else {
             update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
          }
+      } else {
+         // Если поле не передано, очищаем метаданные
+         delete_post_meta($post_id, '_' . $field);
       }
    }
 
    // Save awards (multiple selection)
-   if (isset($_POST['staff_awards'])) {
-      $awards = array_map('intval', $_POST['staff_awards']); // Sanitize as integers
-      update_post_meta($post_id, '_staff_awards', $awards);
+   if (isset($_POST['partners_awards'])) {
+      $awards = array_map('intval', $_POST['partners_awards']);
+      update_post_meta($post_id, '_partners_awards', $awards);
    } else {
-      // If no awards selected, save empty array
-      update_post_meta($post_id, '_staff_awards', array());
+      update_post_meta($post_id, '_partners_awards', array());
    }
 }
-add_action('save_post_staff', 'codeweber_save_staff_additional_meta');
-
-/**
- * Add columns to admin for the second block
- */
-function codeweber_add_staff_additional_admin_columns($columns)
-{
-   // Insert columns after existing ones
-   $new_columns = [];
-
-   foreach ($columns as $key => $value) {
-      $new_columns[$key] = $value;
-
-      // Insert after "Phone" column
-      if ($key === 'staff_phone') {
-         $new_columns['staff_full_position'] = __('Full Position', 'horizons');
-         $new_columns['staff_regions'] = __('Regions', 'horizons');
-         $new_columns['staff_location'] = __('Location', 'horizons');
-         $new_columns['staff_language_skills'] = __('Languages', 'horizons');
-         $new_columns['staff_awards'] = __('Awards', 'horizons');
-      }
-   }
-
-   return $new_columns;
-}
-add_filter('manage_staff_posts_columns', 'codeweber_add_staff_additional_admin_columns');
-
-/**
- * Fill new columns with data
- */
-function codeweber_fill_staff_additional_admin_columns($column, $post_id)
-{
-   switch ($column) {
-      case 'staff_full_position':
-         echo esc_html(get_post_meta($post_id, '_staff_full_position', true));
-         break;
-      case 'staff_regions':
-         echo esc_html(get_post_meta($post_id, '_staff_regions', true));
-         break;
-      case 'staff_location':
-         echo esc_html(get_post_meta($post_id, '_staff_location', true));
-         break;
-      case 'staff_language_skills':
-         $languages = get_post_meta($post_id, '_staff_language_skills', true);
-         echo esc_html(mb_strimwidth($languages, 0, 50, '...')); // Trim long text
-         break;
-      case 'staff_awards':
-         $selected_awards = get_post_meta($post_id, '_staff_awards', true);
-         if (!empty($selected_awards) && is_array($selected_awards)) {
-            $award_titles = array();
-            foreach ($selected_awards as $award_id) {
-               $award_title = get_the_title($award_id);
-               if ($award_title) {
-                  $award_titles[] = $award_title;
-               }
-            }
-            echo esc_html(implode(', ', $award_titles));
-         } else {
-            echo '—';
-         }
-         break;
-   }
-}
-add_action('manage_staff_posts_custom_column', 'codeweber_fill_staff_additional_admin_columns', 10, 2);
-
-/**
- * Make new columns sortable
- */
-function codeweber_make_staff_additional_columns_sortable($columns)
-{
-   $columns['staff_full_position'] = 'staff_full_position';
-   $columns['staff_regions'] = 'staff_regions';
-   $columns['staff_location'] = 'staff_location';
-   $columns['staff_language_skills'] = 'staff_language_skills';
-   $columns['staff_awards'] = 'staff_awards';
-   return $columns;
-}
-add_filter('manage_edit-staff_sortable_columns', 'codeweber_make_staff_additional_columns_sortable');
+add_action('save_post_partners', 'codeweber_save_partners_additional_meta');
 
 
 //--------------------------------

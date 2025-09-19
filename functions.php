@@ -32,7 +32,7 @@ $theme_includes = array(
     '/includes/custom-cpt.php',
     '/includes/add_image_sizes.php',
     '/includes/sidebars.php',
-    '/includes/staff.php',
+    '/includes/partners.php',
     '/includes/blog.php'
 );
 

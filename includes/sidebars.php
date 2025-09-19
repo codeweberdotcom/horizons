@@ -1,14 +1,14 @@
 <?php
 
 add_action('codeweber_after_widget', function ($sidebar_id) {
-   if ($sidebar_id === 'staff') {
-      // Проверяем, существует ли тип записи 'staff'
-      if (!post_type_exists('staff')) {
+   if ($sidebar_id === 'partners') {
+      // Проверяем, существует ли тип записи 'partners'
+      if (!post_type_exists('partners')) {
          return; // Прекращаем выполнение, если тип записи не существует
       }
 
       $legal_posts = get_posts([
-         'post_type'      => 'staff',
+         'post_type'      => 'partners',
          'posts_per_page' => -1,
          'post_status'    => 'publish',
          'orderby'        => 'date',          // Сортировка по дате создания

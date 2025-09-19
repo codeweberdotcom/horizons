@@ -212,22 +212,22 @@ function award_details_meta_box_callback( $post ) {
     $award_organization = get_post_meta( $post->ID, '_award_organization', true );
     $award_date = get_post_meta( $post->ID, '_award_date', true );
     $award_url = get_post_meta( $post->ID, '_award_url', true );
-    $award_staff = get_post_meta( $post->ID, '_award_staff', true );
+    $award_partners = get_post_meta( $post->ID, '_award_partners', true );
     
     // Convert to array if it's not already
-    if (!is_array($award_staff)) {
-        $award_staff = $award_staff ? array($award_staff) : array();
+    if (!is_array($award_partners)) {
+        $award_partners = $award_partners ? array($award_partners) : array();
     }
     
-    // Get all staff members
-    $staff_args = array(
-        'post_type' => 'staff',
+    // Get all partners members
+    $partners_args = array(
+        'post_type' => 'partners',
         'posts_per_page' => -1,
         'orderby' => 'title',
         'order' => 'ASC',
         'post_status' => 'publish'
     );
-    $staff_members = get_posts( $staff_args );
+    $partners_members = get_posts( $partners_args );
     ?>
     
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -264,17 +264,17 @@ function award_details_meta_box_callback( $post ) {
             </p>
             
             <p>
-                <label for="award_staff" style="display: block; margin-bottom: 5px; font-weight: bold;">
-                    <?php _e( 'Associated Staff Members', 'horizons' ); ?>
+                <label for="award_partners" style="display: block; margin-bottom: 5px; font-weight: bold;">
+                    <?php _e( 'Associated partners Members', 'horizons' ); ?>
                 </label>
-                <select id="award_staff" name="award_staff[]" multiple="multiple" style="width: 100%; padding: 8px; height: 120px;">
-                    <?php foreach ( $staff_members as $staff ) : ?>
-                        <option value="<?php echo $staff->ID; ?>" <?php selected( in_array($staff->ID, $award_staff), true ); ?>>
-                            <?php echo esc_html( $staff->post_title ); ?>
+                <select id="award_partners" name="award_partners[]" multiple="multiple" style="width: 100%; padding: 8px; height: 120px;">
+                    <?php foreach ( $partners_members as $partners ) : ?>
+                        <option value="<?php echo $partners->ID; ?>" <?php selected( in_array($partners->ID, $award_partners), true ); ?>>
+                            <?php echo esc_html( $partners->post_title ); ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
-                <p class="description"><?php _e( 'Hold Ctrl/Cmd to select multiple staff members', 'horizons' ); ?></p>
+                <p class="description"><?php _e( 'Hold Ctrl/Cmd to select multiple partners members', 'horizons' ); ?></p>
             </p>
         </div>
     </div>
@@ -299,14 +299,14 @@ function save_award_meta_box_data( $post_id ) {
         return;
     }
     
-    // Get old staff IDs for comparison
-    $old_staff_ids = get_post_meta( $post_id, '_award_staff', true );
-    if (!is_array($old_staff_ids)) {
-        $old_staff_ids = $old_staff_ids ? array($old_staff_ids) : array();
+    // Get old partners IDs for comparison
+    $old_partners_ids = get_post_meta( $post_id, '_award_partners', true );
+    if (!is_array($old_partners_ids)) {
+        $old_partners_ids = $old_partners_ids ? array($old_partners_ids) : array();
     }
     
-    // Get new staff IDs
-    $new_staff_ids = isset( $_POST['award_staff'] ) ? array_map( 'intval', $_POST['award_staff'] ) : array();
+    // Get new partners IDs
+    $new_partners_ids = isset( $_POST['award_partners'] ) ? array_map( 'intval', $_POST['award_partners'] ) : array();
     
     // Save basic meta fields
     $fields = array(
@@ -324,39 +324,39 @@ function save_award_meta_box_data( $post_id ) {
         }
     }
     
-    // Save staff IDs
-    update_post_meta( $post_id, '_award_staff', $new_staff_ids );
+    // Save partners IDs
+    update_post_meta( $post_id, '_award_partners', $new_partners_ids );
     
-    // Two-way synchronization with Staff post type
-    $removed_staff_ids = array_diff( $old_staff_ids, $new_staff_ids );
-    $added_staff_ids = array_diff( $new_staff_ids, $old_staff_ids );
+    // Two-way synchronization with partners post type
+    $removed_partners_ids = array_diff( $old_partners_ids, $new_partners_ids );
+    $added_partners_ids = array_diff( $new_partners_ids, $old_partners_ids );
     
-    // Remove this award from old staff members' awards lists
-    foreach ( $removed_staff_ids as $staff_id ) {
-        $staff_awards = get_post_meta( $staff_id, '_staff_awards', true );
-        if ( is_array( $staff_awards ) ) {
-            $staff_awards = array_diff( $staff_awards, array( $post_id ) );
-            update_post_meta( $staff_id, '_staff_awards', $staff_awards );
+    // Remove this award from old partners members' awards lists
+    foreach ( $removed_partners_ids as $partners_id ) {
+        $partners_awards = get_post_meta( $partners_id, '_partners_awards', true );
+        if ( is_array( $partners_awards ) ) {
+            $partners_awards = array_diff( $partners_awards, array( $post_id ) );
+            update_post_meta( $partners_id, '_partners_awards', $partners_awards );
         }
     }
     
-    // Add this award to new staff members' awards lists
-    foreach ( $added_staff_ids as $staff_id ) {
-        $staff_awards = get_post_meta( $staff_id, '_staff_awards', true );
-        if ( ! is_array( $staff_awards ) ) {
-            $staff_awards = array();
+    // Add this award to new partners members' awards lists
+    foreach ( $added_partners_ids as $partners_id ) {
+        $partners_awards = get_post_meta( $partners_id, '_partners_awards', true );
+        if ( ! is_array( $partners_awards ) ) {
+            $partners_awards = array();
         }
-        if ( ! in_array( $post_id, $staff_awards ) ) {
-            $staff_awards[] = $post_id;
-            update_post_meta( $staff_id, '_staff_awards', $staff_awards );
+        if ( ! in_array( $post_id, $partners_awards ) ) {
+            $partners_awards[] = $post_id;
+            update_post_meta( $partners_id, '_partners_awards', $partners_awards );
         }
     }
 }
 add_action( 'save_post_awards', 'save_award_meta_box_data' );
 
-// Also update when staff awards are changed (from staff side)
-function sync_staff_awards_to_award( $staff_id, $awards ) {
-    // First, remove this staff from all awards
+// Also update when partners awards are changed (from partners side)
+function sync_partners_awards_to_award( $partners_id, $awards ) {
+    // First, remove this partners from all awards
     $all_awards = get_posts( array(
         'post_type' => 'awards',
         'posts_per_page' => -1,
@@ -364,38 +364,38 @@ function sync_staff_awards_to_award( $staff_id, $awards ) {
     ) );
     
     foreach ( $all_awards as $award_id ) {
-        $award_staff = get_post_meta( $award_id, '_award_staff', true );
-        if (!is_array($award_staff)) {
-            $award_staff = $award_staff ? array($award_staff) : array();
+        $award_partners = get_post_meta( $award_id, '_award_partners', true );
+        if (!is_array($award_partners)) {
+            $award_partners = $award_partners ? array($award_partners) : array();
         }
         
-        if (in_array($staff_id, $award_staff)) {
-            $award_staff = array_diff($award_staff, array($staff_id));
-            update_post_meta( $award_id, '_award_staff', $award_staff );
+        if (in_array($partners_id, $award_partners)) {
+            $award_partners = array_diff($award_partners, array($partners_id));
+            update_post_meta( $award_id, '_award_partners', $award_partners );
         }
     }
     
-    // Then set this staff for the selected awards
+    // Then set this partners for the selected awards
     foreach ( $awards as $award_id ) {
-        $award_staff = get_post_meta( $award_id, '_award_staff', true );
-        if (!is_array($award_staff)) {
-            $award_staff = $award_staff ? array($award_staff) : array();
+        $award_partners = get_post_meta( $award_id, '_award_partners', true );
+        if (!is_array($award_partners)) {
+            $award_partners = $award_partners ? array($award_partners) : array();
         }
         
-        if (!in_array($staff_id, $award_staff)) {
-            $award_staff[] = $staff_id;
-            update_post_meta( $award_id, '_award_staff', $award_staff );
+        if (!in_array($partners_id, $award_partners)) {
+            $award_partners[] = $partners_id;
+            update_post_meta( $award_id, '_award_partners', $award_partners );
         }
     }
 }
 
-// Hook into staff save to maintain two-way sync
-function on_staff_save_sync_awards( $post_id ) {
+// Hook into partners save to maintain two-way sync
+function on_partners_save_sync_awards( $post_id ) {
     if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
         return;
     }
     
-    if ( get_post_type( $post_id ) !== 'staff' ) {
+    if ( get_post_type( $post_id ) !== 'partners' ) {
         return;
     }
     
@@ -403,38 +403,38 @@ function on_staff_save_sync_awards( $post_id ) {
         return;
     }
     
-    if ( isset( $_POST['staff_awards'] ) ) {
-        $awards = array_map( 'intval', $_POST['staff_awards'] );
-        sync_staff_awards_to_award( $post_id, $awards );
+    if ( isset( $_POST['partners_awards'] ) ) {
+        $awards = array_map( 'intval', $_POST['partners_awards'] );
+        sync_partners_awards_to_award( $post_id, $awards );
     } else {
         // If no awards selected, remove all associations
-        sync_staff_awards_to_award( $post_id, array() );
+        sync_partners_awards_to_award( $post_id, array() );
     }
 }
-add_action( 'save_post_staff', 'on_staff_save_sync_awards' );
+add_action( 'save_post_partners', 'on_partners_save_sync_awards' );
 
-// Update custom column display for multiple staff
+// Update custom column display for multiple partners
 function display_awards_custom_columns( $column, $post_id ) {
     switch ( $column ) {
         case 'award_organization':
             echo get_post_meta( $post_id, '_award_organization', true ) ?: '—';
             break;
             
-        case 'award_staff':
-            $staff_ids = get_post_meta( $post_id, '_award_staff', true );
-            if (!is_array($staff_ids)) {
-                $staff_ids = $staff_ids ? array($staff_ids) : array();
+        case 'award_partners':
+            $partners_ids = get_post_meta( $post_id, '_award_partners', true );
+            if (!is_array($partners_ids)) {
+                $partners_ids = $partners_ids ? array($partners_ids) : array();
             }
             
-            if ( !empty($staff_ids) ) {
-                $staff_names = array();
-                foreach ( $staff_ids as $staff_id ) {
-                    $staff = get_post( $staff_id );
-                    if ( $staff ) {
-                        $staff_names[] = '<a href="' . get_edit_post_link( $staff_id ) . '">' . esc_html( $staff->post_title ) . '</a>';
+            if ( !empty($partners_ids) ) {
+                $partners_names = array();
+                foreach ( $partners_ids as $partners_id ) {
+                    $partners = get_post( $partners_id );
+                    if ( $partners ) {
+                        $partners_names[] = '<a href="' . get_edit_post_link( $partners_id ) . '">' . esc_html( $partners->post_title ) . '</a>';
                     }
                 }
-                echo implode( ', ', $staff_names );
+                echo implode( ', ', $partners_names );
             } else {
                 echo '—';
             }
@@ -472,22 +472,22 @@ function display_awards_custom_columns( $column, $post_id ) {
 function codeweber_enqueue_select2() {
     $screen = get_current_screen();
     
-    // Load only on awards and staff edit pages
-    if ($screen->post_type === 'awards' || $screen->post_type === 'staff') {
+    // Load only on awards and partners edit pages
+    if ($screen->post_type === 'awards' || $screen->post_type === 'partners') {
         wp_enqueue_script('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js', array('jquery'), '4.1.0-rc.0', true);
         wp_enqueue_style('select2', 'https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css', array(), '4.1.0-rc.0');
 
         wp_add_inline_script('select2', '
             jQuery(document).ready(function($) {
-                // Initialize Select2 for staff awards
-                $("#staff_awards").select2({
+                // Initialize Select2 for partners awards
+                $("#partners_awards").select2({
                     placeholder: "' . __('Select awards...', 'codeweber') . '",
                     allowClear: true
                 });
                 
-                // Initialize Select2 for award staff
-                $("#award_staff").select2({
-                    placeholder: "' . __('Select staff members...', 'codeweber') . '",
+                // Initialize Select2 for award partners
+                $("#award_partners").select2({
+                    placeholder: "' . __('Select partners members...', 'codeweber') . '",
                     allowClear: true
                 });
             });

@@ -1,25 +1,25 @@
 <?php
 
 // Добавляем баннеры через хук
-add_action('before_single_content', 'add_custom_single_banner', 10, 1);
+add_action('before_single_content', 'add_custom_single_banner_partners', 10, 1);
 
-function add_custom_single_banner($post_type)
+function add_custom_single_banner_partners($post_type)
 {
    global $post;
 
-   if ($post_type === 'staff') {
+   if ($post_type === 'partners') {
 
       // Получаем данные
-      $name = get_post_meta($post->ID, '_staff_name', true);
-      $surname = get_post_meta($post->ID, '_staff_surname', true);
+      $name = get_post_meta($post->ID, '_partner_name', true);
+      $surname = get_post_meta($post->ID, '_partner_surname', true);
 
-      $full_position = get_post_meta($post->ID, '_staff_full_position', true);
-      $regions = get_post_meta($post->ID, '_staff_regions', true);
-      $short_description = get_post_meta($post->ID, '_staff_short_description', true);
-      $language_skills = get_post_meta($post->ID, '_staff_language_skills', true);
-      $email = get_post_meta($post->ID, '_staff_email', true);
-      $phone = get_post_meta($post->ID, '_staff_phone', true);
-      $location = get_post_meta($post->ID, '_staff_location', true);
+      $full_position = get_post_meta($post->ID, '_partner_full_position', true);
+      $regions = get_post_meta($post->ID, '_partner_regions', true);
+      $short_description = get_post_meta($post->ID, '_partner_short_description', true);
+      $language_skills = get_post_meta($post->ID, '_partner_language_skills', true);
+      $email = get_post_meta($post->ID, '_partner_email', true);
+      $phone = get_post_meta($post->ID, '_partner_phone', true);
+      $location = get_post_meta($post->ID, '_partner_location', true);
 
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
@@ -31,7 +31,7 @@ function add_custom_single_banner($post_type)
       $background_image = $thumbnail_url ?: get_template_directory_uri() . '/assets/images/default-staff.jpg';
 ?>
 
-      <section class="staff-banner">
+      <section class="partner-banner">
          <div class="col-12">
             <div class="row  wrapper g-0">
                <div class="col-md-12 col-xl-5 ">
@@ -128,9 +128,9 @@ function add_custom_single_banner($post_type)
 
 
 
-function add_news_section_after_staff($post_type)
+function add_news_section_after_partner($post_type)
 {
-   if ($post_type === 'staff') {
+   if ($post_type === 'partners') {
       ob_start(); ?>
       <section class="wrapper blog-section" id="news">
          <div class="container pb-14 pb-md-16">
@@ -147,7 +147,7 @@ function add_news_section_after_staff($post_type)
             </div>
             <div class="row">
                <div class="col-12">
-                  <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_staff" excerpt_length="15"]'); ?>
+                  <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_partner" excerpt_length="15"]'); ?>
                </div>
             </div>
          </div>
@@ -156,4 +156,4 @@ function add_news_section_after_staff($post_type)
       echo ob_get_clean();
    }
 }
-add_action('after_single_post', 'add_news_section_after_staff', 10, 1);
+add_action('after_single_post', 'add_news_section_after_partner', 10, 1);

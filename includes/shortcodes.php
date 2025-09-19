@@ -1,8 +1,8 @@
 <?php
 //--------------------------------
-//STAFF
+//PARTNERS
 //--------------------------------
-function codeweber_staff_shortcode($atts)
+function codeweber_partners_shortcode($atts)
 {
     // Атрибуты шорткода
     $atts = shortcode_atts(array(
@@ -13,7 +13,7 @@ function codeweber_staff_shortcode($atts)
 
     // Аргументы для WP_Query
     $args = array(
-        'post_type' => 'staff',
+        'post_type' => 'partners',
         'posts_per_page' => $atts['posts_per_page'],
         'orderby' => $atts['orderby'],
         'order' => $atts['order']
@@ -30,10 +30,10 @@ function codeweber_staff_shortcode($atts)
             $post_id = get_the_ID();
 
             // Получаем метаданные
-            $position = get_post_meta($post_id, '_staff_position', true);
-            $name = get_post_meta($post_id, '_staff_name', true);
-            $surname = get_post_meta($post_id, '_staff_surname', true);
-            $regions = get_post_meta($post_id, '_staff_regions', true);
+            $position = get_post_meta($post_id, '_partners_position', true);
+            $name = get_post_meta($post_id, '_partners_name', true);
+            $surname = get_post_meta($post_id, '_partners_surname', true);
+            $regions = get_post_meta($post_id, '_partners_regions', true);
             $thumbnail = get_the_post_thumbnail_url($post_id, 'full');
 
             // Формируем полное имя
@@ -76,7 +76,7 @@ function codeweber_staff_shortcode($atts)
 
     return $output;
 }
-add_shortcode('staff_grid', 'codeweber_staff_shortcode');
+add_shortcode('partners_grid', 'codeweber_partners_shortcode');
 
 
 //--------------------------------
@@ -246,7 +246,7 @@ function service_categories_cards_shortcode($atts)
  * 
  * Примеры использования:
  * [awards_grid] - выведет 6 записей в 3 колонки
- * [awards_grid staff_awards="true"] - выведет награды текущего сотрудника
+ * [awards_grid partners_awards="true"] - выведет награды текущего сотрудника
  * [awards_grid posts_per_page="4" columns="2"] - 4 записи в 2 колонки
  * [awards_grid posts_per_page="8" columns="4" columns_md="3" columns_sm="1"] - кастомные колонки
  * [awards_grid orderby="title" order="ASC"] - сортировка по названию по возрастанию
@@ -258,7 +258,7 @@ function service_categories_cards_shortcode($atts)
  * @param int    $columns        - Количество колонок на больших экранах (lg)
  * @param int    $columns_md     - Количество колонок на средних экранах (md)
  * @param int    $columns_sm     - Количество колонок на маленьких экранах (sm)
- * @param bool   $staff_awards   - Если true, выводит награды текущего сотрудника
+ * @param bool   $partners_awards   - Если true, выводит награды текущего сотрудника
  */
 add_shortcode('awards_grid', 'awards_grid_shortcode');
 
@@ -272,15 +272,15 @@ function awards_grid_shortcode($atts)
         'columns'        => 4,
         'columns_md'     => 4,
         'columns_sm'     => 1,
-        'staff_awards'   => false
+        'partners_awards'   => false
     ), $atts);
 
     // Если запрашиваем награды сотрудника
-    if ($atts['staff_awards'] === 'true' && is_singular('staff')) {
+    if ($atts['partners_awards'] === 'true' && is_singular('partners')) {
         global $post;
 
-        // Get selected awards for this staff member
-        $selected_awards = get_post_meta($post->ID, '_staff_awards', true);
+        // Get selected awards for this partners member
+        $selected_awards = get_post_meta($post->ID, '_partners_awards', true);
         if (!is_array($selected_awards)) {
             $selected_awards = array();
         }
