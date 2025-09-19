@@ -237,6 +237,168 @@ function service_categories_cards_shortcode($atts)
     return ob_get_clean();
 }
 
+//
+
+
+
+//--------------------------------
+//SERVICES
+//--------------------------------
+
+add_shortcode('practice_categories_cards', 'practice_categories_cards_shortcode');
+
+function practice_categories_cards_shortcode($atts)
+{
+    $atts = shortcode_atts(array(
+        'posts_per_page' => -1,
+        'orderby' => 'meta_value_num',
+        'order' => 'ASC',
+        'columns' => '3',
+        'columns_xl' => '', // Колонки на xl экранах
+        'columns_lg' => '', // Колонки на lg экранах
+        'columns_md' => '', // Колонки на md экранах
+        'columns_sm' => '', // Колонки на sm экранах
+        'columns_xs' => '1', // Колонки на xs экранах (по умолчанию 1)
+        'use_alt_title' => 'true'
+    ), $atts);
+
+    // Convert string to boolean
+    $use_alt_title = filter_var($atts['use_alt_title'], FILTER_VALIDATE_BOOLEAN);
+
+    // Get terms with proper parameters
+    $args = array(
+        'taxonomy' => 'practice_category',
+        'hide_empty' => false,
+        'orderby' => $atts['orderby'],
+        'order' => $atts['order'],
+    );
+
+    // Add meta_key if ordering by meta_value or meta_value_num
+    if ($atts['orderby'] === 'meta_value_num' || $atts['orderby'] === 'meta_value') {
+        $args['meta_key'] = 'practice_category_order';
+    }
+
+    // Add number only if not -1
+    if ($atts['posts_per_page'] != -1) {
+        $args['number'] = $atts['posts_per_page'];
+    }
+
+    $terms = get_terms($args);
+
+    // Check for errors and empty results
+    if (is_wp_error($terms)) {
+        return '<p>' . sprintf(__('Error loading categories: %s', 'codeweber'), $terms->get_error_message()) . '</p>';
+    }
+
+    if (empty($terms)) {
+        return '<p>' . __('No categories found', 'codeweber') . '</p>';
+    }
+
+    // Manual sorting if terms don't have order meta
+    if ($atts['orderby'] === 'meta_value_num' || $atts['orderby'] === 'meta_value') {
+        usort($terms, function ($a, $b) use ($atts) {
+            $order_a = get_term_meta($a->term_id, 'practice_category_order', true);
+            $order_b = get_term_meta($b->term_id, 'practice_category_order', true);
+
+            $order_a = empty($order_a) ? 0 : intval($order_a);
+            $order_b = empty($order_b) ? 0 : intval($order_b);
+
+            if ($atts['order'] === 'ASC') {
+                return $order_a <=> $order_b;
+            } else {
+                return $order_b <=> $order_a;
+            }
+        });
+    }
+
+    // Генерация CSS классов для колонок
+    $column_classes = [];
+
+    // xs (по умолчанию 1 колонка)
+    $columns_xs = !empty($atts['columns_xs']) ? $atts['columns_xs'] : '1';
+    $column_classes[] = 'col-' . (12 / intval($columns_xs));
+
+    // sm
+    if (!empty($atts['columns_sm'])) {
+        $column_classes[] = 'col-sm-' . (12 / intval($atts['columns_sm']));
+    } else {
+        $column_classes[] = 'col-sm-6'; // default 2 columns on sm
+    }
+
+    // md
+    if (!empty($atts['columns_md'])) {
+        $column_classes[] = 'col-md-' . (12 / intval($atts['columns_md']));
+    } else {
+        $column_classes[] = 'col-md-' . (12 / intval($atts['columns']));
+    }
+
+    // lg
+    if (!empty($atts['columns_lg'])) {
+        $column_classes[] = 'col-lg-' . (12 / intval($atts['columns_lg']));
+    } else {
+        $column_classes[] = 'col-lg-' . (12 / intval($atts['columns']));
+    }
+
+    // xl
+    if (!empty($atts['columns_xl'])) {
+        $column_classes[] = 'col-xl-' . (12 / intval($atts['columns_xl']));
+    } else {
+        $column_classes[] = 'col-xl-' . (12 / intval($atts['columns']));
+    }
+
+    $column_class = implode(' ', $column_classes);
+
+    ob_start();
+?>
+    <div class="row g-3">
+        <?php foreach ($terms as $term):
+            $color = get_term_meta($term->term_id, 'practice_category_color', true);
+            $color_class = $color ? 'bg-' . $color : '';
+            $term_link = get_term_link($term);
+
+            // Get alternative title if enabled
+            $display_title = $term->name;
+            if ($use_alt_title) {
+                $alt_title = get_term_meta($term->term_id, 'practice_category_alt_title', true);
+                if (!empty($alt_title)) {
+                    $display_title = $alt_title;
+                }
+            }
+
+            // Check link for errors
+            if (is_wp_error($term_link)) {
+                $term_link = '#';
+            }
+        ?>
+            <div class="<?php echo esc_attr($column_class); ?>">
+                <a href="<?php echo esc_url($term_link); ?>" class="card h-100 practice-card" data-cue="slideInDown">
+                    <div class="brand-square-xs <?php echo esc_attr($color_class); ?> opacity-0 position-absolute top-0 start-0"></div>
+                    <div class="card-body d-flex flex-column justify-content-between">
+                        <div class="pe-none mb-5">
+                            <div class="practice-card-hover brand-square-md <?php echo esc_attr($color_class); ?>"></div>
+                        </div>
+                        <h3 class="h4"><?php echo wp_kses_post($display_title); ?></h3>
+                    </div>
+                </a>
+            </div>
+        <?php endforeach; ?>
+
+        <div class="<?php echo esc_attr($column_class); ?>">
+            <a href="/practices" class="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
+                <div class="card-body align-content-center text-center">
+                    <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Practice', 'horizons'); ?></span>
+                </div>
+                <!--/.card-body -->
+            </a>
+            <!--/.card -->
+        </div>
+        <!--/column -->
+    </div>
+    <!--/.row -->
+    <?php
+    return ob_get_clean();
+}
+
 //--------------------------------
 //AWARDS
 //--------------------------------
