@@ -33,7 +33,8 @@ $theme_includes = array(
     '/includes/sidebars.php',
     '/includes/partners.php',
     '/includes/practices.php',
-    '/includes/blog.php'
+    '/includes/blog.php',
+    '/includes/user.php'
 );
 
 foreach ($theme_includes as $file) {
