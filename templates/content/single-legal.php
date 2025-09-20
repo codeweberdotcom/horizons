@@ -101,7 +101,7 @@
                      $job_title = __('Writer', 'codeweber');
                   }
                   ?>
-                  <span class="body-s lh-0"><?php echo esc_html($job_title); ?></span>
+                  <span class="body-s lh-0 bg-neutral-500"><?php echo esc_html($job_title); ?></span>
                </div>
             </div>
          </div>
