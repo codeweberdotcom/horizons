@@ -83,15 +83,15 @@
 					if (!empty($avatar_id)) :
 						$avatar_src = wp_get_attachment_image_src($avatar_id, 'thumbnail');
 					?>
-						<img decoding="async" class="avatar w-48 me-3" alt="<?php the_author_meta('display_name'); ?>" src="<?php echo esc_url($avatar_src[0]); ?>">
+						<img decoding="async" class="w-48 me-3" alt="<?php the_author_meta('display_name'); ?>" src="<?php echo esc_url($avatar_src[0]); ?>">
 					<?php else : ?>
 						<figure class="me-3">
 							<?php echo get_avatar(get_the_author_meta('user_email'), 48); ?>
 						</figure>
 					<?php endif; ?>
 
-					<div class="avatar-info mt-1">
-						<a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="label-s r link-dark d-block lh-0">
+					<div class="avatar-info mt-0">
+						<a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
 							<?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
 						</a>
 						<?php
