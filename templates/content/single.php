@@ -35,7 +35,7 @@
 										<li>
 											<a
 												href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
-												class="btn btn-primary btn-xs has-ripple mb-0<?php echo getThemeButton(); ?>">
+												class="btn btn-primary btn-xs has-ripple py-1 mb-0<?php echo getThemeButton(); ?>">
 												<?php echo esc_html($tag->name); ?>
 											</a>
 										</li>
@@ -43,9 +43,7 @@
 								</ul>
 							<?php endif; ?>
 						</div>
-						<div class="mb-0 mb-md-2">
-							<?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
-						</div>
+
 					</div>
 					<!-- /.post-footer -->
 				</article>
@@ -103,11 +101,13 @@
 						<span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
 					</div>
 				</div>
+
 				<div class="mt-3 mt-md-0 ms-auto">
-					<a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="btn btn-xs btn-charcoal-blue <?php echo esc_attr(GetThemeButton('rounded mt-2')); ?> btn-icon btn-icon-start mb-0">
-						<i class="uil uil-file-alt"></i> <?php esc_html_e('All Posts', 'codeweber'); ?>
-					</a>
+					<?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
 				</div>
+
+
+				
 			</div>
 			<!-- /.author-info -->
 
@@ -122,14 +122,6 @@
 			<?php endif; ?>
 			<!-- /.author-bio -->
 
-			<nav class="nav social">
-				<a href="#"><i class="uil uil-twitter"></i></a>
-				<a href="#"><i class="uil uil-facebook-f"></i></a>
-				<a href="#"><i class="uil uil-dribbble"></i></a>
-				<a href="#"><i class="uil uil-instagram"></i></a>
-				<a href="#"><i class="uil uil-youtube"></i></a>
-			</nav>
-			<!-- /.social -->
 
 			<hr />
 			<?php get_template_part('templates/components/lastpostslider-blog'); ?>

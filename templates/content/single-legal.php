@@ -113,6 +113,9 @@
             <p><?php echo esc_html($bio); ?></p>
          <?php endif; ?>
          <!-- /.author-bio -->
+         <div class="mb-0 mb-md-2">
+            <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+         </div>
       </div>
    </div>
 </section> <!-- #post-<?php the_ID(); ?> -->
