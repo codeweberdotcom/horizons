@@ -75,10 +75,11 @@ if ($categories && !is_wp_error($categories)) :
                   <?php endif; ?>
                   <div class="text-line-after label-u mb-3"><?php echo __('Practices', 'horizons'); ?></div>
                   <?php if ($posts->have_posts()) : ?>
-                     <div class="practice-posts-list">
+                     <div class="practice-posts-list mb-5">
                         <?php while ($posts->have_posts()) : $posts->the_post(); ?>
+                           <?php $is_last = ($posts->current_post + 1) === $posts->post_count; ?>
                            <article id="post-<?php the_ID(); ?>" <?php post_class('practice-item mb-0'); ?>>
-                              <a class="body-m-r text-uppercase text-dark py-3 pe-2 d-flex justify-content-between align-items-center mb-0 border-bottom service-link" href="<?php the_permalink(); ?>">
+                              <a class="body-m-r text-uppercase text-dark py-3 pe-2 d-flex justify-content-between align-items-center mb-0 service-link <?php echo !$is_last ? 'border-bottom' : ''; ?>" href="<?php the_permalink(); ?>">
                                  <span class="d-flex align-items-center">
                                     <div class="brand-square-sm me-3"></div>
                                     <?php the_title(); ?>
@@ -88,6 +89,15 @@ if ($categories && !is_wp_error($categories)) :
                            </article>
                         <?php endwhile; ?>
                      </div>
+
+                     <div class="card shadow border-0">
+                        <div class="card-body bg-dusty-navy">
+                           <p class="text-line-before label-u text-sub-white">Связаться с нами</p>
+                           <div class="h3 text-white mb-6">Получить консультацию <br> нашего специалиста</div>
+                           <a href="#" class="btn btn-neutral-50 has-ripple btn-lg w-100" data-ripple-initialized="true">Отправить сообщение</a>
+                        </div>
+                     </div>
+                     
                   <?php else : ?>
                      <p class="no-practices"><?php _e('No practices found in this category.', 'text-domain'); ?></p>
                   <?php endif; ?>
