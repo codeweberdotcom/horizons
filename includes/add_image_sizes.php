@@ -41,7 +41,7 @@ add_filter('codeweber_allowed_image_sizes', 'my_child_theme_allowed_sizes');
 
 
 // Добавляем размер изображения для категорий
-add_image_size('practice_category_image', 720, 900, true);
+add_image_size('practice_category_image', 720, 850, true);
 
 // Определяем контекст загрузки и фильтруем размеры
 add_filter('intermediate_image_sizes_advanced', 'limit_image_sizes_by_context', 10, 2);
@@ -70,7 +70,7 @@ function limit_image_sizes_by_context($sizes, $metadata)
       return array(
          'practice_category_image' => array(
             'width' => 720,
-            'height' => 900,
+            'height' => 850,
             'crop' => true
          )
       );

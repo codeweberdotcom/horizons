@@ -43,9 +43,6 @@
                         </ul>
                      <?php endif; ?>
                   </div>
-                  <div class="mb-0 mb-md-2">
-                     <?php codeweber_share_page(); ?>
-                  </div>
                </div>
                <!-- /.post-footer -->
             </article>
@@ -104,6 +101,10 @@
                   <span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
                </div>
             </div>
+
+            <div class="mt-3 mt-md-0 ms-auto">
+               <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+            </div>
          </div>
          <!-- /.author-info -->
 
@@ -113,9 +114,7 @@
             <p><?php echo esc_html($bio); ?></p>
          <?php endif; ?>
          <!-- /.author-bio -->
-         <div class="mb-0 mb-md-2">
-            <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
-         </div>
+
       </div>
    </div>
 </section> <!-- #post-<?php the_ID(); ?> -->

@@ -105,14 +105,7 @@
 				<div class="mt-3 mt-md-0 ms-auto">
 					<?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
 				</div>
-
-
-				
 			</div>
-			<!-- /.author-info -->
-
-
-
 			<!-- /.author-info -->
 
 			<?php $bio = get_user_meta($user_id, 'description', true); ?>

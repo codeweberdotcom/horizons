@@ -73,25 +73,20 @@ if ($categories && !is_wp_error($categories)) :
                         <?php echo wp_kses_post($category_description); ?>
                      </div>
                   <?php endif; ?>
-                  <div class="text-line-after label-u"><?php echo __('Practices', 'horizons'); ?></div>
+                  <div class="text-line-after label-u mb-3"><?php echo __('Practices', 'horizons'); ?></div>
                   <?php if ($posts->have_posts()) : ?>
                      <div class="practice-posts-list">
                         <?php while ($posts->have_posts()) : $posts->the_post(); ?>
-                           <article id="post-<?php the_ID(); ?>" <?php post_class('practice-item'); ?>>
-                              <a class="" href="<?php the_permalink(); ?>">
-                                 <div class="card-body border-bottom d-flex flex-row p-3 ps-4 align-items-center justify-content-between">
-                                    <h2 href="#" class="h4 mb-0"><?php the_title(); ?></h2>
-                                    <i class="uil uil-angle-right fs-22"></i>
-                                 </div>
+                           <article id="post-<?php the_ID(); ?>" <?php post_class('practice-item mb-0 border-bottom'); ?>>
+                              <a class="h4 py-3 d-block mb-0 " href="<?php the_permalink(); ?>">
+                                 <?php the_title(); ?>
                               </a>
                            </article>
-
                         <?php endwhile; ?>
                      </div>
                   <?php else : ?>
                      <p class="no-practices"><?php _e('No practices found in this category.', 'text-domain'); ?></p>
                   <?php endif; ?>
-
                </div>
                <!-- /column -->
                <?php wp_reset_postdata(); ?>
