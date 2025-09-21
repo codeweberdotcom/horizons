@@ -22,7 +22,7 @@ if ($categories && !is_wp_error($categories)) :
    foreach ($categories as $category) :
       $counter++;
       $image_order = ($counter % 2 == 0) ? 'order-lg-2' : 'order-lg-1 ';
-      $content_order = ($counter % 2 == 0) ? 'order-lg-1 pe-md-14 py-14' : 'order-lg-2 ps-md-14 py-14';
+      $content_order = ($counter % 2 == 0) ? 'order-lg-1 px-md-14 py-14' : 'order-lg-2 px-md-14 py-14';
 
       $color = get_term_meta($category->term_id, 'practice_category_color', true);
       $color_class = $color ? 'bg-' . $color : '';
@@ -50,7 +50,7 @@ if ($categories && !is_wp_error($categories)) :
                <div class="col-lg-6 position-lg-sticky <?php echo esc_attr($image_order); ?>" style="top: 4rem;">
                   <?php
                   if ($category_image_id) { ?>
-                     <figure class="">
+                     <figure class="practice-category-image-wrapper">
                         <?php
                         $category_image = wp_get_attachment_image($category_image_id, 'practice_category_image', false, array(
                            'class' => 'category-image',
@@ -77,9 +77,13 @@ if ($categories && !is_wp_error($categories)) :
                   <?php if ($posts->have_posts()) : ?>
                      <div class="practice-posts-list">
                         <?php while ($posts->have_posts()) : $posts->the_post(); ?>
-                           <article id="post-<?php the_ID(); ?>" <?php post_class('practice-item mb-0 border-bottom'); ?>>
-                              <a class="h4 py-3 d-block mb-0 " href="<?php the_permalink(); ?>">
-                                 <?php the_title(); ?>
+                           <article id="post-<?php the_ID(); ?>" <?php post_class('practice-item mb-0'); ?>>
+                              <a class="body-m-r text-uppercase text-dark py-3 pe-2 d-flex justify-content-between align-items-center mb-0 border-bottom service-link" href="<?php the_permalink(); ?>">
+                                 <span class="d-flex align-items-center">
+                                    <div class="brand-square-sm me-3"></div>
+                                    <?php the_title(); ?>
+                                 </span>
+                                 <i class="uil uil-angle-right"></i>
                               </a>
                            </article>
                         <?php endwhile; ?>
