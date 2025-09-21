@@ -900,162 +900,282 @@ function get_practice_category_alt_title($term_id = null)
    return '';
 }
 
+//
 
+// Добавляем поле изображения для таксономии practice_category
+add_action('practice_category_add_form_fields', 'add_practice_category_image_field', 10, 2);
+add_action('practice_category_edit_form_fields', 'edit_practice_category_image_field', 10, 2);
+
+function add_practice_category_image_field($taxonomy)
+{
+?>
+   <div class="form-field term-group">
+      <label for="practice_category_image"><?php _e('Изображение категории', 'horizons'); ?></label>
+      <input type="hidden" id="practice_category_image" name="practice_category_image" class="custom_media_url" value="">
+      <div id="category-image-wrapper"></div>
+      <p>
+         <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Добавить изображение', 'horizons'); ?>" />
+         <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Удалить изображение', 'horizons'); ?>" />
+      </p>
+   </div>
+<?php
+}
+
+function edit_practice_category_image_field($term, $taxonomy)
+{
+   $image_id = get_term_meta($term->term_id, 'practice_category_image', true);
+?>
+   <tr class="form-field term-group-wrap">
+      <th scope="row">
+         <label for="practice_category_image"><?php _e('Изображение категории', 'horizons'); ?></label>
+      </th>
+      <td>
+         <input type="hidden" id="practice_category_image" name="practice_category_image" value="<?php echo esc_attr($image_id); ?>">
+         <div id="category-image-wrapper">
+            <?php if ($image_id) : ?>
+               <?php echo wp_get_attachment_image($image_id, 'medium'); ?>
+            <?php endif; ?>
+         </div>
+         <p>
+            <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Добавить изображение', 'horizons'); ?>" />
+            <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Удалить изображение', 'horizons'); ?>" />
+         </p>
+      </td>
+   </tr>
+   <?php
+}
+
+
+// Сохраняем поле изображения
+add_action('created_practice_category', 'save_practice_category_image', 10, 2);
+add_action('edited_practice_category', 'save_practice_category_image', 10, 2);
+
+function save_practice_category_image($term_id, $tt_id)
+{
+   if (isset($_POST['practice_category_image']) && '' !== $_POST['practice_category_image']) {
+      $image = sanitize_text_field($_POST['practice_category_image']);
+      update_term_meta($term_id, 'practice_category_image', $image);
+   } else {
+      delete_term_meta($term_id, 'practice_category_image');
+   }
+}
+
+// Подключаем скрипты для медиабиблиотеки
+add_action('admin_enqueue_scripts', 'load_media_scripts');
+function load_media_scripts()
+{
+   wp_enqueue_media();
+}
+
+// Добавляем скрипт для работы с медиабиблиотекой
+add_action('admin_footer', 'add_media_script');
+function add_media_script()
+{
+   $current_screen = get_current_screen();
+
+   if ($current_screen->base == 'edit-tags' || $current_screen->base == 'term') {
+   ?>
+      <script>
+         jQuery(document).ready(function($) {
+            function ct_media_upload(button_class) {
+               var _custom_media = true,
+                  _orig_send_attachment = wp.media.editor.send.attachment;
+
+               $('body').on('click', button_class, function(e) {
+                  var button_id = '#' + $(this).attr('id');
+                  var send_attachment_bkp = wp.media.editor.send.attachment;
+                  var button = $(button_id);
+                  _custom_media = true;
+
+                  wp.media.editor.send.attachment = function(props, attachment) {
+                     if (_custom_media) {
+                        $('#practice_category_image').val(attachment.id);
+                        $('#category-image-wrapper').html('<img class="custom_media_image" src="" style="margin:0;padding:0;max-height:100px;float:none;" />');
+                        $('#category-image-wrapper .custom_media_image').attr('src', attachment.url).css('display', 'block');
+                     } else {
+                        return _orig_send_attachment.apply(this, [props, attachment]);
+                     }
+                  }
+
+                  wp.media.editor.open(button);
+                  return false;
+               });
+            }
+
+            ct_media_upload('.ct_tax_media_button.button');
+
+            $('body').on('click', '.ct_tax_media_remove', function() {
+               $('#practice_category_image').val('');
+               $('#category-image-wrapper').html('');
+            });
+
+            // Исправляем баг: убираем стандартный медиа-загрузчик
+            $('a.add_media').on('click', function() {
+               _custom_media = false;
+            });
+         });
+      </script>
+   <?php
+   }
+}
 
 // Practice Post
 
 /**
  * Регистрируем метабоксы для типа записи "Practices"
  */
-function add_practices_meta_boxes() {
-    add_meta_box(
-        'practices_details',
-        __('Practice Details', 'horizons'),
-        'render_practices_meta_box',
-        'practices',
-        'normal',
-        'high'
-    );
+function add_practices_meta_boxes()
+{
+   add_meta_box(
+      'practices_details',
+      __('Practice Details', 'horizons'),
+      'render_practices_meta_box',
+      'practices',
+      'normal',
+      'high'
+   );
 }
 add_action('add_meta_boxes', 'add_practices_meta_boxes');
 
 /**
  * Функция отрисовки метабокса
  */
-function render_practices_meta_box($post) {
-    // Добавляем nonce для безопасности
-    wp_nonce_field('practices_meta_save', 'practices_meta_nonce');
+function render_practices_meta_box($post)
+{
+   // Добавляем nonce для безопасности
+   wp_nonce_field('practices_meta_save', 'practices_meta_nonce');
 
-    // Получаем существующие значения из базы данных
-    $your_task_text = get_post_meta($post->ID, 'your_task_text', true);
-    $our_solution_text = get_post_meta($post->ID, 'our_solution_text', true);
-    $advantages_text = get_post_meta($post->ID, 'advantages_text', true);
-    $selected_categories = get_post_meta($post->ID, 'related_blog_categories', true);
-    $selected_tags = get_post_meta($post->ID, 'related_blog_tags', true);
+   // Получаем существующие значения из базы данных
+   $your_task_text = get_post_meta($post->ID, 'your_task_text', true);
+   $our_solution_text = get_post_meta($post->ID, 'our_solution_text', true);
+   $advantages_text = get_post_meta($post->ID, 'advantages_text', true);
+   $selected_categories = get_post_meta($post->ID, 'related_blog_categories', true);
+   $selected_tags = get_post_meta($post->ID, 'related_blog_tags', true);
 
-    // Если это массив, работаем с ним, если нет, создаем пустой массив
-    $selected_categories = is_array($selected_categories) ? $selected_categories : array();
-    $selected_tags = is_array($selected_tags) ? $selected_tags : array();
+   // Если это массив, работаем с ним, если нет, создаем пустой массив
+   $selected_categories = is_array($selected_categories) ? $selected_categories : array();
+   $selected_tags = is_array($selected_tags) ? $selected_tags : array();
 
-    // Получаем все категории и теги из таксономий для блога
-    $blog_categories = get_terms(array(
-        'taxonomy' => 'category',
-        'hide_empty' => false,
-    ));
+   // Получаем все категории и теги из таксономий для блога
+   $blog_categories = get_terms(array(
+      'taxonomy' => 'category',
+      'hide_empty' => false,
+   ));
 
-    $blog_tags = get_terms(array(
-        'taxonomy' => 'post_tag',
-        'hide_empty' => false,
-    ));
-    ?>
+   $blog_tags = get_terms(array(
+      'taxonomy' => 'post_tag',
+      'hide_empty' => false,
+   ));
+   ?>
 
-    <p><strong><?php _e('Practice description (main content)', 'horizons'); ?></strong><br>
-    <em><?php _e('Filled in the standard WordPress editor above.', 'horizons'); ?></em>
-    </p>
-    <hr>
+   <p><strong><?php _e('Practice description (main content)', 'horizons'); ?></strong><br>
+      <em><?php _e('Filled in the standard WordPress editor above.', 'horizons'); ?></em>
+   </p>
+   <hr>
 
-    <p>
-        <label for="your_task_text"><strong><?php _e('"Your task" text:', 'horizons'); ?></strong></label>
-        <textarea id="your_task_text" name="your_task_text" rows="5" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($your_task_text); ?></textarea>
-    </p>
-    <hr>
+   <p>
+      <label for="your_task_text"><strong><?php _e('"Your task" text:', 'horizons'); ?></strong></label>
+      <textarea id="your_task_text" name="your_task_text" rows="5" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($your_task_text); ?></textarea>
+   </p>
+   <hr>
 
-    <p>
-        <label for="our_solution_text"><strong><?php _e('"Our solution" text:', 'horizons'); ?></strong></label>
-        <textarea id="our_solution_text" name="our_solution_text" rows="10" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($our_solution_text); ?></textarea>
-    </p>
-    <hr>
+   <p>
+      <label for="our_solution_text"><strong><?php _e('"Our solution" text:', 'horizons'); ?></strong></label>
+      <textarea id="our_solution_text" name="our_solution_text" rows="10" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($our_solution_text); ?></textarea>
+   </p>
+   <hr>
 
-    <p>
-        <label for="advantages_text"><strong><?php _e('"Advantages" text:', 'horizons'); ?></strong></label>
-        <textarea id="advantages_text" name="advantages_text" rows="10" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($advantages_text); ?></textarea>
-    </p>
-    <hr>
+   <p>
+      <label for="advantages_text"><strong><?php _e('"Advantages" text:', 'horizons'); ?></strong></label>
+      <textarea id="advantages_text" name="advantages_text" rows="10" style="width: 100%; margin-top: 5px;"><?php echo esc_textarea($advantages_text); ?></textarea>
+   </p>
+   <hr>
 
-    <p>
-        <label for="related_blog_categories[]"><strong><?php _e('Blog article categories for display:', 'horizons'); ?></strong></label><br>
-        <em><?php _e('Select one or more categories. Articles that belong to ANY of the selected categories will be shown.', 'horizons'); ?></em>
-        <select id="related_blog_categories" name="related_blog_categories[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
-            <?php
-            if (!empty($blog_categories) && !is_wp_error($blog_categories)) {
-                foreach ($blog_categories as $category) {
-                    $selected = in_array($category->term_id, $selected_categories) ? 'selected="selected"' : '';
-                    echo '<option value="' . esc_attr($category->term_id) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
-                }
+   <p>
+      <label for="related_blog_categories[]"><strong><?php _e('Blog article categories for display:', 'horizons'); ?></strong></label><br>
+      <em><?php _e('Select one or more categories. Articles that belong to ANY of the selected categories will be shown.', 'horizons'); ?></em>
+      <select id="related_blog_categories" name="related_blog_categories[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
+         <?php
+         if (!empty($blog_categories) && !is_wp_error($blog_categories)) {
+            foreach ($blog_categories as $category) {
+               $selected = in_array($category->term_id, $selected_categories) ? 'selected="selected"' : '';
+               echo '<option value="' . esc_attr($category->term_id) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
             }
-            ?>
-        </select>
-        <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
-    </p>
+         }
+         ?>
+      </select>
+      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
+   </p>
 
-    <p>
-        <label for="related_blog_tags[]"><strong><?php _e('Blog article tags for display:', 'horizons'); ?></strong></label><br>
-        <em><?php _e('Select one or more tags. Articles that have ANY of the selected tags will be shown.', 'horizons'); ?></em>
-        <select id="related_blog_tags" name="related_blog_tags[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
-            <?php
-            if (!empty($blog_tags) && !is_wp_error($blog_tags)) {
-                foreach ($blog_tags as $tag) {
-                    $selected = in_array($tag->term_id, $selected_tags) ? 'selected="selected"' : '';
-                    echo '<option value="' . esc_attr($tag->term_id) . '" ' . $selected . '>' . esc_html($tag->name) . '</option>';
-                }
+   <p>
+      <label for="related_blog_tags[]"><strong><?php _e('Blog article tags for display:', 'horizons'); ?></strong></label><br>
+      <em><?php _e('Select one or more tags. Articles that have ANY of the selected tags will be shown.', 'horizons'); ?></em>
+      <select id="related_blog_tags" name="related_blog_tags[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
+         <?php
+         if (!empty($blog_tags) && !is_wp_error($blog_tags)) {
+            foreach ($blog_tags as $tag) {
+               $selected = in_array($tag->term_id, $selected_tags) ? 'selected="selected"' : '';
+               echo '<option value="' . esc_attr($tag->term_id) . '" ' . $selected . '>' . esc_html($tag->name) . '</option>';
             }
-            ?>
-        </select>
-        <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
-    </p>
-    <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, articles will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
+         }
+         ?>
+      </select>
+      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
+   </p>
+   <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, articles will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
 
-    <?php
+<?php
 }
 
 /**
  * Функция сохранения метаполей
  */
-function save_practices_meta($post_id) {
-    // Проверяем nonce
-    if (!isset($_POST['practices_meta_nonce']) || !wp_verify_nonce($_POST['practices_meta_nonce'], 'practices_meta_save')) {
-        return;
-    }
+function save_practices_meta($post_id)
+{
+   // Проверяем nonce
+   if (!isset($_POST['practices_meta_nonce']) || !wp_verify_nonce($_POST['practices_meta_nonce'], 'practices_meta_save')) {
+      return;
+   }
 
-    // Проверяем права пользователя
-    if (!current_user_can('edit_post', $post_id)) {
-        return;
-    }
+   // Проверяем права пользователя
+   if (!current_user_can('edit_post', $post_id)) {
+      return;
+   }
 
-    // Проверяем, что это не автосохранение
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
-    }
+   // Проверяем, что это не автосохранение
+   if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+      return;
+   }
 
-    // Массив полей для сохранения
-    $meta_fields = array(
-        'your_task_text',
-        'our_solution_text',
-        'advantages_text'
-    );
+   // Массив полей для сохранения
+   $meta_fields = array(
+      'your_task_text',
+      'our_solution_text',
+      'advantages_text'
+   );
 
-    // Сохраняем каждое текстовое поле
-    foreach ($meta_fields as $field) {
-        if (isset($_POST[$field])) {
-            $value = sanitize_textarea_field($_POST[$field]);
-            update_post_meta($post_id, $field, $value);
-        }
-    }
+   // Сохраняем каждое текстовое поле
+   foreach ($meta_fields as $field) {
+      if (isset($_POST[$field])) {
+         $value = sanitize_textarea_field($_POST[$field]);
+         update_post_meta($post_id, $field, $value);
+      }
+   }
 
-    // Сохраняем выбранные категории (массив)
-    if (isset($_POST['related_blog_categories'])) {
-        $categories = array_map('intval', $_POST['related_blog_categories']);
-        update_post_meta($post_id, 'related_blog_categories', $categories);
-    } else {
-        update_post_meta($post_id, 'related_blog_categories', array());
-    }
+   // Сохраняем выбранные категории (массив)
+   if (isset($_POST['related_blog_categories'])) {
+      $categories = array_map('intval', $_POST['related_blog_categories']);
+      update_post_meta($post_id, 'related_blog_categories', $categories);
+   } else {
+      update_post_meta($post_id, 'related_blog_categories', array());
+   }
 
-    // Сохраняем выбранные теги (массив)
-    if (isset($_POST['related_blog_tags'])) {
-        $tags = array_map('intval', $_POST['related_blog_tags']);
-        update_post_meta($post_id, 'related_blog_tags', $tags);
-    } else {
-        update_post_meta($post_id, 'related_blog_tags', array());
-    }
+   // Сохраняем выбранные теги (массив)
+   if (isset($_POST['related_blog_tags'])) {
+      $tags = array_map('intval', $_POST['related_blog_tags']);
+      update_post_meta($post_id, 'related_blog_tags', $tags);
+   } else {
+      update_post_meta($post_id, 'related_blog_tags', array());
+   }
 }
 add_action('save_post_practices', 'save_practices_meta');

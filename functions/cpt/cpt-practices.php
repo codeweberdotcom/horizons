@@ -81,19 +81,19 @@ function cptui_register_my_taxes_practice_category()
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
-		"hierarchical" => false,
+		"hierarchical" => true, // Изменено на true для иерархичности
 		"show_ui" => true,
 		"show_in_menu" => true,
 		"show_in_nav_menus" => true,
 		"query_var" => true,
 		"rewrite" => ['slug' => 'practice_category', 'with_front' => true],
-		"show_admin_column" => false,
+		"show_admin_column" => true, // Изменено на true для отображения колонки
 		"show_in_rest" => true,
 		"show_tagcloud" => false,
 		"rest_base" => "practice_category",
 		"rest_controller_class" => "WP_REST_Terms_Controller",
-		"show_in_quick_edit" => false,
-		"sort" => false,
+		"show_in_quick_edit" => true, // Изменено на true для быстрого редактирования
+		"sort" => true,
 		"show_in_graphql" => false,
 	];
 
@@ -148,4 +148,46 @@ function disable_gutenberg_for_practices($current_status, $post_type)
 }
 
 
+
+// Добавляем поддержку фильтрации по таксономии в админке
+function add_practice_category_filter()
+{
+	global $typenow;
+
+	if ($typenow == 'practices') {
+		$taxonomy = 'practice_category';
+		$selected = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+		$info_taxonomy = get_taxonomy($taxonomy);
+
+		wp_dropdown_categories(array(
+			'show_option_all' => __("Show All {$info_taxonomy->label}"),
+			'taxonomy' => $taxonomy,
+			'name' => $taxonomy,
+			'orderby' => 'name',
+			'selected' => $selected,
+			'show_count' => true,
+			'hide_empty' => true,
+			'value_field' => 'slug',
+			'hierarchical' => true
+		));
+	}
+}
+add_action('restrict_manage_posts', 'add_practice_category_filter');
+
+// Исправляем запрос для фильтрации
+function practice_category_filter_query($query)
+{
+	global $pagenow;
+	$type = 'practices';
+	$taxonomy = 'practice_category';
+
+	if (
+		$pagenow == 'edit.php' && isset($_GET[$taxonomy]) &&
+		$_GET[$taxonomy] != '' && $query->query['post_type'] == $type
+	) {
+		$term_slug = $_GET[$taxonomy];
+		$query->query_vars[$taxonomy] = $term_slug;
+	}
+}
+add_filter('parse_query', 'practice_category_filter_query');
 
