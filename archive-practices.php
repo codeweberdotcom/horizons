@@ -67,7 +67,7 @@ if ($categories && !is_wp_error($categories)) :
                   <div class="pe-none mb-5">
                      <div class="brand-square-md <?php echo esc_attr($color_class); ?>"></div>
                   </div>
-                  <h3 class="h2 mb-5"><?php echo esc_html($category->name); ?></h3>
+                  <h2 class="h2 mb-5"><?php echo esc_html($category->name); ?></h2>
                   <?php if (!empty($category_description)) : ?>
                      <div class="practice-category-description body-l-l mb-5">
                         <?php echo wp_kses_post($category_description); ?>
