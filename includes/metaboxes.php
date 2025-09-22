@@ -90,8 +90,8 @@ function codeweber_partners_additional_meta_box_callback($post)
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
          <label for="partners_website"><strong><?php _e('Website:', 'horizons'); ?></strong></label>
-         <input type="url" id="partners_website" name="partners_website" value="<?php echo esc_url($website); ?>" 
-                placeholder="<?php esc_attr_e('https://example.com', 'horizons'); ?>" style="width: 100%; padding: 8px;">
+         <input type="url" id="partners_website" name="partners_website" value="<?php echo esc_url($website); ?>"
+            placeholder="<?php esc_attr_e('https://example.com', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <!-- СУЩЕСТВУЮЩИЕ ПОЛЯ -->
@@ -208,6 +208,90 @@ function codeweber_save_partners_additional_meta($post_id)
    }
 }
 add_action('save_post_partners', 'codeweber_save_partners_additional_meta');
+
+//Partner Catgories
+// Добавляем поле "Порядковый номер" для таксономии partner_category
+add_action('partner_category_add_form_fields', 'add_partner_category_order_field');
+add_action('partner_category_edit_form_fields', 'edit_partner_category_order_field');
+add_action('created_partner_category', 'save_partner_category_order_field');
+add_action('edited_partner_category', 'save_partner_category_order_field');
+
+function add_partner_category_order_field()
+{
+?>
+   <div class="form-field">
+      <label for="partner_category_order"><?php _e('Порядковый номер', 'horizons'); ?></label>
+      <input type="number" name="partner_category_order" id="partner_category_order" value="0" min="0" />
+      <p class="description"><?php _e('Чем меньше число, тем выше в списке будет категория', 'horizons'); ?></p>
+   </div>
+<?php
+}
+
+function edit_partner_category_order_field($term)
+{
+   $order = get_term_meta($term->term_id, 'partner_category_order', true);
+?>
+   <tr class="form-field">
+      <th scope="row">
+         <label for="partner_category_order"><?php _e('Порядковый номер', 'horizons'); ?></label>
+      </th>
+      <td>
+         <input type="number" name="partner_category_order" id="partner_category_order" value="<?php echo esc_attr($order ? $order : 0); ?>" min="0" />
+         <p class="description"><?php _e('Чем меньше число, тем выше в списке будет категория', 'horizons'); ?></p>
+      </td>
+   </tr>
+<?php
+}
+
+function save_partner_category_order_field($term_id)
+{
+   if (isset($_POST['partner_category_order'])) {
+      update_term_meta($term_id, 'partner_category_order', sanitize_text_field($_POST['partner_category_order']));
+   }
+}
+
+// Добавляем колонку в список категорий
+add_filter('manage_edit-partner_category_columns', 'add_partner_category_order_column');
+add_filter('manage_partner_category_custom_column', 'show_partner_category_order_column', 10, 3);
+
+function add_partner_category_order_column($columns)
+{
+   $columns['partner_category_order'] = __('Порядок', 'horizons');
+   return $columns;
+}
+
+function show_partner_category_order_column($content, $column_name, $term_id)
+{
+   if ($column_name === 'partner_category_order') {
+      $order = get_term_meta($term_id, 'partner_category_order', true);
+      return $order ? $order : '0';
+   }
+   return $content;
+}
+
+// Делаем колонку сортируемой
+add_filter('manage_edit-partner_category_sortable_columns', 'make_partner_category_order_column_sortable');
+
+function make_partner_category_order_column_sortable($columns)
+{
+   $columns['partner_category_order'] = 'partner_category_order';
+   return $columns;
+}
+
+// Изменяем запрос для сортировки по порядковому номеру
+add_filter('terms_clauses', 'sort_partner_categories_by_order', 10, 3);
+
+function sort_partner_categories_by_order($clauses, $taxonomies, $args)
+{
+   if (in_array('partner_category', $taxonomies) && !isset($args['orderby'])) {
+      global $wpdb;
+
+      $clauses['join'] .= " LEFT JOIN {$wpdb->termmeta} AS tm ON (t.term_id = tm.term_id AND tm.meta_key = 'partner_category_order')";
+      $clauses['orderby'] = "COALESCE(tm.meta_value, 0) ASC, t.name ASC";
+   }
+
+   return $clauses;
+}
 
 
 //--------------------------------
@@ -928,11 +1012,11 @@ function add_practice_category_image_field($taxonomy)
 {
 ?>
    <div class="form-field term-group">
-      <label for="practice_category_image"><?php _e('Изображение категории', 'horizons'); ?></label>
+      <label for="practice_category_image"><?php _e('Category image', 'horizons'); ?></label>
       <input type="hidden" id="practice_category_image" name="practice_category_image" class="custom_media_url" value="">
       <div id="category-image-wrapper"></div>
       <p>
-         <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Добавить изображение', 'horizons'); ?>" />
+         <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Add Image', 'horizons'); ?>" />
          <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Удалить изображение', 'horizons'); ?>" />
       </p>
    </div>
@@ -945,7 +1029,7 @@ function edit_practice_category_image_field($term, $taxonomy)
 ?>
    <tr class="form-field term-group-wrap">
       <th scope="row">
-         <label for="practice_category_image"><?php _e('Изображение категории', 'horizons'); ?></label>
+         <label for="practice_category_image"><?php _e('Category image', 'horizons'); ?></label>
       </th>
       <td>
          <input type="hidden" id="practice_category_image" name="practice_category_image" value="<?php echo esc_attr($image_id); ?>">
@@ -955,8 +1039,8 @@ function edit_practice_category_image_field($term, $taxonomy)
             <?php endif; ?>
          </div>
          <p>
-            <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Добавить изображение', 'horizons'); ?>" />
-            <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Удалить изображение', 'horizons'); ?>" />
+            <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Add Category image', 'horizons'); ?>" />
+            <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Delete Category image', 'horizons'); ?>" />
          </p>
       </td>
    </tr>

@@ -58,6 +58,7 @@ function cptui_register_my_cpts_partners()
 		"query_var" => true,
 		"supports" => ["title", "thumbnail", "editor", "revisions"],
 		"show_in_graphql" => false,
+		"taxonomies" => ["partner_category", "partner_country"], // Добавляем поддержку таксономий
 	];
 
 	register_post_type("partners", $args);
@@ -65,7 +66,92 @@ function cptui_register_my_cpts_partners()
 
 add_action('init', 'cptui_register_my_cpts_partners');
 
+// Регистрируем таксономию "Категория партнеров"
+function register_partner_category_taxonomy()
+{
+	$labels = [
+		'name' => esc_html__('Partner Categories', 'horizons'),
+		'singular_name' => esc_html__('Partner Category', 'horizons'),
+		'menu_name' => esc_html__('Categories', 'horizons'),
+		'all_items' => esc_html__('All Categories', 'horizons'),
+		'edit_item' => esc_html__('Edit Category', 'horizons'),
+		'view_item' => esc_html__('View Category', 'horizons'),
+		'update_item' => esc_html__('Update Category', 'horizons'),
+		'add_new_item' => esc_html__('Add New Category', 'horizons'),
+		'new_item_name' => esc_html__('New Category Name', 'horizons'),
+		'parent_item' => esc_html__('Parent Category', 'horizons'),
+		'parent_item_colon' => esc_html__('Parent Category:', 'horizons'),
+		'search_items' => esc_html__('Search Categories', 'horizons'),
+		'popular_items' => esc_html__('Popular Categories', 'horizons'),
+		'separate_items_with_commas' => esc_html__('Separate categories with commas', 'horizons'),
+		'add_or_remove_items' => esc_html__('Add or remove categories', 'horizons'),
+		'choose_from_most_used' => esc_html__('Choose from the most used categories', 'horizons'),
+		'not_found' => esc_html__('No categories found', 'horizons'),
+	];
 
+	$args = [
+		'label' => esc_html__('Partner Categories', 'horizons'),
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'hierarchical' => true, // Иерархическая как категории
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_in_rest' => true,
+		'show_tagcloud' => true,
+		'show_in_quick_edit' => true,
+		'show_admin_column' => true,
+		'rewrite' => ['slug' => 'partner-category'],
+		'query_var' => true,
+	];
+
+	register_taxonomy('partner_category', ['partners'], $args);
+}
+
+// Регистрируем таксономию "Страна партнеров"
+function register_partner_country_taxonomy()
+{
+	$labels = [
+		'name' => esc_html__('Partner Countries', 'horizons'),
+		'singular_name' => esc_html__('Partner Country', 'horizons'),
+		'menu_name' => esc_html__('Countries', 'horizons'),
+		'all_items' => esc_html__('All Countries', 'horizons'),
+		'edit_item' => esc_html__('Edit Country', 'horizons'),
+		'view_item' => esc_html__('View Country', 'horizons'),
+		'update_item' => esc_html__('Update Country', 'horizons'),
+		'add_new_item' => esc_html__('Add New Country', 'horizons'),
+		'new_item_name' => esc_html__('New Country Name', 'horizons'),
+		'search_items' => esc_html__('Search Countries', 'horizons'),
+		'popular_items' => esc_html__('Popular Countries', 'horizons'),
+		'separate_items_with_commas' => esc_html__('Separate countries with commas', 'horizons'),
+		'add_or_remove_items' => esc_html__('Add or remove countries', 'horizons'),
+		'choose_from_most_used' => esc_html__('Choose from the most used countries', 'horizons'),
+		'not_found' => esc_html__('No countries found', 'horizons'),
+	];
+
+	$args = [
+		'label' => esc_html__('Partner Countries', 'horizons'),
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'hierarchical' => false, // Неиерархическая как теги
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_in_rest' => true,
+		'show_tagcloud' => true,
+		'show_in_quick_edit' => true,
+		'show_admin_column' => true,
+		'rewrite' => ['slug' => 'partner-country'],
+		'query_var' => true,
+	];
+
+	register_taxonomy('partner_country', ['partners'], $args);
+}
+
+add_action('init', 'register_partner_category_taxonomy');
+add_action('init', 'register_partner_country_taxonomy');
 
 add_filter('use_block_editor_for_post_type', 'disable_gutenberg_for_partners', 10, 2);
 function disable_gutenberg_for_partners($current_status, $post_type)
