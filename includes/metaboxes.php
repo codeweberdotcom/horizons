@@ -31,14 +31,18 @@ function codeweber_partners_additional_meta_box_callback($post)
    $email = get_post_meta($post->ID, '_partners_email', true);
    $phone = get_post_meta($post->ID, '_partners_phone', true);
    $company = get_post_meta($post->ID, '_partners_company', true);
-   $website = get_post_meta($post->ID, '_partners_website', true); // НОВОЕ ПОЛЕ
+   $website = get_post_meta($post->ID, '_partners_website', true);
 
    // Get existing field values
    $full_position = get_post_meta($post->ID, '_partners_full_position', true);
-   $regions = get_post_meta($post->ID, '_partners_regions', true);
    $location = get_post_meta($post->ID, '_partners_location', true);
    $short_description = get_post_meta($post->ID, '_partners_short_description', true);
-   $language_skills = get_post_meta($post->ID, '_partners_language_skills', true);
+
+   // Get selected languages from taxonomy
+   $selected_languages = wp_get_post_terms($post->ID, 'partner_language', array('fields' => 'ids'));
+
+   // Get selected countries from taxonomy
+   $selected_countries = wp_get_post_terms($post->ID, 'partner_country', array('fields' => 'ids'));
 
    // Get all awards
    $awards = get_posts(array(
@@ -54,6 +58,22 @@ function codeweber_partners_additional_meta_box_callback($post)
    if (!is_array($selected_awards)) {
       $selected_awards = array();
    }
+
+   // Get all languages from partner_language taxonomy
+   $languages = get_terms(array(
+      'taxonomy' => 'partner_language',
+      'hide_empty' => false,
+      'orderby' => 'name',
+      'order' => 'ASC'
+   ));
+
+   // Get all countries from partner_country taxonomy
+   $countries = get_terms(array(
+      'taxonomy' => 'partner_country',
+      'hide_empty' => false,
+      'orderby' => 'name',
+      'order' => 'ASC'
+   ));
 ?>
 
    <div style="display: grid; gap: 16px;">
@@ -101,10 +121,28 @@ function codeweber_partners_additional_meta_box_callback($post)
             placeholder="<?php esc_attr_e('For example: Senior Financial Analyst and Investment Advisor', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
-      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
-         <label for="partners_regions"><strong><?php _e('Regions:', 'horizons'); ?></strong></label>
-         <input type="text" id="partners_regions" name="partners_regions" value="<?php echo esc_attr($regions); ?>"
-            placeholder="<?php esc_attr_e('For example: Europe, Asia, North America', 'horizons'); ?>" style="width: 100%; padding: 8px;">
+      <!-- ЗАМЕНЕНО: Regions - теперь выбор из таксономии Countries -->
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
+         <label for="partners_countries"><strong><?php _e('Countries:', 'horizons'); ?></strong></label>
+         <div style="display: grid; gap: 8px;">
+            <select id="partners_countries" name="partners_countries[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
+               <?php if (!empty($countries) && !is_wp_error($countries)): ?>
+                  <?php foreach ($countries as $country): ?>
+                     <option value="<?php echo esc_attr($country->term_id); ?>"
+                        <?php selected(in_array($country->term_id, $selected_countries), true); ?>>
+                        <?php echo esc_html($country->name); ?>
+                     </option>
+                  <?php endforeach; ?>
+               <?php else: ?>
+                  <option value=""><?php _e('No countries found. Please add countries first.', 'horizons'); ?></option>
+               <?php endif; ?>
+            </select>
+            <p style="margin: 0; font-size: 12px; color: #666;">
+               <a href="<?php echo admin_url('edit-tags.php?taxonomy=partner_country&post_type=partners'); ?>" target="_blank">
+                  <?php _e('Manage countries', 'horizons'); ?>
+               </a>
+            </p>
+         </div>
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
@@ -120,11 +158,28 @@ function codeweber_partners_additional_meta_box_callback($post)
             style="width: 100%; padding: 8px; min-height: 80px; resize: vertical;"><?php echo esc_textarea($short_description); ?></textarea>
       </div>
 
+      <!-- Language Skills - выбор из таксономии -->
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="partners_language_skills"><strong><?php _e('Language Skills:', 'horizons'); ?></strong></label>
-         <textarea id="partners_language_skills" name="partners_language_skills"
-            placeholder="<?php esc_attr_e('For example: English (C1), German (B2), French (A2)', 'horizons'); ?>"
-            style="width: 100%; padding: 8px; min-height: 60px; resize: vertical;"><?php echo esc_textarea($language_skills); ?></textarea>
+         <label for="partners_languages"><strong><?php _e('Languages:', 'horizons'); ?></strong></label>
+         <div style="display: grid; gap: 8px;">
+            <select id="partners_languages" name="partners_languages[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
+               <?php if (!empty($languages) && !is_wp_error($languages)): ?>
+                  <?php foreach ($languages as $language): ?>
+                     <option value="<?php echo esc_attr($language->term_id); ?>"
+                        <?php selected(in_array($language->term_id, $selected_languages), true); ?>>
+                        <?php echo esc_html($language->name); ?>
+                     </option>
+                  <?php endforeach; ?>
+               <?php else: ?>
+                  <option value=""><?php _e('No languages found. Please add languages first.', 'horizons'); ?></option>
+               <?php endif; ?>
+            </select>
+            <p style="margin: 0; font-size: 12px; color: #666;">
+               <a href="<?php echo admin_url('edit-tags.php?taxonomy=partner_language&post_type=partners'); ?>" target="_blank">
+                  <?php _e('Manage languages', 'horizons'); ?>
+               </a>
+            </p>
+         </div>
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
@@ -137,14 +192,10 @@ function codeweber_partners_additional_meta_box_callback($post)
                </option>
             <?php endforeach; ?>
          </select>
-         <p class="description" style="margin-top: 5px; font-size: 12px; color: #666;">
-            <?php _e('Hold Ctrl/Cmd to select multiple awards', 'horizons'); ?>
-         </p>
       </div>
    </div>
 <?php
 }
-
 
 /**
  * Save data from the second metabox
@@ -166,7 +217,7 @@ function codeweber_save_partners_additional_meta($post_id)
       return;
    }
 
-   // Save ALL fields with partners_ prefix
+   // Save ALL fields with partners_ prefix (исключаем partners_regions)
    $additional_fields = [
       'partners_position',
       'partners_name',
@@ -174,17 +225,15 @@ function codeweber_save_partners_additional_meta($post_id)
       'partners_company',
       'partners_email',
       'partners_phone',
-      'partners_website', // НОВОЕ ПОЛЕ
+      'partners_website',
       'partners_full_position',
-      'partners_regions',
       'partners_location',
-      'partners_short_description',
-      'partners_language_skills'
+      'partners_short_description'
    ];
 
    foreach ($additional_fields as $field) {
       if (isset($_POST[$field])) {
-         if ($field === 'partners_short_description' || $field === 'partners_language_skills') {
+         if ($field === 'partners_short_description') {
             // Use sanitize_textarea_field for text areas
             update_post_meta($post_id, '_' . $field, sanitize_textarea_field($_POST[$field]));
          } elseif ($field === 'partners_website') {
@@ -197,6 +246,27 @@ function codeweber_save_partners_additional_meta($post_id)
          // Если поле не передано, очищаем метаданные
          delete_post_meta($post_id, '_' . $field);
       }
+   }
+
+   // Удаляем старое поле regions из метаданных
+   delete_post_meta($post_id, '_partners_regions');
+
+   // Save countries taxonomy
+   if (isset($_POST['partners_countries'])) {
+      $countries = array_map('intval', $_POST['partners_countries']);
+      wp_set_post_terms($post_id, $countries, 'partner_country', false);
+   } else {
+      // Если ничего не выбрано, удаляем все термины
+      wp_set_post_terms($post_id, array(), 'partner_country', false);
+   }
+
+   // Save languages taxonomy
+   if (isset($_POST['partners_languages'])) {
+      $languages = array_map('intval', $_POST['partners_languages']);
+      wp_set_post_terms($post_id, $languages, 'partner_language', false);
+   } else {
+      // Если ничего не выбрано, удаляем все термины
+      wp_set_post_terms($post_id, array(), 'partner_language', false);
    }
 
    // Save awards (multiple selection)
@@ -606,6 +676,20 @@ function codeweber_enqueue_select2()
                     placeholder: "' . __('Select partners members...', 'codeweber') . '",
                     allowClear: true
                 });
+
+                // Initialize Select2 for award partners
+                $("#partners_languages").select2({
+                    placeholder: "' . __('Select partners language...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                // Initialize Select2 for award partners
+                $("#partners_countries").select2({
+                    placeholder: "' . __('Select partners counries...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                partners_countries
 
                  // Initialize Select2 for award partners
                 $("#related_blog_categories").select2({

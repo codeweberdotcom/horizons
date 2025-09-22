@@ -14,9 +14,9 @@ function add_custom_single_banner_partners($post_type)
       $surname = get_post_meta($post->ID, '_partners_surname', true);
 
       $full_position = get_post_meta($post->ID, '_partners_full_position', true);
-      $regions = get_post_meta($post->ID, '_partners_regions', true);
+      $countries = wp_get_post_terms($post->ID, 'partner_country');
       $short_description = get_post_meta($post->ID, '_partners_short_description', true);
-      $language_skills = get_post_meta($post->ID, '_partners_language_skills', true);
+      $language_skills = wp_get_post_terms($post->ID, 'partner_language');
       $email = get_post_meta($post->ID, '_partners_email', true);
       $phone = get_post_meta($post->ID, '_partners_phone', true);
       $location = get_post_meta($post->ID, '_partners_location', true);
@@ -24,11 +24,10 @@ function add_custom_single_banner_partners($post_type)
       $website = get_post_meta($post->ID, '_partners_website', true);
 
 
-
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
       if (has_post_thumbnail($post->ID)) {
-         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'codeweber_staff');
+         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'codeweber_staff_600');
       }
 
       // Запасное изображение
@@ -66,15 +65,29 @@ function add_custom_single_banner_partners($post_type)
                                     <?php if (!empty($language_skills)) : ?>
                                        <tr>
                                           <td class="py-1 pe-3 align-text-top">
-                                             <div class="text-square-before">
-                                                <?php echo __('Languages', 'horizons') ?>:
-                                             </div>
+                                             <?php
+                                             if (!empty($language_skills) && !is_wp_error($language_skills)) {
+                                                echo '<div class="text-square-before">';
+                                                echo __('Languages', 'horizons') . ':';
+                                                echo '</div>';
+                                             }
+                                             ?>
                                           </td>
-                                          <td class="py-1"><?php echo esc_html($language_skills); ?></td>
+                                          <td class="py-1">
+                                             <?php
+                                             if (!empty($language_skills) && !is_wp_error($language_skills)) {
+                                                $language_names = array();
+                                                foreach ($language_skills as $language) {
+                                                   $language_names[] = $language->name;
+                                                }
+                                                echo implode(', ', $language_names);
+                                             }
+                                             ?>
+                                          </td>
                                        </tr>
                                     <?php endif; ?>
 
-                                    <?php if (!empty($regions)) : ?>
+                                    <?php if (!empty($countries)) : ?>
                                        <tr>
                                           <td class="py-1 pe-3 align-text-top">
                                              <div class="text-square-before">
@@ -82,7 +95,15 @@ function add_custom_single_banner_partners($post_type)
                                              </div>
                                           </td>
                                           <td class="py-1">
-                                             <?php echo esc_html($regions); ?>
+                                             <?php
+                                             if (!empty($countries) && !is_wp_error($countries)) {
+                                                $country_names = array();
+                                                foreach ($countries as $country) {
+                                                   $country_names[] = $country->name;
+                                                }
+                                                echo implode(', ', $country_names);
+                                             }
+                                             ?>
                                           </td>
                                        </tr>
                                     <?php endif; ?>

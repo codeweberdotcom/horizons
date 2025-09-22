@@ -58,7 +58,7 @@ function cptui_register_my_cpts_partners()
 		"query_var" => true,
 		"supports" => ["title", "thumbnail", "editor", "revisions"],
 		"show_in_graphql" => false,
-		"taxonomies" => ["partner_category", "partner_country"], // Добавляем поддержку таксономий
+		"taxonomies" => ["partner_category", "partner_country", "partner_language"], // Добавляем поддержку таксономий
 	];
 
 	register_post_type("partners", $args);
@@ -150,8 +150,50 @@ function register_partner_country_taxonomy()
 	register_taxonomy('partner_country', ['partners'], $args);
 }
 
+// Регистрируем таксономию "Языки партнеров"
+function register_partner_language_taxonomy()
+{
+	$labels = [
+		'name' => esc_html__('Partner Languages', 'horizons'),
+		'singular_name' => esc_html__('Partner Language', 'horizons'),
+		'menu_name' => esc_html__('Languages', 'horizons'),
+		'all_items' => esc_html__('All Languages', 'horizons'),
+		'edit_item' => esc_html__('Edit Language', 'horizons'),
+		'view_item' => esc_html__('View Language', 'horizons'),
+		'update_item' => esc_html__('Update Language', 'horizons'),
+		'add_new_item' => esc_html__('Add New Language', 'horizons'),
+		'new_item_name' => esc_html__('New Language Name', 'horizons'),
+		'search_items' => esc_html__('Search Languages', 'horizons'),
+		'popular_items' => esc_html__('Popular Languages', 'horizons'),
+		'separate_items_with_commas' => esc_html__('Separate languages with commas', 'horizons'),
+		'add_or_remove_items' => esc_html__('Add or remove languages', 'horizons'),
+		'choose_from_most_used' => esc_html__('Choose from the most used languages', 'horizons'),
+		'not_found' => esc_html__('No languages found', 'horizons'),
+	];
+
+	$args = [
+		'label' => esc_html__('Partner Languages', 'horizons'),
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'hierarchical' => false, // Неиерархическая как теги
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_in_rest' => true,
+		'show_tagcloud' => true,
+		'show_in_quick_edit' => true,
+		'show_admin_column' => true,
+		'rewrite' => ['slug' => 'partner-language'],
+		'query_var' => true,
+	];
+
+	register_taxonomy('partner_language', ['partners'], $args);
+}
+
 add_action('init', 'register_partner_category_taxonomy');
 add_action('init', 'register_partner_country_taxonomy');
+add_action('init', 'register_partner_language_taxonomy');
 
 add_filter('use_block_editor_for_post_type', 'disable_gutenberg_for_partners', 10, 2);
 function disable_gutenberg_for_partners($current_status, $post_type)
