@@ -21,6 +21,8 @@ function add_custom_single_banner_partners($post_type)
       $phone = get_post_meta($post->ID, '_partners_phone', true);
       $location = get_post_meta($post->ID, '_partners_location', true);
       $company = get_post_meta($post->ID, '_partners_company', true);
+      $website = get_post_meta($post->ID, '_partners_website', true);
+
 
 
       // Получаем thumbnail разными способами
@@ -45,18 +47,17 @@ function add_custom_single_banner_partners($post_type)
                <div class="col-12 col-xl-7 order-lg-2 ">
                   <div class="card h-100 bg-dusty-navy">
                      <div class="p-md-15 card-body align-content-center p-8">
-
                         <?php if (!empty($full_position)) : ?>
                            <div class="text-line-before label-u mb-2 text-white">
                               <?php echo esc_html($full_position); ?>
                            </div>
                         <?php endif; ?>
-                        <h1 class="h1 mb-1 text-white mt-md-7 mb-4">
+                        <h1 class="h1 mb-1 text-white mt-md-3 mb-4">
                            <?php echo $name; ?><span class="text-uppercase"> <?php echo $surname; ?></span>
                            </h2>
                            <?php if (!empty($short_description)) : ?>
-                              <blockquote class="icon body-l-r text-white mb-7">
-                                 <p><?php echo esc_html($short_description); ?></p>
+                              <blockquote class="icon body-l-r text-white mb-4">
+                                 <?php echo esc_html($short_description); ?>
                               </blockquote>
                            <?php endif; ?>
                            <?php if (!empty($language_skills) || !empty($regions)) : ?>
@@ -92,15 +93,20 @@ function add_custom_single_banner_partners($post_type)
                            </div>
                            <?php if (!empty($company)) : ?>
                               <div class="mt-0">
-                                 <div class="label-s text-white d-inline-flex align-items-center">
-                                    <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
-                                 </div>
+
+                                 <?php if (!empty($website)) : ?>
+                                    <a href="<?php echo esc_url($website); ?>" title="<?= __('Website', 'horizons'); ?>" target="_blank" rel="noopener noreferrer" class="label-s hover-6 text-white d-inline-flex align-items-center">
+                                       <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
+                                    </a>
+                                 <?php else : ?>
+                                    <div title="<?= __('Address', 'horizons'); ?>"><i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
+                                 <?php endif; ?>
                               </div>
                            <?php endif; ?>
 
                            <?php if (!empty($location)) : ?>
                               <div class="mt-0">
-                                 <div class="label-s text-white d-inline-flex align-items-center">
+                                 <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>">
                                     <i class="uil uil-location-point fs-18 text-primary me-1"></i><?php echo esc_html($location); ?>
                                  </div>
                               </div>
@@ -108,7 +114,7 @@ function add_custom_single_banner_partners($post_type)
 
                            <?php if (!empty($phone)) : ?>
                               <div class="mt-0">
-                                 <a href="tell:<?php echo esc_attr($phone); ?>"
+                                 <a href="tell:<?php echo esc_attr($phone); ?>" title="<?= __('Phone', 'horizons'); ?>"
                                     class="label-s hover-6 text-white d-inline-flex align-items-center">
                                     <i class="uil uil-phone-alt fs-18 text-primary me-1"></i><?php echo esc_html($phone); ?>
                                  </a>
@@ -117,7 +123,7 @@ function add_custom_single_banner_partners($post_type)
 
                            <?php if (!empty($email)) : ?>
                               <div class="mt-0">
-                                 <a href="mailto:<?php echo esc_attr($email); ?>"
+                                 <a href="mailto:<?php echo esc_attr($email); ?>" title="<?= __('E-Mail', 'horizons'); ?>"
                                     class="label-s hover-6 text-white d-inline-flex align-items-center">
                                     <i class="uil uil-envelope fs-18 text-primary me-1"></i><?php echo esc_html($email); ?>
                                  </a>

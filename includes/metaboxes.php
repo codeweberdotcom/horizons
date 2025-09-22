@@ -31,6 +31,7 @@ function codeweber_partners_additional_meta_box_callback($post)
    $email = get_post_meta($post->ID, '_partners_email', true);
    $phone = get_post_meta($post->ID, '_partners_phone', true);
    $company = get_post_meta($post->ID, '_partners_company', true);
+   $website = get_post_meta($post->ID, '_partners_website', true); // НОВОЕ ПОЛЕ
 
    // Get existing field values
    $full_position = get_post_meta($post->ID, '_partners_full_position', true);
@@ -85,6 +86,12 @@ function codeweber_partners_additional_meta_box_callback($post)
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
          <label for="partners_phone"><strong><?php _e('Phone:', 'horizons'); ?></strong></label>
          <input type="tel" id="partners_phone" name="partners_phone" value="<?php echo esc_attr($phone); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_website"><strong><?php _e('Website:', 'horizons'); ?></strong></label>
+         <input type="url" id="partners_website" name="partners_website" value="<?php echo esc_url($website); ?>" 
+                placeholder="<?php esc_attr_e('https://example.com', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <!-- СУЩЕСТВУЮЩИЕ ПОЛЯ -->
@@ -164,9 +171,10 @@ function codeweber_save_partners_additional_meta($post_id)
       'partners_position',
       'partners_name',
       'partners_surname',
-      'partners_company', // НОВОЕ ПОЛЕ
+      'partners_company',
       'partners_email',
       'partners_phone',
+      'partners_website', // НОВОЕ ПОЛЕ
       'partners_full_position',
       'partners_regions',
       'partners_location',
@@ -179,6 +187,9 @@ function codeweber_save_partners_additional_meta($post_id)
          if ($field === 'partners_short_description' || $field === 'partners_language_skills') {
             // Use sanitize_textarea_field for text areas
             update_post_meta($post_id, '_' . $field, sanitize_textarea_field($_POST[$field]));
+         } elseif ($field === 'partners_website') {
+            // Use esc_url_raw for website URLs
+            update_post_meta($post_id, '_' . $field, esc_url_raw($_POST[$field]));
          } else {
             update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
          }
