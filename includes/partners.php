@@ -20,6 +20,8 @@ function add_custom_single_banner_partners($post_type)
       $email = get_post_meta($post->ID, '_partners_email', true);
       $phone = get_post_meta($post->ID, '_partners_phone', true);
       $location = get_post_meta($post->ID, '_partners_location', true);
+      $company = get_post_meta($post->ID, '_partners_company', true);
+
 
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
@@ -57,8 +59,6 @@ function add_custom_single_banner_partners($post_type)
                                  <p><?php echo esc_html($short_description); ?></p>
                               </blockquote>
                            <?php endif; ?>
-
-
                            <?php if (!empty($language_skills) || !empty($regions)) : ?>
                               <table class="w-100 text-white label-u mb-4">
                                  <tbody>
@@ -88,8 +88,16 @@ function add_custom_single_banner_partners($post_type)
                                  </tbody>
                               </table>
                            <?php endif; ?>
-                           <div class="h4 mb-1 text-uppercase text-white mt-md-7 mb-4"><?= __('Get in touch', 'horizons'); ?>
+                           <div class="text-line-neutral-after text-sub-white label-u mb-3"><?= __('Get in touch', 'horizons'); ?>
                            </div>
+                           <?php if (!empty($company)) : ?>
+                              <div class="mt-0">
+                                 <div class="label-s text-white d-inline-flex align-items-center">
+                                    <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
+                                 </div>
+                              </div>
+                           <?php endif; ?>
+
                            <?php if (!empty($location)) : ?>
                               <div class="mt-0">
                                  <div class="label-s text-white d-inline-flex align-items-center">

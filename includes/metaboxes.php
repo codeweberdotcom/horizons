@@ -29,7 +29,8 @@ function codeweber_partners_additional_meta_box_callback($post)
    $name = get_post_meta($post->ID, '_partners_name', true);
    $surname = get_post_meta($post->ID, '_partners_surname', true);
    $email = get_post_meta($post->ID, '_partners_email', true);
-   $phone = get_post_meta($post->ID, '_partners_phone', true); // Исправлено: было _partnersr_phone
+   $phone = get_post_meta($post->ID, '_partners_phone', true);
+   $company = get_post_meta($post->ID, '_partners_company', true);
 
    // Get existing field values
    $full_position = get_post_meta($post->ID, '_partners_full_position', true);
@@ -69,6 +70,11 @@ function codeweber_partners_additional_meta_box_callback($post)
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
          <label for="partners_surname"><strong><?php _e('Surname:', 'horizons'); ?></strong></label>
          <input type="text" id="partners_surname" name="partners_surname" value="<?php echo esc_attr($surname); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_company"><strong><?php _e('Company:', 'horizons'); ?></strong></label>
+         <input type="text" id="partners_company" name="partners_company" value="<?php echo esc_attr($company); ?>" style="width: 100%; padding: 8px;">
       </div>
 
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
@@ -158,6 +164,7 @@ function codeweber_save_partners_additional_meta($post_id)
       'partners_position',
       'partners_name',
       'partners_surname',
+      'partners_company', // НОВОЕ ПОЛЕ
       'partners_email',
       'partners_phone',
       'partners_full_position',
