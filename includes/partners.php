@@ -99,7 +99,7 @@ function add_custom_single_banner_partners($post_type)
                                        <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
                                     </a>
                                  <?php else : ?>
-                                    <div title="<?= __('Address', 'horizons'); ?>"><i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
+                                    <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>"><i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
                                  <?php endif; ?>
                               </div>
                            <?php endif; ?>
