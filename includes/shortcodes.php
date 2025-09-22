@@ -289,19 +289,7 @@ function awards_grid_shortcode($atts)
         // Если нет выбранных наград, выводим только кнопку "Все награды"
         if (empty($selected_awards)) {
             ob_start();
-    ?>
-            <div class="row row-cols-1 row-cols-sm-1 row-cols-md-4 row-cols-lg-4 gx-3 gy-3">
-                <div class="col">
-                    <a href="/awards" class="card h-100 bg-dusty-navy" style="min-height: 191.3px">
-                        <div class="card-body align-content-center text-center">
-                            <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
-                        </div>
-                        <!--/.card-body -->
-                    </a>
-                    <!--/.card -->
-                </div>
-            </div>
-        <?php
+
             return ob_get_clean();
         }
 
@@ -328,6 +316,7 @@ function awards_grid_shortcode($atts)
     ob_start();
 
     if ($awards_query->have_posts()) :
+        
         // Формируем классы для колонок
         $column_classes = sprintf(
             'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
