@@ -13,37 +13,55 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 
 <section class="bg-light">
    <div class="container py-15 py-md-17 pb-md-25">
-      <div class="row d-flex align-items-start gy-10">
-         <div class="col-lg-5 position-lg-sticky" style="top: 8rem;">
-            <div class="text-line-before label-u">Subtitle</div>
-            <h3 class="h2 mb-5">Корпоративный сектор</a>
-         </div>
-         <!-- /column -->
-         <div class="col-lg-6 ms-auto">
 
-            <a class="btn btn-primary btn-icon btn-icon-end rounded mb-2 w-100">
-               Google Play <i class="uil uil-google-play"></i>
-            </a>
 
-            <div class="card mb-2">
-               <div class="card-body d-flex flex-row p-3 ps-4">
-                  <a href="#" class="h4 mb-0">Marketing Automation</a>
-               </div>
-               <!-- /.card-body -->
+      <div class="accordion accordion-wrapper" id="accordionSimpleExample">
+         <div class="card plain accordion-item">
+            <div class="card-header" id="headingSimpleOne">
+               <button class="accordion-button h4" data-bs-toggle="collapse" data-bs-target="#collapseSimpleOne" aria-expanded="true" aria-controls="collapseSimpleOne"> Professional Design </button>
             </div>
-            <!-- /.card -->
-            <div class="card mb-2">
-               <div class="card-body d-flex flex-row p-3 ps-4">
-                  <a href="#" class="h4 mb-0">Project Management</a>
+            <!--/.card-header -->
+            <div id="collapseSimpleOne" class="accordion-collapse collapse show" aria-labelledby="headingSimpleOne" data-bs-parent="#accordionSimpleExample">
+               <div class="card-body">
+                  <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Praesent commodo cursus magna, vel.</p>
                </div>
-               <!-- /.card-body -->
+               <!--/.card-body -->
             </div>
-            <!-- /.card -->
-
+            <!--/.accordion-collapse -->
          </div>
-         <!-- /column -->
+         <!--/.accordion-item -->
+         <div class="card plain accordion-item">
+            <div class="card-header" id="headingSimpleTwo">
+               <button class="collapsed h4" data-bs-toggle="collapse" data-bs-target="#collapseSimpleTwo" aria-expanded="false" aria-controls="collapseSimpleTwo"> Top-Notch Support </button>
+            </div>
+            <!--/.card-header -->
+            <div id="collapseSimpleTwo" class="accordion-collapse collapse" aria-labelledby="headingSimpleTwo" data-bs-parent="#accordionSimpleExample">
+               <div class="card-body">
+                  <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Praesent commodo cursus magna, vel.</p>
+               </div>
+               <!--/.card-body -->
+            </div>
+            <!--/.accordion-collapse -->
+         </div>
+         <!--/.accordion-item -->
+         <div class="card plain accordion-item">
+            <div class="card-header" id="headingSimpleThree">
+               <button class="collapsed h4" data-bs-toggle="collapse" data-bs-target="#collapseSimpleThree" aria-expanded="false" aria-controls="collapseSimpleThree"> Header and Slider Options </button>
+            </div>
+            <!--/.card-header -->
+            <div id="collapseSimpleThree" class="accordion-collapse collapse" aria-labelledby="headingSimpleThree" data-bs-parent="#accordionSimpleExample">
+               <div class="card-body">
+                  <p>Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Cras mattis consectetur purus sit amet fermentum. Praesent commodo cursus magna, vel.</p>
+               </div>
+               <!--/.card-body -->
+            </div>
+            <!--/.accordion-collapse -->
+         </div>
+         <!--/.accordion-item -->
       </div>
-      <!-- /.row -->
+      <!--/.accordion -->
+
+
    </div>
    <!-- /.container -->
 </section>
