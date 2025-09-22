@@ -46,7 +46,7 @@ if ($categories && !is_wp_error($categories)) :
 ?>
       <section id="content-wrapper" class="wrapper">
          <div class="container">
-            <div class="row d-flex align-items-start g-0 py-14">
+            <div class="row d-flex align-items-start g-0">
                <div class="col-lg-6 position-lg-sticky <?php echo esc_attr($image_order); ?>" style="top: 4rem;">
                   <?php
                   if ($category_image_id) { ?>
