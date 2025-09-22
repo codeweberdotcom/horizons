@@ -12,7 +12,6 @@ function add_custom_single_banner_partners($post_type)
       // Получаем данные
       $name = get_post_meta($post->ID, '_partners_name', true);
       $surname = get_post_meta($post->ID, '_partners_surname', true);
-
       $full_position = get_post_meta($post->ID, '_partners_full_position', true);
       $countries = wp_get_post_terms($post->ID, 'partner_country');
       $short_description = get_post_meta($post->ID, '_partners_short_description', true);
@@ -27,7 +26,7 @@ function add_custom_single_banner_partners($post_type)
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
       if (has_post_thumbnail($post->ID)) {
-         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'codeweber_staff_600');
+         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'codeweber_staff_800');
       }
 
       // Запасное изображение
