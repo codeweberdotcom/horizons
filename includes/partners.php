@@ -88,6 +88,8 @@ function add_custom_single_banner_partners($post_type)
                                  </tbody>
                               </table>
                            <?php endif; ?>
+                           <div class="h4 mb-1 text-uppercase text-white mt-md-7 mb-4"><?= __('Get in touch', 'horizons'); ?>
+                           </div>
                            <?php if (!empty($location)) : ?>
                               <div class="mt-0">
                                  <div class="label-s text-white d-inline-flex align-items-center">

@@ -17,27 +17,48 @@ if (get_post_type() == 'practices') :
    $advantages_text = get_post_meta($post_id, 'advantages_text', true);
 ?>
 
+
+
    <div class="practice-details">
-      <?php if (!empty($your_task_text)) : ?>
-         <div class="practice-section your-task">
-            <h2 class="h3 mb-4"><?php _e('Your Task', 'horizons'); ?></h2>
-            <div class="practice-content body-l-r mb-8"><?php echo wpautop($your_task_text); ?></div>
-         </div>
-      <?php endif; ?>
+      <div class="row g-5">
+         <?php if (!empty($your_task_text)) : ?>
+            <div class="col-md-12">
+               <div class="practice-section your-task card card-body h-100">
+                  <h2 class="h3 mb-4"><?php _e('Your Task', 'horizons'); ?></h2>
+                  <div class="practice-content body-l-r"><?php echo $your_task_text; ?></div>
+               </div>
+            </div>
+         <?php endif; ?>
 
-      <?php if (!empty($our_solution_text)) : ?>
-         <div class="practice-section our-solution">
-            <h2 class="h3 mb-4"><?php _e('Our Solution', 'horizons'); ?></h2>
-            <div class="practice-content body-l-r  mb-8"><?php echo wpautop($our_solution_text); ?></div>
-         </div>
-      <?php endif; ?>
+         <?php if (!empty($our_solution_text)) : ?>
+            <div class="col-md-12">
+               <div class="practice-section our-solution card card-body h-100">
+                  <h2 class="h3 mb-4"><?php _e('Our Solution', 'horizons'); ?></h2>
+                  <div class="practice-content body-l-r"><?php echo $our_solution_text; ?></div>
+               </div>
+            </div>
+         <?php endif; ?>
 
-      <?php if (!empty($advantages_text)) : ?>
-         <div class="practice-section advantages">
-            <h2 class="h3 mb-4"><?php _e('Advantages', 'horizons'); ?></h2>
-            <div class="practice-content body-l-r  mb-8"><?php echo wpautop($advantages_text); ?></div>
+         <?php if (!empty($advantages_text)) : ?>
+            <div class="col-md-6">
+               <div class="practice-section advantages card card-body h-100">
+                  <h2 class="h3 mb-4"><?php _e('Advantages', 'horizons'); ?></h2>
+                  <div class="practice-content body-l-r"><?php echo $advantages_text; ?></div>
+               </div>
+            </div>
+         <?php endif; ?>
+
+         <div class="col-md-6">
+            <div class="card shadow border-0 h-100">
+               <div class="card-body bg-dusty-navy">
+                  <p class="text-line-before label-u text-sub-white">Связаться с нами</p>
+                  <div class="h3 text-white mb-6">Получить консультацию <br> нашего специалиста</div>
+                  <a href="#" class="btn btn-neutral-50 has-ripple btn-lg w-100" data-ripple-initialized="true">Отправить сообщение</a>
+               </div>
+            </div>
          </div>
-      <?php endif; ?>
+
+      </div>
    </div>
 
 <?php endif; ?>

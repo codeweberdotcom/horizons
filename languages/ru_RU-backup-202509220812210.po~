@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-19 16:15+0000\n"
+"PO-Revision-Date: 2025-09-22 08:12+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -16,15 +16,15 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
 "X-Domain: horizons"
 
-#: includes/metaboxes.php:1333
+#: includes/metaboxes.php:1089
 msgid "\"Advantages\" text:"
-msgstr ""
+msgstr "\"Преимущества\" текст"
 
-#: includes/metaboxes.php:1327
+#: includes/metaboxes.php:1083
 msgid "\"Our solution\" text:"
 msgstr "Наше \"решение\" текст"
 
-#: includes/metaboxes.php:1321
+#: includes/metaboxes.php:1077
 msgid "\"Your task\" text:"
 msgstr "Ваша \"задача\" текст"
 
@@ -80,12 +80,12 @@ msgstr "Добавить Практику"
 msgid "Additional Information"
 msgstr "Дополнительная информация"
 
-#: templates/content/single-practices.php:37
+#: templates/content/single-practices.php:45
 msgid "Advantages"
-msgstr ""
+msgstr "Преимущества"
 
-#: includes/shortcodes.php:458 includes/shortcodes.php:529
-#: includes/shortcodes.php:544 functions/cpt/cpt-awards.php:15
+#: includes/shortcodes.php:297 includes/shortcodes.php:368
+#: includes/shortcodes.php:383 functions/cpt/cpt-awards.php:15
 msgid "All Awards"
 msgstr "Все Награды"
 
@@ -93,7 +93,7 @@ msgstr "Все Награды"
 msgid "All Categories"
 msgstr "Все Категории"
 
-#: includes/partners.php:144
+#: includes/partners.php:146 includes/practices.php:51
 msgid "All News"
 msgstr "Все новости"
 
@@ -101,7 +101,7 @@ msgstr "Все новости"
 msgid "All Partners"
 msgstr "Все Партнеры"
 
-#: includes/shortcodes.php:227 includes/shortcodes.php:389
+#: includes/shortcodes.php:228
 msgid "All Practice"
 msgstr "Все практики"
 
@@ -117,20 +117,19 @@ msgstr "Все Метки"
 msgid "All Years"
 msgstr "Все Года"
 
-#: includes/metaboxes.php:440 includes/metaboxes.php:1148
+#: includes/metaboxes.php:785
 msgid "Alt. Title"
 msgstr "Альтернативный Заголовок"
 
-#: includes/metaboxes.php:230 includes/metaboxes.php:276
-#: includes/metaboxes.php:938 includes/metaboxes.php:984
+#: includes/metaboxes.php:575 includes/metaboxes.php:621
 msgid "Alternative Title"
 msgstr "Альтернативный Заголовок"
 
-#: includes/metaboxes.php:280 includes/metaboxes.php:988
+#: includes/metaboxes.php:625
 msgid "Alternative title for display purposes"
 msgstr "Альтернативное название для отображения"
 
-#: includes/metaboxes.php:640
+#: includes/metaboxes.php:277
 msgid "Associated partners Members"
 msgstr "Ассоциированные Партнеры"
 
@@ -146,11 +145,11 @@ msgstr "Архив наград"
 msgid "Award Attributes"
 msgstr "Атрибуты награды"
 
-#: includes/metaboxes.php:619
+#: includes/metaboxes.php:256
 msgid "Award Date"
 msgstr "Дата Награды"
 
-#: includes/metaboxes.php:568
+#: includes/metaboxes.php:205
 msgid "Award Details"
 msgstr "Подробности Награды"
 
@@ -158,7 +157,7 @@ msgstr "Подробности Награды"
 msgid "Award Image"
 msgstr "Изображение Награды"
 
-#: includes/metaboxes.php:630
+#: includes/metaboxes.php:267
 msgid "Award URL"
 msgstr "URL-адрес Награды"
 
@@ -178,11 +177,11 @@ msgstr "Навигация по списку наград"
 msgid "Awards:"
 msgstr "Награды:"
 
-#: includes/metaboxes.php:1339
+#: includes/metaboxes.php:1095
 msgid "Blog article categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1355
+#: includes/metaboxes.php:1111
 msgid "Blog article tags for display:"
 msgstr ""
 
@@ -202,17 +201,15 @@ msgstr "Список Категорий"
 msgid "Categories list navigation"
 msgstr "Навигация по списку категорий"
 
-#: includes/metaboxes.php:209 includes/metaboxes.php:252
-#: includes/metaboxes.php:917 includes/metaboxes.php:960
+#: includes/metaboxes.php:554 includes/metaboxes.php:597
 msgid "Category Color"
 msgstr "Цвет Категории"
 
-#: includes/metaboxes.php:456 includes/metaboxes.php:1164
+#: includes/metaboxes.php:801
 msgid "Charcoal Blue"
 msgstr ""
 
-#: includes/metaboxes.php:223 includes/metaboxes.php:267
-#: includes/metaboxes.php:931 includes/metaboxes.php:975
+#: includes/metaboxes.php:568 includes/metaboxes.php:612
 msgid "Charcoal Blue (#303C42)"
 msgstr ""
 
@@ -221,7 +218,7 @@ msgstr ""
 msgid "Choose from the most used"
 msgstr "Выбрать из часто используемых"
 
-#: includes/metaboxes.php:439 includes/metaboxes.php:1147
+#: includes/metaboxes.php:784
 msgid "Color"
 msgstr "Цвет"
 
@@ -229,12 +226,11 @@ msgstr "Цвет"
 msgid "Company awards and achievements"
 msgstr "Награды и достижения компании"
 
-#: includes/metaboxes.php:457 includes/metaboxes.php:1165
+#: includes/metaboxes.php:802
 msgid "Dusty Navy"
 msgstr ""
 
-#: includes/metaboxes.php:224 includes/metaboxes.php:268
-#: includes/metaboxes.php:932 includes/metaboxes.php:976
+#: includes/metaboxes.php:569 includes/metaboxes.php:613
 msgid "Dusty Navy (#3D5567)"
 msgstr ""
 
@@ -242,7 +238,7 @@ msgstr ""
 msgid "E-Mail:"
 msgstr "E-Mail:"
 
-#: includes/metaboxes.php:614
+#: includes/metaboxes.php:251
 msgid "e.g., International Design Awards"
 msgstr "например, Международная премия в области дизайна"
 
@@ -270,7 +266,7 @@ msgstr "Редактировать Метку"
 msgid "Edit Year"
 msgstr "Редактировать Год"
 
-#: includes/metaboxes.php:1316
+#: includes/metaboxes.php:1072
 msgid "Filled in the standard WordPress editor above."
 msgstr ""
 
@@ -298,11 +294,15 @@ msgstr "Например: Старший финансовый аналитик �
 msgid "Full Position Title:"
 msgstr "Заголовок Полной Должности"
 
+#: includes/partners.php:91
+msgid "Get in touch"
+msgstr "Свяжитесь со нами"
+
 #. Author of the theme
 msgid "Gladkov Denis"
 msgstr "Гладков Денис"
 
-#: includes/metaboxes.php:1351 includes/metaboxes.php:1367
+#: includes/metaboxes.php:1107 includes/metaboxes.php:1123
 msgid "Hold Ctrl (Cmd on Mac) for multiple selection."
 msgstr ""
 
@@ -310,7 +310,7 @@ msgstr ""
 msgid "Hold Ctrl/Cmd to select multiple awards"
 msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать несколько Наград."
 
-#: includes/metaboxes.php:649
+#: includes/metaboxes.php:286
 msgid "Hold Ctrl/Cmd to select multiple partners members"
 msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескольких Партнеров."
 
@@ -322,7 +322,7 @@ msgstr "horizons"
 msgid "https://codeweber.com"
 msgstr "https://codeweber.ru"
 
-#: includes/metaboxes.php:635
+#: includes/metaboxes.php:272
 msgid "https://example.com/award"
 msgstr ""
 
@@ -342,12 +342,15 @@ msgstr "Языки"
 msgid "Location:"
 msgstr "Адрес:"
 
-#: includes/metaboxes.php:455 includes/metaboxes.php:1163
+#: includes/shortcodes.php:219
+msgid "More details"
+msgstr "Перейти"
+
+#: includes/metaboxes.php:800
 msgid "Muted Teal"
 msgstr ""
 
-#: includes/metaboxes.php:222 includes/metaboxes.php:266
-#: includes/metaboxes.php:930 includes/metaboxes.php:974
+#: includes/metaboxes.php:567 includes/metaboxes.php:611
 msgid "Muted Teal (#47878F)"
 msgstr ""
 
@@ -379,7 +382,7 @@ msgstr "Новое имя Метки"
 msgid "New Year"
 msgstr "Новый Год"
 
-#: includes/partners.php:139
+#: includes/partners.php:141 includes/practices.php:46
 msgid "News"
 msgstr "Новости"
 
@@ -387,7 +390,7 @@ msgstr "Новости"
 msgid "No categories"
 msgstr "Нет категорий"
 
-#: includes/shortcodes.php:514
+#: includes/shortcodes.php:353
 msgid "No image"
 msgstr "Нет изображения"
 
@@ -428,40 +431,38 @@ msgstr "Не существует"
 msgid "Not found in Trash"
 msgstr "Не найдено в корзине"
 
-#: includes/metaboxes.php:1369
+#: includes/metaboxes.php:1125
 msgid "Note:"
 msgstr ""
 
-#: includes/metaboxes.php:454 includes/metaboxes.php:1162
+#: includes/metaboxes.php:799
 msgid "Olive Green"
 msgstr ""
 
-#: includes/metaboxes.php:221 includes/metaboxes.php:265
-#: includes/metaboxes.php:929 includes/metaboxes.php:973
+#: includes/metaboxes.php:566 includes/metaboxes.php:610
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1369
+#: includes/metaboxes.php:1125
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
 
-#: includes/metaboxes.php:441 includes/metaboxes.php:1149
+#: includes/metaboxes.php:786
 msgid "Order"
 msgstr "Номер"
 
-#: includes/metaboxes.php:236 includes/metaboxes.php:286
-#: includes/metaboxes.php:944 includes/metaboxes.php:994
+#: includes/metaboxes.php:581 includes/metaboxes.php:631
 msgid "Order Number"
 msgstr "Порядковый номер"
 
-#: includes/metaboxes.php:609
+#: includes/metaboxes.php:246
 msgid "Organization"
 msgstr "Организация"
 
-#: templates/content/single-practices.php:30
+#: templates/content/single-practices.php:36
 msgid "Our Solution"
 msgstr "Наше Решение"
 
@@ -584,7 +585,11 @@ msgstr "Категории практики"
 msgid "Practice Category"
 msgstr "Категория Практики"
 
-#: includes/metaboxes.php:1276
+#: includes/metaboxes.php:1071
+msgid "Practice description (main content)"
+msgstr ""
+
+#: includes/metaboxes.php:1031
 msgid "Practice Details"
 msgstr "Подробности Практики"
 
@@ -608,8 +613,8 @@ msgstr "Практика запланирована"
 msgid "Practice updated"
 msgstr "Практика обновлена"
 
-#: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
-#: functions/cpt/cpt-practices.php:38
+#: archive-practices.php:76 functions/cpt/cpt-practices.php:9
+#: functions/cpt/cpt-practices.php:11 functions/cpt/cpt-practices.php:38
 msgid "Practices"
 msgstr "Практики"
 
@@ -621,12 +626,11 @@ msgstr "Архив практик"
 msgid "Practices list"
 msgstr "Список практик"
 
-#: includes/metaboxes.php:451 includes/metaboxes.php:1159
+#: includes/metaboxes.php:796
 msgid "Primary"
 msgstr ""
 
-#: includes/metaboxes.php:218 includes/metaboxes.php:262
-#: includes/metaboxes.php:926 includes/metaboxes.php:970
+#: includes/metaboxes.php:563 includes/metaboxes.php:607
 msgid "Primary (#FEBE10)"
 msgstr ""
 
@@ -642,11 +646,7 @@ msgstr "Регионы"
 msgid "Regions:"
 msgstr "Регионы:"
 
-#: templates/content/single-practices.php:71
-msgid "Related Blog Posts"
-msgstr ""
-
-#: includes/partners.php:140
+#: includes/partners.php:142 includes/practices.php:47
 msgid "Related news"
 msgstr "Рекомендуемые новости"
 
@@ -686,28 +686,23 @@ msgstr ""
 msgid "Search Years"
 msgstr "Выбрать Год"
 
-#: includes/metaboxes.php:934 includes/metaboxes.php:978
+#: includes/metaboxes.php:571 includes/metaboxes.php:615
 msgid "Select color for practice category display"
 msgstr "Выберите цвет для отображения категории практики"
 
-#: includes/metaboxes.php:226 includes/metaboxes.php:270
-msgid "Select color for service category display"
-msgstr "Выберите цвет для отображения категории услуг"
-
-#: includes/metaboxes.php:1340
+#: includes/metaboxes.php:1096
 msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1356
+#: includes/metaboxes.php:1112
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
 msgstr ""
 
-#: includes/metaboxes.php:213 includes/metaboxes.php:257
-#: includes/metaboxes.php:921 includes/metaboxes.php:965
+#: includes/metaboxes.php:558 includes/metaboxes.php:602
 msgid "Selected Color Preview:"
 msgstr "Предварительный просмотр выбранного цвета:"
 
@@ -723,16 +718,11 @@ msgstr "Разделяйте теги запятыми."
 msgid "Separate years with commas"
 msgstr "Разделяйте годы запятыми"
 
-#: includes/metaboxes.php:1315
-msgid "Service description (main content)"
-msgstr ""
-
 #: functions/cpt/cpt-awards.php:27
 msgid "Set award image"
 msgstr "Установить изображение награды"
 
-#: includes/metaboxes.php:238 includes/metaboxes.php:290
-#: includes/metaboxes.php:946 includes/metaboxes.php:998
+#: includes/metaboxes.php:583 includes/metaboxes.php:635
 msgid "Set order for category display (lower numbers first)"
 msgstr "Установить порядок отображения категорий (сначала меньшие номера)"
 
@@ -748,12 +738,11 @@ msgstr "Установить изображение Практики"
 msgid "Short Description:"
 msgstr "Краткое описание:"
 
-#: includes/metaboxes.php:453 includes/metaboxes.php:1161
+#: includes/metaboxes.php:798
 msgid "Slate Gray"
 msgstr ""
 
-#: includes/metaboxes.php:220 includes/metaboxes.php:264
-#: includes/metaboxes.php:928 includes/metaboxes.php:972
+#: includes/metaboxes.php:565 includes/metaboxes.php:609
 msgid "Slate Gray (#86909B)"
 msgstr ""
 
@@ -879,12 +868,11 @@ msgstr "Показать Метку"
 msgid "View Year"
 msgstr "Показать Год"
 
-#: includes/metaboxes.php:452 includes/metaboxes.php:1160
+#: includes/metaboxes.php:797
 msgid "Vintage Burgundy"
 msgstr ""
 
-#: includes/metaboxes.php:219 includes/metaboxes.php:263
-#: includes/metaboxes.php:927 includes/metaboxes.php:971
+#: includes/metaboxes.php:564 includes/metaboxes.php:608
 msgid "Vintage Burgundy (#893B41)"
 msgstr ""
 
@@ -900,6 +888,18 @@ msgstr "Список Лет"
 msgid "Years list navigation"
 msgstr ""
 
-#: templates/content/single-practices.php:23
+#: templates/content/single-practices.php:27
 msgid "Your Task"
 msgstr "Ваша задача"
+
+#: includes/metaboxes.php:917 includes/metaboxes.php:940
+msgid "Добавить изображение"
+msgstr ""
+
+#: includes/metaboxes.php:913 includes/metaboxes.php:930
+msgid "Изображение категории"
+msgstr ""
+
+#: includes/metaboxes.php:918 includes/metaboxes.php:941
+msgid "Удалить изображение"
+msgstr ""

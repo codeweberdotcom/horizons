@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-19 21:49+0000\n"
+"PO-Revision-Date: 2025-09-22 08:12+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -16,15 +16,15 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
 "X-Domain: horizons"
 
-#: includes/metaboxes.php:970
+#: includes/metaboxes.php:1089
 msgid "\"Advantages\" text:"
 msgstr "\"Преимущества\" текст"
 
-#: includes/metaboxes.php:964
+#: includes/metaboxes.php:1083
 msgid "\"Our solution\" text:"
 msgstr "Наше \"решение\" текст"
 
-#: includes/metaboxes.php:958
+#: includes/metaboxes.php:1077
 msgid "\"Your task\" text:"
 msgstr "Ваша \"задача\" текст"
 
@@ -80,7 +80,7 @@ msgstr "Добавить Практику"
 msgid "Additional Information"
 msgstr "Дополнительная информация"
 
-#: templates/content/single-practices.php:39
+#: templates/content/single-practices.php:45
 msgid "Advantages"
 msgstr "Преимущества"
 
@@ -93,7 +93,7 @@ msgstr "Все Награды"
 msgid "All Categories"
 msgstr "Все Категории"
 
-#: includes/partners.php:144
+#: includes/partners.php:146 includes/practices.php:51
 msgid "All News"
 msgstr "Все новости"
 
@@ -177,11 +177,11 @@ msgstr "Навигация по списку наград"
 msgid "Awards:"
 msgstr "Награды:"
 
-#: includes/metaboxes.php:976
+#: includes/metaboxes.php:1095
 msgid "Blog article categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:992
+#: includes/metaboxes.php:1111
 msgid "Blog article tags for display:"
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr "Редактировать Метку"
 msgid "Edit Year"
 msgstr "Редактировать Год"
 
-#: includes/metaboxes.php:953
+#: includes/metaboxes.php:1072
 msgid "Filled in the standard WordPress editor above."
 msgstr ""
 
@@ -294,11 +294,15 @@ msgstr "Например: Старший финансовый аналитик �
 msgid "Full Position Title:"
 msgstr "Заголовок Полной Должности"
 
+#: includes/partners.php:91
+msgid "Get in touch"
+msgstr "Свяжитесь с нами"
+
 #. Author of the theme
 msgid "Gladkov Denis"
 msgstr "Гладков Денис"
 
-#: includes/metaboxes.php:988 includes/metaboxes.php:1004
+#: includes/metaboxes.php:1107 includes/metaboxes.php:1123
 msgid "Hold Ctrl (Cmd on Mac) for multiple selection."
 msgstr ""
 
@@ -378,7 +382,7 @@ msgstr "Новое имя Метки"
 msgid "New Year"
 msgstr "Новый Год"
 
-#: includes/partners.php:139
+#: includes/partners.php:141 includes/practices.php:46
 msgid "News"
 msgstr "Новости"
 
@@ -427,7 +431,7 @@ msgstr "Не существует"
 msgid "Not found in Trash"
 msgstr "Не найдено в корзине"
 
-#: includes/metaboxes.php:1006
+#: includes/metaboxes.php:1125
 msgid "Note:"
 msgstr ""
 
@@ -439,7 +443,7 @@ msgstr ""
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1006
+#: includes/metaboxes.php:1125
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
@@ -458,7 +462,7 @@ msgstr "Порядковый номер"
 msgid "Organization"
 msgstr "Организация"
 
-#: templates/content/single-practices.php:32
+#: templates/content/single-practices.php:36
 msgid "Our Solution"
 msgstr "Наше Решение"
 
@@ -581,11 +585,11 @@ msgstr "Категории практики"
 msgid "Practice Category"
 msgstr "Категория Практики"
 
-#: includes/metaboxes.php:952
+#: includes/metaboxes.php:1071
 msgid "Practice description (main content)"
 msgstr ""
 
-#: includes/metaboxes.php:913
+#: includes/metaboxes.php:1031
 msgid "Practice Details"
 msgstr "Подробности Практики"
 
@@ -609,8 +613,8 @@ msgstr "Практика запланирована"
 msgid "Practice updated"
 msgstr "Практика обновлена"
 
-#: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
-#: functions/cpt/cpt-practices.php:38
+#: archive-practices.php:76 functions/cpt/cpt-practices.php:9
+#: functions/cpt/cpt-practices.php:11 functions/cpt/cpt-practices.php:38
 msgid "Practices"
 msgstr "Практики"
 
@@ -642,11 +646,7 @@ msgstr "Регионы"
 msgid "Regions:"
 msgstr "Регионы:"
 
-#: templates/content/single-practices.php:73
-msgid "Related Blog Posts"
-msgstr ""
-
-#: includes/partners.php:140
+#: includes/partners.php:142 includes/practices.php:47
 msgid "Related news"
 msgstr "Рекомендуемые новости"
 
@@ -690,13 +690,13 @@ msgstr "Выбрать Год"
 msgid "Select color for practice category display"
 msgstr "Выберите цвет для отображения категории практики"
 
-#: includes/metaboxes.php:977
+#: includes/metaboxes.php:1096
 msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:993
+#: includes/metaboxes.php:1112
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
@@ -888,6 +888,18 @@ msgstr "Список Лет"
 msgid "Years list navigation"
 msgstr ""
 
-#: templates/content/single-practices.php:25
+#: templates/content/single-practices.php:27
 msgid "Your Task"
 msgstr "Ваша задача"
+
+#: includes/metaboxes.php:917 includes/metaboxes.php:940
+msgid "Добавить изображение"
+msgstr ""
+
+#: includes/metaboxes.php:913 includes/metaboxes.php:930
+msgid "Изображение категории"
+msgstr ""
+
+#: includes/metaboxes.php:918 includes/metaboxes.php:941
+msgid "Удалить изображение"
+msgstr ""
