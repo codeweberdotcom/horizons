@@ -22,7 +22,7 @@ if ($categories && !is_wp_error($categories)) :
    foreach ($categories as $category) :
       $counter++;
       $image_order = ($counter % 2 == 0) ? 'order-lg-2' : 'order-lg-1 ';
-      $content_order = ($counter % 2 == 0) ? 'order-lg-1 px-md-14 pt-14' : 'order-lg-2 px-md-14 pt-14';
+      $content_order = ($counter % 2 == 0) ? 'order-lg-1 p-md-14' : 'order-lg-2 p-md-14';
 
       $color = get_term_meta($category->term_id, 'practice_category_color', true);
       $color_class = $color ? 'bg-' . $color : '';
