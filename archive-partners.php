@@ -40,7 +40,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                'post_type' => 'partners',
                'posts_per_page' => -1,
                'orderby' => 'date',  
-               'order' => 'DESC',    
+               'order' => 'ASC',    
                'tax_query' => array(
                   array(
                      'taxonomy' => 'partner_category',
