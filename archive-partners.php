@@ -39,8 +39,8 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
             $args = array(
                'post_type' => 'partners',
                'posts_per_page' => -1,
-               'orderby' => 'title',
-               'order' => 'ASC',
+               'orderby' => 'date',  
+               'order' => 'DESC',    
                'tax_query' => array(
                   array(
                      'taxonomy' => 'partner_category',
