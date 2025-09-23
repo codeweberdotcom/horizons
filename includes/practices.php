@@ -2,9 +2,8 @@
 
 function add_news_section_after_practices($post_type)
 {
-   display_faq_section(get_the_ID());
-
    if ($post_type === 'practices') {
+      display_faq_section(get_the_ID());
       $post_id = get_the_ID();
       $related_categories = get_post_meta($post_id, 'related_blog_categories', true);
       $related_tags = get_post_meta($post_id, 'related_blog_tags', true);
