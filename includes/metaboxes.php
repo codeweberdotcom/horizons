@@ -684,12 +684,28 @@ function codeweber_enqueue_select2()
                 });
 
                 // Initialize Select2 for award partners
-                $("#partners_countries").select2({
-                    placeholder: "' . __('Select partners counries...', 'codeweber') . '",
+                $("#related_blog_categories").select2({
+                    placeholder: "' . __('Select blog categories...', 'codeweber') . '",
                     allowClear: true
                 });
 
-                partners_countries
+                // Initialize Select2 for award partners
+                $("#related_blog_tags").select2({
+                    placeholder: "' . __('Select blog tags...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                // Initialize Select2 for award partners
+                $("#related_faq_categories").select2({
+                    placeholder: "' . __('Select faq categories...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                // Initialize Select2 for award partners
+                $("#related_faq_tags").select2({
+                    placeholder: "' . __('Select faq tags...', 'codeweber') . '",
+                    allowClear: true
+                });
 
                  // Initialize Select2 for award partners
                 $("#related_blog_categories").select2({
@@ -700,6 +716,12 @@ function codeweber_enqueue_select2()
                 // Initialize Select2 for award partners
                 $("#related_blog_tags").select2({
                     placeholder: "' . __('Select related blog tags...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                // Initialize Select2 for award partners
+                $("#partners_countries").select2({
+                    placeholder: "' . __('Select partners counries...', 'codeweber') . '",
                     allowClear: true
                 });
             });
@@ -1237,10 +1259,14 @@ function render_practices_meta_box($post)
    $advantages_text = get_post_meta($post->ID, 'advantages_text', true);
    $selected_categories = get_post_meta($post->ID, 'related_blog_categories', true);
    $selected_tags = get_post_meta($post->ID, 'related_blog_tags', true);
+   $selected_faq_categories = get_post_meta($post->ID, 'related_faq_categories', true);
+   $selected_faq_tags = get_post_meta($post->ID, 'related_faq_tags', true);
 
    // Если это массив, работаем с ним, если нет, создаем пустой массив
    $selected_categories = is_array($selected_categories) ? $selected_categories : array();
    $selected_tags = is_array($selected_tags) ? $selected_tags : array();
+   $selected_faq_categories = is_array($selected_faq_categories) ? $selected_faq_categories : array();
+   $selected_faq_tags = is_array($selected_faq_tags) ? $selected_faq_tags : array();
 
    // Получаем все категории и теги из таксономий для блога
    $blog_categories = get_terms(array(
@@ -1250,6 +1276,17 @@ function render_practices_meta_box($post)
 
    $blog_tags = get_terms(array(
       'taxonomy' => 'post_tag',
+      'hide_empty' => false,
+   ));
+
+   // Получаем все категории и теги из таксономий для FAQ
+   $faq_categories = get_terms(array(
+      'taxonomy' => 'faq_categories',
+      'hide_empty' => false,
+   ));
+
+   $faq_tags = get_terms(array(
+      'taxonomy' => 'faq_tag',
       'hide_empty' => false,
    ));
    ?>
@@ -1310,6 +1347,41 @@ function render_practices_meta_box($post)
    </p>
    <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, articles will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
 
+   <hr>
+
+   <p>
+      <label for="related_faq_categories[]"><strong><?php _e('FAQ categories for display:', 'horizons'); ?></strong></label><br>
+      <em><?php _e('Select one or more FAQ categories. FAQ items that belong to ANY of the selected categories will be shown.', 'horizons'); ?></em>
+      <select id="related_faq_categories" name="related_faq_categories[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
+         <?php
+         if (!empty($faq_categories) && !is_wp_error($faq_categories)) {
+            foreach ($faq_categories as $category) {
+               $selected = in_array($category->term_id, $selected_faq_categories) ? 'selected="selected"' : '';
+               echo '<option value="' . esc_attr($category->term_id) . '" ' . $selected . '>' . esc_html($category->name) . '</option>';
+            }
+         }
+         ?>
+      </select>
+      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
+   </p>
+
+   <p>
+      <label for="related_faq_tags[]"><strong><?php _e('FAQ tags for display:', 'horizons'); ?></strong></label><br>
+      <em><?php _e('Select one or more FAQ tags. FAQ items that have ANY of the selected tags will be shown.', 'horizons'); ?></em>
+      <select id="related_faq_tags" name="related_faq_tags[]" multiple="multiple" style="width: 100%; height: 150px; margin-top: 10px;">
+         <?php
+         if (!empty($faq_tags) && !is_wp_error($faq_tags)) {
+            foreach ($faq_tags as $tag) {
+               $selected = in_array($tag->term_id, $selected_faq_tags) ? 'selected="selected"' : '';
+               echo '<option value="' . esc_attr($tag->term_id) . '" ' . $selected . '>' . esc_html($tag->name) . '</option>';
+            }
+         }
+         ?>
+      </select>
+      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
+   </p>
+   <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, FAQ items will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
+
 <?php
 }
 
@@ -1348,7 +1420,7 @@ function save_practices_meta($post_id)
       }
    }
 
-   // Сохраняем выбранные категории (массив)
+   // Сохраняем выбранные категории блога (массив)
    if (isset($_POST['related_blog_categories'])) {
       $categories = array_map('intval', $_POST['related_blog_categories']);
       update_post_meta($post_id, 'related_blog_categories', $categories);
@@ -1356,12 +1428,28 @@ function save_practices_meta($post_id)
       update_post_meta($post_id, 'related_blog_categories', array());
    }
 
-   // Сохраняем выбранные теги (массив)
+   // Сохраняем выбранные теги блога (массив)
    if (isset($_POST['related_blog_tags'])) {
       $tags = array_map('intval', $_POST['related_blog_tags']);
       update_post_meta($post_id, 'related_blog_tags', $tags);
    } else {
       update_post_meta($post_id, 'related_blog_tags', array());
+   }
+
+   // Сохраняем выбранные категории FAQ (массив)
+   if (isset($_POST['related_faq_categories'])) {
+      $faq_categories = array_map('intval', $_POST['related_faq_categories']);
+      update_post_meta($post_id, 'related_faq_categories', $faq_categories);
+   } else {
+      update_post_meta($post_id, 'related_faq_categories', array());
+   }
+
+   // Сохраняем выбранные теги FAQ (массив)
+   if (isset($_POST['related_faq_tags'])) {
+      $faq_tags = array_map('intval', $_POST['related_faq_tags']);
+      update_post_meta($post_id, 'related_faq_tags', $faq_tags);
+   } else {
+      update_post_meta($post_id, 'related_faq_tags', array());
    }
 }
 add_action('save_post_practices', 'save_practices_meta');

@@ -74,3 +74,48 @@ function horizons_elements_scripts()
     );
 }
 add_action('wp_enqueue_scripts', 'horizons_elements_scripts');
+
+
+
+
+function modify_cpt_args($args, $post_type)
+{
+    if ($post_type === 'documents') {
+        $args['has_archive'] = false; // Просто меняем параметр
+    }
+    return $args;
+}
+add_filter('register_post_type_args', 'modify_cpt_args', 10, 2);
+
+
+function modify_taxonomy_args($args, $taxonomy_name)
+{
+    if ($taxonomy_name === 'document_category' || $taxonomy_name === 'document_type') {
+        $args['public'] = false; // Полностью отключаем публичность
+        $args['publicly_queryable'] = false; // Запрещаем query запросы
+        $args['show_ui'] = true; // Оставляем интерфейс в админке
+        $args['show_in_menu'] = true; // Показываем в меню админки
+        $args['show_in_rest'] = true; // Для Gutenberg если нужно
+        $args['rewrite'] = false; // Отключаем ЧПУ
+        $args['query_var'] = false; // Полностью отключаем query_var
+    }
+    return $args;
+}
+add_filter('register_taxonomy_args', 'modify_taxonomy_args', 10, 2);
+
+function modify_taxonomy_args1($args, $taxonomy_name)
+{
+    if ($taxonomy_name === 'document_type') {
+        $args['public'] = false; // Полностью отключаем публичность
+        $args['publicly_queryable'] = false; // Запрещаем query запросы
+        $args['show_ui'] = true; // Оставляем интерфейс в админке
+        $args['show_in_menu'] = true; // Показываем в меню админки
+        $args['show_in_rest'] = true; // Для Gutenberg если нужно
+        $args['rewrite'] = false; // Отключаем ЧПУ
+        $args['query_var'] = false; // Полностью отключаем query_var
+    }
+    return $args;
+}
+add_filter('register_taxonomy_args', 'modify_taxonomy_args1', 10, 2);
+
+

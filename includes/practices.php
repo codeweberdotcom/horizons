@@ -2,6 +2,8 @@
 
 function add_news_section_after_practices($post_type)
 {
+   display_faq_section(get_the_ID());
+
    if ($post_type === 'practices') {
       $post_id = get_the_ID();
       $related_categories = get_post_meta($post_id, 'related_blog_categories', true);
@@ -39,8 +41,8 @@ function add_news_section_after_practices($post_type)
       }
 
       ob_start(); ?>
-      <section class="wrapper blog-section" id="news">
-         <div class="container pb-14 pb-md-16">
+      <section class="wrapper blog-section" id="practices_news">
+         <div class="container py-14 py-md-16">
             <div class="row align-items-center mb-8">
                <div class="col-md-8">
                   <div class="text-line-before label-u mb-2"><?php echo esc_html__('News', 'horizons'); ?></div>
@@ -64,3 +66,7 @@ function add_news_section_after_practices($post_type)
    }
 }
 add_action('after_single_post', 'add_news_section_after_practices', 10, 1);
+
+
+
+
