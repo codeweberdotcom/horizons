@@ -11,7 +11,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 
 <!-- Секция с партнерами -->
 <section class="wrapper bg-white">
-   <div class="container pb-14 pb-md-16">
+   <div class="container py-8 py-md-12">
       <?php
       /**
        * Функция для вывода партнеров, сгруппированных по категориям
@@ -153,8 +153,6 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                      </div>
                   <?php endif; ?>
 
-
-
                   <?php if (!empty($full_position)) : ?>
                      <div class="caption-wrapper p-7">
                         <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">
@@ -168,10 +166,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                         </div>
                      </div>
                   <?php endif; ?>
-
-
                </figure>
-
                <div class="team-item-content text-dark mt-3">
                   <h3 class="h5 mb-1"><?php echo wp_kses($full_name_html, array('span' => array('class' => array()))); ?></h3>
                   <div class="label-u"><?php
