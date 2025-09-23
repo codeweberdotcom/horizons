@@ -181,13 +181,15 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
          'order'      => 'ASC'
       ]);
 
-      if ($categories && !is_wp_error($categories)) {
-         foreach ($categories as $category) {
-            echo '<div class="widget">';
-            echo '<div class="text-line-after label-u mb-6">' . esc_html($category->name) . '</div>';
-            echo '<nav id="sidebar-nav">';
-            echo '<ul class="list-unstyled">';
+      $current_id = get_queried_object_id();
+      $accordion_id = 'practicesAccordion';
 
+      echo '<div class="accordion accordion-wrapper" id="' . $accordion_id . '">';
+
+      if ($categories && !is_wp_error($categories)) {
+         $category_index = 0;
+
+         foreach ($categories as $category) {
             // Получаем записи для текущей категории
             $practice_posts = get_posts([
                'post_type'      => 'practices',
@@ -204,7 +206,46 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
                ]
             ]);
 
-            $current_id = get_queried_object_id();
+            // Проверяем, есть ли видимые посты в категории
+            $has_visible_posts = false;
+            $has_active_post = false;
+
+            foreach ($practice_posts as $post) {
+               $hide = get_post_meta($post->ID, '_hide_from_archive', true);
+               if ($hide !== '1') {
+                  $has_visible_posts = true;
+                  if ($current_id === $post->ID) {
+                     $has_active_post = true;
+                  }
+               }
+            }
+
+            // Пропускаем категории без видимых постов
+            if (!$has_visible_posts) {
+               continue;
+            }
+
+            $category_index++;
+            $heading_id = 'headingPracticeCategory' . $category_index;
+            $collapse_id = 'collapsePracticeCategory' . $category_index;
+
+            // Определяем, нужно ли развернуть категорию (если есть активный пост)
+            $is_expanded = $has_active_post ? 'true' : 'false';
+            $show_class = $has_active_post ? 'show' : '';
+            $button_class = $has_active_post ? 'accordion-button text-line-after text-uppercase fs-14' : 'collapsed accordion-button text-line-after text-uppercase fs-14';
+
+            echo '<div class="card plain accordion-item">';
+            echo '<div class="card-header" id="' . $heading_id . '">';
+            echo '<button class="' . $button_class . '" data-bs-toggle="collapse" data-bs-target="#' . $collapse_id . '" aria-expanded="' . $is_expanded . '" aria-controls="' . $collapse_id . '">';
+            echo esc_html($category->name);
+            echo '</button>';
+            echo '</div>';
+            echo '<!--/.card-header -->';
+
+            echo '<div id="' . $collapse_id . '" class="accordion-collapse collapse ' . $show_class . '" aria-labelledby="' . $heading_id . '" data-bs-parent="#' . $accordion_id . '">';
+            echo '<div class="card-body">';
+            echo '<nav id="sidebar-nav">';
+            echo '<ul class="list-unstyled">';
 
             foreach ($practice_posts as $post) {
                $hide = get_post_meta($post->ID, '_hide_from_archive', true);
@@ -220,7 +261,15 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             echo '</ul>';
             echo '</nav>';
             echo '</div>';
+            echo '<!--/.card-body -->';
+            echo '</div>';
+            echo '<!--/.accordion-collapse -->';
+            echo '</div>';
+            echo '<!--/.accordion-item -->';
          }
       }
+
+      echo '</div>';
+      echo '<!--/.accordion -->';
    }
 });
