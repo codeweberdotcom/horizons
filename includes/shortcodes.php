@@ -272,7 +272,7 @@ function awards_grid_shortcode($atts)
         'order'          => 'DESC',
         'columns'        => 4,
         'columns_md'     => 4,
-        'columns_sm'     => 1,
+        'columns_sm'     => 2,
         'partners_awards'   => false
     ), $atts);
 
@@ -316,8 +316,6 @@ function awards_grid_shortcode($atts)
     ob_start();
 
     if ($awards_query->have_posts()) :
-        
-        // Формируем классы для колонок
         $column_classes = sprintf(
             'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
             intval($atts['columns_sm']),
