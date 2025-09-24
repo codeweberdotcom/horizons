@@ -55,7 +55,12 @@ function limit_image_sizes_by_context($sizes, $metadata)
             'width' => 720,
             'height' => 850,
             'crop' => true
-         )
+         ),
+         'codeweber_staff_800' => array(
+            'width' => 800,
+            'height' => 800,
+            'crop' => true
+         ),
       );
    }
 

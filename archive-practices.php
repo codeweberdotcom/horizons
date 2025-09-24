@@ -52,7 +52,8 @@ if ($categories && !is_wp_error($categories)) :
                   if ($category_image_id) { ?>
                      <figure class="practice-category-image-wrapper" style="height: 100%;">
                         <?php
-                        $category_image_url = wp_get_attachment_url($category_image_id);
+                        $category_image_url = wp_get_attachment_image_src($category_image_id, 'codeweber_staff_800');
+                        $image_url = $category_image_url[0];
                         $category_image = wp_get_attachment_image($category_image_id, 'practice_category_image', false, array(
                            'class' => 'category-image h-100 w-100',
                            'style' => 'object-fit: cover;',
@@ -95,7 +96,7 @@ if ($categories && !is_wp_error($categories)) :
                      <div class="card shadow border-0">
                         <div class="row g-0">
                            <div class="col-md-4">
-                              <img src="<?= $category_image_url; ?>" class="img-fluid rounded-start h-100" alt="Cover" style="object-fit: cover;">
+                              <img src="<?= $image_url; ?>" class="img-fluid rounded-start h-100" alt="Cover" style="object-fit: cover;">
                            </div>
                            <div class="col-md-8">
                               <div class="card-body bg-dusty-navy h-100">
