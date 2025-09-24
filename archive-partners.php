@@ -10,7 +10,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 
 
 <!-- Секция с партнерами -->
-<section class="wrapper bg-white">
+<section class="wrapper bg-white practice-section">
    <div class="container py-8 py-md-12">
       <?php
       /**
@@ -39,8 +39,8 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
             $args = array(
                'post_type' => 'partners',
                'posts_per_page' => -1,
-               'orderby' => 'date',  
-               'order' => 'ASC',    
+               'orderby' => 'date',
+               'order' => 'ASC',
                'tax_query' => array(
                   array(
                      'taxonomy' => 'partner_category',
@@ -143,8 +143,8 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
       ?>
 
          <div class="col-md-4 col-lg-4">
-            <a href="<?php the_permalink(); ?>" class="swiper-slide partner-card" data-cue="slideInDown" data-show="true" style="animation-name: slideInDown; animation-duration: 700ms; animation-timing-function: ease; animation-delay: <?php echo $animation_delay; ?>ms; animation-direction: normal; animation-fill-mode: both;">
-               <figure class="lift rounded">
+            <a href="<?php the_permalink(); ?>" class="swiper-slide partner-card" data-cue="slideInDown">
+               <figure class="lift">
                   <?php if ($thumbnail_url) : ?>
                      <img decoding="async" src="<?php echo esc_url($thumbnail_url); ?>" alt="<?php echo esc_attr($alt_text); ?>" class="w-100">
                   <?php else : ?>
