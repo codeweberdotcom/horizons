@@ -47,13 +47,14 @@ if ($categories && !is_wp_error($categories)) :
       <section id="content-wrapper" class="wrapper">
          <div class="container">
             <div class="row d-flex align-items-start g-0">
-               <div class="col-lg-6 position-lg-sticky <?php echo esc_attr($image_order); ?>" style="top: 4rem;">
+               <div class="col-lg-4 position-lg-sticky <?php echo esc_attr($image_order); ?>" style="top: 4rem; height: calc(100vh - 100px);">
                   <?php
                   if ($category_image_id) { ?>
-                     <figure class="practice-category-image-wrapper">
+                     <figure class="practice-category-image-wrapper" style="height: 100%;">
                         <?php
                         $category_image = wp_get_attachment_image($category_image_id, 'practice_category_image', false, array(
-                           'class' => 'category-image',
+                           'class' => 'category-image h-100 w-100',
+                           'style' => 'object-fit: cover;',
                            'alt' => $category->name
                         ));
                         echo $category_image; ?>
@@ -63,7 +64,7 @@ if ($categories && !is_wp_error($categories)) :
                   ?>
                </div>
                <!-- /column -->
-               <div class="col-lg-6 ms-auto bg-white  <?php echo esc_attr($content_order); ?>">
+               <div class="col-lg-8 ms-auto bg-white <?php echo esc_attr($content_order); ?>">
                   <div class="pe-none mb-5">
                      <div class="brand-square-md <?php echo esc_attr($color_class); ?>"></div>
                   </div>
