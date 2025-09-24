@@ -79,6 +79,30 @@ function codeweber_partners_shortcode($atts)
 add_shortcode('partners_grid', 'codeweber_partners_shortcode');
 
 
+// Добавьте этот код в functions.php вашей темы
+
+function get_partner_countries_shortcode()
+{
+    $terms = get_terms(array(
+        'taxonomy' => 'partner_country',
+        'hide_empty' => true,
+        'post_type' => 'partners',
+    ));
+
+    if (is_wp_error($terms) || empty($terms)) {
+        return '';
+    }
+
+    $term_names = array();
+    foreach ($terms as $term) {
+        $term_names[] = $term->name;
+    }
+
+    return implode(', ', $term_names);
+}
+add_shortcode('partner_countries', 'get_partner_countries_shortcode');
+
+
 //--------------------------------
 //PRACTICES
 //--------------------------------
