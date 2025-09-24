@@ -23,7 +23,7 @@ function codeweber_partners_shortcode($atts)
     $output = '';
 
     if ($query->have_posts()) {
-        $output .= '<div class="row gx-md-5 gy-5">';
+        
 
         while ($query->have_posts()) {
             $query->the_post();
@@ -68,7 +68,7 @@ function codeweber_partners_shortcode($atts)
             </div>';
         }
 
-        $output .= '</div>';
+        
         wp_reset_postdata();
     } else {
         $output = '<p>' . __('No employees found', 'codeweber') . '</p>';
@@ -317,7 +317,7 @@ function awards_grid_shortcode($atts)
 
     if ($awards_query->have_posts()) :
         $column_classes = sprintf(
-            'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
+            'row row-cols-2 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
             intval($atts['columns_sm']),
             intval($atts['columns_md']),
             intval($atts['columns'])
@@ -350,7 +350,7 @@ function awards_grid_shortcode($atts)
 
             <!-- Кнопка "All Awards" отображается ВСЕГДА -->
             <div class="col">
-                <a href="/awards" class="card h-100 bg-dusty-navy" style="min-height: 191.3px">
+                <a href="/awards" class="card h-100 bg-dusty-navy" >
                     <div class="card-body align-content-center text-center">
                         <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
                     </div>
