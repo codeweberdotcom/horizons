@@ -22,7 +22,7 @@ if ($categories && !is_wp_error($categories)) :
    foreach ($categories as $category) :
       $counter++;
       $image_order = ($counter % 2 == 0) ? 'order-lg-2' : 'order-lg-1 ';
-      $content_order = ($counter % 2 == 0) ? 'order-lg-1 p-md-14' : 'order-lg-2 p-md-14';
+      $content_order = ($counter % 2 == 0) ? 'order-lg-1 p-8 p-md-12' : 'order-lg-2 p-8 p-md-12';
 
       $color = get_term_meta($category->term_id, 'practice_category_color', true);
       $color_class = $color ? 'bg-' . $color : '';
@@ -92,10 +92,17 @@ if ($categories && !is_wp_error($categories)) :
                      </div>
 
                      <div class="card shadow border-0">
-                        <div class="card-body bg-dusty-navy">
-                           <p class="text-line-before label-u text-sub-white">Связаться с нами</p>
-                           <div class="h3 text-white mb-6">Получить консультацию <br> нашего специалиста</div>
-                           <a href="#" class="btn btn-neutral-50 has-ripple btn-lg w-100" data-ripple-initialized="true">Отправить сообщение</a>
+                        <div class="row g-0">
+                           <div class="col-md-4">
+                              <img src="https://bricksnew.test/wp-content/uploads/2025/09/Rectangle-7.jpg" class="img-fluid rounded-start h-100" alt="Cover" style="object-fit: cover;">
+                           </div>
+                           <div class="col-md-8">
+                              <div class="card-body bg-dusty-navy h-100">
+                                 <p class="text-line-before label-u text-sub-white">Связаться с нами</p>
+                                 <div class="h3 text-white mb-6">Получить консультацию <br> нашего специалиста</div>
+                                 <a href="#" class="btn btn-neutral-50 has-ripple btn-lg w-100" data-ripple-initialized="true">Отправить сообщение</a>
+                              </div>
+                           </div>
                         </div>
                      </div>
 
