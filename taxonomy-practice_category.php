@@ -40,6 +40,8 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                   'post_type' => 'partners',
                   'posts_per_page' => -1,
                   'post_status' => 'publish',
+                  'orderby' => 'date',  // Сортировка по дате создания
+                  'order' => 'DESC'     // По умолчанию новые сначала
                );
 
                $partners_query = new WP_Query($args);
