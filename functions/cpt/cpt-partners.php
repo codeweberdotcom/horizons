@@ -58,7 +58,7 @@ function cptui_register_my_cpts_partners()
 		"query_var" => true,
 		"supports" => ["title", "thumbnail", "editor", "revisions"],
 		"show_in_graphql" => false,
-		"taxonomies" => ["partner_category", "partner_country", "partner_language"], // Добавляем поддержку таксономий
+		"taxonomies" => ["partner_category", "partner_country", "partner_language", "partner_region"], // Добавляем поддержку таксономии Regions
 	];
 
 	register_post_type("partners", $args);
@@ -191,9 +191,53 @@ function register_partner_language_taxonomy()
 	register_taxonomy('partner_language', ['partners'], $args);
 }
 
+// Регистрируем таксономию "Регионы партнеров"
+function register_partner_region_taxonomy()
+{
+	$labels = [
+		'name' => esc_html__('Partner Regions', 'horizons'),
+		'singular_name' => esc_html__('Partner Region', 'horizons'),
+		'menu_name' => esc_html__('Regions', 'horizons'),
+		'all_items' => esc_html__('All Regions', 'horizons'),
+		'edit_item' => esc_html__('Edit Region', 'horizons'),
+		'view_item' => esc_html__('View Region', 'horizons'),
+		'update_item' => esc_html__('Update Region', 'horizons'),
+		'add_new_item' => esc_html__('Add New Region', 'horizons'),
+		'new_item_name' => esc_html__('New Region Name', 'horizons'),
+		'parent_item' => esc_html__('Parent Region', 'horizons'),
+		'parent_item_colon' => esc_html__('Parent Region:', 'horizons'),
+		'search_items' => esc_html__('Search Regions', 'horizons'),
+		'popular_items' => esc_html__('Popular Regions', 'horizons'),
+		'separate_items_with_commas' => esc_html__('Separate regions with commas', 'horizons'),
+		'add_or_remove_items' => esc_html__('Add or remove regions', 'horizons'),
+		'choose_from_most_used' => esc_html__('Choose from the most used regions', 'horizons'),
+		'not_found' => esc_html__('No regions found', 'horizons'),
+	];
+
+	$args = [
+		'label' => esc_html__('Partner Regions', 'horizons'),
+		'labels' => $labels,
+		'public' => true,
+		'publicly_queryable' => true,
+		'hierarchical' => true, // Иерархическая как категории (можно изменить на false если нужны теги)
+		'show_ui' => true,
+		'show_in_menu' => true,
+		'show_in_nav_menus' => true,
+		'show_in_rest' => true,
+		'show_tagcloud' => true,
+		'show_in_quick_edit' => true,
+		'show_admin_column' => true,
+		'rewrite' => ['slug' => 'partner-region'],
+		'query_var' => true,
+	];
+
+	register_taxonomy('partner_region', ['partners'], $args);
+}
+
 add_action('init', 'register_partner_category_taxonomy');
 add_action('init', 'register_partner_country_taxonomy');
 add_action('init', 'register_partner_language_taxonomy');
+add_action('init', 'register_partner_region_taxonomy'); // Добавляем регистрацию таксономии Regions
 
 add_filter('use_block_editor_for_post_type', 'disable_gutenberg_for_partners', 10, 2);
 function disable_gutenberg_for_partners($current_status, $post_type)

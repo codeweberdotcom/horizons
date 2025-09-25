@@ -33,6 +33,7 @@ function codeweber_partners_additional_meta_box_callback($post)
    $company = get_post_meta($post->ID, '_partners_company', true);
    $website = get_post_meta($post->ID, '_partners_website', true);
 
+
    // Get existing field values
    $full_position = get_post_meta($post->ID, '_partners_full_position', true);
    $location = get_post_meta($post->ID, '_partners_location', true);
