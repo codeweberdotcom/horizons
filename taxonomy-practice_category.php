@@ -82,7 +82,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                      $countries_string = implode(', ', $country_names);
 
                      // Получаем изображение
-                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_staff_800');
 
                      // Если нет изображения, можно использовать заглушку
                      if (!$thumbnail_url) {
