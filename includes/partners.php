@@ -22,6 +22,9 @@ function add_custom_single_banner_partners($post_type)
       $company = get_post_meta($post->ID, '_partners_company', true);
       $website = get_post_meta($post->ID, '_partners_website', true);
       $linkedin = get_post_meta($post->ID, '_partners_linkedin', true);
+      $regions = wp_get_post_terms($post->ID, 'partner_region');
+
+
 
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
@@ -86,11 +89,35 @@ function add_custom_single_banner_partners($post_type)
                                        </tr>
                                     <?php endif; ?>
 
+
+
                                     <?php if (!empty($countries)) : ?>
                                        <tr>
                                           <td class="py-1 pe-3 align-text-top">
                                              <div class="text-square-before">
-                                                <?php echo __('Regions', 'horizons') ?>:
+                                                <?php echo __('Continent', 'horizons') ?>:
+                                             </div>
+                                          </td>
+                                          <td class="py-1">
+                                             <?php
+
+                                       if (!empty($regions) && !is_wp_error($regions)) {
+                                          $region_names = array();
+                                          foreach ($regions as $region) {
+                                             $region_names[] = $region->name;
+                                          }
+                                          echo implode(', ', $region_names);
+                                       }
+                                             ?>
+                                          </td>
+                                       </tr>
+                                    <?php endif; ?>
+
+                                    <?php if (!empty($countries)) : ?>
+                                       <tr>
+                                          <td class="py-1 pe-3 align-text-top">
+                                             <div class="text-square-before">
+                                                <?php echo __('Countries', 'horizons') ?>:
                                              </div>
                                           </td>
                                           <td class="py-1">
@@ -140,7 +167,7 @@ function add_custom_single_banner_partners($post_type)
                               </div>
                            <?php endif; ?>
 
-                           <div class="d-flex mt-2">
+                           <div class="d-flex mt-3">
                               <?php if (!empty($linkedin)) : ?>
                                  <a href="<?php echo esc_attr($linkedin); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-linkedin"></i></a>
                               <?php endif; ?>

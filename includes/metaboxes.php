@@ -165,7 +165,7 @@ function codeweber_partners_additional_meta_box_callback($post)
 
       <!-- Regions (дублирует Countries) -->
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
-         <label for="partners_regions"><strong><?php _e('Regions:', 'horizons'); ?></strong></label>
+         <label for="partners_regions"><strong><?php _e('Continents:', 'horizons'); ?></strong></label>
          <div style="display: grid; gap: 8px;">
             <select id="partners_regions" name="partners_regions[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
                <?php if (!empty($regions) && !is_wp_error($regions)): ?>
@@ -339,9 +339,9 @@ function add_partner_category_order_field()
 {
 ?>
    <div class="form-field">
-      <label for="partner_category_order"><?php _e('Порядковый номер', 'horizons'); ?></label>
+      <label for="partner_category_order"><?php _e('Order Number', 'horizons'); ?></label>
       <input type="number" name="partner_category_order" id="partner_category_order" value="0" min="0" />
-      <p class="description"><?php _e('Чем меньше число, тем выше в списке будет категория', 'horizons'); ?></p>
+      <p class="description"><?php _e('The lower the number, the higher the category will be in the list.', 'horizons'); ?></p>
    </div>
 <?php
 }
@@ -352,11 +352,11 @@ function edit_partner_category_order_field($term)
 ?>
    <tr class="form-field">
       <th scope="row">
-         <label for="partner_category_order"><?php _e('Порядковый номер', 'horizons'); ?></label>
+         <label for="partner_category_order"><?php _e('Order Number', 'horizons'); ?></label>
       </th>
       <td>
          <input type="number" name="partner_category_order" id="partner_category_order" value="<?php echo esc_attr($order ? $order : 0); ?>" min="0" />
-         <p class="description"><?php _e('Чем меньше число, тем выше в списке будет категория', 'horizons'); ?></p>
+         <p class="description"><?php _e('The lower the number, the higher the category will be in the list.', 'horizons'); ?></p>
       </td>
    </tr>
 <?php
@@ -375,7 +375,7 @@ add_filter('manage_partner_category_custom_column', 'show_partner_category_order
 
 function add_partner_category_order_column($columns)
 {
-   $columns['partner_category_order'] = __('Порядок', 'horizons');
+   $columns['partner_category_order'] = __('Order', 'horizons');
    return $columns;
 }
 
