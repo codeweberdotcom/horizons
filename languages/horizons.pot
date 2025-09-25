@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 20:49+0000\n"
+"POT-Creation-Date: 2025-09-25 20:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -302,7 +302,7 @@ msgid "Company:"
 msgstr ""
 
 #: includes/partners.php:98
-msgid "Continent"
+msgid "Continents"
 msgstr ""
 
 #: includes/metaboxes.php:168

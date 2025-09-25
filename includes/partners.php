@@ -95,7 +95,7 @@ function add_custom_single_banner_partners($post_type)
                                        <tr>
                                           <td class="py-1 pe-3 align-text-top">
                                              <div class="text-square-before">
-                                                <?php echo __('Continent', 'horizons') ?>:
+                                                <?php echo __('Continents', 'horizons') ?>:
                                              </div>
                                           </td>
                                           <td class="py-1">

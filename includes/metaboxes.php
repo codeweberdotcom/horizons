@@ -1377,7 +1377,6 @@ function render_practices_meta_box($post)
          }
          ?>
       </select>
-      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
    </p>
 
    <p>
@@ -1393,7 +1392,6 @@ function render_practices_meta_box($post)
          }
          ?>
       </select>
-      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
    </p>
    <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, articles will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
 
@@ -1412,7 +1410,6 @@ function render_practices_meta_box($post)
          }
          ?>
       </select>
-      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
    </p>
 
    <p>
@@ -1428,7 +1425,6 @@ function render_practices_meta_box($post)
          }
          ?>
       </select>
-      <small><?php _e('Hold Ctrl (Cmd on Mac) for multiple selection.', 'horizons'); ?></small>
    </p>
    <p><strong><?php _e('Note:', 'horizons'); ?></strong> <?php _e('On the frontend, FAQ items will be displayed that belong to ANY of the selected categories AND have ANY of the selected tags (logical "AND" between taxonomies, "OR" within them).', 'horizons'); ?></p>
 
