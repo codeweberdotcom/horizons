@@ -58,7 +58,7 @@ function cptui_register_my_cpts_partners()
 		"query_var" => true,
 		"supports" => ["title", "thumbnail", "editor", "revisions"],
 		"show_in_graphql" => false,
-		"taxonomies" => ["partner_category", "partner_country", "partner_language", "partner_region"], // Добавляем поддержку таксономии Regions
+		"taxonomies" => ["partner_category", "partner_country", "partner_language", "partner_region"],
 	];
 
 	register_post_type("partners", $args);
@@ -93,17 +93,17 @@ function register_partner_category_taxonomy()
 		'label' => esc_html__('Partner Categories', 'horizons'),
 		'labels' => $labels,
 		'public' => true,
-		'publicly_queryable' => true,
-		'hierarchical' => true, // Иерархическая как категории
+		'publicly_queryable' => false, // Отключаем публичные URL
+		'hierarchical' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
+		'show_in_nav_menus' => false, // Скрываем из меню навигации
 		'show_in_rest' => true,
-		'show_tagcloud' => true,
+		'show_tagcloud' => false, // Отключаем облако тегов
 		'show_in_quick_edit' => true,
 		'show_admin_column' => true,
-		'rewrite' => ['slug' => 'partner-category'],
-		'query_var' => true,
+		'rewrite' => false, // Отключаем перезапись URL
+		'query_var' => false, // Отключаем query var
 	];
 
 	register_taxonomy('partner_category', ['partners'], $args);
@@ -134,17 +134,17 @@ function register_partner_country_taxonomy()
 		'label' => esc_html__('Partner Countries', 'horizons'),
 		'labels' => $labels,
 		'public' => true,
-		'publicly_queryable' => true,
-		'hierarchical' => false, // Неиерархическая как теги
+		'publicly_queryable' => false, // Отключаем публичные URL
+		'hierarchical' => false,
 		'show_ui' => true,
 		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
+		'show_in_nav_menus' => false, // Скрываем из меню навигации
 		'show_in_rest' => true,
-		'show_tagcloud' => true,
+		'show_tagcloud' => false, // Отключаем облако тегов
 		'show_in_quick_edit' => true,
 		'show_admin_column' => true,
-		'rewrite' => ['slug' => 'partner-country'],
-		'query_var' => true,
+		'rewrite' => false, // Отключаем перезапись URL
+		'query_var' => false, // Отключаем query var
 	];
 
 	register_taxonomy('partner_country', ['partners'], $args);
@@ -175,17 +175,17 @@ function register_partner_language_taxonomy()
 		'label' => esc_html__('Partner Languages', 'horizons'),
 		'labels' => $labels,
 		'public' => true,
-		'publicly_queryable' => true,
-		'hierarchical' => false, // Неиерархическая как теги
+		'publicly_queryable' => false, // Отключаем публичные URL
+		'hierarchical' => false,
 		'show_ui' => true,
 		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
+		'show_in_nav_menus' => false, // Скрываем из меню навигации
 		'show_in_rest' => true,
-		'show_tagcloud' => true,
+		'show_tagcloud' => false, // Отключаем облако тегов
 		'show_in_quick_edit' => true,
 		'show_admin_column' => true,
-		'rewrite' => ['slug' => 'partner-language'],
-		'query_var' => true,
+		'rewrite' => false, // Отключаем перезапись URL
+		'query_var' => false, // Отключаем query var
 	];
 
 	register_taxonomy('partner_language', ['partners'], $args);
@@ -218,17 +218,17 @@ function register_partner_region_taxonomy()
 		'label' => esc_html__('Partner Regions', 'horizons'),
 		'labels' => $labels,
 		'public' => true,
-		'publicly_queryable' => true,
-		'hierarchical' => true, // Иерархическая как категории (можно изменить на false если нужны теги)
+		'publicly_queryable' => false, // Отключаем публичные URL
+		'hierarchical' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
+		'show_in_nav_menus' => false, // Скрываем из меню навигации
 		'show_in_rest' => true,
-		'show_tagcloud' => true,
+		'show_tagcloud' => false, // Отключаем облако тегов
 		'show_in_quick_edit' => true,
 		'show_admin_column' => true,
-		'rewrite' => ['slug' => 'partner-region'],
-		'query_var' => true,
+		'rewrite' => false, // Отключаем перезапись URL
+		'query_var' => false, // Отключаем query var
 	];
 
 	register_taxonomy('partner_region', ['partners'], $args);
@@ -237,7 +237,7 @@ function register_partner_region_taxonomy()
 add_action('init', 'register_partner_category_taxonomy');
 add_action('init', 'register_partner_country_taxonomy');
 add_action('init', 'register_partner_language_taxonomy');
-add_action('init', 'register_partner_region_taxonomy'); // Добавляем регистрацию таксономии Regions
+add_action('init', 'register_partner_region_taxonomy');
 
 add_filter('use_block_editor_for_post_type', 'disable_gutenberg_for_partners', 10, 2);
 function disable_gutenberg_for_partners($current_status, $post_type)

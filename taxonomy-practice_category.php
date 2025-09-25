@@ -91,7 +91,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                ?>
 
                      <div class="project item col-md-6 col-xl-4<?php echo $country_classes; ?>">
-                        <a href="<?php the_permalink(); ?>" class="swiper-slide partner-card" data-cue="slideInDown">
+                        <a href="<?php the_permalink(); ?>" class="swiper-slide partner-card">
                            <figure class="lift">
                               <img decoding="async" src="<?php echo $thumbnail_url; ?>" alt="<?php echo esc_attr($full_name); ?>" class="w-100">
 
