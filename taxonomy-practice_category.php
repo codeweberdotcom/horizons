@@ -6,7 +6,6 @@ $post_type_lc = strtolower($post_type);
 $sidebar_position = Redux::get_option($opt_name, 'sidebar_position_archive_' . $post_type);
 $pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
 
-
 // Определяем класс колонки для контента
 $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 ?>
@@ -53,6 +52,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                      $surname = get_post_meta($post->ID, '_partners_surname', true);
                      $company = get_post_meta($post->ID, '_partners_company', true);
                      $position = get_post_meta($post->ID, '_partners_position', true);
+                     $full_position = get_post_meta($post->ID, '_partners_full_position', true);
 
                      // Полное имя
                      $full_name = trim($name . ' ' . $surname);
@@ -62,7 +62,9 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 
                      // Логика вывода подписи на фото: сначала позиция, если нет - компания
                      $caption_text = '';
-                     if (!empty($position)) {
+                     if (!empty($full_position)) {
+                        $caption_text = $full_position;
+                     } elseif (!empty($position)) {
                         $caption_text = $position;
                      } elseif (!empty($company)) {
                         $caption_text = $company;
