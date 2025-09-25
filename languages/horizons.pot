@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 10:34+0000\n"
+"POT-Creation-Date: 2025-09-25 20:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
-#: includes/partners.php:122 includes/partners.php:129
+#: includes/partners.php:150 includes/partners.php:157
 msgid "Address"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "All Languages"
 msgstr ""
 
-#: includes/partners.php:180 includes/practices.php:52
+#: includes/partners.php:215 includes/practices.php:52
 msgid "All News"
 msgstr ""
 
@@ -301,7 +301,15 @@ msgstr ""
 msgid "Company:"
 msgstr ""
 
-#: functions/cpt/cpt-partners.php:118
+#: includes/partners.php:98
+msgid "Continent"
+msgstr ""
+
+#: includes/metaboxes.php:168
+msgid "Continents:"
+msgstr ""
+
+#: includes/partners.php:120 functions/cpt/cpt-partners.php:118
 msgid "Countries"
 msgstr ""
 
@@ -319,10 +327,6 @@ msgstr ""
 
 #: includes/metaboxes.php:827 includes/metaboxes.php:871
 msgid "Dusty Navy (#3D5567)"
-msgstr ""
-
-#: includes/partners.php:146
-msgid "E-Mail"
 msgstr ""
 
 #: includes/metaboxes.php:114
@@ -401,7 +405,7 @@ msgstr ""
 msgid "Full Position Title:"
 msgstr ""
 
-#: includes/partners.php:112
+#: includes/partners.php:139
 msgid "Get in touch"
 msgstr ""
 
@@ -442,7 +446,7 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
-#: includes/partners.php:70 functions/cpt/cpt-partners.php:159
+#: includes/partners.php:73 functions/cpt/cpt-partners.php:159
 msgid "Languages"
 msgstr ""
 
@@ -522,7 +526,7 @@ msgstr ""
 msgid "New Year"
 msgstr ""
 
-#: includes/partners.php:175 includes/practices.php:47
+#: includes/partners.php:210 includes/practices.php:47
 msgid "News"
 msgstr ""
 
@@ -633,10 +637,11 @@ msgid ""
 "between taxonomies, \"OR\" within them)."
 msgstr ""
 
-#: includes/metaboxes.php:1044
+#: includes/metaboxes.php:378 includes/metaboxes.php:1044
 msgid "Order"
 msgstr ""
 
+#: includes/metaboxes.php:342 includes/metaboxes.php:355
 #: includes/metaboxes.php:839 includes/metaboxes.php:889
 msgid "Order Number"
 msgstr ""
@@ -766,7 +771,7 @@ msgstr ""
 msgid "Partners list"
 msgstr ""
 
-#: includes/partners.php:137
+#: includes/partners.php:165
 msgid "Phone"
 msgstr ""
 
@@ -877,15 +882,11 @@ msgstr ""
 msgid "Read"
 msgstr ""
 
-#: includes/partners.php:93 functions/cpt/cpt-partners.php:200
+#: functions/cpt/cpt-partners.php:200
 msgid "Regions"
 msgstr ""
 
-#: includes/metaboxes.php:168
-msgid "Regions:"
-msgstr ""
-
-#: includes/partners.php:176 includes/practices.php:48
+#: includes/partners.php:211 includes/practices.php:48
 msgid "Related news"
 msgstr ""
 
@@ -1067,6 +1068,10 @@ msgctxt "Taxonomy Singular Name"
 msgid "Award Year"
 msgstr ""
 
+#: includes/metaboxes.php:344 includes/metaboxes.php:359
+msgid "The lower the number, the higher the category will be in the list."
+msgstr ""
+
 #: functions/cpt/cpt-practices.php:112
 msgid "Type"
 msgstr ""
@@ -1175,7 +1180,7 @@ msgstr ""
 msgid "Vintage Burgundy (#893B41)"
 msgstr ""
 
-#: includes/partners.php:118
+#: includes/partners.php:146
 msgid "Website"
 msgstr ""
 
@@ -1199,18 +1204,6 @@ msgstr ""
 msgid "Your Task"
 msgstr ""
 
-#: includes/metaboxes.php:342 includes/metaboxes.php:355
-msgid "Порядковый номер"
-msgstr ""
-
-#: includes/metaboxes.php:378
-msgid "Порядок"
-msgstr ""
-
 #: includes/metaboxes.php:1176
 msgid "Удалить изображение"
-msgstr ""
-
-#: includes/metaboxes.php:344 includes/metaboxes.php:359
-msgid "Чем меньше число, тем выше в списке будет категория"
 msgstr ""
