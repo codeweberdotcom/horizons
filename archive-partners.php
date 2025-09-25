@@ -98,11 +98,11 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
                               <img decoding="async" src="<?php echo $thumbnail_url; ?>" alt="<?php echo esc_attr($full_name); ?>" class="w-100">
 
                               <?php if (!empty($caption_text)) : ?>
-                                 <div class="caption-wrapper p-7">
+                                 <figcaption class="caption-wrapper p-7">
                                     <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">
                                        <?php echo esc_html($caption_text); ?>
                                     </div>
-                                 </div>
+                                 </figcaption>
                               <?php endif; ?>
                            </figure>
 

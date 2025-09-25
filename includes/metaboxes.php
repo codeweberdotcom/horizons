@@ -32,7 +32,7 @@ function codeweber_partners_additional_meta_box_callback($post)
    $phone = get_post_meta($post->ID, '_partners_phone', true);
    $company = get_post_meta($post->ID, '_partners_company', true);
    $website = get_post_meta($post->ID, '_partners_website', true);
-
+   $linkedin = get_post_meta($post->ID, '_partners_linkedin', true);
 
    // Get existing field values
    $full_position = get_post_meta($post->ID, '_partners_full_position', true);
@@ -44,6 +44,9 @@ function codeweber_partners_additional_meta_box_callback($post)
 
    // Get selected countries from taxonomy
    $selected_countries = wp_get_post_terms($post->ID, 'partner_country', array('fields' => 'ids'));
+
+   // Get selected regions from taxonomy (дублирует countries)
+   $selected_regions = wp_get_post_terms($post->ID, 'partner_region', array('fields' => 'ids'));
 
    // Get all awards
    $awards = get_posts(array(
@@ -71,6 +74,14 @@ function codeweber_partners_additional_meta_box_callback($post)
    // Get all countries from partner_country taxonomy
    $countries = get_terms(array(
       'taxonomy' => 'partner_country',
+      'hide_empty' => false,
+      'orderby' => 'name',
+      'order' => 'ASC'
+   ));
+
+   // Get all regions from partner_region taxonomy (дублирует countries)
+   $regions = get_terms(array(
+      'taxonomy' => 'partner_region',
       'hide_empty' => false,
       'orderby' => 'name',
       'order' => 'ASC'
@@ -115,6 +126,12 @@ function codeweber_partners_additional_meta_box_callback($post)
             placeholder="<?php esc_attr_e('https://example.com', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
+         <label for="partners_linkedin"><strong><?php _e('LinkedIn:', 'horizons'); ?></strong></label>
+         <input type="url" id="partners_linkedin" name="partners_linkedin" value="<?php echo esc_url($linkedin); ?>"
+            placeholder="<?php esc_attr_e('https://linkedin.com/in/username', 'horizons'); ?>" style="width: 100%; padding: 8px;">
+      </div>
+
       <!-- СУЩЕСТВУЮЩИЕ ПОЛЯ -->
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: center;">
          <label for="partners_full_position"><strong><?php _e('Full Position Title:', 'horizons'); ?></strong></label>
@@ -122,7 +139,7 @@ function codeweber_partners_additional_meta_box_callback($post)
             placeholder="<?php esc_attr_e('For example: Senior Financial Analyst and Investment Advisor', 'horizons'); ?>" style="width: 100%; padding: 8px;">
       </div>
 
-      <!-- ЗАМЕНЕНО: Regions - теперь выбор из таксономии Countries -->
+      <!-- Countries -->
       <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
          <label for="partners_countries"><strong><?php _e('Countries:', 'horizons'); ?></strong></label>
          <div style="display: grid; gap: 8px;">
@@ -141,6 +158,30 @@ function codeweber_partners_additional_meta_box_callback($post)
             <p style="margin: 0; font-size: 12px; color: #666;">
                <a href="<?php echo admin_url('edit-tags.php?taxonomy=partner_country&post_type=partners'); ?>" target="_blank">
                   <?php _e('Manage countries', 'horizons'); ?>
+               </a>
+            </p>
+         </div>
+      </div>
+
+      <!-- Regions (дублирует Countries) -->
+      <div style="display: grid; grid-template-columns: 180px 1fr; gap: 12px; align-items: start;">
+         <label for="partners_regions"><strong><?php _e('Regions:', 'horizons'); ?></strong></label>
+         <div style="display: grid; gap: 8px;">
+            <select id="partners_regions" name="partners_regions[]" multiple="multiple" style="width: 100%; padding: 8px; min-height: 120px;">
+               <?php if (!empty($regions) && !is_wp_error($regions)): ?>
+                  <?php foreach ($regions as $region): ?>
+                     <option value="<?php echo esc_attr($region->term_id); ?>"
+                        <?php selected(in_array($region->term_id, $selected_regions), true); ?>>
+                        <?php echo esc_html($region->name); ?>
+                     </option>
+                  <?php endforeach; ?>
+               <?php else: ?>
+                  <option value=""><?php _e('No regions found. Please add regions first.', 'horizons'); ?></option>
+               <?php endif; ?>
+            </select>
+            <p style="margin: 0; font-size: 12px; color: #666;">
+               <a href="<?php echo admin_url('edit-tags.php?taxonomy=partner_region&post_type=partners'); ?>" target="_blank">
+                  <?php _e('Manage regions', 'horizons'); ?>
                </a>
             </p>
          </div>
@@ -218,7 +259,7 @@ function codeweber_save_partners_additional_meta($post_id)
       return;
    }
 
-   // Save ALL fields with partners_ prefix (исключаем partners_regions)
+   // Save ALL fields with partners_ prefix
    $additional_fields = [
       'partners_position',
       'partners_name',
@@ -227,6 +268,7 @@ function codeweber_save_partners_additional_meta($post_id)
       'partners_email',
       'partners_phone',
       'partners_website',
+      'partners_linkedin',
       'partners_full_position',
       'partners_location',
       'partners_short_description'
@@ -237,8 +279,8 @@ function codeweber_save_partners_additional_meta($post_id)
          if ($field === 'partners_short_description') {
             // Use sanitize_textarea_field for text areas
             update_post_meta($post_id, '_' . $field, sanitize_textarea_field($_POST[$field]));
-         } elseif ($field === 'partners_website') {
-            // Use esc_url_raw for website URLs
+         } elseif ($field === 'partners_website' || $field === 'partners_linkedin') {
+            // Use esc_url_raw for website and LinkedIn URLs
             update_post_meta($post_id, '_' . $field, esc_url_raw($_POST[$field]));
          } else {
             update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
@@ -249,9 +291,6 @@ function codeweber_save_partners_additional_meta($post_id)
       }
    }
 
-   // Удаляем старое поле regions из метаданных
-   delete_post_meta($post_id, '_partners_regions');
-
    // Save countries taxonomy
    if (isset($_POST['partners_countries'])) {
       $countries = array_map('intval', $_POST['partners_countries']);
@@ -259,6 +298,15 @@ function codeweber_save_partners_additional_meta($post_id)
    } else {
       // Если ничего не выбрано, удаляем все термины
       wp_set_post_terms($post_id, array(), 'partner_country', false);
+   }
+
+   // Save regions taxonomy (дублирует countries)
+   if (isset($_POST['partners_regions'])) {
+      $regions = array_map('intval', $_POST['partners_regions']);
+      wp_set_post_terms($post_id, $regions, 'partner_region', false);
+   } else {
+      // Если ничего не выбрано, удаляем все термины
+      wp_set_post_terms($post_id, array(), 'partner_region', false);
    }
 
    // Save languages taxonomy
@@ -690,37 +738,38 @@ function codeweber_enqueue_select2()
                     allowClear: true
                 });
 
-                // Initialize Select2 for award partners
+                // Initialize Select2 for blog tags
                 $("#related_blog_tags").select2({
                     placeholder: "' . __('Select blog tags...', 'codeweber') . '",
                     allowClear: true
                 });
 
-                // Initialize Select2 for award partners
+                // Initialize Select2 for faq categories
                 $("#related_faq_categories").select2({
                     placeholder: "' . __('Select faq categories...', 'codeweber') . '",
                     allowClear: true
                 });
 
-                // Initialize Select2 for award partners
+                // Initialize Select2 for faq tags
                 $("#related_faq_tags").select2({
                     placeholder: "' . __('Select faq tags...', 'codeweber') . '",
                     allowClear: true
                 });
 
-                 // Initialize Select2 for award partners
-                $("#related_blog_categories").select2({
-                    placeholder: "' . __('Select related blog categories...', 'codeweber') . '",
-                    allowClear: true
-                });
 
-                // Initialize Select2 for award partners
+                // Initialize Select2 for related_blog_tags
                 $("#related_blog_tags").select2({
-                    placeholder: "' . __('Select related blog tags...', 'codeweber') . '",
+                    placeholder: "' . __('Select related_blog_tags...', 'codeweber') . '",
                     allowClear: true
                 });
 
-                // Initialize Select2 for award partners
+                // Initialize Select2 for partners_regions
+                $("#partners_regions").select2({
+                    placeholder: "' . __('Select partners regions...', 'codeweber') . '",
+                    allowClear: true
+                });
+
+                // Initialize Select2 for partners counries
                 $("#partners_countries").select2({
                     placeholder: "' . __('Select partners counries...', 'codeweber') . '",
                     allowClear: true

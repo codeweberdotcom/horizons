@@ -21,7 +21,7 @@ function add_custom_single_banner_partners($post_type)
       $location = get_post_meta($post->ID, '_partners_location', true);
       $company = get_post_meta($post->ID, '_partners_company', true);
       $website = get_post_meta($post->ID, '_partners_website', true);
-
+      $linkedin = get_post_meta($post->ID, '_partners_linkedin', true);
 
       // Получаем thumbnail разными способами
       $thumbnail_url = '';
@@ -113,7 +113,6 @@ function add_custom_single_banner_partners($post_type)
                            </div>
                            <?php if (!empty($company)) : ?>
                               <div class="mt-0">
-
                                  <?php if (!empty($website)) : ?>
                                     <a href="<?php echo esc_url($website); ?>" title="<?= __('Website', 'horizons'); ?>" target="_blank" rel="noopener noreferrer" class="label-s hover-6 text-white d-inline-flex align-items-center">
                                        <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
@@ -141,14 +140,19 @@ function add_custom_single_banner_partners($post_type)
                               </div>
                            <?php endif; ?>
 
-                           <?php if (!empty($email)) : ?>
-                              <div class="mt-0">
-                                 <a href="mailto:<?php echo esc_attr($email); ?>" title="<?= __('E-Mail', 'horizons'); ?>"
-                                    class="label-s hover-6 text-white d-inline-flex align-items-center">
-                                    <i class="uil uil-envelope fs-18 text-primary me-1"></i><?php echo esc_html($email); ?>
-                                 </a>
-                              </div>
-                           <?php endif; ?>
+                           <div class="d-flex mt-2">
+                              <?php if (!empty($linkedin)) : ?>
+                                 <a href="<?php echo esc_attr($linkedin); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-linkedin"></i></a>
+                              <?php endif; ?>
+
+                              <?php if (!empty($email)) : ?>
+                                 <a href="<?php echo esc_attr($email); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-envelope"></i></a>
+                              <?php endif; ?>
+
+                              <?php if (!empty($website)) : ?>
+                                 <a href="<?php echo esc_url($website); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-link"></i></a>
+                              <?php endif; ?>
+                           </div>
                      </div>
                      <!--/column -->
 
