@@ -26,7 +26,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
          <div class="grid grid-view projects-masonry">
             <div class="isotope-filter filter mb-10">
                <ul>
-                  <li><a class="filter-item active" data-filter="*"><?php __('All World', 'horizons'); ?></a></li>
+                  <li><a class="filter-item active" data-filter="*"><?php echo __('All World', 'horizons'); ?></a></li>
                   <?php foreach ($countries as $country) : ?>
                      <li><a class="filter-item" data-filter=".<?php echo sanitize_title($country->slug); ?>"><?php echo $country->name; ?></a></li>
                   <?php endforeach; ?>
