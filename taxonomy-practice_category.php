@@ -11,7 +11,7 @@ $pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
 $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 ?>
 
-<section class="wrapper bg-white">
+<section class="wrapper bg-white practice-section">
    <div class="container py-8 py-md-12">
 
       <?php
