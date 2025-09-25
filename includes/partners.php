@@ -101,13 +101,13 @@ function add_custom_single_banner_partners($post_type)
                                           <td class="py-1">
                                              <?php
 
-                                       if (!empty($regions) && !is_wp_error($regions)) {
-                                          $region_names = array();
-                                          foreach ($regions as $region) {
-                                             $region_names[] = $region->name;
-                                          }
-                                          echo implode(', ', $region_names);
-                                       }
+                                             if (!empty($regions) && !is_wp_error($regions)) {
+                                                $region_names = array();
+                                                foreach ($regions as $region) {
+                                                   $region_names[] = $region->name;
+                                                }
+                                                echo implode(', ', $region_names);
+                                             }
                                              ?>
                                           </td>
                                        </tr>
@@ -138,47 +138,51 @@ function add_custom_single_banner_partners($post_type)
                            <?php endif; ?>
                            <div class="text-line-neutral-after text-sub-white label-u mb-3"><?= __('Get in touch', 'horizons'); ?>
                            </div>
-                           <?php if (!empty($company)) : ?>
-                              <div class="mt-0">
-                                 <?php if (!empty($website)) : ?>
-                                    <a href="<?php echo esc_url($website); ?>" title="<?= __('Website', 'horizons'); ?>" target="_blank" rel="noopener noreferrer" class="label-s hover-6 text-white d-inline-flex align-items-center">
-                                       <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
-                                    </a>
-                                 <?php else : ?>
-                                    <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>"><i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
+                           <div class="group_contact_wrapper group_contact_wrapper d-md-flex flex-md-row justify-content-between align-items-end">
+                              <div class="group_contact">
+                                 <?php if (!empty($company)) : ?>
+                                    <div class="mt-0">
+                                       <?php if (!empty($website)) : ?>
+                                          <a href="<?php echo esc_url($website); ?>" title="<?= __('Website', 'horizons'); ?>" target="_blank" rel="noopener noreferrer" class="label-s hover-6 text-white d-inline-flex align-items-center">
+                                             <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
+                                          </a>
+                                       <?php else : ?>
+                                          <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>"><i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
+                                       <?php endif; ?>
+                                    </div>
+                                 <?php endif; ?>
+
+                                 <?php if (!empty($location)) : ?>
+                                    <div class="mt-0">
+                                       <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>">
+                                          <i class="uil uil-location-point fs-18 text-primary me-1"></i><?php echo esc_html($location); ?>
+                                       </div>
+                                    </div>
+                                 <?php endif; ?>
+
+                                 <?php if (!empty($phone)) : ?>
+                                    <div class="mt-0">
+                                       <a href="tell:<?php echo esc_attr($phone); ?>" title="<?= __('Phone', 'horizons'); ?>"
+                                          class="label-s hover-6 text-white d-inline-flex align-items-center">
+                                          <i class="uil uil-phone-alt fs-18 text-primary me-1"></i><?php echo esc_html($phone); ?>
+                                       </a>
+                                    </div>
                                  <?php endif; ?>
                               </div>
-                           <?php endif; ?>
 
-                           <?php if (!empty($location)) : ?>
-                              <div class="mt-0">
-                                 <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>">
-                                    <i class="uil uil-location-point fs-18 text-primary me-1"></i><?php echo esc_html($location); ?>
-                                 </div>
+                              <div class="d-flex mt-3">
+                                 <?php if (!empty($linkedin)) : ?>
+                                    <a href="<?php echo esc_attr($linkedin); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-linkedin"></i></a>
+                                 <?php endif; ?>
+
+                                 <?php if (!empty($email)) : ?>
+                                    <a href="mailto:<?php echo esc_attr($email); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-envelope"></i></a>
+                                 <?php endif; ?>
+
+                                 <?php if (!empty($website)) : ?>
+                                    <a href="<?php echo esc_url($website); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-link"></i></a>
+                                 <?php endif; ?>
                               </div>
-                           <?php endif; ?>
-
-                           <?php if (!empty($phone)) : ?>
-                              <div class="mt-0">
-                                 <a href="tell:<?php echo esc_attr($phone); ?>" title="<?= __('Phone', 'horizons'); ?>"
-                                    class="label-s hover-6 text-white d-inline-flex align-items-center">
-                                    <i class="uil uil-phone-alt fs-18 text-primary me-1"></i><?php echo esc_html($phone); ?>
-                                 </a>
-                              </div>
-                           <?php endif; ?>
-
-                           <div class="d-flex mt-3">
-                              <?php if (!empty($linkedin)) : ?>
-                                 <a href="<?php echo esc_attr($linkedin); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-linkedin"></i></a>
-                              <?php endif; ?>
-
-                              <?php if (!empty($email)) : ?>
-                                 <a href="<?php echo esc_attr($email); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-envelope"></i></a>
-                              <?php endif; ?>
-
-                              <?php if (!empty($website)) : ?>
-                                 <a href="<?php echo esc_url($website); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-link"></i></a>
-                              <?php endif; ?>
                            </div>
                      </div>
                      <!--/column -->
