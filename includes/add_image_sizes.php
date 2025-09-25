@@ -21,8 +21,6 @@ function my_child_theme_allowed_sizes($sizes)
 add_filter('codeweber_allowed_image_sizes', 'my_child_theme_allowed_sizes');
 
 
-
-
 // Добавляем размер изображения для категорий
 add_image_size('practice_category_image', 720, 850, true);
 
