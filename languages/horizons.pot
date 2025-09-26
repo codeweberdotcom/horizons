@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 20:51+0000\n"
+"POT-Creation-Date: 2025-09-26 14:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -160,7 +160,7 @@ msgstr ""
 msgid "All Tags"
 msgstr ""
 
-#: archive-partners.php:26 taxonomy-practice_category.php:28
+#: archive-partners.php:26
 msgid "All World"
 msgstr ""
 
@@ -232,12 +232,16 @@ msgstr ""
 msgid "Blog article categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1384
+#: includes/metaboxes.php:1383
 msgid "Blog article tags for display:"
 msgstr ""
 
 #: includes/metaboxes.php:199
 msgid "Brief information about the employee"
+msgstr ""
+
+#: archive-vacancies.php:16
+msgid "Careers"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:71 functions/cpt/cpt-partners.php:75
@@ -373,11 +377,11 @@ msgstr ""
 msgid "Edit Year"
 msgstr ""
 
-#: includes/metaboxes.php:1403
+#: includes/metaboxes.php:1401
 msgid "FAQ categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1419
+#: includes/metaboxes.php:1416
 msgid "FAQ tags for display:"
 msgstr ""
 
@@ -411,11 +415,6 @@ msgstr ""
 
 #. Author of the theme
 msgid "Gladkov Denis"
-msgstr ""
-
-#: includes/metaboxes.php:1380 includes/metaboxes.php:1396
-#: includes/metaboxes.php:1415 includes/metaboxes.php:1431
-msgid "Hold Ctrl (Cmd on Mac) for multiple selection."
 msgstr ""
 
 #: includes/metaboxes.php:507
@@ -558,7 +557,7 @@ msgstr ""
 msgid "No languages found. Please add languages first."
 msgstr ""
 
-#: archive-partners.php:152 taxonomy-practice_category.php:154
+#: archive-partners.php:152
 msgid "No partner countries found."
 msgstr ""
 
@@ -570,7 +569,7 @@ msgstr ""
 msgid "No Partners found in Trash"
 msgstr ""
 
-#: archive-partners.php:144 taxonomy-practice_category.php:146
+#: archive-partners.php:144
 msgid "No partners found."
 msgstr ""
 
@@ -611,7 +610,7 @@ msgstr ""
 msgid "Not found in Trash"
 msgstr ""
 
-#: includes/metaboxes.php:1398 includes/metaboxes.php:1433
+#: includes/metaboxes.php:1396 includes/metaboxes.php:1429
 msgid "Note:"
 msgstr ""
 
@@ -623,14 +622,14 @@ msgstr ""
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1398
+#: includes/metaboxes.php:1396
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
 
-#: includes/metaboxes.php:1433
+#: includes/metaboxes.php:1429
 msgid ""
 "On the frontend, FAQ items will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
@@ -948,19 +947,19 @@ msgid ""
 "categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1404
+#: includes/metaboxes.php:1402
 msgid ""
 "Select one or more FAQ categories. FAQ items that belong to ANY of the "
 "selected categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1420
+#: includes/metaboxes.php:1417
 msgid ""
 "Select one or more FAQ tags. FAQ items that have ANY of the selected tags "
 "will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1385
+#: includes/metaboxes.php:1384
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."

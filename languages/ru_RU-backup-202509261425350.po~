@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-25 10:37+0000\n"
+"PO-Revision-Date: 2025-09-25 20:57+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -112,7 +112,7 @@ msgstr "Добавить Практику"
 msgid "Additional Information"
 msgstr "Дополнительная информация"
 
-#: includes/partners.php:122 includes/partners.php:129
+#: includes/partners.php:150 includes/partners.php:157
 msgid "Address"
 msgstr "Адрес"
 
@@ -136,7 +136,7 @@ msgstr "Все Страны"
 msgid "All Languages"
 msgstr ""
 
-#: includes/partners.php:180 includes/practices.php:52
+#: includes/partners.php:215 includes/practices.php:52
 msgid "All News"
 msgstr "Все новости"
 
@@ -275,19 +275,19 @@ msgstr "Выбрать из часто используемых"
 
 #: functions/cpt/cpt-partners.php:88
 msgid "Choose from the most used categories"
-msgstr ""
+msgstr "Выберите из наиболее часто используемых категорий"
 
 #: functions/cpt/cpt-partners.php:129
 msgid "Choose from the most used countries"
-msgstr ""
+msgstr "Выберите из наиболее часто используемых стран"
 
 #: functions/cpt/cpt-partners.php:170
 msgid "Choose from the most used languages"
-msgstr ""
+msgstr "Выберите один из наиболее используемых языков"
 
 #: functions/cpt/cpt-partners.php:213
 msgid "Choose from the most used regions"
-msgstr ""
+msgstr "Выберите из наиболее используемых регионов"
 
 #: includes/metaboxes.php:1042
 msgid "Color"
@@ -301,7 +301,16 @@ msgstr "Награды и достижения компании"
 msgid "Company:"
 msgstr "Компания:"
 
-#: functions/cpt/cpt-partners.php:118
+#: includes/partners.php:98
+#| msgid "Continent"
+msgid "Continents"
+msgstr "Регионы"
+
+#: includes/metaboxes.php:168
+msgid "Continents:"
+msgstr "Регионы:"
+
+#: includes/partners.php:120 functions/cpt/cpt-partners.php:118
 msgid "Countries"
 msgstr "Страны"
 
@@ -320,10 +329,6 @@ msgstr ""
 #: includes/metaboxes.php:827 includes/metaboxes.php:871
 msgid "Dusty Navy (#3D5567)"
 msgstr ""
-
-#: includes/partners.php:146
-msgid "E-Mail"
-msgstr "E-Mail"
 
 #: includes/metaboxes.php:114
 msgid "E-Mail:"
@@ -371,15 +376,15 @@ msgstr "Редактировать Год"
 
 #: includes/metaboxes.php:1403
 msgid "FAQ categories for display:"
-msgstr ""
+msgstr "Категории часто задаваемых вопросов для отображения:"
 
 #: includes/metaboxes.php:1419
 msgid "FAQ tags for display:"
-msgstr ""
+msgstr "Часто задаваемые вопросы теги для отображения:"
 
 #: includes/metaboxes.php:1345
 msgid "Filled in the standard WordPress editor above."
-msgstr ""
+msgstr "Заполнено в стандартном редакторе WordPress выше."
 
 #: functions/cpt/cpt-awards.php:34
 msgid "Filter awards list"
@@ -395,13 +400,13 @@ msgstr "Например: Старший финансовый аналитик �
 
 #: templates/content/single-practices.php:135
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Часто задаваемые вопросы"
 
 #: includes/metaboxes.php:137
 msgid "Full Position Title:"
 msgstr "Заголовок Полной Должности"
 
-#: includes/partners.php:112
+#: includes/partners.php:139
 msgid "Get in touch"
 msgstr "Свяжитесь с нами"
 
@@ -442,7 +447,7 @@ msgstr ""
 msgid "Insert into award"
 msgstr "Вставить в награду"
 
-#: includes/partners.php:70 functions/cpt/cpt-partners.php:159
+#: includes/partners.php:73 functions/cpt/cpt-partners.php:159
 msgid "Languages"
 msgstr "Языки"
 
@@ -522,7 +527,7 @@ msgstr "Новое имя Метки"
 msgid "New Year"
 msgstr "Новый Год"
 
-#: includes/partners.php:175 includes/practices.php:47
+#: includes/partners.php:210 includes/practices.php:47
 msgid "News"
 msgstr "Новости"
 
@@ -584,7 +589,7 @@ msgstr ""
 
 #: includes/metaboxes.php:179
 msgid "No regions found. Please add regions first."
-msgstr ""
+msgstr "Регионы не найдены. Сначала добавьте регионы."
 
 #: functions/cpt/cpt-awards.php:172
 msgid "No tags"
@@ -625,6 +630,9 @@ msgid ""
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
+"На внешнем интерфейсе будут отображаться статьи, относящиеся к ЛЮБОЙ из "
+"выбранных категорий И имеющие ЛЮБОЙ из выбранных тегов (логическое «И» между "
+"таксономиями, «ИЛИ» внутри них)."
 
 #: includes/metaboxes.php:1433
 msgid ""
@@ -632,11 +640,15 @@ msgid ""
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
+"На внешнем интерфейсе будут отображаться элементы FAQ, которые относятся к "
+"ЛЮБОЙ из выбранных категорий И имеют ЛЮБОЙ из выбранных тегов (логическое "
+"«И» между таксономиями, «ИЛИ» внутри них)."
 
-#: includes/metaboxes.php:1044
+#: includes/metaboxes.php:378 includes/metaboxes.php:1044
 msgid "Order"
 msgstr "Номер"
 
+#: includes/metaboxes.php:342 includes/metaboxes.php:355
 #: includes/metaboxes.php:839 includes/metaboxes.php:889
 msgid "Order Number"
 msgstr "Порядковый номер"
@@ -739,7 +751,7 @@ msgstr ""
 
 #: functions/cpt/cpt-partners.php:198 functions/cpt/cpt-partners.php:218
 msgid "Partner Regions"
-msgstr ""
+msgstr "Регионы Партнера"
 
 #: functions/cpt/cpt-partners.php:31
 msgid "Partner reverted to draft"
@@ -766,7 +778,7 @@ msgstr "Архив партнеров"
 msgid "Partners list"
 msgstr "Список партнеров"
 
-#: includes/partners.php:137
+#: includes/partners.php:165
 msgid "Phone"
 msgstr "Телефон"
 
@@ -826,7 +838,7 @@ msgstr "Категория Практики"
 
 #: includes/metaboxes.php:1344
 msgid "Practice description (main content)"
-msgstr "Описание Практики"
+msgstr "Описание практики (основное содержание)"
 
 #: includes/metaboxes.php:1289
 msgid "Practice Details"
@@ -877,15 +889,11 @@ msgstr ""
 msgid "Read"
 msgstr "Читать"
 
-#: includes/partners.php:93 functions/cpt/cpt-partners.php:200
+#: functions/cpt/cpt-partners.php:200
 msgid "Regions"
 msgstr "Страны"
 
-#: includes/metaboxes.php:168
-msgid "Regions:"
-msgstr "Регионы:"
-
-#: includes/partners.php:176 includes/practices.php:48
+#: includes/partners.php:211 includes/practices.php:48
 msgid "Related news"
 msgstr "Рекомендуемые новости"
 
@@ -946,24 +954,33 @@ msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
 msgstr ""
+"Выберите одну или несколько категорий. Будут показаны статьи, относящиеся к "
+"ЛЮБОЙ из выбранных категорий."
 
 #: includes/metaboxes.php:1404
 msgid ""
 "Select one or more FAQ categories. FAQ items that belong to ANY of the "
 "selected categories will be shown."
 msgstr ""
+"Выберите одну или несколько категорий часто задаваемых вопросов. Будут "
+"показаны пункты часто задаваемых вопросов, относящиеся к ЛЮБОЙ из выбранных "
+"категорий."
 
 #: includes/metaboxes.php:1420
 msgid ""
 "Select one or more FAQ tags. FAQ items that have ANY of the selected tags "
 "will be shown."
 msgstr ""
+"Выберите один или несколько тегов часто задаваемых вопросов. Будут показаны "
+"пункты часто задаваемых вопросов, содержащие ЛЮБОЙ из выбранных тегов."
 
 #: includes/metaboxes.php:1385
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
 msgstr ""
+"Выберите один или несколько тегов. Будут показаны статьи, содержащие ЛЮБОЙ "
+"из выбранных тегов."
 
 #: includes/metaboxes.php:816 includes/metaboxes.php:860
 msgid "Selected Color Preview:"
@@ -975,15 +992,15 @@ msgstr "Разделяйте категории запятыми."
 
 #: functions/cpt/cpt-partners.php:127
 msgid "Separate countries with commas"
-msgstr ""
+msgstr "Разделяйте страны запятыми"
 
 #: functions/cpt/cpt-partners.php:168
 msgid "Separate languages with commas"
-msgstr ""
+msgstr "Разделяйте языки запятыми"
 
 #: functions/cpt/cpt-partners.php:211
 msgid "Separate regions with commas"
-msgstr ""
+msgstr "Разделяйте регионы запятыми"
 
 #: functions/cpt/cpt-awards.php:166
 msgid "Separate tags with commas"
@@ -1031,11 +1048,11 @@ msgstr "Метки"
 
 #: functions/cpt/cpt-awards.php:173
 msgid "Tags list"
-msgstr ""
+msgstr "Список тегов"
 
 #: functions/cpt/cpt-awards.php:174
 msgid "Tags list navigation"
-msgstr ""
+msgstr "Навигация по списку тегов"
 
 #: functions/cpt/cpt-awards.php:69
 msgctxt "Taxonomy General Name"
@@ -1066,6 +1083,10 @@ msgstr "Метка Награды"
 msgctxt "Taxonomy Singular Name"
 msgid "Award Year"
 msgstr "Год Награды"
+
+#: includes/metaboxes.php:344 includes/metaboxes.php:359
+msgid "The lower the number, the higher the category will be in the list."
+msgstr "Чем меньше число, тем выше будет категория в списке."
 
 #: functions/cpt/cpt-practices.php:112
 msgid "Type"
@@ -1175,7 +1196,7 @@ msgstr ""
 msgid "Vintage Burgundy (#893B41)"
 msgstr ""
 
-#: includes/partners.php:118
+#: includes/partners.php:146
 msgid "Website"
 msgstr "Вебсайт"
 
@@ -1199,18 +1220,6 @@ msgstr ""
 msgid "Your Task"
 msgstr "Ваша задача"
 
-#: includes/metaboxes.php:342 includes/metaboxes.php:355
-msgid "Порядковый номер"
-msgstr ""
-
-#: includes/metaboxes.php:378
-msgid "Порядок"
-msgstr ""
-
 #: includes/metaboxes.php:1176
 msgid "Удалить изображение"
-msgstr ""
-
-#: includes/metaboxes.php:344 includes/metaboxes.php:359
-msgid "Чем меньше число, тем выше в списке будет категория"
 msgstr ""
