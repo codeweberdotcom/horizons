@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-26 17:56+0000\n"
+"PO-Revision-Date: 2025-09-26 23:37+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -963,7 +963,7 @@ msgstr "Удалить изображение Практики"
 
 #: templates/content/single-vacancies.php:61
 msgid "Requirements"
-msgstr ""
+msgstr "Требования"
 
 #: templates/content/single-vacancies.php:57
 msgid "Responsibilities"

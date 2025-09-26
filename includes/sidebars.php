@@ -273,3 +273,107 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
       echo '<!--/.accordion -->';
    }
 });
+
+
+
+// Обновляем основной код вывода категорий
+add_action('codeweber_after_widget', function ($sidebar_id) {
+   if ($sidebar_id === 'vacancies') {
+      if (!post_type_exists('vacancies')) {
+         return;
+      }
+
+      $vacancy_data = get_vacancy_data_array();
+
+      // Выводим карточку вакансии
+      echo '<div class="card border">
+          <img src="/wp-content/uploads/2025/09/closeup-diverse-group-friends-sitting-together-grayscale-scaled.jpg" class="card-img-top" alt="Вакансия">
+          <div class="card-body bg-neutral-100">
+
+          <div class="mb-6">
+           <div class="text-line-after label-u mb-4">Детали</div>';
+
+      if (!empty($vacancy_data['location'])) {
+         echo '<p class="mb-2 body-l-r d-flex align-content-center">
+              <i class="uil uil-map-marker-alt me-2""></i> ' . esc_html($vacancy_data['location']) . '
+            </p>';
+      };
+
+      if (!empty($vacancy_data['employment_type'])) {
+         // Массив переводов
+         $employment_types = array(
+            'full-time'  => __('Full-time', 'codeweber'),
+            'part-time'  => __('Part-time', 'codeweber'),
+            'internship' => __('Internship', 'codeweber'),
+            'contract'   => __('Contract', 'codeweber')
+         );
+
+         $type = $vacancy_data['employment_type'];
+         $display_type = isset($employment_types[$type]) ? $employment_types[$type] : $type;
+
+         echo '<p class="mb-2 body-l-r d-flex align-content-center">
+          <i class="uil uil-calendar-alt me-2"></i> ' . esc_html($display_type) . '
+        </p>';
+      };
+
+
+      if (!empty($vacancy_data['salary'])) {
+         echo '<p class="mb-2 body-l-r d-flex align-content-center">
+              <i class="uil uil-money-stack me-2""></i> ' . esc_html($vacancy_data['salary']) . '
+            </p>';
+      };
+
+      echo '</div>';
+
+            echo '<div class="text-line-after label-u mb-4">Контактное лицо</div>';
+
+            ?>
+
+            <div class="author-info d-md-flex align-items-center mb-4">
+				<div class="d-flex align-items-center">
+
+					<?php
+					$user_id = get_the_author_meta('ID');
+
+					// Проверяем оба возможных ключа
+					$avatar_id = get_user_meta($user_id, 'avatar_id', true);
+					if (empty($avatar_id)) {
+						$avatar_id = get_user_meta($user_id, 'custom_avatar_id', true);
+					}
+
+					if (!empty($avatar_id)) :
+						$avatar_src = wp_get_attachment_image_src($avatar_id, 'thumbnail');
+					?>
+						<img decoding="async" class="w-48 h-48  me-3" alt="<?php the_author_meta('display_name'); ?>" src="<?php echo esc_url($avatar_src[0]); ?>">
+					<?php else : ?>
+						<figure class="me-3">
+							<?php echo get_avatar(get_the_author_meta('user_email'), 48); ?>
+						</figure>
+					<?php endif; ?>
+
+					<div class="avatar-info mt-0">
+						<a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
+							<?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
+						</a>
+						<?php
+						$job_title = get_user_meta($user_id, 'user_position', true);
+						if (empty($job_title)) {
+							$job_title = __('Writer', 'codeweber');
+						}
+						?>
+						<span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
+					</div>
+				</div>
+			</div>
+			<!-- /.author-info -->
+
+         <?php
+
+            echo '<button class="btn btn-dusty-navy has-ripple btn-lg w-100">
+              Подать заявку
+            </button>
+          </div>
+        </div>
+      ';
+   }
+});

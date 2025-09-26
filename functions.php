@@ -120,3 +120,12 @@ function modify_taxonomy_args1($args, $taxonomy_name)
 add_filter('register_taxonomy_args', 'modify_taxonomy_args1', 10, 2);
 
 
+
+add_filter( 'register_post_type_args', 'modify_faq_post_type_args', 10, 2 );
+function modify_faq_post_type_args( $args, $post_type ) {
+    if ( 'faq' === $post_type ) {
+        $args['has_archive'] = false;
+        $args['publicly_queryable'] = false; // опционально
+    }
+    return $args;
+}
