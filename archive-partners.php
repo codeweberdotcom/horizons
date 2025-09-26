@@ -1,7 +1,7 @@
 <?php get_header(); ?>
 <?php get_pageheader(); ?>
 <?php
-$post_type = get_post_type();
+$post_type = universal_get_post_type();
 $post_type_lc = strtolower($post_type);
 $sidebar_position = Redux::get_option($opt_name, 'sidebar_position_archive_' . $post_type);
 $pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
