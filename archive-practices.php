@@ -47,7 +47,7 @@ if ($categories && !is_wp_error($categories)) :
       <section id="content-wrapper" class="wrapper">
          <div class="container">
             <div class="row d-flex align-items-start g-0">
-               <div class="col-lg-4 position-lg-sticky <?php echo esc_attr($image_order); ?>" style="top: 4rem; height: calc(100vh - 100px);">
+               <div class="col-lg-6 position-lg-sticky <?php echo esc_attr($image_order); ?>" style="top: 4rem; height: calc(100vh - 100px);">
                   <?php
                   if ($category_image_id) { ?>
                      <figure class="practice-category-image-wrapper" style="height: 100%;">
@@ -66,7 +66,7 @@ if ($categories && !is_wp_error($categories)) :
                   ?>
                </div>
                <!-- /column -->
-               <div class="col-lg-8 ms-auto bg-white <?php echo esc_attr($content_order); ?>">
+               <div class="col-lg-6 ms-auto bg-white <?php echo esc_attr($content_order); ?>">
                   <div class="pe-none mb-5">
                      <div class="brand-square-md <?php echo esc_attr($color_class); ?>"></div>
                   </div>
@@ -95,10 +95,7 @@ if ($categories && !is_wp_error($categories)) :
 
                      <div class="card shadow border-0">
                         <div class="row g-0">
-                           <div class="col-md-4">
-                              <img src="<?= $image_url; ?>" class="img-fluid rounded-start h-100" alt="Cover" style="object-fit: cover;">
-                           </div>
-                           <div class="col-md-8">
+                           <div class="col-md-12">
                               <div class="card-body bg-dusty-navy h-100">
                                  <p class="text-line-before label-u text-sub-white">Связаться с нами</p>
                                  <div class="h3 text-white mb-6">Получить консультацию <br> нашего специалиста</div>
