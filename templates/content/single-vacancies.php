@@ -13,68 +13,68 @@ $vacancy_data = get_vacancy_data_array();
 
 if ($vacancy_data) {
    if (!empty($vacancy_data['company'])) {
-      echo '<p>' . __('Company', 'text-domain') . ': ' . esc_html($vacancy_data['company']) . '</p>';
+      echo '<p>' . __('Company', 'horizons') . ': ' . esc_html($vacancy_data['company']) . '</p>';
    }
 
    if (!empty($vacancy_data['location'])) {
-      echo '<p>' . __('Location', 'text-domain') . ': ' . esc_html($vacancy_data['location']) . '</p>';
+      echo '<p>' . __('Location', 'horizons') . ': ' . esc_html($vacancy_data['location']) . '</p>';
    }
 
    if (!empty($vacancy_data['email'])) {
-      echo '<p>' . __('Email', 'text-domain') . ': ' . esc_html($vacancy_data['email']) . '</p>';
+      echo '<p>' . __('Email', 'horizons') . ': ' . esc_html($vacancy_data['email']) . '</p>';
    }
 
    if (!empty($vacancy_data['apply_url'])) {
-      echo '<p>' . __('Apply URL', 'text-domain') . ': ' . esc_html($vacancy_data['apply_url']) . '</p>';
+      echo '<p>' . __('Apply URL', 'horizons') . ': ' . esc_html($vacancy_data['apply_url']) . '</p>';
    }
 
    if (!empty($vacancy_data['introduction'])) {
-      echo '<p>' . __('Introduction', 'text-domain') . ': ' . esc_html($vacancy_data['introduction']) . '</p>';
+      echo '<p>' . __('Introduction', 'horizons') . ': ' . esc_html($vacancy_data['introduction']) . '</p>';
    }
 
    if (!empty($vacancy_data['additional_info'])) {
-      echo '<p>' . __('Additional Info', 'text-domain') . ': ' . esc_html($vacancy_data['additional_info']) . '</p>';
+      echo '<p>' . __('Additional Info', 'horizons') . ': ' . esc_html($vacancy_data['additional_info']) . '</p>';
    }
 
    if (!empty($vacancy_data['employment_type'])) {
-      echo '<p>' . __('Employment Type', 'text-domain') . ': ' . esc_html($vacancy_data['employment_type']) . '</p>';
+      echo '<p>' . __('Employment Type', 'horizons') . ': ' . esc_html($vacancy_data['employment_type']) . '</p>';
    }
 
    if (!empty($vacancy_data['experience'])) {
-      echo '<p>' . __('Experience', 'text-domain') . ': ' . esc_html($vacancy_data['experience']) . '</p>';
+      echo '<p>' . __('Experience', 'horizons') . ': ' . esc_html($vacancy_data['experience']) . '</p>';
    }
 
    if (!empty($vacancy_data['education'])) {
-      echo '<p>' . __('Education', 'text-domain') . ': ' . esc_html($vacancy_data['education']) . '</p>';
+      echo '<p>' . __('Education', 'horizons') . ': ' . esc_html($vacancy_data['education']) . '</p>';
    }
 
    if (!empty($vacancy_data['status'])) {
-      echo '<p>' . __('Status', 'text-domain') . ': ' . esc_html($vacancy_data['status']) . '</p>';
+      echo '<p>' . __('Status', 'horizons') . ': ' . esc_html($vacancy_data['status']) . '</p>';
    }
 
    // Обработка массивов
    if (!empty($vacancy_data['responsibilities']) && is_array($vacancy_data['responsibilities'])) {
-      echo '<p>' . __('Responsibilities', 'text-domain') . ': ' . esc_html(implode(', ', $vacancy_data['responsibilities'])) . '</p>';
+      echo '<p>' . __('Responsibilities', 'horizons') . ': ' . esc_html(implode(', ', $vacancy_data['responsibilities'])) . '</p>';
    }
 
    if (!empty($vacancy_data['requirements']) && is_array($vacancy_data['requirements'])) {
-      echo '<p>' . __('Requirements', 'text-domain') . ': ' . esc_html(implode(', ', $vacancy_data['requirements'])) . '</p>';
+      echo '<p>' . __('Requirements', 'horizons') . ': ' . esc_html(implode(', ', $vacancy_data['requirements'])) . '</p>';
    }
 
    if (!empty($vacancy_data['languages']) && is_array($vacancy_data['languages'])) {
-      echo '<p>' . __('Languages', 'text-domain') . ': ' . esc_html(implode(', ', $vacancy_data['languages'])) . '</p>';
+      echo '<p>' . __('Languages', 'horizons') . ': ' . esc_html(implode(', ', $vacancy_data['languages'])) . '</p>';
    }
 
    if (!empty($vacancy_data['skills']) && is_array($vacancy_data['skills'])) {
-      echo '<p>' . __('Skills', 'text-domain') . ': ' . esc_html(implode(', ', $vacancy_data['skills'])) . '</p>';
+      echo '<p>' . __('Skills', 'horizons') . ': ' . esc_html(implode(', ', $vacancy_data['skills'])) . '</p>';
    }
 
    if (!empty($vacancy_data['pdf_url'])) {
-      echo '<p>' . __('PDF URL', 'text-domain') . ': ' . esc_html($vacancy_data['pdf_url']) . '</p>';
+      echo '<p>' . __('PDF URL', 'horizons') . ': ' . esc_html($vacancy_data['pdf_url']) . '</p>';
    }
 
    if (!empty($vacancy_data['vacancy_types']) && is_array($vacancy_data['vacancy_types'])) {
-      echo '<p>' . __('Vacancy Types', 'text-domain') . ': ' . esc_html(implode(', ', wp_list_pluck($vacancy_data['vacancy_types'], 'name'))) . '</p>';
+      echo '<p>' . __('Vacancy Types', 'horizons') . ': ' . esc_html(implode(', ', wp_list_pluck($vacancy_data['vacancy_types'], 'name'))) . '</p>';
    }
 }
 

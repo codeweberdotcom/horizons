@@ -106,7 +106,7 @@ if ($categories && !is_wp_error($categories)) :
                      </div>
 
                   <?php else : ?>
-                     <p class="no-practices"><?php _e('No practices found in this category.', 'text-domain'); ?></p>
+                     <p class="no-practices"><?php _e('No practices found in this category.', 'horizons'); ?></p>
                   <?php endif; ?>
                </div>
                <!-- /column -->
@@ -116,7 +116,7 @@ if ($categories && !is_wp_error($categories)) :
       </section> <!-- #content-wrapper -->
    <?php endforeach; ?>
 <?php else : ?>
-   <p class="no-categories"><?php _e('No categories found.', 'text-domain'); ?></p>
+   <p class="no-categories"><?php _e('No categories found.', 'horizons'); ?></p>
 <?php endif; ?>
 
 <?php get_footer(); ?>
