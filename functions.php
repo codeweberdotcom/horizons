@@ -34,6 +34,7 @@ $theme_includes = array(
     '/includes/partners.php',
     '/includes/practices.php',
     '/includes/blog.php',
+    '/includes/vacancies.php',
     '/includes/user.php'
 );
 
