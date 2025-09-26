@@ -25,7 +25,7 @@ $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
       <!--/.row -->
    </div>
    <!-- /.container -->
-   <div class="col-lg-6 position-lg-absolute top-0 end-0 image-wrapper bg-image bg-cover h-100" data-image-src="https://bricksnew.test/wp-content/uploads/2025/09/vertical-shot-modern-stairway-beautiful-white-building-scaled.jpg">
+   <div class="col-lg-6 position-lg-absolute top-0 end-0 image-wrapper bg-image bg-cover h-100" data-image-src="/wp-content/uploads/2025/09/vertical-shot-modern-stairway-beautiful-white-building-scaled.jpg">
    </div>
    <!--/column -->
 </section>
