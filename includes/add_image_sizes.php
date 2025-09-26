@@ -15,6 +15,7 @@ function my_child_theme_allowed_sizes($sizes)
    // Для нового типа записи 'awards'
    $sizes['awards'] = ['codeweber_awards'];
    $sizes['post'] = ['codeweber_staff','codeweber_awards','thumbnail'];
+   $sizes['vacancies'] = ['codeweber_staff_800','thumbnail','codeweber_staff'];
    $sizes['partners'] = ['codeweber_staff','codeweber_staff_800','woocommerce_gallery_thumbnail'];
    return $sizes;
 }

@@ -20,7 +20,7 @@ $vacancy_data_array = get_vacancy_data_array($post->ID);
 
                if (!empty($vacancy_data['requirements']) && is_array($vacancy_data['requirements'])) : ?>
                   <div class="mb-12">
-                     <div class="text-line-after label-u mb-4"><?php _e('Requirements', 'horizons'); ?></div>
+                     <div class="text-line-after label-u mb-6"><?php _e('Requirements', 'horizons'); ?></div>
                      <ul class="unordered-list bullet-primary body-l-r">
                         <?php foreach ($vacancy_data['requirements'] as $requirement) : ?>
                            <li><?php echo esc_html($requirement); ?></li>

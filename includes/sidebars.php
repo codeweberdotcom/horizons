@@ -286,10 +286,16 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
       $vacancy_data = get_vacancy_data_array();
 
       // Выводим карточку вакансии
-      echo '<div class="card border">
-          <img src="/wp-content/uploads/2025/09/closeup-diverse-group-friends-sitting-together-grayscale-scaled.jpg" class="card-img-top" alt="Вакансия">
-          <div class="card-body bg-neutral-100">
+      echo '<div class="card border">';
 
+
+            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_staff_800');
+            if ($image_url) {
+               echo '<img src="' . esc_url($image_url) . '" class="card-img-top" alt="' . esc_attr(get_the_title()) . '">';
+            }
+
+
+          echo '<div class="card-body bg-neutral-100">
           <div class="mb-6">
            <div class="text-line-after label-u mb-4">Детали</div>';
 
