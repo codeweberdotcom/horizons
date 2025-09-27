@@ -172,38 +172,43 @@ if ($current_term && !is_wp_error($current_term)) {
                                  </figure>
                               <?php endif; ?>
 
-                              <div class="avatar-info mt-0">
-                                 <a href="<?php echo esc_url(get_author_posts_url($category_author_id)); ?>"
-                                    class="hover-7 link-body label-u text-charcoal-blue d-block lh-0">
-                                    <?php echo esc_html($category_author->first_name . ' ' . $category_author->last_name); ?>
-                                 </a>
-                                 <span class="body-s lh-0 text-neutral-500">
-                                    <?php echo esc_html($category_author_job_title); ?>
-                                 </span>
+
+                              <?php
+                              $user_link = get_user_partner_link($category_author_id);
+                              ?>
+                              
+                                 <div class="avatar-info mt-0">
+                                    <a href="<?php echo esc_url($user_link['url']); ?>"
+                                       class="hover-7 link-body label-u text-charcoal-blue d-block lh-0">
+                                       <?php echo esc_html($category_author->first_name . ' ' . $category_author->last_name); ?>
+                                    </a>
+                                    <span class="body-s lh-0 text-neutral-500">
+                                       <?php echo esc_html($category_author_job_title); ?>
+                                    </span>
+                                 </div>
                               </div>
                            </div>
-                        </div>
 
-                        <div class="contact-buttons">
-                           <a href="mailto:<?php echo esc_attr($category_author->user_email); ?>"
-                              class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-2">
-                              <i class="uil uil-envelope me-2"></i>
-                              <?php _e('Send Email', 'horizons'); ?>
-                           </a>
+                           <div class="contact-buttons">
+                              <a href="mailto:<?php echo esc_attr($category_author->user_email); ?>"
+                                 class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-2">
+                                 <i class="uil uil-envelope me-2"></i>
+                                 <?php _e('Send Email', 'horizons'); ?>
+                              </a>
 
-                           <button class="btn btn-dusty-navy has-ripple btn-lg w-100"
-                              onclick="window.location.href='tel:<?php echo esc_attr(get_user_meta($category_author_id, 'phone', true)); ?>'">
-                              <?php _e('Submit a request', 'horizons'); ?>
-                           </button>
+                              <button class="btn btn-dusty-navy has-ripple btn-lg w-100"
+                                 onclick="window.location.href='tel:<?php echo esc_attr(get_user_meta($category_author_id, 'phone', true)); ?>'">
+                                 <?php _e('Submit a request', 'horizons'); ?>
+                              </button>
+                           </div>
+                        <?php else : ?>
+                           <div class="text-center py-4">
+                              <i class="uil uil-user-circle display-4 text-muted mb-3"></i>
+                              <p class="text-muted mb-0"><?php _e('No category manager assigned', 'horizons'); ?></p>
+                           </div>
+                        <?php endif; ?>
                         </div>
-                     <?php else : ?>
-                        <div class="text-center py-4">
-                           <i class="uil uil-user-circle display-4 text-muted mb-3"></i>
-                           <p class="text-muted mb-0"><?php _e('No category manager assigned', 'horizons'); ?></p>
-                        </div>
-                     <?php endif; ?>
                   </div>
-               </div>
             </aside>
          </div>
       </div>

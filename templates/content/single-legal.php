@@ -88,33 +88,37 @@
                   </figure>
                <?php endif; ?>
 
-               <div class="avatar-info mt-0">
-                  <a href="<?php echo esc_url(get_user_partner_link($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
-                     <?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
-                  </a>
-                  <?php
-                  $job_title = get_user_meta($user_id, 'user_position', true);
-                  if (empty($job_title)) {
-                     $job_title = __('Writer', 'codeweber');
-                  }
-                  ?>
-                  <span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
+               <?php
+               $user_link = get_user_partner_link($user_id);
+               ?>
+
+                     <div class="avatar-info mt-0">
+                        <a href="<?php echo esc_url($user_link['url']); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
+                           <?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
+                        </a>
+                        <?php
+                        $job_title = get_user_meta($user_id, 'user_position', true);
+                        if (empty($job_title)) {
+                           $job_title = __('Writer', 'codeweber');
+                        }
+                        ?>
+                        <span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
+                     </div>
+               </div>
+
+               <div class="mt-3 mt-md-0 ms-auto">
+                  <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
                </div>
             </div>
+            <!-- /.author-info -->
 
-            <div class="mt-3 mt-md-0 ms-auto">
-               <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
-            </div>
+            <?php $bio = get_user_meta($user_id, 'description', true); ?>
+            <?php
+            if (!empty($bio)) : ?>
+               <p><?php echo esc_html($bio); ?></p>
+            <?php endif; ?>
+            <!-- /.author-bio -->
+
          </div>
-         <!-- /.author-info -->
-
-         <?php $bio = get_user_meta($user_id, 'description', true); ?>
-         <?php
-         if (!empty($bio)) : ?>
-            <p><?php echo esc_html($bio); ?></p>
-         <?php endif; ?>
-         <!-- /.author-bio -->
-
       </div>
-   </div>
 </section> <!-- #post-<?php the_ID(); ?> -->

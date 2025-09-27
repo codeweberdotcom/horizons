@@ -131,8 +131,7 @@ function modify_faq_post_type_args( $args, $post_type ) {
 }
 
 
-
-// Универсальная функция для получения ссылки на партнера
+// Универсальная функция для получения ссылки (партнер или пользователь)
 function get_user_partner_link($user_id = null)
 {
     if (!$user_id) {
@@ -141,22 +140,23 @@ function get_user_partner_link($user_id = null)
 
     $partner_id = get_user_meta($user_id, 'user_partner', true);
 
-    if (!$partner_id) {
-        return false;
+    // Если есть партнер - возвращаем ссылку на партнера
+    if ($partner_id) {
+        return array(
+            'url' => get_permalink($partner_id),
+            'title' => get_the_title($partner_id),
+            'id' => $partner_id,
+            'edit_url' => get_edit_post_link($partner_id),
+            'type' => 'partner'
+        );
     }
 
+    // Если нет партнера - возвращаем ссылку на профиль пользователя
     return array(
-        'url' => get_permalink($partner_id),
-        'title' => get_the_title($partner_id),
-        'id' => $partner_id,
-        'edit_url' => get_edit_post_link($partner_id)
+        'url' => get_author_posts_url($user_id),
+        'title' => get_the_author_meta('display_name', $user_id),
+        'id' => $user_id,
+        'edit_url' => get_edit_user_link($user_id),
+        'type' => 'user'
     );
-}
-
-// Использование
-$partner_link = get_user_partner_link();
-if ($partner_link) {
-    echo '<a href="' . esc_url($partner_link['url']) . '" class="partner-link">';
-    echo esc_html($partner_link['title']);
-    echo '</a>';
 }

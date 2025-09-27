@@ -88,10 +88,16 @@
 						</figure>
 					<?php endif; ?>
 
+
+					<?php
+					$user_link = get_user_partner_link($user_id);
+					?>
+
 					<div class="avatar-info mt-0">
-						<a href="<?php echo esc_url(get_user_partner_link($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
+						<a href="<?php echo esc_url($user_link['url']); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
 							<?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
 						</a>
+
 						<?php
 						$job_title = get_user_meta($user_id, 'user_position', true);
 						if (empty($job_title)) {
