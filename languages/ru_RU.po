@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-27 15:25+0000\n"
+"PO-Revision-Date: 2025-09-27 15:27+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -355,7 +355,7 @@ msgstr "Удалить Изображение Категории"
 
 #: includes/sidebars.php:319
 msgid "Details"
-msgstr "Детали"
+msgstr "Детально"
 
 #: includes/sidebars.php:367
 msgid "Download document"

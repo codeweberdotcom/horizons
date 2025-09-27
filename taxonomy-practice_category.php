@@ -135,7 +135,7 @@ if ($current_term && !is_wp_error($current_term)) {
                <div class="card border">
                   <div class="card-body bg-neutral-100">
                      <div class="mb-6">
-                        <div class="text-line-after label-u mb-4"><?php _e('Area Details', 'horizons'); ?></div>
+                        <div class="text-line-after label-u mb-4"><?php _e('Details', 'horizons'); ?></div>
 
                         <?php if (!empty($current_term->name)) : ?>
                            <p class="mb-2 body-l-r d-flex align-content-center">
