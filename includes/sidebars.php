@@ -369,7 +369,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             <?php endif; ?>
 
             <button class="btn btn-dusty-navy has-ripple btn-lg w-100">
-               <?php _e('Apply now', 'horizons'); ?>
+               <?php _e('Submit a request', 'horizons'); ?>
             </button>
          </div>
       </div>
