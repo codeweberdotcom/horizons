@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-27 15:16+0000\n"
+"POT-Creation-Date: 2025-09-27 15:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -760,6 +760,7 @@ msgid "Parent Year:"
 msgstr ""
 
 #: includes/sidebars.php:291
+msgctxt "Неполная занятость"
 msgid "Part-time"
 msgstr ""
 

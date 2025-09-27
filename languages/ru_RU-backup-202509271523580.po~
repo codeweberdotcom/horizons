@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-27 15:07+0000\n"
+"PO-Revision-Date: 2025-09-27 15:16+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -28,12 +28,12 @@ msgstr "Наше \"решение\" текст"
 msgid "\"Your task\" text:"
 msgstr "Ваша \"задача\" текст"
 
-#: taxonomy-practice_category.php:156
+#: taxonomy-practice_category.php:152
 msgid "%d practice"
 msgid_plural "%d practices"
-msgstr[0] "практика"
-msgstr[1] "практики"
-msgstr[2] "практик"
+msgstr[0] "%d практика"
+msgstr[1] "%d практики"
+msgstr[2] "%d практик"
 
 #: includes/metaboxes.php:1242
 msgid "Add Category image"
@@ -191,6 +191,10 @@ msgstr "Альтернативное название для отображен�
 msgid "Apply now"
 msgstr ""
 
+#: taxonomy-practice_category.php:138
+msgid "Area Details"
+msgstr "Детально о направлении"
+
 #: includes/metaboxes.php:498
 msgid "Associated partners Members"
 msgstr "Ассоциированные Партнеры"
@@ -251,10 +255,6 @@ msgstr "Теги статей блога для отображения:"
 msgid "Brief information about the employee"
 msgstr "Краткая информация о сотруднике"
 
-#: taxonomy-practice_category.php:201
-msgid "Call Manager"
-msgstr ""
-
 #: archive-vacancies.php:17
 msgid "Careers"
 msgstr "Карьера"
@@ -275,15 +275,11 @@ msgstr "Навигация по списку категорий"
 msgid "Category Color"
 msgstr "Цвет Категории"
 
-#: taxonomy-practice_category.php:142
-msgid "Category Details"
-msgstr ""
-
 #: includes/metaboxes.php:1215 includes/metaboxes.php:1232
 msgid "Category image"
 msgstr "Изображение Категории"
 
-#: taxonomy-practice_category.php:165
+#: taxonomy-practice_category.php:161
 msgid "Category Manager"
 msgstr "Менеджер направления"
 
@@ -589,7 +585,7 @@ msgstr "Категории не найдены"
 msgid "No categories found."
 msgstr "Категории не найдены."
 
-#: taxonomy-practice_category.php:207
+#: taxonomy-practice_category.php:202
 msgid "No category manager assigned"
 msgstr ""
 
@@ -649,7 +645,7 @@ msgstr "Регионы не найдены"
 msgid "No regions found. Please add regions first."
 msgstr "Регионы не найдены. Сначала добавьте регионы."
 
-#: taxonomy-practice_category.php:223
+#: taxonomy-practice_category.php:218
 msgid "No services found in this category."
 msgstr ""
 
@@ -1069,9 +1065,9 @@ msgstr ""
 msgid "Selected Color Preview:"
 msgstr "Предварительный просмотр выбранного цвета:"
 
-#: taxonomy-practice_category.php:195
+#: taxonomy-practice_category.php:191
 msgid "Send Email"
-msgstr ""
+msgstr "Отправить E-Mail"
 
 #: functions/cpt/cpt-awards.php:80 functions/cpt/cpt-partners.php:86
 msgid "Separate categories with commas"
@@ -1124,6 +1120,10 @@ msgstr ""
 #: includes/metaboxes.php:823 includes/metaboxes.php:867
 msgid "Slate Gray (#86909B)"
 msgstr ""
+
+#: taxonomy-practice_category.php:196
+msgid "Submit a request"
+msgstr "Заполнить заявку"
 
 #: includes/metaboxes.php:104
 msgid "Surname:"
