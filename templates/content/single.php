@@ -89,7 +89,7 @@
 					<?php endif; ?>
 
 					<div class="avatar-info mt-0">
-						<a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
+						<a href="<?php echo esc_url(get_user_partner_link($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
 							<?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
 						</a>
 						<?php
