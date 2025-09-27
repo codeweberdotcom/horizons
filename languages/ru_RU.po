@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-27 15:23+0000\n"
+"PO-Revision-Date: 2025-09-27 15:25+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -587,7 +587,7 @@ msgstr "Категории не найдены."
 
 #: taxonomy-practice_category.php:202
 msgid "No category manager assigned"
-msgstr ""
+msgstr "Менеджер категории не назначен"
 
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
