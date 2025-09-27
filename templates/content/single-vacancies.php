@@ -1,13 +1,10 @@
 <?php
 $vacancy_data_array = get_vacancy_data_array($post->ID);
 ?>
-
 <div class="blog single">
    <div class="classic-view">
       <article class="post">
          <div class="post-content mb-5">
-
-
             <?php
             $vacancy_data = get_vacancy_data_array();
 
@@ -16,9 +13,7 @@ $vacancy_data_array = get_vacancy_data_array($post->ID);
                if (!empty($vacancy_data['introduction'])) {
                   echo '<div class="body-l-r mb-12">' . esc_html($vacancy_data['introduction']) . '</div>';
                }
-
             ?>
-
                <?php if (!empty($vacancy_data['requirements']) && is_array($vacancy_data['requirements'])) : ?>
                   <div class="mb-12">
                      <div class="text-line-after label-u mb-6"><?php _e('Requirements', 'horizons'); ?></div>

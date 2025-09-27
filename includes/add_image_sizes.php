@@ -61,6 +61,11 @@ function limit_image_sizes_by_context($sizes, $metadata)
             'height' => 800,
             'crop' => true
          ),
+         'codeweber_awards' => array(
+            'width' => 960,
+            'height' => 600,
+            'crop' => true
+         ),
       );
    }
 
