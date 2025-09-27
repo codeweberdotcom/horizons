@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-27 15:21+0000\n"
+"POT-Creation-Date: 2025-09-27 19:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -174,6 +174,10 @@ msgstr ""
 msgid "All Years"
 msgstr ""
 
+#: includes/metaboxes.php:1641
+msgid "Already assigned"
+msgstr ""
+
 #: includes/metaboxes.php:1043
 msgid "Alt. Title"
 msgstr ""
@@ -186,16 +190,12 @@ msgstr ""
 msgid "Alternative title for display purposes"
 msgstr ""
 
-#: includes/sidebars.php:372
-msgid "Apply now"
-msgstr ""
-
-#: taxonomy-practice_category.php:138
-msgid "Area Details"
-msgstr ""
-
 #: includes/metaboxes.php:498
 msgid "Associated partners Members"
+msgstr ""
+
+#: includes/metaboxes.php:1606 includes/metaboxes.php:1759
+msgid "Associated User"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:11 functions/cpt/cpt-awards.php:38
@@ -270,6 +270,10 @@ msgstr ""
 msgid "Categories list navigation"
 msgstr ""
 
+#: includes/metaboxes.php:1177
+msgid "Category Author"
+msgstr ""
+
 #: includes/metaboxes.php:812 includes/metaboxes.php:855
 msgid "Category Color"
 msgstr ""
@@ -311,6 +315,10 @@ msgstr ""
 msgid "Choose from the most used regions"
 msgstr ""
 
+#: includes/metaboxes.php:1581
+msgid "Choose the partner this user represents."
+msgstr ""
+
 #: includes/metaboxes.php:1042
 msgid "Color"
 msgstr ""
@@ -347,11 +355,23 @@ msgstr ""
 msgid "Countries:"
 msgstr ""
 
+#: includes/metaboxes.php:1588
+msgid "Current Partner:"
+msgstr ""
+
+#: includes/metaboxes.php:1656
+msgid "Current User:"
+msgstr ""
+
 #: includes/metaboxes.php:1243
 msgid "Delete Category image"
 msgstr ""
 
-#: includes/sidebars.php:319
+#: includes/metaboxes.php:1220
+msgid "Delete Image"
+msgstr ""
+
+#: taxonomy-practice_category.php:138 includes/sidebars.php:319
 msgid "Details"
 msgstr ""
 
@@ -760,12 +780,16 @@ msgid "Parent Year:"
 msgstr ""
 
 #: includes/sidebars.php:291
-msgctxt "Неполная занятость"
 msgid "Part-time"
 msgstr ""
 
-#: functions/cpt/cpt-partners.php:10 functions/cpt/cpt-partners.php:29
+#: includes/metaboxes.php:1791 functions/cpt/cpt-partners.php:10
+#: functions/cpt/cpt-partners.php:29
 msgid "Partner"
+msgstr ""
+
+#: includes/metaboxes.php:1567
+msgid "Partner Association"
 msgstr ""
 
 #: includes/sidebars.php:131
@@ -949,6 +973,10 @@ msgstr ""
 msgid "Primary (#FEBE10)"
 msgstr ""
 
+#: includes/metaboxes.php:1570
+msgid "Primary Partner"
+msgstr ""
+
 #: includes/blog.php:159
 msgid "Read"
 msgstr ""
@@ -1017,8 +1045,28 @@ msgstr ""
 msgid "Search Years"
 msgstr ""
 
+#: includes/metaboxes.php:719
+msgid "Select awards..."
+msgstr ""
+
+#: includes/metaboxes.php:737
+msgid "Select blog categories..."
+msgstr ""
+
+#: includes/metaboxes.php:743
+msgid "Select blog tags..."
+msgstr ""
+
 #: includes/metaboxes.php:829 includes/metaboxes.php:873
 msgid "Select color for practice category display"
+msgstr ""
+
+#: includes/metaboxes.php:749
+msgid "Select faq categories..."
+msgstr ""
+
+#: includes/metaboxes.php:755
+msgid "Select faq tags..."
 msgstr ""
 
 #: includes/metaboxes.php:1413
@@ -1043,6 +1091,34 @@ msgstr ""
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
+msgstr ""
+
+#: includes/metaboxes.php:774
+msgid "Select partners counries..."
+msgstr ""
+
+#: includes/metaboxes.php:731
+msgid "Select partners language..."
+msgstr ""
+
+#: includes/metaboxes.php:725
+msgid "Select partners members..."
+msgstr ""
+
+#: includes/metaboxes.php:768
+msgid "Select partners regions..."
+msgstr ""
+
+#: includes/metaboxes.php:762
+msgid "Select related blog tags..."
+msgstr ""
+
+#: includes/metaboxes.php:1188
+msgid "Select the author responsible for this practice category."
+msgstr ""
+
+#: includes/metaboxes.php:1648
+msgid "Select the user associated with this partner."
 msgstr ""
 
 #: includes/metaboxes.php:816 includes/metaboxes.php:860
@@ -1105,7 +1181,7 @@ msgstr ""
 msgid "Slate Gray (#86909B)"
 msgstr ""
 
-#: taxonomy-practice_category.php:196
+#: taxonomy-practice_category.php:196 includes/sidebars.php:372
 msgid "Submit a request"
 msgstr ""
 
@@ -1295,6 +1371,14 @@ msgstr ""
 msgid "Your Task"
 msgstr ""
 
-#: includes/metaboxes.php:1220
-msgid "Удалить изображение"
+#: includes/metaboxes.php:1631
+msgid "— No User —"
+msgstr ""
+
+#: includes/metaboxes.php:1181
+msgid "— Select Author —"
+msgstr ""
+
+#: includes/metaboxes.php:1573
+msgid "— Select Partner —"
 msgstr ""

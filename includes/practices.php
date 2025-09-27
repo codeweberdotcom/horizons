@@ -65,7 +65,3 @@ function add_news_section_after_practices($post_type)
    }
 }
 add_action('after_single_post', 'add_news_section_after_practices', 10, 1);
-
-
-
-

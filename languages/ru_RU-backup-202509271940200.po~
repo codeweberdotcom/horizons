@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-27 15:09+0000\n"
+"PO-Revision-Date: 2025-09-27 19:38+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -28,7 +28,7 @@ msgstr "Наше \"решение\" текст"
 msgid "\"Your task\" text:"
 msgstr "Ваша \"задача\" текст"
 
-#: taxonomy-practice_category.php:156
+#: taxonomy-practice_category.php:152
 msgid "%d practice"
 msgid_plural "%d practices"
 msgstr[0] "%d практика"
@@ -175,6 +175,10 @@ msgstr "Весь мир"
 msgid "All Years"
 msgstr "Все Года"
 
+#: includes/metaboxes.php:1641
+msgid "Already assigned"
+msgstr "Уже назначен"
+
 #: includes/metaboxes.php:1043
 msgid "Alt. Title"
 msgstr "Альтернативный Заголовок"
@@ -187,13 +191,13 @@ msgstr "Альтернативный Заголовок"
 msgid "Alternative title for display purposes"
 msgstr "Альтернативное название для отображения"
 
-#: includes/sidebars.php:372
-msgid "Apply now"
-msgstr ""
-
 #: includes/metaboxes.php:498
 msgid "Associated partners Members"
 msgstr "Ассоциированные Партнеры"
+
+#: includes/metaboxes.php:1606 includes/metaboxes.php:1759
+msgid "Associated User"
+msgstr "Связанный пользователь"
 
 #: functions/cpt/cpt-awards.php:11 functions/cpt/cpt-awards.php:38
 msgid "Award"
@@ -267,19 +271,19 @@ msgstr "Список Категорий"
 msgid "Categories list navigation"
 msgstr "Навигация по списку категорий"
 
+#: includes/metaboxes.php:1177
+msgid "Category Author"
+msgstr "Автор Направления"
+
 #: includes/metaboxes.php:812 includes/metaboxes.php:855
 msgid "Category Color"
 msgstr "Цвет Категории"
-
-#: taxonomy-practice_category.php:142
-msgid "Category Details"
-msgstr ""
 
 #: includes/metaboxes.php:1215 includes/metaboxes.php:1232
 msgid "Category image"
 msgstr "Изображение Категории"
 
-#: taxonomy-practice_category.php:165
+#: taxonomy-practice_category.php:161
 msgid "Category Manager"
 msgstr "Менеджер направления"
 
@@ -312,6 +316,10 @@ msgstr "Выберите один из наиболее используемых
 msgid "Choose from the most used regions"
 msgstr "Выберите из наиболее используемых регионов"
 
+#: includes/metaboxes.php:1581
+msgid "Choose the partner this user represents."
+msgstr "Выберите партнера, которого представляет этот пользователь."
+
 #: includes/metaboxes.php:1042
 msgid "Color"
 msgstr "Цвет"
@@ -339,7 +347,7 @@ msgstr "Регионы:"
 
 #: includes/sidebars.php:293
 msgid "Contract"
-msgstr ""
+msgstr "Договор"
 
 #: includes/partners.php:120 functions/cpt/cpt-partners.php:118
 msgid "Countries"
@@ -349,13 +357,21 @@ msgstr "Страны"
 msgid "Countries:"
 msgstr "Страны:"
 
+#: includes/metaboxes.php:1588
+msgid "Current Partner:"
+msgstr "Текущий партнер:"
+
+#: includes/metaboxes.php:1656
+msgid "Current User:"
+msgstr "Текущий пользователь:"
+
 #: includes/metaboxes.php:1243
 msgid "Delete Category image"
 msgstr "Удалить Изображение Категории"
 
-#: includes/sidebars.php:319
+#: taxonomy-practice_category.php:138 includes/sidebars.php:319
 msgid "Details"
-msgstr "Детали"
+msgstr "Детально"
 
 #: includes/sidebars.php:367
 msgid "Download document"
@@ -447,7 +463,7 @@ msgstr "Заголовок Полной Должности"
 
 #: includes/sidebars.php:290
 msgid "Full-time"
-msgstr ""
+msgstr "На постоянной основе"
 
 #: includes/partners.php:139
 msgid "Get in touch"
@@ -487,7 +503,7 @@ msgstr "Вставить в награду"
 
 #: includes/sidebars.php:292
 msgid "Internship"
-msgstr ""
+msgstr "Стажировка"
 
 #: includes/partners.php:73 functions/cpt/cpt-partners.php:159
 msgid "Languages"
@@ -585,9 +601,9 @@ msgstr "Категории не найдены"
 msgid "No categories found."
 msgstr "Категории не найдены."
 
-#: taxonomy-practice_category.php:207
+#: taxonomy-practice_category.php:202
 msgid "No category manager assigned"
-msgstr ""
+msgstr "Менеджер категории не назначен"
 
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
@@ -645,9 +661,9 @@ msgstr "Регионы не найдены"
 msgid "No regions found. Please add regions first."
 msgstr "Регионы не найдены. Сначала добавьте регионы."
 
-#: taxonomy-practice_category.php:223
+#: taxonomy-practice_category.php:218
 msgid "No services found in this category."
-msgstr ""
+msgstr "В этой категории не найдено ни одной практики"
 
 #: functions/cpt/cpt-awards.php:172
 msgid "No tags"
@@ -770,10 +786,16 @@ msgstr "Родительский Год"
 #: includes/sidebars.php:291
 msgid "Part-time"
 msgstr ""
+"Неполная занятость\n"
 
-#: functions/cpt/cpt-partners.php:10 functions/cpt/cpt-partners.php:29
+#: includes/metaboxes.php:1791 functions/cpt/cpt-partners.php:10
+#: functions/cpt/cpt-partners.php:29
 msgid "Partner"
 msgstr "Партнер"
+
+#: includes/metaboxes.php:1567
+msgid "Partner Association"
+msgstr "Связь с партнером"
 
 #: includes/sidebars.php:131
 msgid "Partner Biographies"
@@ -862,11 +884,11 @@ msgstr "Популярные Страны"
 
 #: functions/cpt/cpt-partners.php:167
 msgid "Popular Languages"
-msgstr ""
+msgstr "Популярные языки"
 
 #: functions/cpt/cpt-partners.php:210
 msgid "Popular Regions"
-msgstr ""
+msgstr "Популярные регионы"
 
 #: functions/cpt/cpt-awards.php:169
 msgid "Popular Tags"
@@ -916,7 +938,7 @@ msgstr "Изображение практики"
 
 #: taxonomy-practice_category.php:42
 msgid "Practice Manager"
-msgstr ""
+msgstr "Менеджер практики"
 
 #: functions/cpt/cpt-practices.php:30
 msgid "Practice published"
@@ -955,6 +977,10 @@ msgstr ""
 #: includes/metaboxes.php:821 includes/metaboxes.php:865
 msgid "Primary (#FEBE10)"
 msgstr ""
+
+#: includes/metaboxes.php:1570
+msgid "Primary Partner"
+msgstr "Основной партнер"
 
 #: includes/blog.php:159
 msgid "Read"
@@ -1024,9 +1050,29 @@ msgstr "Поиск Тега"
 msgid "Search Years"
 msgstr "Выбрать Год"
 
+#: includes/metaboxes.php:719
+msgid "Select awards..."
+msgstr "Выберите награды..."
+
+#: includes/metaboxes.php:737
+msgid "Select blog categories..."
+msgstr "Выберите категории блога..."
+
+#: includes/metaboxes.php:743
+msgid "Select blog tags..."
+msgstr "Выберите теги блога..."
+
 #: includes/metaboxes.php:829 includes/metaboxes.php:873
 msgid "Select color for practice category display"
 msgstr "Выберите цвет для отображения категории практики"
+
+#: includes/metaboxes.php:749
+msgid "Select faq categories..."
+msgstr "Выберите категории FAQ"
+
+#: includes/metaboxes.php:755
+msgid "Select faq tags..."
+msgstr "Выберите теги FAQ..."
 
 #: includes/metaboxes.php:1413
 msgid ""
@@ -1061,11 +1107,39 @@ msgstr ""
 "Выберите один или несколько тегов. Будут показаны статьи, содержащие ЛЮБОЙ "
 "из выбранных тегов."
 
+#: includes/metaboxes.php:774
+msgid "Select partners counries..."
+msgstr "Выберите страны партнера..."
+
+#: includes/metaboxes.php:731
+msgid "Select partners language..."
+msgstr "Выберите язык партнера..."
+
+#: includes/metaboxes.php:725
+msgid "Select partners members..."
+msgstr "Выберите участников-партнеров..."
+
+#: includes/metaboxes.php:768
+msgid "Select partners regions..."
+msgstr "Выберите регионы партнера..."
+
+#: includes/metaboxes.php:762
+msgid "Select related blog tags..."
+msgstr ""
+
+#: includes/metaboxes.php:1188
+msgid "Select the author responsible for this practice category."
+msgstr ""
+
+#: includes/metaboxes.php:1648
+msgid "Select the user associated with this partner."
+msgstr ""
+
 #: includes/metaboxes.php:816 includes/metaboxes.php:860
 msgid "Selected Color Preview:"
 msgstr "Предварительный просмотр выбранного цвета:"
 
-#: taxonomy-practice_category.php:195
+#: taxonomy-practice_category.php:191
 msgid "Send Email"
 msgstr "Отправить E-Mail"
 
@@ -1121,9 +1195,9 @@ msgstr ""
 msgid "Slate Gray (#86909B)"
 msgstr ""
 
-#: taxonomy-practice_category.php:201
+#: taxonomy-practice_category.php:196 includes/sidebars.php:372
 msgid "Submit a request"
-msgstr "Отправить запрос"
+msgstr "Заполнить заявку"
 
 #: includes/metaboxes.php:104
 msgid "Surname:"
@@ -1313,4 +1387,16 @@ msgstr "Ваша задача"
 
 #: includes/metaboxes.php:1220
 msgid "Удалить изображение"
+msgstr ""
+
+#: includes/metaboxes.php:1631
+msgid "— No User —"
+msgstr ""
+
+#: includes/metaboxes.php:1181
+msgid "— Select Author —"
+msgstr ""
+
+#: includes/metaboxes.php:1573
+msgid "— Select Partner —"
 msgstr ""

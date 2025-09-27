@@ -22,8 +22,6 @@ $post_type_lc = strtolower($post_type);
 $sidebar_position = Redux::get_option($opt_name, 'sidebar_position_archive_' . $post_type);
 $pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
 
-
-// Определяем класс колонки для контента
 $content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
 ?>
 

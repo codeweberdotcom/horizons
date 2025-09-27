@@ -716,62 +716,62 @@ function codeweber_enqueue_select2()
             jQuery(document).ready(function($) {
                 // Initialize Select2 for partners awards
                 $("#partners_awards").select2({
-                    placeholder: "' . __('Select awards...', 'codeweber') . '",
+                    placeholder: "' . __('Select awards...', 'horizons') . '",
                     allowClear: true
                 });
                 
                 // Initialize Select2 for award partners
                 $("#award_partners").select2({
-                    placeholder: "' . __('Select partners members...', 'codeweber') . '",
+                    placeholder: "' . __('Select partners members...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for award partners
                 $("#partners_languages").select2({
-                    placeholder: "' . __('Select partners language...', 'codeweber') . '",
+                    placeholder: "' . __('Select partners language...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for award partners
                 $("#related_blog_categories").select2({
-                    placeholder: "' . __('Select blog categories...', 'codeweber') . '",
+                    placeholder: "' . __('Select blog categories...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for blog tags
                 $("#related_blog_tags").select2({
-                    placeholder: "' . __('Select blog tags...', 'codeweber') . '",
+                    placeholder: "' . __('Select blog tags...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for faq categories
                 $("#related_faq_categories").select2({
-                    placeholder: "' . __('Select faq categories...', 'codeweber') . '",
+                    placeholder: "' . __('Select faq categories...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for faq tags
                 $("#related_faq_tags").select2({
-                    placeholder: "' . __('Select faq tags...', 'codeweber') . '",
+                    placeholder: "' . __('Select faq tags...', 'horizons') . '",
                     allowClear: true
                 });
 
 
                 // Initialize Select2 for related_blog_tags
                 $("#related_blog_tags").select2({
-                    placeholder: "' . __('Select related_blog_tags...', 'codeweber') . '",
+                    placeholder: "' . __('Select related blog tags...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for partners_regions
                 $("#partners_regions").select2({
-                    placeholder: "' . __('Select partners regions...', 'codeweber') . '",
+                    placeholder: "' . __('Select partners regions...', 'horizons') . '",
                     allowClear: true
                 });
 
                 // Initialize Select2 for partners counries
                 $("#partners_countries").select2({
-                    placeholder: "' . __('Select partners counries...', 'codeweber') . '",
+                    placeholder: "' . __('Select partners counries...', 'horizons') . '",
                     allowClear: true
                 });
             });
@@ -1174,18 +1174,18 @@ function add_practice_category_author_field($term)
 ?>
    <tr class="form-field">
       <th scope="row">
-         <label for="practice_category_author"><?php _e('Category Author', 'codeweber'); ?></label>
+         <label for="practice_category_author"><?php _e('Category Author', 'horizons'); ?></label>
       </th>
       <td>
          <select name="practice_category_author" id="practice_category_author" class="postform">
-            <option value=""><?php _e('— Select Author —', 'codeweber'); ?></option>
+            <option value=""><?php _e('— Select Author —', 'horizons'); ?></option>
             <?php foreach ($users as $user) : ?>
                <option value="<?php echo $user->ID; ?>" <?php selected($author_id, $user->ID); ?>>
                   <?php echo esc_html($user->display_name . ' (' . $user->user_email . ')'); ?>
                </option>
             <?php endforeach; ?>
          </select>
-         <p class="description"><?php _e('Select the author responsible for this practice category.', 'codeweber'); ?></p>
+         <p class="description"><?php _e('Select the author responsible for this practice category.', 'horizons'); ?></p>
       </td>
    </tr>
 <?php
@@ -1217,7 +1217,7 @@ function add_practice_category_image_field($taxonomy)
       <div id="category-image-wrapper"></div>
       <p>
          <input type="button" class="button button-secondary ct_tax_media_button" id="ct_tax_media_button" name="ct_tax_media_button" value="<?php _e('Add Image', 'horizons'); ?>" />
-         <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Удалить изображение', 'horizons'); ?>" />
+         <input type="button" class="button button-secondary ct_tax_media_remove" id="ct_tax_media_remove" name="ct_tax_media_remove" value="<?php _e('Delete Image', 'horizons'); ?>" />
       </p>
    </div>
 <?php
@@ -1543,3 +1543,270 @@ function save_practices_meta($post_id)
    }
 }
 add_action('save_post_practices', 'save_practices_meta');
+
+
+//Admin User
+
+// 1. ПОЛЕ ДЛЯ ПОЛЬЗОВАТЕЛЯ (в профиле)
+add_action('show_user_profile', 'single_partner_bidirectional_field');
+add_action('edit_user_profile', 'single_partner_bidirectional_field');
+
+function single_partner_bidirectional_field($user)
+{
+   $user_partner = get_user_meta($user->ID, 'user_partner', true);
+
+   $partners = get_posts(array(
+      'post_type' => 'partners',
+      'posts_per_page' => -1,
+      'orderby' => 'title',
+      'order' => 'ASC',
+      'post_status' => 'publish'
+   ));
+?>
+
+   <h3><?php _e('Partner Association', 'horizons'); ?></h3>
+   <table class="form-table">
+      <tr>
+         <th><label for="user_partner"><?php _e('Primary Partner', 'horizons'); ?></label></th>
+         <td>
+            <select name="user_partner" id="user_partner" class="regular-text">
+               <option value=""><?php _e('— Select Partner —', 'horizons'); ?></option>
+               <?php foreach ($partners as $partner) : ?>
+                  <option value="<?php echo $partner->ID; ?>"
+                     <?php selected($user_partner, $partner->ID); ?>>
+                     <?php echo esc_html($partner->post_title); ?>
+                  </option>
+               <?php endforeach; ?>
+            </select>
+            <p class="description"><?php _e('Choose the partner this user represents.', 'horizons'); ?></p>
+
+            <?php if ($user_partner) : ?>
+               <?php
+               $current_partner = get_post($user_partner);
+               if ($current_partner) : ?>
+                  <div style="margin-top: 10px; padding: 10px; background: #f9f9f9; border-radius: 4px;">
+                     <strong><?php _e('Current Partner:', 'horizons'); ?></strong><br>
+                     <?php echo esc_html($current_partner->post_title); ?>
+                  </div>
+               <?php endif; ?>
+            <?php endif; ?>
+         </td>
+      </tr>
+   </table>
+<?php
+}
+
+// 2. МЕТАБОКС ДЛЯ ЗАПИСИ PARTNERS
+add_action('add_meta_boxes', 'add_partner_user_meta_box');
+
+function add_partner_user_meta_box()
+{
+   add_meta_box(
+      'partner_user_meta',
+      __('Associated User', 'horizons'),
+      'partner_user_meta_box_callback',
+      'partners',
+      'side',
+      'default'
+   );
+}
+
+function partner_user_meta_box_callback($post)
+{
+   // Получаем текущего связанного пользователя
+   $partner_user_id = get_post_meta($post->ID, 'partner_user', true);
+
+   // Получаем всех пользователей с ролями author, editor, administrator
+   $users = get_users(array(
+      'role__in' => ['author', 'editor', 'administrator'],
+      'orderby' => 'display_name',
+      'fields' => array('ID', 'display_name', 'user_email')
+   ));
+
+   wp_nonce_field('partner_user_nonce', 'partner_user_nonce_field');
+?>
+
+   <div class="partner-user-selection">
+      <select name="partner_user" id="partner_user" style="width: 100%;">
+         <option value=""><?php _e('— No User —', 'horizons'); ?></option>
+         <?php foreach ($users as $user) :
+            $user_current_partner = get_user_meta($user->ID, 'user_partner', true);
+            $is_available = empty($user_current_partner) || $user_current_partner == $post->ID;
+         ?>
+            <option value="<?php echo $user->ID; ?>"
+               <?php selected($partner_user_id, $user->ID); ?>
+               <?php if (!$is_available && $partner_user_id != $user->ID) echo 'disabled'; ?>>
+               <?php echo esc_html($user->display_name . ' (' . $user->user_email . ')'); ?>
+               <?php if (!$is_available && $partner_user_id != $user->ID) : ?>
+                  - <?php _e('Already assigned', 'horizons'); ?>
+               <?php endif; ?>
+            </option>
+         <?php endforeach; ?>
+      </select>
+
+      <p class="description">
+         <?php _e('Select the user associated with this partner.', 'horizons'); ?>
+      </p>
+
+      <?php if ($partner_user_id) : ?>
+         <?php
+         $user = get_userdata($partner_user_id);
+         if ($user) : ?>
+            <div style="margin-top: 10px; padding: 10px; background: #f0f8ff; border-radius: 4px;">
+               <strong><?php _e('Current User:', 'horizons'); ?></strong><br>
+               <?php echo esc_html($user->display_name); ?><br>
+               <?php echo esc_html($user->user_email); ?>
+            </div>
+         <?php endif; ?>
+      <?php endif; ?>
+   </div>
+
+   <style>
+      .partner-user-selection option:disabled {
+         color: #ccc;
+         background-color: #f9f9f9;
+      }
+   </style>
+<?php
+}
+
+// 3. СОХРАНЕНИЕ ДЛЯ ЗАПИСИ PARTNERS
+add_action('save_post_partners', 'save_partner_user_meta');
+
+function save_partner_user_meta($post_id)
+{
+   // Проверяем nonce и права
+   if (
+      !isset($_POST['partner_user_nonce_field']) ||
+      !wp_verify_nonce($_POST['partner_user_nonce_field'], 'partner_user_nonce') ||
+      defined('DOING_AUTOSAVE') && DOING_AUTOSAVE
+   ) {
+      return;
+   }
+
+   if (!current_user_can('edit_post', $post_id)) {
+      return;
+   }
+
+   $old_user_id = get_post_meta($post_id, 'partner_user', true);
+   $new_user_id = isset($_POST['partner_user']) ? intval($_POST['partner_user']) : '';
+
+   // Обновляем метаполе партнера
+   if ($new_user_id) {
+      update_post_meta($post_id, 'partner_user', $new_user_id);
+   } else {
+      delete_post_meta($post_id, 'partner_user');
+   }
+
+   // Удаляем связь у старого пользователя
+   if ($old_user_id && $old_user_id != $new_user_id) {
+      $old_user_partner = get_user_meta($old_user_id, 'user_partner', true);
+      if ($old_user_partner == $post_id) {
+         delete_user_meta($old_user_id, 'user_partner');
+      }
+   }
+
+   // Добавляем связь новому пользователю
+   if ($new_user_id && $new_user_id != $old_user_id) {
+      update_user_meta($new_user_id, 'user_partner', $post_id);
+   }
+}
+
+// 4. СОХРАНЕНИЕ ДЛЯ ПОЛЬЗОВАТЕЛЯ (обновленная версия)
+add_action('personal_options_update', 'save_single_partner_bidirectional');
+add_action('edit_user_profile_update', 'save_single_partner_bidirectional');
+
+function save_single_partner_bidirectional($user_id)
+{
+   if (!current_user_can('edit_user', $user_id)) {
+      return;
+   }
+
+   $old_partner_id = get_user_meta($user_id, 'user_partner', true);
+   $new_partner_id = isset($_POST['user_partner']) ? intval($_POST['user_partner']) : '';
+
+   // Обновляем у пользователя
+   if ($new_partner_id) {
+      update_user_meta($user_id, 'user_partner', $new_partner_id);
+   } else {
+      delete_user_meta($user_id, 'user_partner');
+   }
+
+   // Удаляем пользователя из старого партнера
+   if ($old_partner_id && $old_partner_id != $new_partner_id) {
+      $old_partner_user = get_post_meta($old_partner_id, 'partner_user', true);
+      if ($old_partner_user == $user_id) {
+         delete_post_meta($old_partner_id, 'partner_user');
+      }
+   }
+
+   // Добавляем пользователя к новому партнеру
+   if ($new_partner_id && $new_partner_id != $old_partner_id) {
+      update_post_meta($new_partner_id, 'partner_user', $user_id);
+   }
+}
+
+// 5. КОЛОНКА В СПИСКЕ PARTNERS
+add_filter('manage_partners_posts_columns', 'add_partner_user_column');
+
+function add_partner_user_column($columns)
+{
+   $new_columns = array();
+
+   foreach ($columns as $key => $value) {
+      $new_columns[$key] = $value;
+      if ($key === 'title') {
+         $new_columns['partner_user'] = __('Associated User', 'horizons');
+      }
+   }
+
+   return $new_columns;
+}
+
+add_action('manage_partners_posts_custom_column', 'show_partner_user_column', 10, 2);
+
+function show_partner_user_column($column_name, $post_id)
+{
+   if ($column_name !== 'partner_user') {
+      return;
+   }
+
+   $user_id = get_post_meta($post_id, 'partner_user', true);
+   if ($user_id) {
+      $user = get_userdata($user_id);
+      if ($user) {
+         echo esc_html($user->display_name);
+         echo '<br><small>' . esc_html($user->user_email) . '</small>';
+      }
+   } else {
+      echo '<span style="color: #ccc;">—</span>';
+   }
+}
+
+// 6. КОЛОНКА В СПИСКЕ ПОЛЬЗОВАТЕЛЕЙ
+add_filter('manage_users_columns', 'add_user_partner_column');
+
+function add_user_partner_column($columns)
+{
+   $columns['user_partner'] = __('Partner', 'horizons');
+   return $columns;
+}
+
+add_action('manage_users_custom_column', 'show_user_partner_column', 10, 3);
+
+function show_user_partner_column($value, $column_name, $user_id)
+{
+   if ($column_name !== 'user_partner') {
+      return $value;
+   }
+
+   $partner_id = get_user_meta($user_id, 'user_partner', true);
+   if ($partner_id) {
+      $partner = get_post($partner_id);
+      if ($partner) {
+         return '<a href="' . get_edit_post_link($partner_id) . '">' . esc_html($partner->post_title) . '</a>';
+      }
+   }
+
+   return '<span style="color: #ccc;">—</span>';
+}
