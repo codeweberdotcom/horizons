@@ -373,7 +373,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          <?php
               if (!empty($vacancy_data['pdf_url'])) {
-                  echo '<a href="'. esc_html($vacancy_data['pdf_url']) .'" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-1">
+                  echo '<a href="'. esc_html($vacancy_data['pdf_url']) . '" target="_blank" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-1">
               '.__('Download document', 'horizons').'
             </a>';
              }
