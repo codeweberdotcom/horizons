@@ -287,13 +287,10 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
       // Выводим карточку вакансии
       echo '<div class="card border">';
-
-
-            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_staff_800');
+            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_vacancy');
             if ($image_url) {
                echo '<img src="' . esc_url($image_url) . '" class="card-img-top" alt="' . esc_attr(get_the_title()) . '">';
             }
-
 
           echo '<div class="card-body bg-neutral-100">
           <div class="mb-6">
@@ -373,6 +370,15 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 			</div>
 			<!-- /.author-info -->
 
+
+         <?php
+              if (!empty($vacancy_data['pdf_url'])) {
+                  echo '<a href="'. esc_html($vacancy_data['pdf_url']) .'" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-1">
+              '.__('Download document', 'horizons').'
+            </a>';
+             }
+
+               ?>
          <?php
 
             echo '<button class="btn btn-dusty-navy has-ripple btn-lg w-100">

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-26 23:37+0000\n"
+"PO-Revision-Date: 2025-09-27 11:37+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -54,7 +54,7 @@ msgstr "Добавить Страну"
 
 #: functions/cpt/cpt-partners.php:164
 msgid "Add New Language"
-msgstr ""
+msgstr "Добавить новый язык"
 
 #: functions/cpt/cpt-partners.php:14
 msgid "Add New Partner"
@@ -66,7 +66,7 @@ msgstr "Добавить Практику"
 
 #: functions/cpt/cpt-partners.php:205
 msgid "Add New Region"
-msgstr ""
+msgstr "Добавить новый регион"
 
 #: functions/cpt/cpt-awards.php:162
 msgid "Add New Tag"
@@ -86,11 +86,11 @@ msgstr "Добавить или удалить страны"
 
 #: functions/cpt/cpt-partners.php:169
 msgid "Add or remove languages"
-msgstr ""
+msgstr "Добавить или удалить языки"
 
 #: functions/cpt/cpt-partners.php:212
 msgid "Add or remove regions"
-msgstr ""
+msgstr "Добавить или удалить регионы"
 
 #: functions/cpt/cpt-awards.php:167
 msgid "Add or remove tags"
@@ -107,10 +107,6 @@ msgstr "Добавить Партнера"
 #: functions/cpt/cpt-practices.php:13
 msgid "Add Practice"
 msgstr "Добавить Практику"
-
-#: templates/content/single-vacancies.php:36
-msgid "Additional Info"
-msgstr ""
 
 #: includes/metaboxes.php:10
 msgid "Additional Information"
@@ -138,7 +134,7 @@ msgstr "Все Страны"
 
 #: functions/cpt/cpt-partners.php:160
 msgid "All Languages"
-msgstr ""
+msgstr "Все языки"
 
 #: includes/partners.php:215 includes/practices.php:52
 msgid "All News"
@@ -158,7 +154,7 @@ msgstr "Все Практики"
 
 #: functions/cpt/cpt-partners.php:201
 msgid "All Regions"
-msgstr ""
+msgstr "Все регионы"
 
 #: functions/cpt/cpt-awards.php:158
 msgid "All Tags"
@@ -183,10 +179,6 @@ msgstr "Альтернативный Заголовок"
 #: includes/metaboxes.php:883
 msgid "Alternative title for display purposes"
 msgstr "Альтернативное название для отображения"
-
-#: templates/content/single-vacancies.php:28
-msgid "Apply URL"
-msgstr ""
 
 #: includes/metaboxes.php:498
 msgid "Associated partners Members"
@@ -238,11 +230,11 @@ msgstr "Награды:"
 
 #: includes/metaboxes.php:1368
 msgid "Blog article categories for display:"
-msgstr ""
+msgstr "Категории статей блога для отображения:"
 
 #: includes/metaboxes.php:1383
 msgid "Blog article tags for display:"
-msgstr ""
+msgstr "Теги статей блога для отображения:"
 
 #: includes/metaboxes.php:199
 msgid "Brief information about the employee"
@@ -305,10 +297,6 @@ msgstr "Выберите из наиболее используемых реги
 msgid "Color"
 msgstr "Цвет"
 
-#: templates/content/single-vacancies.php:16
-msgid "Company"
-msgstr ""
-
 #: functions/cpt/cpt-awards.php:39
 msgid "Company awards and achievements"
 msgstr "Награды и достижения компании"
@@ -337,6 +325,10 @@ msgstr "Страны:"
 #: includes/metaboxes.php:1199
 msgid "Delete Category image"
 msgstr "Удалить Изображение Категории"
+
+#: includes/sidebars.php:377
+msgid "Download document"
+msgstr "Скачать документ"
 
 #: includes/metaboxes.php:1060
 msgid "Dusty Navy"
@@ -368,7 +360,7 @@ msgstr "Редактировать Страну"
 
 #: functions/cpt/cpt-partners.php:161
 msgid "Edit Language"
-msgstr ""
+msgstr "Изменить язык"
 
 #: functions/cpt/cpt-partners.php:15
 msgid "Edit Partner"
@@ -380,7 +372,7 @@ msgstr "Редактировать Практику"
 
 #: functions/cpt/cpt-partners.php:202
 msgid "Edit Region"
-msgstr ""
+msgstr "Редактировать регион"
 
 #: functions/cpt/cpt-awards.php:163
 msgid "Edit Tag"
@@ -389,22 +381,6 @@ msgstr "Редактировать Метку"
 #: functions/cpt/cpt-awards.php:120
 msgid "Edit Year"
 msgstr "Редактировать Год"
-
-#: templates/content/single-vacancies.php:48
-msgid "Education"
-msgstr ""
-
-#: templates/content/single-vacancies.php:24
-msgid "Email"
-msgstr ""
-
-#: templates/content/single-vacancies.php:40
-msgid "Employment Type"
-msgstr ""
-
-#: templates/content/single-vacancies.php:44
-msgid "Experience"
-msgstr ""
 
 #: includes/metaboxes.php:1401
 msgid "FAQ categories for display:"
@@ -474,12 +450,7 @@ msgstr ""
 msgid "Insert into award"
 msgstr "Вставить в награду"
 
-#: templates/content/single-vacancies.php:32
-msgid "Introduction"
-msgstr ""
-
 #: includes/partners.php:73 functions/cpt/cpt-partners.php:159
-#: templates/content/single-vacancies.php:65
 msgid "Languages"
 msgstr "Языки"
 
@@ -489,10 +460,6 @@ msgstr "Языки:"
 
 #: includes/metaboxes.php:130
 msgid "LinkedIn:"
-msgstr ""
-
-#: templates/content/single-vacancies.php:20
-msgid "Location"
 msgstr ""
 
 #: includes/metaboxes.php:191
@@ -541,7 +508,7 @@ msgstr "Новое Имя Страны"
 
 #: functions/cpt/cpt-partners.php:165
 msgid "New Language Name"
-msgstr ""
+msgstr "Новое название языка"
 
 #: functions/cpt/cpt-partners.php:16
 msgid "New Partner"
@@ -553,7 +520,7 @@ msgstr "Новая Практика"
 
 #: functions/cpt/cpt-partners.php:206
 msgid "New Region Name"
-msgstr ""
+msgstr "Новое название Региона"
 
 #: functions/cpt/cpt-awards.php:161
 msgid "New Tag Name"
@@ -573,19 +540,19 @@ msgstr "Нет категорий"
 
 #: functions/cpt/cpt-partners.php:89
 msgid "No categories found"
-msgstr ""
+msgstr "Категории не найдены"
 
 #: archive-practices.php:119
 msgid "No categories found."
-msgstr ""
+msgstr "Категории не найдены."
 
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
-msgstr ""
+msgstr "Страны не найдены"
 
 #: includes/metaboxes.php:155
 msgid "No countries found. Please add countries first."
-msgstr ""
+msgstr "Страны не найдены. Сначала добавьте страны."
 
 #: includes/shortcodes.php:364
 msgid "No image"
@@ -593,15 +560,15 @@ msgstr "Нет изображения"
 
 #: functions/cpt/cpt-partners.php:171
 msgid "No languages found"
-msgstr ""
+msgstr "Языки не найдены"
 
 #: includes/metaboxes.php:216
 msgid "No languages found. Please add languages first."
-msgstr ""
+msgstr "Языки не найдены. Сначала добавьте языки."
 
 #: archive-partners.php:152
 msgid "No partner countries found."
-msgstr ""
+msgstr "Страны не найдены."
 
 #: functions/cpt/cpt-partners.php:20
 msgid "No Partners found"
@@ -613,7 +580,7 @@ msgstr "Нет Партнеров в корзине"
 
 #: archive-partners.php:144
 msgid "No partners found."
-msgstr ""
+msgstr "Партнеры не найдены."
 
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
@@ -621,7 +588,7 @@ msgstr "Не Практик"
 
 #: archive-practices.php:109
 msgid "No practices found in this category."
-msgstr ""
+msgstr "Практики не найдены в этой категории"
 
 #: functions/cpt/cpt-practices.php:21
 msgid "No Practices found in Trash"
@@ -629,7 +596,7 @@ msgstr "Нет практик в корзине"
 
 #: functions/cpt/cpt-partners.php:214
 msgid "No regions found"
-msgstr ""
+msgstr "Регионы не найдены"
 
 #: includes/metaboxes.php:179
 msgid "No regions found. Please add regions first."
@@ -731,11 +698,11 @@ msgstr "Родительская Практика"
 
 #: functions/cpt/cpt-partners.php:207
 msgid "Parent Region"
-msgstr ""
+msgstr "Родительский регион"
 
 #: functions/cpt/cpt-partners.php:208
 msgid "Parent Region:"
-msgstr ""
+msgstr "Родительский регион:"
 
 #: functions/cpt/cpt-awards.php:159
 msgid "Parent Tag"
@@ -795,7 +762,7 @@ msgstr "Партнер опубликован"
 
 #: functions/cpt/cpt-partners.php:199
 msgid "Partner Region"
-msgstr ""
+msgstr "Регион Партнера"
 
 #: functions/cpt/cpt-partners.php:198 functions/cpt/cpt-partners.php:218
 msgid "Partner Regions"
@@ -825,10 +792,6 @@ msgstr "Архив партнеров"
 #: functions/cpt/cpt-partners.php:28
 msgid "Partners list"
 msgstr "Список партнеров"
-
-#: templates/content/single-vacancies.php:73
-msgid "PDF URL"
-msgstr ""
 
 #: includes/partners.php:165
 msgid "Phone"
@@ -951,43 +914,43 @@ msgstr "Рекомендуемые новости"
 
 #: functions/cpt/cpt-awards.php:28
 msgid "Remove award image"
-msgstr ""
+msgstr "Удалить изображение награды"
 
 #: functions/cpt/cpt-partners.php:25
 msgid "Remove partner image"
-msgstr ""
+msgstr "Удалить изображение партнера"
 
 #: functions/cpt/cpt-practices.php:25
 msgid "Remove practice image"
 msgstr "Удалить изображение Практики"
 
-#: templates/content/single-vacancies.php:61
+#: templates/content/single-vacancies.php:24
 msgid "Requirements"
-msgstr "Требования"
+msgstr "Требования к кандидату"
 
-#: templates/content/single-vacancies.php:57
+#: templates/content/single-vacancies.php:36
 msgid "Responsibilities"
-msgstr ""
+msgstr "Ключевые обязанности"
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"
-msgstr ""
+msgstr "Поиск Награды"
 
 #: functions/cpt/cpt-awards.php:84 functions/cpt/cpt-partners.php:84
 msgid "Search Categories"
-msgstr ""
+msgstr "Поиск Категории"
 
 #: functions/cpt/cpt-partners.php:125
 msgid "Search Countries"
-msgstr ""
+msgstr "Поиск Страны"
 
 #: functions/cpt/cpt-partners.php:166
 msgid "Search Languages"
-msgstr ""
+msgstr "Поиск Языка"
 
 #: functions/cpt/cpt-partners.php:19
 msgid "Search Partners"
-msgstr ""
+msgstr "Поиск Партнера"
 
 #: functions/cpt/cpt-practices.php:19
 msgid "Search Practices"
@@ -995,11 +958,11 @@ msgstr "Поиск Практики"
 
 #: functions/cpt/cpt-partners.php:209
 msgid "Search Regions"
-msgstr ""
+msgstr "Поиск Региона"
 
 #: functions/cpt/cpt-awards.php:170
 msgid "Search Tags"
-msgstr ""
+msgstr "Поиск Тега"
 
 #: functions/cpt/cpt-awards.php:127
 msgid "Search Years"
@@ -1090,20 +1053,12 @@ msgstr "Установить изображение Практики"
 msgid "Short Description:"
 msgstr "Краткое описание:"
 
-#: templates/content/single-vacancies.php:69
-msgid "Skills"
-msgstr ""
-
 #: includes/metaboxes.php:1056
 msgid "Slate Gray"
 msgstr ""
 
 #: includes/metaboxes.php:823 includes/metaboxes.php:867
 msgid "Slate Gray (#86909B)"
-msgstr ""
-
-#: templates/content/single-vacancies.php:52
-msgid "Status"
 msgstr ""
 
 #: includes/metaboxes.php:104
@@ -1178,11 +1133,11 @@ msgstr "Обновить Страну"
 
 #: functions/cpt/cpt-partners.php:163
 msgid "Update Language"
-msgstr ""
+msgstr "Обновить Язык"
 
 #: functions/cpt/cpt-partners.php:204
 msgid "Update Region"
-msgstr ""
+msgstr "Обновить Регион"
 
 #: functions/cpt/cpt-awards.php:164
 msgid "Update Tag"
@@ -1194,23 +1149,19 @@ msgstr "Обновить Год"
 
 #: functions/cpt/cpt-awards.php:31
 msgid "Uploaded to this award"
-msgstr ""
+msgstr "Загружено в эту награду"
 
 #: functions/cpt/cpt-awards.php:29
 msgid "Use as award image"
-msgstr ""
+msgstr "Использовать как изображение награды"
 
 #: functions/cpt/cpt-partners.php:26
 msgid "Use as partner image"
-msgstr ""
+msgstr "Использовать как изображение партнера"
 
 #: functions/cpt/cpt-practices.php:26
 msgid "Use as practice image"
 msgstr "Использовать изображение Практики"
-
-#: templates/content/single-vacancies.php:77
-msgid "Vacancy Types"
-msgstr ""
 
 #: functions/cpt/cpt-awards.php:21
 msgid "View Award"
@@ -1226,19 +1177,19 @@ msgstr "Показать Категорию"
 
 #: functions/cpt/cpt-partners.php:121
 msgid "View Country"
-msgstr ""
+msgstr "Посмотреть страну"
 
 #: functions/cpt/cpt-partners.php:162
 msgid "View Language"
-msgstr ""
+msgstr "Просмотреть язык"
 
 #: functions/cpt/cpt-partners.php:17
 msgid "View Partner"
-msgstr ""
+msgstr "Просмотреть Партнера"
 
 #: functions/cpt/cpt-partners.php:18
 msgid "View Partners"
-msgstr ""
+msgstr "Просмотреть Партнеров"
 
 #: functions/cpt/cpt-practices.php:17
 msgid "View Practice"
@@ -1250,7 +1201,7 @@ msgstr "Посмотреть Практики"
 
 #: functions/cpt/cpt-partners.php:203
 msgid "View Region"
-msgstr ""
+msgstr "Просмотреть Регион"
 
 #: functions/cpt/cpt-awards.php:165
 msgid "View Tag"
@@ -1286,7 +1237,7 @@ msgstr "Список Лет"
 
 #: functions/cpt/cpt-awards.php:131
 msgid "Years list navigation"
-msgstr ""
+msgstr "Навигация по списку лет"
 
 #: templates/content/single-practices.php:25
 msgid "Your Task"

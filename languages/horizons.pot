@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-26 17:56+0000\n"
+"POT-Creation-Date: 2025-09-27 11:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -108,10 +108,6 @@ msgstr ""
 msgid "Add Practice"
 msgstr ""
 
-#: templates/content/single-vacancies.php:36
-msgid "Additional Info"
-msgstr ""
-
 #: includes/metaboxes.php:10
 msgid "Additional Information"
 msgstr ""
@@ -182,10 +178,6 @@ msgstr ""
 
 #: includes/metaboxes.php:883
 msgid "Alternative title for display purposes"
-msgstr ""
-
-#: templates/content/single-vacancies.php:28
-msgid "Apply URL"
 msgstr ""
 
 #: includes/metaboxes.php:498
@@ -305,10 +297,6 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
-#: templates/content/single-vacancies.php:16
-msgid "Company"
-msgstr ""
-
 #: functions/cpt/cpt-awards.php:39
 msgid "Company awards and achievements"
 msgstr ""
@@ -335,6 +323,10 @@ msgstr ""
 
 #: includes/metaboxes.php:1199
 msgid "Delete Category image"
+msgstr ""
+
+#: includes/sidebars.php:377
+msgid "Download document"
 msgstr ""
 
 #: includes/metaboxes.php:1060
@@ -387,22 +379,6 @@ msgstr ""
 
 #: functions/cpt/cpt-awards.php:120
 msgid "Edit Year"
-msgstr ""
-
-#: templates/content/single-vacancies.php:48
-msgid "Education"
-msgstr ""
-
-#: templates/content/single-vacancies.php:24
-msgid "Email"
-msgstr ""
-
-#: templates/content/single-vacancies.php:40
-msgid "Employment Type"
-msgstr ""
-
-#: templates/content/single-vacancies.php:44
-msgid "Experience"
 msgstr ""
 
 #: includes/metaboxes.php:1401
@@ -473,12 +449,7 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
-#: templates/content/single-vacancies.php:32
-msgid "Introduction"
-msgstr ""
-
 #: includes/partners.php:73 functions/cpt/cpt-partners.php:159
-#: templates/content/single-vacancies.php:65
 msgid "Languages"
 msgstr ""
 
@@ -488,10 +459,6 @@ msgstr ""
 
 #: includes/metaboxes.php:130
 msgid "LinkedIn:"
-msgstr ""
-
-#: templates/content/single-vacancies.php:20
-msgid "Location"
 msgstr ""
 
 #: includes/metaboxes.php:191
@@ -819,10 +786,6 @@ msgstr ""
 msgid "Partners list"
 msgstr ""
 
-#: templates/content/single-vacancies.php:73
-msgid "PDF URL"
-msgstr ""
-
 #: includes/partners.php:165
 msgid "Phone"
 msgstr ""
@@ -954,11 +917,11 @@ msgstr ""
 msgid "Remove practice image"
 msgstr ""
 
-#: templates/content/single-vacancies.php:61
+#: templates/content/single-vacancies.php:24
 msgid "Requirements"
 msgstr ""
 
-#: templates/content/single-vacancies.php:57
+#: templates/content/single-vacancies.php:36
 msgid "Responsibilities"
 msgstr ""
 
@@ -1074,20 +1037,12 @@ msgstr ""
 msgid "Short Description:"
 msgstr ""
 
-#: templates/content/single-vacancies.php:69
-msgid "Skills"
-msgstr ""
-
 #: includes/metaboxes.php:1056
 msgid "Slate Gray"
 msgstr ""
 
 #: includes/metaboxes.php:823 includes/metaboxes.php:867
 msgid "Slate Gray (#86909B)"
-msgstr ""
-
-#: templates/content/single-vacancies.php:52
-msgid "Status"
 msgstr ""
 
 #: includes/metaboxes.php:104
@@ -1190,10 +1145,6 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:26
 msgid "Use as practice image"
-msgstr ""
-
-#: templates/content/single-vacancies.php:77
-msgid "Vacancy Types"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:21

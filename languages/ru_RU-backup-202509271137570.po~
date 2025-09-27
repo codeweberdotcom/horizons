@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-26 14:25+0000\n"
+"PO-Revision-Date: 2025-09-27 11:30+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -240,9 +240,9 @@ msgstr ""
 msgid "Brief information about the employee"
 msgstr "Краткая информация о сотруднике"
 
-#: archive-vacancies.php:16
+#: archive-vacancies.php:17
 msgid "Careers"
-msgstr ""
+msgstr "Карьера"
 
 #: functions/cpt/cpt-awards.php:71 functions/cpt/cpt-partners.php:75
 msgid "Categories"
@@ -325,6 +325,10 @@ msgstr "Страны:"
 #: includes/metaboxes.php:1199
 msgid "Delete Category image"
 msgstr "Удалить Изображение Категории"
+
+#: includes/sidebars.php:377
+msgid "Download document"
+msgstr ""
 
 #: includes/metaboxes.php:1060
 msgid "Dusty Navy"
@@ -538,6 +542,10 @@ msgstr "Нет категорий"
 msgid "No categories found"
 msgstr ""
 
+#: archive-practices.php:119
+msgid "No categories found."
+msgstr ""
+
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
 msgstr ""
@@ -577,6 +585,10 @@ msgstr ""
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
 msgstr "Не Практик"
+
+#: archive-practices.php:109
+msgid "No practices found in this category."
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:21
 msgid "No Practices found in Trash"
@@ -655,6 +667,10 @@ msgstr "Порядковый номер"
 #: includes/metaboxes.php:467
 msgid "Organization"
 msgstr "Организация"
+
+#: archive-vacancies.php:67
+msgid "Other Vacancies"
+msgstr "Другие вакансии"
 
 #: templates/content/single-practices.php:34
 msgid "Our Solution"
@@ -907,6 +923,14 @@ msgstr ""
 #: functions/cpt/cpt-practices.php:25
 msgid "Remove practice image"
 msgstr "Удалить изображение Практики"
+
+#: templates/content/single-vacancies.php:24
+msgid "Requirements"
+msgstr "Требования к кандидату"
+
+#: templates/content/single-vacancies.php:36
+msgid "Responsibilities"
+msgstr "Ключевые обязанности"
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"

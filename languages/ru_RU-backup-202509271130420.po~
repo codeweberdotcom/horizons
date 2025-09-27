@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-25 20:57+0000\n"
+"PO-Revision-Date: 2025-09-27 10:21+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -108,6 +108,10 @@ msgstr "Добавить Партнера"
 msgid "Add Practice"
 msgstr "Добавить Практику"
 
+#: templates/content/single-vacancies.php:36
+msgid "Additional Info"
+msgstr ""
+
 #: includes/metaboxes.php:10
 msgid "Additional Information"
 msgstr "Дополнительная информация"
@@ -160,7 +164,7 @@ msgstr ""
 msgid "All Tags"
 msgstr "Все Метки"
 
-#: archive-partners.php:26 taxonomy-practice_category.php:28
+#: archive-partners.php:26
 msgid "All World"
 msgstr "Весь мир"
 
@@ -179,6 +183,10 @@ msgstr "Альтернативный Заголовок"
 #: includes/metaboxes.php:883
 msgid "Alternative title for display purposes"
 msgstr "Альтернативное название для отображения"
+
+#: templates/content/single-vacancies.php:28
+msgid "Apply URL"
+msgstr ""
 
 #: includes/metaboxes.php:498
 msgid "Associated partners Members"
@@ -232,13 +240,17 @@ msgstr "Награды:"
 msgid "Blog article categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1384
+#: includes/metaboxes.php:1383
 msgid "Blog article tags for display:"
 msgstr ""
 
 #: includes/metaboxes.php:199
 msgid "Brief information about the employee"
 msgstr "Краткая информация о сотруднике"
+
+#: archive-vacancies.php:17
+msgid "Careers"
+msgstr "Карьера"
 
 #: functions/cpt/cpt-awards.php:71 functions/cpt/cpt-partners.php:75
 msgid "Categories"
@@ -292,6 +304,10 @@ msgstr "Выберите из наиболее используемых реги
 #: includes/metaboxes.php:1042
 msgid "Color"
 msgstr "Цвет"
+
+#: templates/content/single-vacancies.php:16
+msgid "Company"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:39
 msgid "Company awards and achievements"
@@ -374,11 +390,27 @@ msgstr "Редактировать Метку"
 msgid "Edit Year"
 msgstr "Редактировать Год"
 
-#: includes/metaboxes.php:1403
+#: templates/content/single-vacancies.php:48
+msgid "Education"
+msgstr ""
+
+#: templates/content/single-vacancies.php:24
+msgid "Email"
+msgstr ""
+
+#: templates/content/single-vacancies.php:40
+msgid "Employment Type"
+msgstr ""
+
+#: templates/content/single-vacancies.php:44
+msgid "Experience"
+msgstr ""
+
+#: includes/metaboxes.php:1401
 msgid "FAQ categories for display:"
 msgstr "Категории часто задаваемых вопросов для отображения:"
 
-#: includes/metaboxes.php:1419
+#: includes/metaboxes.php:1416
 msgid "FAQ tags for display:"
 msgstr "Часто задаваемые вопросы теги для отображения:"
 
@@ -414,11 +446,6 @@ msgstr "Свяжитесь с нами"
 msgid "Gladkov Denis"
 msgstr "Гладков Денис"
 
-#: includes/metaboxes.php:1380 includes/metaboxes.php:1396
-#: includes/metaboxes.php:1415 includes/metaboxes.php:1431
-msgid "Hold Ctrl (Cmd on Mac) for multiple selection."
-msgstr ""
-
 #: includes/metaboxes.php:507
 msgid "Hold Ctrl/Cmd to select multiple partners members"
 msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескольких Партнеров."
@@ -447,7 +474,12 @@ msgstr ""
 msgid "Insert into award"
 msgstr "Вставить в награду"
 
+#: templates/content/single-vacancies.php:32
+msgid "Introduction"
+msgstr ""
+
 #: includes/partners.php:73 functions/cpt/cpt-partners.php:159
+#: templates/content/single-vacancies.php:65
 msgid "Languages"
 msgstr "Языки"
 
@@ -457,6 +489,10 @@ msgstr "Языки:"
 
 #: includes/metaboxes.php:130
 msgid "LinkedIn:"
+msgstr ""
+
+#: templates/content/single-vacancies.php:20
+msgid "Location"
 msgstr ""
 
 #: includes/metaboxes.php:191
@@ -539,6 +575,10 @@ msgstr "Нет категорий"
 msgid "No categories found"
 msgstr ""
 
+#: archive-practices.php:119
+msgid "No categories found."
+msgstr ""
+
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
 msgstr ""
@@ -559,7 +599,7 @@ msgstr ""
 msgid "No languages found. Please add languages first."
 msgstr ""
 
-#: archive-partners.php:152 taxonomy-practice_category.php:154
+#: archive-partners.php:152
 msgid "No partner countries found."
 msgstr ""
 
@@ -571,13 +611,17 @@ msgstr "Нет Партнеров"
 msgid "No Partners found in Trash"
 msgstr "Нет Партнеров в корзине"
 
-#: archive-partners.php:144 taxonomy-practice_category.php:146
+#: archive-partners.php:144
 msgid "No partners found."
 msgstr ""
 
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
 msgstr "Не Практик"
+
+#: archive-practices.php:109
+msgid "No practices found in this category."
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:21
 msgid "No Practices found in Trash"
@@ -612,7 +656,7 @@ msgstr "Не существует"
 msgid "Not found in Trash"
 msgstr "Не найдено в корзине"
 
-#: includes/metaboxes.php:1398 includes/metaboxes.php:1433
+#: includes/metaboxes.php:1396 includes/metaboxes.php:1429
 msgid "Note:"
 msgstr "Комментарий:"
 
@@ -624,7 +668,7 @@ msgstr ""
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1398
+#: includes/metaboxes.php:1396
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
@@ -634,7 +678,7 @@ msgstr ""
 "выбранных категорий И имеющие ЛЮБОЙ из выбранных тегов (логическое «И» между "
 "таксономиями, «ИЛИ» внутри них)."
 
-#: includes/metaboxes.php:1433
+#: includes/metaboxes.php:1429
 msgid ""
 "On the frontend, FAQ items will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
@@ -656,6 +700,10 @@ msgstr "Порядковый номер"
 #: includes/metaboxes.php:467
 msgid "Organization"
 msgstr "Организация"
+
+#: archive-vacancies.php:67
+msgid "Other Vacancies"
+msgstr "Другие вакансии"
 
 #: templates/content/single-practices.php:34
 msgid "Our Solution"
@@ -777,6 +825,10 @@ msgstr "Архив партнеров"
 #: functions/cpt/cpt-partners.php:28
 msgid "Partners list"
 msgstr "Список партнеров"
+
+#: templates/content/single-vacancies.php:73
+msgid "PDF URL"
+msgstr ""
 
 #: includes/partners.php:165
 msgid "Phone"
@@ -909,6 +961,14 @@ msgstr ""
 msgid "Remove practice image"
 msgstr "Удалить изображение Практики"
 
+#: templates/content/single-vacancies.php:61
+msgid "Requirements"
+msgstr "Требования к кандидату"
+
+#: templates/content/single-vacancies.php:57
+msgid "Responsibilities"
+msgstr "Ключевые обязанности"
+
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"
 msgstr ""
@@ -957,7 +1017,7 @@ msgstr ""
 "Выберите одну или несколько категорий. Будут показаны статьи, относящиеся к "
 "ЛЮБОЙ из выбранных категорий."
 
-#: includes/metaboxes.php:1404
+#: includes/metaboxes.php:1402
 msgid ""
 "Select one or more FAQ categories. FAQ items that belong to ANY of the "
 "selected categories will be shown."
@@ -966,7 +1026,7 @@ msgstr ""
 "показаны пункты часто задаваемых вопросов, относящиеся к ЛЮБОЙ из выбранных "
 "категорий."
 
-#: includes/metaboxes.php:1420
+#: includes/metaboxes.php:1417
 msgid ""
 "Select one or more FAQ tags. FAQ items that have ANY of the selected tags "
 "will be shown."
@@ -974,7 +1034,7 @@ msgstr ""
 "Выберите один или несколько тегов часто задаваемых вопросов. Будут показаны "
 "пункты часто задаваемых вопросов, содержащие ЛЮБОЙ из выбранных тегов."
 
-#: includes/metaboxes.php:1385
+#: includes/metaboxes.php:1384
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
@@ -1030,12 +1090,20 @@ msgstr "Установить изображение Практики"
 msgid "Short Description:"
 msgstr "Краткое описание:"
 
+#: templates/content/single-vacancies.php:69
+msgid "Skills"
+msgstr ""
+
 #: includes/metaboxes.php:1056
 msgid "Slate Gray"
 msgstr ""
 
 #: includes/metaboxes.php:823 includes/metaboxes.php:867
 msgid "Slate Gray (#86909B)"
+msgstr ""
+
+#: templates/content/single-vacancies.php:52
+msgid "Status"
 msgstr ""
 
 #: includes/metaboxes.php:104
@@ -1139,6 +1207,10 @@ msgstr ""
 #: functions/cpt/cpt-practices.php:26
 msgid "Use as practice image"
 msgstr "Использовать изображение Практики"
+
+#: templates/content/single-vacancies.php:77
+msgid "Vacancy Types"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:21
 msgid "View Award"
