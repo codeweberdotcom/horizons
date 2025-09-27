@@ -1160,6 +1160,50 @@ function get_practice_category_alt_title($term_id = null)
 
 //
 
+// Добавляем метаполе для выбора автора в таксономии practice_category
+add_action('practice_category_edit_form_fields', 'add_practice_category_author_field', 10, 2);
+add_action('practice_category_add_form_fields', 'add_practice_category_author_field', 10, 2);
+
+function add_practice_category_author_field($term)
+{
+   $author_id = get_term_meta($term->term_id, 'practice_category_author', true);
+   $users = get_users(array(
+      'role__in' => ['author', 'editor', 'administrator'],
+      'orderby' => 'display_name'
+   ));
+?>
+   <tr class="form-field">
+      <th scope="row">
+         <label for="practice_category_author"><?php _e('Category Author', 'codeweber'); ?></label>
+      </th>
+      <td>
+         <select name="practice_category_author" id="practice_category_author" class="postform">
+            <option value=""><?php _e('— Select Author —', 'codeweber'); ?></option>
+            <?php foreach ($users as $user) : ?>
+               <option value="<?php echo $user->ID; ?>" <?php selected($author_id, $user->ID); ?>>
+                  <?php echo esc_html($user->display_name . ' (' . $user->user_email . ')'); ?>
+               </option>
+            <?php endforeach; ?>
+         </select>
+         <p class="description"><?php _e('Select the author responsible for this practice category.', 'codeweber'); ?></p>
+      </td>
+   </tr>
+<?php
+}
+
+// Сохраняем метаполе
+add_action('edited_practice_category', 'save_practice_category_author');
+add_action('created_practice_category', 'save_practice_category_author');
+
+function save_practice_category_author($term_id)
+{
+   if (isset($_POST['practice_category_author'])) {
+      update_term_meta($term_id, 'practice_category_author', sanitize_text_field($_POST['practice_category_author']));
+   }
+}
+
+
+
 // Добавляем поле изображения для таксономии practice_category
 add_action('practice_category_add_form_fields', 'add_practice_category_image_field', 10, 2);
 add_action('practice_category_edit_form_fields', 'edit_practice_category_image_field', 10, 2);

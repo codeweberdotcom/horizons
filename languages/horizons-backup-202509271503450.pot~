@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-26 14:25+0000\n"
+"POT-Creation-Date: 2025-09-27 11:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -240,7 +240,7 @@ msgstr ""
 msgid "Brief information about the employee"
 msgstr ""
 
-#: archive-vacancies.php:16
+#: archive-vacancies.php:17
 msgid "Careers"
 msgstr ""
 
@@ -323,6 +323,10 @@ msgstr ""
 
 #: includes/metaboxes.php:1199
 msgid "Delete Category image"
+msgstr ""
+
+#: includes/sidebars.php:377
+msgid "Download document"
 msgstr ""
 
 #: includes/metaboxes.php:1060
@@ -537,6 +541,10 @@ msgstr ""
 msgid "No categories found"
 msgstr ""
 
+#: archive-practices.php:119
+msgid "No categories found."
+msgstr ""
+
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
 msgstr ""
@@ -575,6 +583,10 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
+msgstr ""
+
+#: archive-practices.php:109
+msgid "No practices found in this category."
 msgstr ""
 
 #: functions/cpt/cpt-practices.php:21
@@ -647,6 +659,10 @@ msgstr ""
 
 #: includes/metaboxes.php:467
 msgid "Organization"
+msgstr ""
+
+#: archive-vacancies.php:67
+msgid "Other Vacancies"
 msgstr ""
 
 #: templates/content/single-practices.php:34
@@ -899,6 +915,14 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:25
 msgid "Remove practice image"
+msgstr ""
+
+#: templates/content/single-vacancies.php:24
+msgid "Requirements"
+msgstr ""
+
+#: templates/content/single-vacancies.php:36
+msgid "Responsibilities"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:23

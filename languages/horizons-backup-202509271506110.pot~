@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-25 10:34+0000\n"
+"POT-Creation-Date: 2025-09-27 15:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,23 +16,23 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
 "X-Domain: horizons"
 
-#: includes/metaboxes.php:1362
+#: includes/metaboxes.php:1406
 msgid "\"Advantages\" text:"
 msgstr ""
 
-#: includes/metaboxes.php:1356
+#: includes/metaboxes.php:1400
 msgid "\"Our solution\" text:"
 msgstr ""
 
-#: includes/metaboxes.php:1350
+#: includes/metaboxes.php:1394
 msgid "\"Your task\" text:"
 msgstr ""
 
-#: includes/metaboxes.php:1198
+#: includes/metaboxes.php:1242
 msgid "Add Category image"
 msgstr ""
 
-#: includes/metaboxes.php:1175
+#: includes/metaboxes.php:1219
 msgid "Add Image"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgstr ""
 msgid "Additional Information"
 msgstr ""
 
-#: includes/partners.php:122 includes/partners.php:129
+#: includes/partners.php:150 includes/partners.php:157
 msgid "Address"
 msgstr ""
 
@@ -136,7 +136,7 @@ msgstr ""
 msgid "All Languages"
 msgstr ""
 
-#: includes/partners.php:180 includes/practices.php:52
+#: includes/partners.php:215 includes/practices.php:52
 msgid "All News"
 msgstr ""
 
@@ -160,7 +160,7 @@ msgstr ""
 msgid "All Tags"
 msgstr ""
 
-#: archive-partners.php:26 taxonomy-practice_category.php:28
+#: archive-partners.php:26
 msgid "All World"
 msgstr ""
 
@@ -178,6 +178,10 @@ msgstr ""
 
 #: includes/metaboxes.php:883
 msgid "Alternative title for display purposes"
+msgstr ""
+
+#: taxonomy-practice_category.php:162 includes/sidebars.php:372
+msgid "Apply now"
 msgstr ""
 
 #: includes/metaboxes.php:498
@@ -228,16 +232,20 @@ msgstr ""
 msgid "Awards:"
 msgstr ""
 
-#: includes/metaboxes.php:1368
+#: includes/metaboxes.php:1412
 msgid "Blog article categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1384
+#: includes/metaboxes.php:1427
 msgid "Blog article tags for display:"
 msgstr ""
 
 #: includes/metaboxes.php:199
 msgid "Brief information about the employee"
+msgstr ""
+
+#: archive-vacancies.php:17
+msgid "Careers"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:71 functions/cpt/cpt-partners.php:75
@@ -256,7 +264,7 @@ msgstr ""
 msgid "Category Color"
 msgstr ""
 
-#: includes/metaboxes.php:1171 includes/metaboxes.php:1188
+#: includes/metaboxes.php:1215 includes/metaboxes.php:1232
 msgid "Category image"
 msgstr ""
 
@@ -301,7 +309,23 @@ msgstr ""
 msgid "Company:"
 msgstr ""
 
-#: functions/cpt/cpt-partners.php:118
+#: taxonomy-practice_category.php:133 includes/sidebars.php:343
+msgid "Contact Person"
+msgstr ""
+
+#: includes/partners.php:98
+msgid "Continents"
+msgstr ""
+
+#: includes/metaboxes.php:168
+msgid "Continents:"
+msgstr ""
+
+#: includes/sidebars.php:293
+msgid "Contract"
+msgstr ""
+
+#: includes/partners.php:120 functions/cpt/cpt-partners.php:118
 msgid "Countries"
 msgstr ""
 
@@ -309,8 +333,16 @@ msgstr ""
 msgid "Countries:"
 msgstr ""
 
-#: includes/metaboxes.php:1199
+#: includes/metaboxes.php:1243
 msgid "Delete Category image"
+msgstr ""
+
+#: taxonomy-practice_category.php:109 includes/sidebars.php:319
+msgid "Details"
+msgstr ""
+
+#: taxonomy-practice_category.php:157 includes/sidebars.php:367
+msgid "Download document"
 msgstr ""
 
 #: includes/metaboxes.php:1060
@@ -319,10 +351,6 @@ msgstr ""
 
 #: includes/metaboxes.php:827 includes/metaboxes.php:871
 msgid "Dusty Navy (#3D5567)"
-msgstr ""
-
-#: includes/partners.php:146
-msgid "E-Mail"
 msgstr ""
 
 #: includes/metaboxes.php:114
@@ -369,15 +397,15 @@ msgstr ""
 msgid "Edit Year"
 msgstr ""
 
-#: includes/metaboxes.php:1403
+#: includes/metaboxes.php:1445
 msgid "FAQ categories for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1419
+#: includes/metaboxes.php:1460
 msgid "FAQ tags for display:"
 msgstr ""
 
-#: includes/metaboxes.php:1345
+#: includes/metaboxes.php:1389
 msgid "Filled in the standard WordPress editor above."
 msgstr ""
 
@@ -401,17 +429,16 @@ msgstr ""
 msgid "Full Position Title:"
 msgstr ""
 
-#: includes/partners.php:112
+#: includes/sidebars.php:290
+msgid "Full-time"
+msgstr ""
+
+#: includes/partners.php:139
 msgid "Get in touch"
 msgstr ""
 
 #. Author of the theme
 msgid "Gladkov Denis"
-msgstr ""
-
-#: includes/metaboxes.php:1380 includes/metaboxes.php:1396
-#: includes/metaboxes.php:1415 includes/metaboxes.php:1431
-msgid "Hold Ctrl (Cmd on Mac) for multiple selection."
 msgstr ""
 
 #: includes/metaboxes.php:507
@@ -442,7 +469,11 @@ msgstr ""
 msgid "Insert into award"
 msgstr ""
 
-#: includes/partners.php:70 functions/cpt/cpt-partners.php:159
+#: includes/sidebars.php:292
+msgid "Internship"
+msgstr ""
+
+#: includes/partners.php:73 functions/cpt/cpt-partners.php:159
 msgid "Languages"
 msgstr ""
 
@@ -522,7 +553,7 @@ msgstr ""
 msgid "New Year"
 msgstr ""
 
-#: includes/partners.php:175 includes/practices.php:47
+#: includes/partners.php:210 includes/practices.php:47
 msgid "News"
 msgstr ""
 
@@ -532,6 +563,10 @@ msgstr ""
 
 #: functions/cpt/cpt-partners.php:89
 msgid "No categories found"
+msgstr ""
+
+#: archive-practices.php:119
+msgid "No categories found."
 msgstr ""
 
 #: functions/cpt/cpt-partners.php:130
@@ -554,7 +589,7 @@ msgstr ""
 msgid "No languages found. Please add languages first."
 msgstr ""
 
-#: archive-partners.php:152 taxonomy-practice_category.php:154
+#: archive-partners.php:152
 msgid "No partner countries found."
 msgstr ""
 
@@ -566,12 +601,16 @@ msgstr ""
 msgid "No Partners found in Trash"
 msgstr ""
 
-#: archive-partners.php:144 taxonomy-practice_category.php:146
+#: archive-partners.php:144
 msgid "No partners found."
 msgstr ""
 
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
+msgstr ""
+
+#: archive-practices.php:109
+msgid "No practices found in this category."
 msgstr ""
 
 #: functions/cpt/cpt-practices.php:21
@@ -584,6 +623,10 @@ msgstr ""
 
 #: includes/metaboxes.php:179
 msgid "No regions found. Please add regions first."
+msgstr ""
+
+#: taxonomy-practice_category.php:178
+msgid "No services found in this category."
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:172
@@ -607,7 +650,7 @@ msgstr ""
 msgid "Not found in Trash"
 msgstr ""
 
-#: includes/metaboxes.php:1398 includes/metaboxes.php:1433
+#: includes/metaboxes.php:1440 includes/metaboxes.php:1473
 msgid "Note:"
 msgstr ""
 
@@ -619,30 +662,35 @@ msgstr ""
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1398
+#: includes/metaboxes.php:1440
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
 
-#: includes/metaboxes.php:1433
+#: includes/metaboxes.php:1473
 msgid ""
 "On the frontend, FAQ items will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
 
-#: includes/metaboxes.php:1044
+#: includes/metaboxes.php:378 includes/metaboxes.php:1044
 msgid "Order"
 msgstr ""
 
+#: includes/metaboxes.php:342 includes/metaboxes.php:355
 #: includes/metaboxes.php:839 includes/metaboxes.php:889
 msgid "Order Number"
 msgstr ""
 
 #: includes/metaboxes.php:467
 msgid "Organization"
+msgstr ""
+
+#: archive-vacancies.php:67
+msgid "Other Vacancies"
 msgstr ""
 
 #: templates/content/single-practices.php:34
@@ -691,6 +739,10 @@ msgstr ""
 
 #: functions/cpt/cpt-awards.php:117
 msgid "Parent Year:"
+msgstr ""
+
+#: includes/sidebars.php:291
+msgid "Part-time"
 msgstr ""
 
 #: functions/cpt/cpt-partners.php:10 functions/cpt/cpt-partners.php:29
@@ -766,7 +818,7 @@ msgstr ""
 msgid "Partners list"
 msgstr ""
 
-#: includes/partners.php:137
+#: includes/partners.php:165
 msgid "Phone"
 msgstr ""
 
@@ -824,11 +876,11 @@ msgstr ""
 msgid "Practice Category"
 msgstr ""
 
-#: includes/metaboxes.php:1344
+#: includes/metaboxes.php:1388
 msgid "Practice description (main content)"
 msgstr ""
 
-#: includes/metaboxes.php:1289
+#: includes/metaboxes.php:1333
 msgid "Practice Details"
 msgstr ""
 
@@ -852,8 +904,9 @@ msgstr ""
 msgid "Practice updated"
 msgstr ""
 
-#: archive-practices.php:79 functions/cpt/cpt-practices.php:9
-#: functions/cpt/cpt-practices.php:11 functions/cpt/cpt-practices.php:38
+#: archive-practices.php:79 taxonomy-practice_category.php:56
+#: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
+#: functions/cpt/cpt-practices.php:38
 msgid "Practices"
 msgstr ""
 
@@ -877,15 +930,11 @@ msgstr ""
 msgid "Read"
 msgstr ""
 
-#: includes/partners.php:93 functions/cpt/cpt-partners.php:200
+#: functions/cpt/cpt-partners.php:200
 msgid "Regions"
 msgstr ""
 
-#: includes/metaboxes.php:168
-msgid "Regions:"
-msgstr ""
-
-#: includes/partners.php:176 includes/practices.php:48
+#: includes/partners.php:211 includes/practices.php:48
 msgid "Related news"
 msgstr ""
 
@@ -899,6 +948,14 @@ msgstr ""
 
 #: functions/cpt/cpt-practices.php:25
 msgid "Remove practice image"
+msgstr ""
+
+#: templates/content/single-vacancies.php:19
+msgid "Requirements"
+msgstr ""
+
+#: templates/content/single-vacancies.php:31
+msgid "Responsibilities"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:23
@@ -941,25 +998,25 @@ msgstr ""
 msgid "Select color for practice category display"
 msgstr ""
 
-#: includes/metaboxes.php:1369
+#: includes/metaboxes.php:1413
 msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1404
+#: includes/metaboxes.php:1446
 msgid ""
 "Select one or more FAQ categories. FAQ items that belong to ANY of the "
 "selected categories will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1420
+#: includes/metaboxes.php:1461
 msgid ""
 "Select one or more FAQ tags. FAQ items that have ANY of the selected tags "
 "will be shown."
 msgstr ""
 
-#: includes/metaboxes.php:1385
+#: includes/metaboxes.php:1428
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
@@ -1065,6 +1122,10 @@ msgstr ""
 #: functions/cpt/cpt-awards.php:113
 msgctxt "Taxonomy Singular Name"
 msgid "Award Year"
+msgstr ""
+
+#: includes/metaboxes.php:344 includes/metaboxes.php:359
+msgid "The lower the number, the higher the category will be in the list."
 msgstr ""
 
 #: functions/cpt/cpt-practices.php:112
@@ -1175,12 +1236,16 @@ msgstr ""
 msgid "Vintage Burgundy (#893B41)"
 msgstr ""
 
-#: includes/partners.php:118
+#: includes/partners.php:146
 msgid "Website"
 msgstr ""
 
 #: includes/metaboxes.php:124
 msgid "Website:"
+msgstr ""
+
+#: includes/sidebars.php:307
+msgid "Writer"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:114
@@ -1199,18 +1264,6 @@ msgstr ""
 msgid "Your Task"
 msgstr ""
 
-#: includes/metaboxes.php:342 includes/metaboxes.php:355
-msgid "Порядковый номер"
-msgstr ""
-
-#: includes/metaboxes.php:378
-msgid "Порядок"
-msgstr ""
-
-#: includes/metaboxes.php:1176
+#: includes/metaboxes.php:1220
 msgid "Удалить изображение"
-msgstr ""
-
-#: includes/metaboxes.php:344 includes/metaboxes.php:359
-msgid "Чем меньше число, тем выше в списке будет категория"
 msgstr ""

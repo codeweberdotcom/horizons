@@ -285,107 +285,94 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
       $vacancy_data = get_vacancy_data_array();
 
-      // Выводим карточку вакансии
-      echo '<div class="card border">';
-            $image_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_vacancy');
-            if ($image_url) {
-               echo '<img src="' . esc_url($image_url) . '" class="card-img-top" alt="' . esc_attr(get_the_title()) . '">';
-            }
+      // Массив переводов для типа занятости
+      $employment_types = array(
+         'full-time'  => __('Full-time', 'horizons'),
+         'part-time'  => __('Part-time', 'horizons'),
+         'internship' => __('Internship', 'horizons'),
+         'contract'   => __('Contract', 'horizons')
+      );
 
-          echo '<div class="card-body bg-neutral-100">
-          <div class="mb-6">
-           <div class="text-line-after label-u mb-4">Детали</div>';
+      $type = $vacancy_data['employment_type'] ?? '';
+      $display_type = isset($employment_types[$type]) ? $employment_types[$type] : $type;
 
-      if (!empty($vacancy_data['location'])) {
-         echo '<p class="mb-2 body-l-r d-flex align-content-center">
-              <i class="uil uil-map-marker-alt me-2""></i> ' . esc_html($vacancy_data['location']) . '
-            </p>';
-      };
+      $user_id = get_the_author_meta('ID');
+      $avatar_id = get_user_meta($user_id, 'avatar_id', true);
+      if (empty($avatar_id)) {
+         $avatar_id = get_user_meta($user_id, 'custom_avatar_id', true);
+      }
 
-      if (!empty($vacancy_data['employment_type'])) {
-         // Массив переводов
-         $employment_types = array(
-            'full-time'  => __('Full-time', 'codeweber'),
-            'part-time'  => __('Part-time', 'codeweber'),
-            'internship' => __('Internship', 'codeweber'),
-            'contract'   => __('Contract', 'codeweber')
-         );
+      $job_title = get_user_meta($user_id, 'user_position', true);
+      if (empty($job_title)) {
+         $job_title = __('Writer', 'horizons');
+      }
+?>
 
-         $type = $vacancy_data['employment_type'];
-         $display_type = isset($employment_types[$type]) ? $employment_types[$type] : $type;
+      <div class="card border">
+         <?php $image_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_vacancy'); ?>
+         <?php if ($image_url) : ?>
+            <img src="<?php echo esc_url($image_url); ?>" class="card-img-top" alt="<?php echo esc_attr(get_the_title()); ?>">
+         <?php endif; ?>
 
-         echo '<p class="mb-2 body-l-r d-flex align-content-center">
-          <i class="uil uil-calendar-alt me-2"></i> ' . esc_html($display_type) . '
-        </p>';
-      };
+         <div class="card-body bg-neutral-100">
+            <div class="mb-6">
+               <div class="text-line-after label-u mb-4"><?php _e('Details', 'horizons'); ?></div>
 
+               <?php if (!empty($vacancy_data['location'])) : ?>
+                  <p class="mb-2 body-l-r d-flex align-content-center">
+                     <i class="uil uil-map-marker-alt me-2"></i>
+                     <?php echo esc_html($vacancy_data['location']); ?>
+                  </p>
+               <?php endif; ?>
 
-      if (!empty($vacancy_data['salary'])) {
-         echo '<p class="mb-2 body-l-r d-flex align-content-center">
-              <i class="uil uil-money-stack me-2""></i> ' . esc_html($vacancy_data['salary']) . '
-            </p>';
-      };
+               <?php if (!empty($vacancy_data['employment_type'])) : ?>
+                  <p class="mb-2 body-l-r d-flex align-content-center">
+                     <i class="uil uil-calendar-alt me-2"></i>
+                     <?php echo esc_html($display_type); ?>
+                  </p>
+               <?php endif; ?>
 
-      echo '</div>';
+               <?php if (!empty($vacancy_data['salary'])) : ?>
+                  <p class="mb-2 body-l-r d-flex align-content-center">
+                     <i class="uil uil-money-stack me-2"></i>
+                     <?php echo esc_html($vacancy_data['salary']); ?>
+                  </p>
+               <?php endif; ?>
+            </div>
 
-            echo '<div class="text-line-after label-u mb-4">Контактное лицо</div>';
-
-            ?>
+            <div class="text-line-after label-u mb-4"><?php _e('Contact Person', 'horizons'); ?></div>
 
             <div class="author-info d-md-flex align-items-center mb-4">
-				<div class="d-flex align-items-center">
+               <div class="d-flex align-items-center">
+                  <?php if (!empty($avatar_id)) : ?>
+                     <?php $avatar_src = wp_get_attachment_image_src($avatar_id, 'thumbnail'); ?>
+                     <img decoding="async" class="w-48 h-48 me-3" alt="<?php the_author_meta('display_name'); ?>" src="<?php echo esc_url($avatar_src[0]); ?>">
+                  <?php else : ?>
+                     <figure class="me-3">
+                        <?php echo get_avatar(get_the_author_meta('user_email'), 48); ?>
+                     </figure>
+                  <?php endif; ?>
 
-					<?php
-					$user_id = get_the_author_meta('ID');
+                  <div class="avatar-info mt-0">
+                     <a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0">
+                        <?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
+                     </a>
+                     <span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
+                  </div>
+               </div>
+            </div>
 
-					// Проверяем оба возможных ключа
-					$avatar_id = get_user_meta($user_id, 'avatar_id', true);
-					if (empty($avatar_id)) {
-						$avatar_id = get_user_meta($user_id, 'custom_avatar_id', true);
-					}
+            <?php if (!empty($vacancy_data['pdf_url'])) : ?>
+               <a href="<?php echo esc_url($vacancy_data['pdf_url']); ?>" target="_blank" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-1">
+                  <?php _e('Download document', 'horizons'); ?>
+               </a>
+            <?php endif; ?>
 
-					if (!empty($avatar_id)) :
-						$avatar_src = wp_get_attachment_image_src($avatar_id, 'thumbnail');
-					?>
-						<img decoding="async" class="w-48 h-48  me-3" alt="<?php the_author_meta('display_name'); ?>" src="<?php echo esc_url($avatar_src[0]); ?>">
-					<?php else : ?>
-						<figure class="me-3">
-							<?php echo get_avatar(get_the_author_meta('user_email'), 48); ?>
-						</figure>
-					<?php endif; ?>
-
-					<div class="avatar-info mt-0">
-						<a href="<?php echo esc_url(get_author_posts_url($user_id)); ?>" class="hover-7 link-body label-u text-charcoal-blue  d-block lh-0">
-							<?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
-						</a>
-						<?php
-						$job_title = get_user_meta($user_id, 'user_position', true);
-						if (empty($job_title)) {
-							$job_title = __('Writer', 'codeweber');
-						}
-						?>
-						<span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
-					</div>
-				</div>
-			</div>
-			<!-- /.author-info -->
-
-
-         <?php
-              if (!empty($vacancy_data['pdf_url'])) {
-                  echo '<a href="'. esc_html($vacancy_data['pdf_url']) . '" target="_blank" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-1">
-              '.__('Download document', 'horizons').'
-            </a>';
-             }
-
-               ?>
-         <?php
-
-            echo '<button class="btn btn-dusty-navy has-ripple btn-lg w-100">
-              Подать заявку
+            <button class="btn btn-dusty-navy has-ripple btn-lg w-100">
+               <?php _e('Apply now', 'horizons'); ?>
             </button>
-          </div>
-        </div>
-      ';
+         </div>
+      </div>
+<?php
    }
 });

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-27 11:37+0000\n"
+"PO-Revision-Date: 2025-09-27 15:16+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -16,23 +16,30 @@ msgstr ""
 "X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
 "X-Domain: horizons"
 
-#: includes/metaboxes.php:1362
+#: includes/metaboxes.php:1406
 msgid "\"Advantages\" text:"
 msgstr "\"Преимущества\" текст"
 
-#: includes/metaboxes.php:1356
+#: includes/metaboxes.php:1400
 msgid "\"Our solution\" text:"
 msgstr "Наше \"решение\" текст"
 
-#: includes/metaboxes.php:1350
+#: includes/metaboxes.php:1394
 msgid "\"Your task\" text:"
 msgstr "Ваша \"задача\" текст"
 
-#: includes/metaboxes.php:1198
+#: taxonomy-practice_category.php:152
+msgid "%d practice"
+msgid_plural "%d practices"
+msgstr[0] "%d практика"
+msgstr[1] "%d практики"
+msgstr[2] "%d практик"
+
+#: includes/metaboxes.php:1242
 msgid "Add Category image"
 msgstr "Добавить Изображение категории"
 
-#: includes/metaboxes.php:1175
+#: includes/metaboxes.php:1219
 msgid "Add Image"
 msgstr "Добавить Изображение"
 
@@ -180,6 +187,14 @@ msgstr "Альтернативный Заголовок"
 msgid "Alternative title for display purposes"
 msgstr "Альтернативное название для отображения"
 
+#: includes/sidebars.php:372
+msgid "Apply now"
+msgstr ""
+
+#: taxonomy-practice_category.php:138
+msgid "Area Details"
+msgstr "Детально о направлении"
+
 #: includes/metaboxes.php:498
 msgid "Associated partners Members"
 msgstr "Ассоциированные Партнеры"
@@ -228,11 +243,11 @@ msgstr "Навигация по списку наград"
 msgid "Awards:"
 msgstr "Награды:"
 
-#: includes/metaboxes.php:1368
+#: includes/metaboxes.php:1412
 msgid "Blog article categories for display:"
 msgstr "Категории статей блога для отображения:"
 
-#: includes/metaboxes.php:1383
+#: includes/metaboxes.php:1427
 msgid "Blog article tags for display:"
 msgstr "Теги статей блога для отображения:"
 
@@ -260,9 +275,13 @@ msgstr "Навигация по списку категорий"
 msgid "Category Color"
 msgstr "Цвет Категории"
 
-#: includes/metaboxes.php:1171 includes/metaboxes.php:1188
+#: includes/metaboxes.php:1215 includes/metaboxes.php:1232
 msgid "Category image"
 msgstr "Изображение Категории"
+
+#: taxonomy-practice_category.php:161
+msgid "Category Manager"
+msgstr "Менеджер направления"
 
 #: includes/metaboxes.php:1059
 msgid "Charcoal Blue"
@@ -305,6 +324,10 @@ msgstr "Награды и достижения компании"
 msgid "Company:"
 msgstr "Компания:"
 
+#: includes/sidebars.php:343
+msgid "Contact Person"
+msgstr "Контактное лицо"
+
 #: includes/partners.php:98
 #| msgid "Continent"
 msgid "Continents"
@@ -314,6 +337,10 @@ msgstr "Регионы"
 msgid "Continents:"
 msgstr "Регионы:"
 
+#: includes/sidebars.php:293
+msgid "Contract"
+msgstr ""
+
 #: includes/partners.php:120 functions/cpt/cpt-partners.php:118
 msgid "Countries"
 msgstr "Страны"
@@ -322,11 +349,15 @@ msgstr "Страны"
 msgid "Countries:"
 msgstr "Страны:"
 
-#: includes/metaboxes.php:1199
+#: includes/metaboxes.php:1243
 msgid "Delete Category image"
 msgstr "Удалить Изображение Категории"
 
-#: includes/sidebars.php:377
+#: includes/sidebars.php:319
+msgid "Details"
+msgstr "Детали"
+
+#: includes/sidebars.php:367
 msgid "Download document"
 msgstr "Скачать документ"
 
@@ -382,15 +413,15 @@ msgstr "Редактировать Метку"
 msgid "Edit Year"
 msgstr "Редактировать Год"
 
-#: includes/metaboxes.php:1401
+#: includes/metaboxes.php:1445
 msgid "FAQ categories for display:"
 msgstr "Категории часто задаваемых вопросов для отображения:"
 
-#: includes/metaboxes.php:1416
+#: includes/metaboxes.php:1460
 msgid "FAQ tags for display:"
 msgstr "Часто задаваемые вопросы теги для отображения:"
 
-#: includes/metaboxes.php:1345
+#: includes/metaboxes.php:1389
 msgid "Filled in the standard WordPress editor above."
 msgstr "Заполнено в стандартном редакторе WordPress выше."
 
@@ -413,6 +444,10 @@ msgstr "Часто задаваемые вопросы"
 #: includes/metaboxes.php:137
 msgid "Full Position Title:"
 msgstr "Заголовок Полной Должности"
+
+#: includes/sidebars.php:290
+msgid "Full-time"
+msgstr ""
 
 #: includes/partners.php:139
 msgid "Get in touch"
@@ -449,6 +484,10 @@ msgstr ""
 #: functions/cpt/cpt-awards.php:30
 msgid "Insert into award"
 msgstr "Вставить в награду"
+
+#: includes/sidebars.php:292
+msgid "Internship"
+msgstr ""
 
 #: includes/partners.php:73 functions/cpt/cpt-partners.php:159
 msgid "Languages"
@@ -546,6 +585,10 @@ msgstr "Категории не найдены"
 msgid "No categories found."
 msgstr "Категории не найдены."
 
+#: taxonomy-practice_category.php:202
+msgid "No category manager assigned"
+msgstr ""
+
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
 msgstr "Страны не найдены"
@@ -602,6 +645,10 @@ msgstr "Регионы не найдены"
 msgid "No regions found. Please add regions first."
 msgstr "Регионы не найдены. Сначала добавьте регионы."
 
+#: taxonomy-practice_category.php:218
+msgid "No services found in this category."
+msgstr ""
+
 #: functions/cpt/cpt-awards.php:172
 msgid "No tags"
 msgstr "Нет меток"
@@ -623,7 +670,7 @@ msgstr "Не существует"
 msgid "Not found in Trash"
 msgstr "Не найдено в корзине"
 
-#: includes/metaboxes.php:1396 includes/metaboxes.php:1429
+#: includes/metaboxes.php:1440 includes/metaboxes.php:1473
 msgid "Note:"
 msgstr "Комментарий:"
 
@@ -635,7 +682,7 @@ msgstr ""
 msgid "Olive Green (#738D50)"
 msgstr ""
 
-#: includes/metaboxes.php:1396
+#: includes/metaboxes.php:1440
 msgid ""
 "On the frontend, articles will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
@@ -645,7 +692,7 @@ msgstr ""
 "выбранных категорий И имеющие ЛЮБОЙ из выбранных тегов (логическое «И» между "
 "таксономиями, «ИЛИ» внутри них)."
 
-#: includes/metaboxes.php:1429
+#: includes/metaboxes.php:1473
 msgid ""
 "On the frontend, FAQ items will be displayed that belong to ANY of the "
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
@@ -719,6 +766,10 @@ msgstr "Родительский Год"
 #: functions/cpt/cpt-awards.php:117
 msgid "Parent Year:"
 msgstr "Родительский Год"
+
+#: includes/sidebars.php:291
+msgid "Part-time"
+msgstr ""
 
 #: functions/cpt/cpt-partners.php:10 functions/cpt/cpt-partners.php:29
 msgid "Partner"
@@ -851,17 +902,21 @@ msgstr "Категории практики"
 msgid "Practice Category"
 msgstr "Категория Практики"
 
-#: includes/metaboxes.php:1344
+#: includes/metaboxes.php:1388
 msgid "Practice description (main content)"
 msgstr "Описание практики (основное содержание)"
 
-#: includes/metaboxes.php:1289
+#: includes/metaboxes.php:1333
 msgid "Practice Details"
 msgstr "Подробности Практики"
 
 #: functions/cpt/cpt-practices.php:23
 msgid "Practice Image"
 msgstr "Изображение практики"
+
+#: taxonomy-practice_category.php:42
+msgid "Practice Manager"
+msgstr ""
 
 #: functions/cpt/cpt-practices.php:30
 msgid "Practice published"
@@ -879,8 +934,9 @@ msgstr "Практика запланирована"
 msgid "Practice updated"
 msgstr "Практика обновлена"
 
-#: archive-practices.php:79 functions/cpt/cpt-practices.php:9
-#: functions/cpt/cpt-practices.php:11 functions/cpt/cpt-practices.php:38
+#: archive-practices.php:79 taxonomy-practice_category.php:90
+#: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
+#: functions/cpt/cpt-practices.php:38
 msgid "Practices"
 msgstr "Практики"
 
@@ -924,11 +980,11 @@ msgstr "Удалить изображение партнера"
 msgid "Remove practice image"
 msgstr "Удалить изображение Практики"
 
-#: templates/content/single-vacancies.php:24
+#: templates/content/single-vacancies.php:19
 msgid "Requirements"
 msgstr "Требования к кандидату"
 
-#: templates/content/single-vacancies.php:36
+#: templates/content/single-vacancies.php:31
 msgid "Responsibilities"
 msgstr "Ключевые обязанности"
 
@@ -972,7 +1028,7 @@ msgstr "Выбрать Год"
 msgid "Select color for practice category display"
 msgstr "Выберите цвет для отображения категории практики"
 
-#: includes/metaboxes.php:1369
+#: includes/metaboxes.php:1413
 msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
@@ -980,7 +1036,7 @@ msgstr ""
 "Выберите одну или несколько категорий. Будут показаны статьи, относящиеся к "
 "ЛЮБОЙ из выбранных категорий."
 
-#: includes/metaboxes.php:1402
+#: includes/metaboxes.php:1446
 msgid ""
 "Select one or more FAQ categories. FAQ items that belong to ANY of the "
 "selected categories will be shown."
@@ -989,7 +1045,7 @@ msgstr ""
 "показаны пункты часто задаваемых вопросов, относящиеся к ЛЮБОЙ из выбранных "
 "категорий."
 
-#: includes/metaboxes.php:1417
+#: includes/metaboxes.php:1461
 msgid ""
 "Select one or more FAQ tags. FAQ items that have ANY of the selected tags "
 "will be shown."
@@ -997,7 +1053,7 @@ msgstr ""
 "Выберите один или несколько тегов часто задаваемых вопросов. Будут показаны "
 "пункты часто задаваемых вопросов, содержащие ЛЮБОЙ из выбранных тегов."
 
-#: includes/metaboxes.php:1384
+#: includes/metaboxes.php:1428
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
@@ -1008,6 +1064,10 @@ msgstr ""
 #: includes/metaboxes.php:816 includes/metaboxes.php:860
 msgid "Selected Color Preview:"
 msgstr "Предварительный просмотр выбранного цвета:"
+
+#: taxonomy-practice_category.php:191
+msgid "Send Email"
+msgstr "Отправить E-Mail"
 
 #: functions/cpt/cpt-awards.php:80 functions/cpt/cpt-partners.php:86
 msgid "Separate categories with commas"
@@ -1060,6 +1120,10 @@ msgstr ""
 #: includes/metaboxes.php:823 includes/metaboxes.php:867
 msgid "Slate Gray (#86909B)"
 msgstr ""
+
+#: taxonomy-practice_category.php:196
+msgid "Submit a request"
+msgstr "Заполнить заявку"
 
 #: includes/metaboxes.php:104
 msgid "Surname:"
@@ -1227,6 +1291,10 @@ msgstr "Вебсайт"
 msgid "Website:"
 msgstr "Вебсайт:"
 
+#: includes/sidebars.php:307
+msgid "Writer"
+msgstr ""
+
 #: functions/cpt/cpt-awards.php:114
 msgid "Years"
 msgstr "Года"
@@ -1243,6 +1311,6 @@ msgstr "Навигация по списку лет"
 msgid "Your Task"
 msgstr "Ваша задача"
 
-#: includes/metaboxes.php:1176
+#: includes/metaboxes.php:1220
 msgid "Удалить изображение"
 msgstr ""
