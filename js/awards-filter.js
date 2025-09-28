@@ -21,9 +21,32 @@ document.addEventListener("DOMContentLoaded", function () {
         // Добавляем активный класс к текущей ссылке
         this.classList.add("active");
 
+        // Сбрасываем активные классы в других меню
+        resetOtherMenus(filterType);
+
         // Выполняем фильтрацию
         filterAwards(filterType, this.href);
       });
+    });
+  }
+
+  // Функция для сброса активных классов в других меню
+  function resetOtherMenus(currentFilterType) {
+    const menus = {
+      category: "awards-category-nav",
+      year: "awards-year-nav",
+      partner: "awards-partners-nav",
+    };
+
+    // Сбрасываем активные классы во всех меню, кроме текущего
+    Object.keys(menus).forEach((filterType) => {
+      if (filterType !== currentFilterType) {
+        const menu = document.getElementById(menus[filterType]);
+        if (menu) {
+          const links = menu.querySelectorAll("a");
+          links.forEach((link) => link.classList.remove("active"));
+        }
+      }
     });
   }
 
@@ -51,29 +74,6 @@ document.addEventListener("DOMContentLoaded", function () {
           if (isotopeContainer) {
             isotopeContainer.innerHTML = data.data.html;
 
-            // Обновляем блок активных фильтров
-            const activeFiltersBlock = document.querySelector(
-              ".active-filters-block"
-            );
-            if (activeFiltersBlock && data.data.active_filters_html) {
-              activeFiltersBlock.outerHTML = data.data.active_filters_html;
-            } else if (!activeFiltersBlock && data.data.active_filters_html) {
-              // Если блока еще нет, добавляем его перед первым виджетом
-              const firstWidget = document.querySelector(".widget");
-              if (firstWidget) {
-                firstWidget.insertAdjacentHTML(
-                  "beforebegin",
-                  data.data.active_filters_html
-                );
-              }
-            } else if (activeFiltersBlock && !data.data.active_filters_html) {
-              // Если фильтров нет, удаляем блок
-              activeFiltersBlock.remove();
-            }
-
-            // Обновляем активные классы в других меню
-            updateOtherMenus(filterType);
-
             // Инициализируем компоненты темы
             initThemeComponents();
           }
@@ -90,26 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .finally(() => {
         hideLoadingIndicator();
       });
-  }
-
-  // Функция для сброса активных классов в других меню
-  function updateOtherMenus(currentFilterType) {
-    const menus = {
-      category: "awards-category-nav",
-      year: "awards-year-nav",
-      partner: "awards-partners-nav",
-    };
-
-    // Сбрасываем активные классы во всех меню, кроме текущего
-    Object.keys(menus).forEach((filterType) => {
-      if (filterType !== currentFilterType) {
-        const menu = document.getElementById(menus[filterType]);
-        if (menu) {
-          const links = menu.querySelectorAll("a");
-          links.forEach((link) => link.classList.remove("active"));
-        }
-      }
-    });
   }
 
   function initThemeComponents() {
@@ -192,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
       links.forEach((link) => link.classList.remove("active"));
     });
 
-    // Затем активируем соответствующие фильтры
+    // Затем активируем соответствующий фильтр (только один)
 
     // Для категорий (из таксономии)
     if (window.location.pathname.includes("/award-category/")) {
@@ -215,9 +195,8 @@ document.addEventListener("DOMContentLoaded", function () {
         categoryLink.classList.add("active");
       }
     }
-
     // Для годов
-    if (url.searchParams.get("year")) {
+    else if (url.searchParams.get("year")) {
       const year = url.searchParams.get("year");
       const yearLink = document.querySelector(
         `#awards-year-nav a[href*="year=${year}"]`
@@ -226,9 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
         yearLink.classList.add("active");
       }
     }
-
     // Для партнеров
-    if (url.searchParams.get("partner")) {
+    else if (url.searchParams.get("partner")) {
       const partner = url.searchParams.get("partner");
       const partnerLink = document.querySelector(
         `#awards-partners-nav a[href*="partner=${partner}"]`

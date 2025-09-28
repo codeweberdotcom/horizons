@@ -391,8 +391,6 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
 
 
-
-
 //--------------------------------
 //AWARDS SIDEBAR MENUS
 //--------------------------------
@@ -419,7 +417,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($categories as $category) {
             $active_class = is_tax('award_category', $category->term_id) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_single_filter_url('category', $category->slug)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
          }
 
          echo '</ul>';
@@ -439,7 +437,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($years as $year_data) {
             $active_class = is_year_active($year_data['year']) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(add_query_arg('year', $year_data['year'], get_post_type_archive_link('awards'))) . '">' . esc_html($year_data['year']) . ' <span class="text-muted">(' . $year_data['count'] . ')</span></a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_single_filter_url('year', $year_data['year'])) . '">' . esc_html($year_data['year']) . ' <span class="text-muted">(' . $year_data['count'] . ')</span></a></li>';
          }
 
          echo '</ul>';
@@ -459,7 +457,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($partners_with_awards as $partner) {
             $active_class = is_partner_active($partner->ID) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(add_query_arg('partner', $partner->ID, get_post_type_archive_link('awards'))) . '">' . esc_html($partner->post_title) . '</a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_single_filter_url('partner', $partner->ID)) . '">' . esc_html($partner->post_title) . '</a></li>';
          }
 
          echo '</ul>';
@@ -471,43 +469,54 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 });
 
 /**
+ * Генерирует URL только с одним фильтром (очищает другие)
+ */
+function get_single_filter_url($filter_type, $filter_value)
+{
+   $base_url = get_post_type_archive_link('awards');
+
+   // Очищаем все параметры и добавляем только текущий фильтр
+   return add_query_arg($filter_type, $filter_value, $base_url);
+}
+
+/**
  * Получает года из даты публикации постов наград
  */
+function get_awards_years_from_posts()
+{
+   $awards = get_posts([
+      'post_type' => 'awards',
+      'posts_per_page' => -1,
+      'post_status' => 'publish',
+      'orderby' => 'date',
+      'order' => 'DESC'
+   ]);
 
-   function get_awards_years_from_posts() {
-    $awards = get_posts([
-        'post_type' => 'awards',
-        'posts_per_page' => -1,
-        'post_status' => 'publish',
-        'orderby' => 'date',
-        'order' => 'DESC'
-    ]);
-    
-    $years = [];
-    
-    foreach ($awards as $award) {
-        $year = get_the_date('Y', $award->ID);
-        
-        if (!isset($years[$year])) {
-            $years[$year] = 0;
-        }
-        
-        $years[$year]++;
-    }
-    
-    // Сортируем по году (по убыванию)
-    krsort($years);
-    
-    // Форматируем результат
-    $formatted_years = [];
-    foreach ($years as $year => $count) {
-        $formatted_years[] = [
-            'year' => $year,
-            'count' => $count
-        ];
-    }
-    
-    return $formatted_years;
+   $years = [];
+
+   foreach ($awards as $award) {
+      $year = get_the_date('Y', $award->ID);
+
+      if (!isset($years[$year])) {
+         $years[$year] = 0;
+      }
+
+      $years[$year]++;
+   }
+
+   // Сортируем по году (по убыванию)
+   krsort($years);
+
+   // Форматируем результат
+   $formatted_years = [];
+   foreach ($years as $year => $count) {
+      $formatted_years[] = [
+         'year' => $year,
+         'count' => $count
+      ];
+   }
+
+   return $formatted_years;
 }
 
 /**
