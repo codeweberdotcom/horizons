@@ -13,9 +13,12 @@ $pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
 
 $archive_pageheader_id = Redux::get_option($opt_name, 'archive_page_header_select_' . $post_type);
 $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 'disabled');
+
+
+
 ?>
 
-<section class="wrapper bg-white practice-section">
+<section class="wrapper bg-white">
    <div class="container py-8 py-md-12">
       <div class="row gx-lg-8 gx-xl-12">
 
