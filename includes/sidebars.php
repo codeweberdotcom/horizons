@@ -1,6 +1,9 @@
 <?php
 
-// Обновляем основной код вывода категорий
+//--------------------------------
+//PARTNERS
+//--------------------------------
+
 add_action('codeweber_after_widget', function ($sidebar_id) {
    if ($sidebar_id === 'partners') {
       if (!post_type_exists('partners')) {
@@ -276,7 +279,10 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
 
 
-// Обновляем основной код вывода категорий
+//--------------------------------
+//VACANCIES
+//--------------------------------
+
 add_action('codeweber_after_widget', function ($sidebar_id) {
    if ($sidebar_id === 'vacancies') {
       if (!post_type_exists('vacancies')) {
@@ -378,5 +384,125 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
          </div>
       </div>
 <?php
+   }
+});
+
+
+
+
+
+
+
+//--------------------------------
+//AWARDS SIDEBAR MENUS
+//--------------------------------
+
+add_action('codeweber_after_widget', function ($sidebar_id) {
+   if ($sidebar_id === 'awards') {
+      if (!post_type_exists('awards')) {
+         return;
+      }
+
+      // Меню категорий наград
+      $categories = get_terms([
+         'taxonomy'   => 'award_category',
+         'hide_empty' => true,
+         'orderby'    => 'name',
+         'order'      => 'ASC'
+      ]);
+
+      if ($categories && !is_wp_error($categories)) {
+         echo '<div class="widget mb-10">';
+         echo '<div class="text-line-after label-u mb-4">' . __('Award Categories', 'horizons') . '</div>';
+         echo '<nav id="awards-category-nav">';
+         echo '<ul class="list-unstyled">';
+
+         foreach ($categories as $category) {
+            $active_class = is_tax('award_category', $category->term_id) ? ' active' : '';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
+         }
+
+         echo '</ul>';
+         echo '</nav>';
+         echo '</div>';
+         echo '<!--/.widget -->';
+      }
+
+      // Меню лет наград
+      $years = get_terms([
+         'taxonomy'   => 'award_year',
+         'hide_empty' => true,
+         'orderby'    => 'name',
+         'order'      => 'DESC'
+      ]);
+
+      if ($years && !is_wp_error($years)) {
+         echo '<div class="widget mb-10">';
+         echo '<div class="text-line-after label-u mb-4">' . __('Award Years', 'horizons') . '</div>';
+         echo '<nav id="awards-year-nav">';
+         echo '<ul class="list-unstyled">';
+
+         foreach ($years as $year) {
+            $active_class = is_tax('award_year', $year->term_id) ? ' active' : '';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_term_link($year)) . '">' . esc_html($year->name) . ' <span class="text-muted">(' . $year->count . ')</span></a></li>';
+         }
+
+         echo '</ul>';
+         echo '</nav>';
+         echo '</div>';
+         echo '<!--/.widget -->';
+      }
+
+      // Меню партнеров из метаполя
+      $partners = get_posts([
+         'post_type'      => 'partners',
+         'posts_per_page' => -1,
+         'post_status'    => 'publish',
+         'orderby'        => 'title',
+         'order'          => 'ASC'
+      ]);
+
+      $partners_with_awards = [];
+
+      if ($partners) {
+         foreach ($partners as $partner) {
+            // Получаем все награды, связанные с этим партнером
+            $partner_awards = get_post_meta($partner->ID, '_partners_awards', true);
+            
+            // Проверяем, что поле существует и не пустое
+            if ($partner_awards && is_array($partner_awards) && !empty($partner_awards)) {
+               // Проверяем, что хотя бы одна награда опубликована
+               $has_published_awards = false;
+               foreach ($partner_awards as $award_id) {
+                  if (get_post_status($award_id) === 'publish') {
+                     $has_published_awards = true;
+                     break;
+                  }
+               }
+               
+               if ($has_published_awards) {
+                  $partners_with_awards[] = $partner;
+               }
+            }
+         }
+
+         if (!empty($partners_with_awards)) {
+            echo '<div class="widget mb-10">';
+            echo '<div class="text-line-after label-u mb-4">' . __('Award Partners', 'horizons') . '</div>';
+            echo '<nav id="awards-partners-nav">';
+            echo '<ul class="list-unstyled">';
+
+            foreach ($partners_with_awards as $partner) {
+               $active_class = '';
+               // Проверяем активность по текущему URL или другим параметрам
+               echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(add_query_arg('partner', $partner->ID)) . '">' . esc_html($partner->post_title) . '</a></li>';
+            }
+
+            echo '</ul>';
+            echo '</nav>';
+            echo '</div>';
+            echo '<!--/.widget -->';
+         }
+      }
    }
 });

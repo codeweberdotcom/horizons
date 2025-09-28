@@ -66,7 +66,7 @@ function add_custom_single_banner_partners($post_type)
                                  <tbody>
                                     <?php if (!empty($language_skills)) : ?>
                                        <tr>
-                                          <td class="py-1 pe-3 align-text-top">
+                                          <td class="pb-1 pe-3 align-text-top">
                                              <?php
                                              if (!empty($language_skills) && !is_wp_error($language_skills)) {
                                                 echo '<div class="text-square-before">';
@@ -75,7 +75,7 @@ function add_custom_single_banner_partners($post_type)
                                              }
                                              ?>
                                           </td>
-                                          <td class="py-1">
+                                          <td class="pb-1">
                                              <?php
                                              if (!empty($language_skills) && !is_wp_error($language_skills)) {
                                                 $language_names = array();
@@ -93,12 +93,12 @@ function add_custom_single_banner_partners($post_type)
 
                                     <?php if (!empty($countries)) : ?>
                                        <tr>
-                                          <td class="py-1 pe-3 align-text-top">
+                                          <td class="pb-1 pe-3 align-text-top">
                                              <div class="text-square-before">
                                                 <?php echo __('Continents', 'horizons') ?>:
                                              </div>
                                           </td>
-                                          <td class="py-1">
+                                          <td class="pb-1">
                                              <?php
 
                                              if (!empty($regions) && !is_wp_error($regions)) {
@@ -115,12 +115,12 @@ function add_custom_single_banner_partners($post_type)
 
                                     <?php if (!empty($countries)) : ?>
                                        <tr>
-                                          <td class="py-1 pe-3 align-text-top">
+                                          <td class="pb-1 pe-3 align-text-top">
                                              <div class="text-square-before">
                                                 <?php echo __('Countries', 'horizons') ?>:
                                              </div>
                                           </td>
-                                          <td class="py-1">
+                                          <td class="pb-1">
                                              <?php
                                              if (!empty($countries) && !is_wp_error($countries)) {
                                                 $country_names = array();

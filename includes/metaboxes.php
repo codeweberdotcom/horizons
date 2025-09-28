@@ -413,10 +413,10 @@ function sort_partner_categories_by_order($clauses, $taxonomies, $args)
 }
 
 
+
 //--------------------------------
 //AWARDS
 //--------------------------------
-
 
 // Add custom meta boxes for Awards
 function add_awards_meta_boxes()
@@ -440,7 +440,6 @@ function award_details_meta_box_callback($post)
 
    // Get existing values
    $award_organization = get_post_meta($post->ID, '_award_organization', true);
-   $award_date = get_post_meta($post->ID, '_award_date', true);
    $award_url = get_post_meta($post->ID, '_award_url', true);
    $award_partners = get_post_meta($post->ID, '_award_partners', true);
 
@@ -470,15 +469,6 @@ function award_details_meta_box_callback($post)
                value="<?php echo esc_attr($award_organization); ?>"
                style="width: 100%; padding: 8px;"
                placeholder="<?php _e('e.g., International Design Awards', 'horizons'); ?>">
-         </p>
-
-         <p>
-            <label for="award_date" style="display: block; margin-bottom: 5px; font-weight: bold;">
-               <?php _e('Award Date', 'horizons'); ?>
-            </label>
-            <input type="date" id="award_date" name="award_date"
-               value="<?php echo esc_attr($award_date); ?>"
-               style="width: 100%; padding: 8px;">
          </p>
       </div>
 
@@ -539,10 +529,9 @@ function save_award_meta_box_data($post_id)
    // Get new partners IDs
    $new_partners_ids = isset($_POST['award_partners']) ? array_map('intval', $_POST['award_partners']) : array();
 
-   // Save basic meta fields
+   // Save basic meta fields (убрано award_date)
    $fields = array(
       'award_organization' => 'sanitize_text_field',
-      'award_date' => 'sanitize_text_field',
       'award_url' => 'esc_url_raw'
    );
 
@@ -554,6 +543,9 @@ function save_award_meta_box_data($post_id)
          delete_post_meta($post_id, '_' . $field);
       }
    }
+
+   // Удаляем старое поле даты, если оно существует
+   delete_post_meta($post_id, '_award_date');
 
    // Save partners IDs
    update_post_meta($post_id, '_award_partners', $new_partners_ids);
