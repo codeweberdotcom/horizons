@@ -8,24 +8,21 @@ $post_type = universal_get_post_type();
 $post_type_lc = strtolower($post_type);
 $sidebar_position = Redux::get_option($opt_name, 'sidebar_position_archive_' . $post_type);
 
-$content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-md-8';
+$content_class = ($sidebar_position === 'none') ? 'col-12' : 'col-xl-8';
 $pageheader_name = Redux::get_option($opt_name, 'global_page_header_model');
 
 $archive_pageheader_id = Redux::get_option($opt_name, 'archive_page_header_select_' . $post_type);
 $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 'disabled');
-
-
-
 ?>
 
 <section class="wrapper bg-white">
-   <div class="container py-8 py-md-12">
+   <div class="container">
       <div class="row gx-lg-8 gx-xl-12">
 
          <?php get_sidebar('left'); ?>
 
-         <div class="grid grid-view projects-masonry shop mb-13 py-12 <?php echo $content_class; ?>">
-            <div class="row  g-3 isotope">
+         <div id="awards-grid" class="grid grid-view mb-13 py-8 py-md-14 awards-grid <?php echo $content_class; ?>">
+            <div class="row g-3 isotope">
 
                <?php if (have_posts()) : ?>
                   <?php while (have_posts()) : the_post(); ?>
@@ -72,11 +69,11 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                      }
                      ?>
 
-                     <div class="project item col-md-6 col-xl-6">
+                     <div class="project item col-6 col-xl-6">
                         <figure class="overlay overlay-3 hover-scale card">
                            <a href="<?php the_permalink(); ?>">
                               <?php if (has_post_thumbnail()) : ?>
-                                 <?php the_post_thumbnail('large', array(
+                                 <?php the_post_thumbnail('codeweber_awards', array(
                                     'class' => 'img-fluid w-100',
                                     'alt' => get_the_title()
                                  )); ?>

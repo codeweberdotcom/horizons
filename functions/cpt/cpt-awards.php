@@ -104,48 +104,7 @@ function create_award_category_taxonomy()
 }
 add_action('init', 'create_award_category_taxonomy', 0);
 
-// Register Custom Taxonomy Award Year
-function create_award_year_taxonomy()
-{
 
-	$labels = array(
-		'name'                       => _x('Award Years', 'Taxonomy General Name', 'horizons'),
-		'singular_name'              => _x('Award Year', 'Taxonomy Singular Name', 'horizons'),
-		'menu_name'                  => __('Years', 'horizons'),
-		'all_items'                  => __('All Years', 'horizons'),
-		'parent_item'                => __('Parent Year', 'horizons'),
-		'parent_item_colon'          => __('Parent Year:', 'horizons'),
-		'new_item_name'              => __('New Year', 'horizons'),
-		'add_new_item'               => __('Add New Year', 'horizons'),
-		'edit_item'                  => __('Edit Year', 'horizons'),
-		'update_item'                => __('Update Year', 'horizons'),
-		'view_item'                  => __('View Year', 'horizons'),
-		'separate_items_with_commas' => __('Separate years with commas', 'horizons'),
-		'add_or_remove_items'        => __('Add or remove years', 'horizons'),
-		'choose_from_most_used'      => __('Choose from the most used', 'horizons'),
-		'popular_items'              => __('Popular Years', 'horizons'),
-		'search_items'               => __('Search Years', 'horizons'),
-		'not_found'                  => __('Not Found', 'horizons'),
-		'no_terms'                   => __('No years', 'horizons'),
-		'items_list'                 => __('Years list', 'horizons'),
-		'items_list_navigation'      => __('Years list navigation', 'horizons'),
-	);
-
-	$args = array(
-		'labels'                     => $labels,
-		'hierarchical'               => false,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'show_admin_column'          => true,
-		'show_in_nav_menus'          => true,
-		'show_tagcloud'              => false,
-		'show_in_rest'               => true,
-		'rewrite'                    => array('slug' => 'award-year'),
-	);
-
-	register_taxonomy('award_year', array('awards'), $args);
-}
-add_action('init', 'create_award_year_taxonomy', 0);
 
 // Register Custom Taxonomy Award Tags
 function create_award_tags_taxonomy()
