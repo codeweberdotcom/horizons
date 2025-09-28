@@ -391,6 +391,8 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
 
 
+
+
 //--------------------------------
 //AWARDS SIDEBAR MENUS
 //--------------------------------
@@ -400,9 +402,6 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
       if (!post_type_exists('awards')) {
          return;
       }
-
-      // Выводим блок активных фильтров
-      echo get_active_filters_block();
 
       // Меню категорий наград
       $categories = get_terms([
@@ -420,7 +419,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($categories as $category) {
             $active_class = is_tax('award_category', $category->term_id) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_filtered_url('category', $category->slug)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_term_link($category)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
          }
 
          echo '</ul>';
@@ -440,7 +439,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($years as $year_data) {
             $active_class = is_year_active($year_data['year']) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_filtered_url('year', $year_data['year'])) . '">' . esc_html($year_data['year']) . ' <span class="text-muted">(' . $year_data['count'] . ')</span></a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(add_query_arg('year', $year_data['year'], get_post_type_archive_link('awards'))) . '">' . esc_html($year_data['year']) . ' <span class="text-muted">(' . $year_data['count'] . ')</span></a></li>';
          }
 
          echo '</ul>';
@@ -460,7 +459,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($partners_with_awards as $partner) {
             $active_class = is_partner_active($partner->ID) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_filtered_url('partner', $partner->ID)) . '">' . esc_html($partner->post_title) . '</a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(add_query_arg('partner', $partner->ID, get_post_type_archive_link('awards'))) . '">' . esc_html($partner->post_title) . '</a></li>';
          }
 
          echo '</ul>';
@@ -472,121 +471,10 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 });
 
 /**
- * Генерирует URL с учетом текущих фильтров
- */
-function get_filtered_url($filter_type, $filter_value) {
-    $base_url = get_post_type_archive_link('awards');
-    $current_params = $_GET;
-    
-    // Добавляем/обновляем параметр фильтра
-    $current_params[$filter_type] = $filter_value;
-    
-    // Собираем URL с параметрами
-    return add_query_arg($current_params, $base_url);
-}
-
-/**
- * Генерирует блок активных фильтров
- */
-function get_active_filters_block() {
-    $active_filters = get_active_filters();
-    
-    if (empty($active_filters)) {
-        return '';
-    }
-    
-    $output = '<div class="widget mb-10 active-filters-block">';
-    $output .= '<div class="text-line-after label-u mb-4">' . __('Active Filters', 'horizons') . '</div>';
-    $output .= '<div class="active-filters-list">';
-    
-    foreach ($active_filters as $filter) {
-        $remove_url = remove_filter_url($filter['type'], $filter['value']);
-        $output .= '<span class="active-filter-item">';
-        $output .= '<span class="filter-label">' . esc_html($filter['label']) . ': ' . esc_html($filter['display_value']) . '</span>';
-        $output .= '<a href="' . esc_url($remove_url) . '" class="filter-remove" title="' . __('Remove filter', 'horizons') . '">';
-        $output .= '<i class="uil uil-times"></i>';
-        $output .= '</a>';
-        $output .= '</span>';
-    }
-    
-    $output .= '</div>';
-    $output .= '</div>';
-    $output .= '<!--/.active-filters -->';
-    
-    return $output;
-}
-
-/**
- * Получает список активных фильтров
- */
-function get_active_filters() {
-    $active_filters = [];
-    
-    // Проверяем категорию
-    if (is_tax('award_category')) {
-        $category = get_queried_object();
-        if ($category && !is_wp_error($category)) {
-            $active_filters[] = [
-                'type' => 'category',
-                'value' => $category->slug,
-                'display_value' => $category->name,
-                'label' => __('Category', 'horizons')
-            ];
-        }
-    }
-    
-    // Проверяем год
-    if (isset($_GET['year']) && !empty($_GET['year'])) {
-        $year = intval($_GET['year']);
-        $active_filters[] = [
-            'type' => 'year',
-            'value' => $year,
-            'display_value' => $year,
-            'label' => __('Year', 'horizons')
-        ];
-    }
-    
-    // Проверяем партнера
-    if (isset($_GET['partner']) && !empty($_GET['partner'])) {
-        $partner_id = intval($_GET['partner']);
-        $partner = get_post($partner_id);
-        if ($partner) {
-            $active_filters[] = [
-                'type' => 'partner',
-                'value' => $partner_id,
-                'display_value' => $partner->post_title,
-                'label' => __('Partner', 'horizons')
-            ];
-        }
-    }
-    
-    return $active_filters;
-}
-
-/**
- * Генерирует URL для удаления фильтра
- */
-function remove_filter_url($filter_type, $filter_value) {
-    $base_url = get_post_type_archive_link('awards');
-    $current_params = $_GET;
-    
-    // Удаляем конкретный фильтр
-    if (isset($current_params[$filter_type]) && $current_params[$filter_type] == $filter_value) {
-        unset($current_params[$filter_type]);
-    }
-    
-    // Для таксономий категорий используем базовый URL архива
-    if ($filter_type === 'category' && is_tax('award_category')) {
-        return $base_url;
-    }
-    
-    return add_query_arg($current_params, $base_url);
-}
-
-/**
  * Получает года из даты публикации постов наград
  */
-function get_awards_years_from_posts() {
+
+   function get_awards_years_from_posts() {
     $awards = get_posts([
         'post_type' => 'awards',
         'posts_per_page' => -1,
@@ -625,7 +513,8 @@ function get_awards_years_from_posts() {
 /**
  * Проверяет активен ли текущий год в URL
  */
-function is_year_active($year) {
+function is_year_active($year)
+{
    if (!isset($_GET['year'])) {
       return false;
    }
@@ -636,7 +525,8 @@ function is_year_active($year) {
 /**
  * Получает партнеров у которых есть опубликованные награды
  */
-function get_partners_with_published_awards() {
+function get_partners_with_published_awards()
+{
    $partners = get_posts([
       'post_type'      => 'partners',
       'posts_per_page' => -1,
@@ -681,7 +571,8 @@ function get_partners_with_published_awards() {
 /**
  * Проверяет активен ли текущий партнер в URL
  */
-function is_partner_active($partner_id) {
+function is_partner_active($partner_id)
+{
    if (!isset($_GET['partner'])) {
       return false;
    }

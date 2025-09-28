@@ -104,8 +104,6 @@ function create_award_category_taxonomy()
 }
 add_action('init', 'create_award_category_taxonomy', 0);
 
-
-
 // Register Custom Taxonomy Award Tags
 function create_award_tags_taxonomy()
 {

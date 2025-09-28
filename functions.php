@@ -248,7 +248,7 @@ function handle_filter_awards()
             )
         );
     }
-    // Если это архив наград без фильтров или с непонятными параметрами
+    // Если это архив наград без фильтров
     elseif (basename($url_parts['path']) === 'awards') {
         // Базовый запрос для архива наград
         $args = array(
@@ -377,7 +377,6 @@ function handle_filter_awards()
 
     wp_send_json_success(array(
         'html' => $html,
-        'found_posts' => $awards_query->found_posts,
-        'active_filters_html' => get_active_filters_block()
+        'found_posts' => $awards_query->found_posts
     ));
 }
