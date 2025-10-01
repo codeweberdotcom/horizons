@@ -163,9 +163,6 @@ function get_user_partner_link($user_id = null)
 }
 
 
-
-
-
 // Подключение скриптов для фильтрации наград
 add_action('wp_enqueue_scripts', 'enqueue_awards_filter_scripts');
 function enqueue_awards_filter_scripts()
@@ -196,7 +193,6 @@ add_action('wp_ajax_nopriv_filter_awards', 'handle_filter_awards');
 
 function handle_filter_awards()
 {
-    // Проверка nonce для безопасности
     if (!wp_verify_nonce($_POST['nonce'], 'awards_filter_nonce')) {
         wp_send_json_error('Security check failed');
         return;
@@ -205,14 +201,12 @@ function handle_filter_awards()
     $filter_type = sanitize_text_field($_POST['filter_type']);
     $filter_url = esc_url_raw($_POST['filter_url']);
 
-    // Парсим URL для определения фильтра
     $url_parts = parse_url($filter_url);
     $query_params = [];
     if (isset($url_parts['query'])) {
         parse_str($url_parts['query'], $query_params);
     }
 
-    // Базовые аргументы запроса
     $args = array(
         'post_type' => 'awards',
         'posts_per_page' => -1,
@@ -221,9 +215,7 @@ function handle_filter_awards()
         'order' => 'DESC'
     );
 
-    // Обрабатываем только ОДИН активный фильтр
     if (isset($query_params['category'])) {
-        // Фильтрация по категории
         $args['tax_query'] = array(
             array(
                 'taxonomy' => 'award_category',
@@ -232,14 +224,12 @@ function handle_filter_awards()
             )
         );
     } elseif (isset($query_params['year'])) {
-        // Фильтрация по году
         $args['date_query'] = array(
             array(
                 'year' => intval($query_params['year'])
             )
         );
     } elseif (isset($query_params['partner'])) {
-        // Фильтрация по партнеру
         $args['meta_query'] = array(
             array(
                 'key' => '_award_partners',
@@ -248,9 +238,7 @@ function handle_filter_awards()
             )
         );
     }
-    // Если это архив наград без фильтров
     elseif (basename($url_parts['path']) === 'awards') {
-        // Базовый запрос для архива наград
         $args = array(
             'post_type' => 'awards',
             'posts_per_page' => -1,
@@ -260,26 +248,19 @@ function handle_filter_awards()
         );
     }
 
-    // Выполняем запрос
     $awards_query = new WP_Query($args);
 
-    // Генерируем HTML
     ob_start();
 ?>
-
     <div class="row g-3 isotope">
-
         <?php if ($awards_query->have_posts()) : ?>
             <?php while ($awards_query->have_posts()) : $awards_query->the_post(); ?>
-
                 <?php
-                // Получаем данные из метаполей
                 $award_organization = get_post_meta(get_the_ID(), '_award_organization', true);
                 $award_url = get_post_meta(get_the_ID(), '_award_url', true);
                 $award_partners = get_post_meta(get_the_ID(), '_award_partners', true);
                 $formatted_date = get_the_date('F Y');
 
-                // Получаем категории
                 $categories = get_the_terms(get_the_ID(), 'award_category');
                 $category_text = '';
                 if ($categories && !is_wp_error($categories)) {
@@ -290,7 +271,6 @@ function handle_filter_awards()
                     $category_text = implode(', ', $category_names);
                 }
 
-                // Получаем партнеров
                 $partners_text = '';
                 if ($award_partners && is_array($award_partners) && !empty($award_partners)) {
                     $partners_count = count($award_partners);
@@ -309,7 +289,6 @@ function handle_filter_awards()
                     }
                 }
                 ?>
-
                 <div class="project item col-6 col-xl-6">
                     <figure class="overlay overlay-3 hover-scale card">
                         <a href="<?php the_permalink(); ?>">
@@ -324,7 +303,6 @@ function handle_filter_awards()
                                     alt="<?php the_title_attribute(); ?>" class="img-fluid w-100" />
                             <?php endif; ?>
                         </a>
-
                         <figcaption>
                             <h2 class="from-left body-l-r mb-3"><?php the_title(); ?></h2>
                             <div class="award-desc-group">
@@ -354,21 +332,16 @@ function handle_filter_awards()
                     </figure>
                 </div>
                 <!-- /.item -->
-
             <?php endwhile; ?>
         <?php else : ?>
-
             <div class="col-12">
                 <div class="alert alert-info text-center">
                     <p><?php _e('No awards found.', 'horizons'); ?></p>
                 </div>
             </div>
-
         <?php endif; ?>
-
     </div>
     <!-- /.row -->
-
 <?php
     $html = ob_get_clean();
 
@@ -380,3 +353,5 @@ function handle_filter_awards()
         'found_posts' => $awards_query->found_posts
     ));
 }
+?>
+
