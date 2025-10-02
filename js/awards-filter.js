@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("Awards filter script loaded");
 
   // Обработчики для всех меню фильтрации
   setupFilterMenu("awards-category-nav", "category");
@@ -81,11 +80,9 @@ document.addEventListener("DOMContentLoaded", function () {
           // Обновляем URL
           window.history.pushState({}, "", filterUrl);
         } else {
-          console.error("AJAX Error:", data.data);
         }
       })
       .catch((error) => {
-        console.error("Fetch Error:", error);
       })
       .finally(() => {
         hideLoadingIndicator();
@@ -96,14 +93,11 @@ document.addEventListener("DOMContentLoaded", function () {
     if (typeof theme !== "undefined") {
       if (typeof theme.isotope === "function") {
         theme.isotope();
-        console.log("Isotope reinitialized");
       }
       if (typeof theme.imageHoverOverlay === "function") {
         theme.imageHoverOverlay();
-        console.log("Image hover overlay reinitialized");
       }
     } else {
-      console.warn("Theme object not found");
       initComponentsManually();
     }
   }
@@ -115,7 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
         itemSelector: ".item",
         layoutMode: "fitRows",
       });
-      console.log("Isotope initialized manually");
     }
     initHoverEffects();
   }

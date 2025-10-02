@@ -38,7 +38,7 @@ function create_awards_cpt()
 		'label'                 => __('Award', 'horizons'),
 		'description'           => __('Company awards and achievements', 'horizons'),
 		'labels'                => $labels,
-		'supports'              => array('title', 'editor', 'thumbnail'),
+		'supports'              => array('title', 'editor', 'thumbnail', "revisions", "author"),
 		'taxonomies'            => array('award_category', 'award_year', 'award_tags'),
 		'hierarchical'          => false,
 		'public'                => true,

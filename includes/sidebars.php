@@ -364,7 +364,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
                   ?>
 
                   <div class="avatar-info mt-0">
-                        <a href="<?php echo esc_url($user_link['url']); ?>" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0">
+                     <a href="<?php echo esc_url($user_link['url']); ?>" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0">
                         <?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
                      </a>
                      <span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
@@ -383,10 +383,9 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             </button>
          </div>
       </div>
-<?php
+      <?php
    }
 });
-
 
 
 
@@ -397,6 +396,106 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
 add_action('codeweber_after_widget', function ($sidebar_id) {
    if ($sidebar_id === 'awards') {
+      // Проверяем, находимся ли на сингл-странице awards
+      if (is_singular('awards')) {
+         $post_id = get_the_ID();
+         $meta_fields = array();
+         $meta_fields['organization'] = get_post_meta($post_id, '_award_organization', true);
+         $meta_fields['url'] = get_post_meta($post_id, '_award_url', true);
+         $meta_fields['year'] = get_the_date('Y', $post_id);
+         $terms = get_the_terms($post_id, 'award_category');
+
+         $user_id = get_the_author_meta('ID');
+         $avatar_id = get_user_meta($user_id, 'avatar_id', true);
+         if (empty($avatar_id)) {
+            $avatar_id = get_user_meta($user_id, 'custom_avatar_id', true);
+         }
+
+         $job_title = get_user_meta($user_id, 'user_position', true);
+         if (empty($job_title)) {
+            $job_title = __('Writer', 'horizons');
+         }
+
+         echo '<div class="widget mb-10">';
+      ?>
+
+         <div class="card border">
+            <div class="card-body bg-neutral-100">
+               <div class="mb-6">
+                  <div class="text-line-after label-u mb-4"><?php echo __('Details', 'horizons'); ?></div>
+
+                  <?php
+                  if ($terms && !is_wp_error($terms)) { ?>
+                     <p class="mb-2 body-l-r d-flex align-content-center">
+                        <i class="uil uil-angle-right me-2"></i>
+                        <?php
+                        $term_names = wp_list_pluck($terms, 'name');
+                        echo implode(', ', $term_names);
+                        ?>
+                     </p>
+                  <?php
+                  }
+                  ?>
+                  <?php
+                  if (!empty($meta_fields['organization'])) : ?>
+                     <p class="mb-2 body-l-r d-flex align-content-center">
+                        <i class="uil uil-angle-right me-2"></i>
+                        <?php echo $meta_fields['organization']; ?>
+                     </p>
+                  <?php endif; ?>
+
+                  <p class="mb-2 body-l-r d-flex align-content-center">
+                     <i class="uil uil-angle-right me-2"></i>
+                     <?php echo $meta_fields['year']; ?>
+                  </p>
+               </div>
+
+               <div class="text-line-after label-u mb-4"><?php _e('Contact Person', 'horizons'); ?></div>
+               <div class="author-info d-md-flex align-items-center mb-4">
+                  <div class="d-flex align-items-center">
+                     <?php if (!empty($avatar_id)) : ?>
+                        <?php $avatar_src = wp_get_attachment_image_src($avatar_id, 'thumbnail'); ?>
+                        <img decoding="async" class="w-48 h-48 me-3" alt="<?php the_author_meta('display_name'); ?>" src="<?php echo esc_url($avatar_src[0]); ?>">
+                     <?php else : ?>
+                        <figure class="me-3">
+                           <?php echo get_avatar(get_the_author_meta('user_email'), 48); ?>
+                        </figure>
+                     <?php endif; ?>
+
+                     <?php
+                     $user_link = get_user_partner_link($user_id);
+                     ?>
+
+                     <div class="avatar-info mt-0">
+                        <a href="<?php echo esc_url($user_link['url']); ?>" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0">
+                           <?php the_author_meta('first_name'); ?> <?php the_author_meta('last_name'); ?>
+                        </a>
+                        <span class="body-s lh-0 text-neutral-500"><?php echo esc_html($job_title); ?></span>
+                     </div>
+                  </div>
+               </div>
+
+               <a href="/awards/" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100">
+                  <?php echo __('Return', 'horizons') ?> </a>
+               <?php
+               if (!empty($meta_fields['url'])) : ?>
+                  <a href="<?php echo esc_url($meta_fields['url']); ?>" class="btn btn-dusty-navy has-ripple btn-lg w-100 mt-1" target="_blank">
+                     <?php echo __('Link to source', 'horizons'); ?>
+                  </a>
+               <?php endif; ?>
+            </div>
+         </div>
+
+<?php
+         echo '</div>';
+         return;
+      }
+
+      // Проверяем, что это архивная страница awards
+      if (!is_post_type_archive('awards') && !is_tax('award_category')) {
+         return;
+      }
+
       if (!post_type_exists('awards')) {
          return;
       }
