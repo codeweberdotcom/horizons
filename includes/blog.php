@@ -198,3 +198,104 @@ function codeweber_blog_posts_slider_shortcode($atts)
    wp_reset_postdata();
    return ob_get_clean();
 }
+
+
+
+
+// Добавьте этот код в functions.php вашей темы
+
+// Регистрация шорткода
+add_shortcode('custom_menu', 'custom_menu_shortcode');
+
+function custom_menu_shortcode($atts)
+{
+   // Атрибуты шорткода
+   $atts = shortcode_atts(array(
+      'id' => '',
+      'title' => '',
+   ), $atts);
+
+   // Если ID меню не указан, возвращаем пустую строку
+   if (empty($atts['id'])) {
+      return '<!-- Menu ID not specified -->';
+   }
+
+   // Получаем меню по ID
+   $menu_items = wp_get_nav_menu_items($atts['id']);
+
+   // Если меню не найдено или пустое
+   if (!$menu_items || is_wp_error($menu_items)) {
+      return '<!-- Menu not found or empty -->';
+   }
+
+   // Начинаем формировать HTML
+   $output = '<div class="widget mb-10">';
+
+   // Добавляем заголовок если указан (с поддержкой перевода)
+   if (!empty($atts['title'])) {
+      $translated_title = apply_filters('wpml_translate_single_string', $atts['title'], 'custom-menu-shortcode', 'menu-title-' . sanitize_title($atts['title']));
+      $output .= '<div class="text-line-after label-u mb-4">' . esc_html($translated_title) . '</div>';
+   }
+
+   $output .= '<nav id="awards-category-nav">';
+   $output .= '<ul class="list-unstyled">';
+
+   // Перебираем элементы меню
+   foreach ($menu_items as $item) {
+      $count = get_post_count_for_menu_item($item);
+
+      $output .= '<li class="mt-0">';
+      $output .= '<a class="label-s text-neutral-500" href="' . esc_url($item->url) . '">';
+      $output .= esc_html($item->title) . $count;
+      $output .= '</a>';
+      $output .= '</li>';
+   }
+
+   $output .= '</ul>';
+   $output .= '</nav>';
+   $output .= '</div>';
+
+   return $output;
+}
+
+// Вспомогательная функция для получения количества записей
+function get_post_count_for_menu_item($menu_item)
+{
+   $count = '';
+
+   // Если это ссылка на категорию
+   if ($menu_item->type === 'taxonomy' && $menu_item->object === 'category') {
+      $category = get_category($menu_item->object_id);
+      if ($category) {
+         $count = ' <span class="text-muted">(' . $category->count . ')</span>';
+      }
+   }
+   // Если это ссылка на произвольную таксономию
+   elseif ($menu_item->type === 'taxonomy') {
+      $term = get_term($menu_item->object_id, $menu_item->object);
+      if ($term && !is_wp_error($term)) {
+         $count = ' <span class="text-muted">(' . $term->count . ')</span>';
+      }
+   }
+   // Если это ссылка с параметром category в URL
+   elseif ($menu_item->type === 'custom' && strpos($menu_item->url, 'category=') !== false) {
+      preg_match('/category=([^&]+)/', $menu_item->url, $matches);
+      if (!empty($matches[1])) {
+         $category = get_category_by_slug($matches[1]);
+         if ($category) {
+            $count = ' <span class="text-muted">(' . $category->count . ')</span>';
+         }
+      }
+   }
+
+   return $count;
+}
+
+// Регистрация строк для перевода (для WPML)
+add_action('init', 'register_custom_menu_strings');
+function register_custom_menu_strings()
+{
+   if (function_exists('wpml_register_single_string')) {
+      do_action('wpml_register_single_string', 'custom-menu-shortcode', 'Menu Title', 'Категория');
+   }
+}
