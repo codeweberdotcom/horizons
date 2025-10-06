@@ -210,7 +210,6 @@ function custom_menu_shortcode($atts)
    // Атрибуты шорткода
    $atts = shortcode_atts(array(
       'id' => '',
-      'title' => '',
    ), $atts);
 
    // Если ID меню не указан, возвращаем пустую строку
@@ -221,8 +220,11 @@ function custom_menu_shortcode($atts)
    // Получаем меню по ID
    $menu_items = wp_get_nav_menu_items($atts['id']);
 
+   // Получаем название меню
+   $menu = wp_get_nav_menu_object($atts['id']);
+
    // Если меню не найдено или пустое
-   if (!$menu_items || is_wp_error($menu_items)) {
+   if (!$menu_items || is_wp_error($menu_items) || !$menu) {
       return '<!-- Menu not found or empty -->';
    }
 
@@ -233,11 +235,9 @@ function custom_menu_shortcode($atts)
    // Начинаем формировать HTML
    $output = '<div class="widget mb-10">';
 
-   // Добавляем заголовок если указан (с поддержкой перевода)
-   if (!empty($atts['title'])) {
-      $translated_title = apply_filters('wpml_translate_single_string', $atts['title'], 'custom-menu-shortcode', 'menu-title-' . sanitize_title($atts['title']));
-      $output .= '<div class="text-line-after label-u mb-4">' . esc_html($translated_title) . '</div>';
-   }
+   // Добавляем заголовок из названия меню (с поддержкой перевода)
+   $menu_name = apply_filters('wpml_translate_single_string', $menu->name, 'nav_menu', 'menu_name_' . $menu->term_id);
+   $output .= '<div class="text-line-after label-u mb-4">' . esc_html($menu_name) . '</div>';
 
    $output .= '<nav class="sidebar" id="awards-category-nav">';
    $output .= '<ul class="list-unstyled">';
@@ -350,13 +350,4 @@ function get_post_count_for_menu_item($menu_item)
    }
 
    return $count;
-}
-
-// Регистрация строк для перевода (для WPML)
-add_action('init', 'register_custom_menu_strings');
-function register_custom_menu_strings()
-{
-   if (function_exists('wpml_register_single_string')) {
-      do_action('wpml_register_single_string', 'custom-menu-shortcode', 'Menu Title', 'Категория');
-   }
 }
