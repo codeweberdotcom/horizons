@@ -16,7 +16,7 @@
  *     @type string $tag            Slug меток для фильтрации (через запятую). По умолчанию пусто.
  *     @type string $orderby        Поле для сортировки записей ('date', 'title', 'rand' и др.). По умолчанию 'date'.
  *     @type string $order          Направление сортировки ('ASC' или 'DESC'). По умолчанию 'DESC'.
- *     @type string $image_size     Размер изображения записи. По умолчанию 'codeweber_staff'.
+ *     @type string $image_size     Размер изображения записи. По умолчанию 'horizons_staff'.
  *     @type int    $excerpt_length Длина текста анонса (в словах). По умолчанию 20.
  *     @type string $items_xl       Количество слайдов при разрешении ≥1200px. По умолчанию '3'.
  *     @type string $items_lg       Количество слайдов при разрешении ≥992px. По умолчанию '3'.
@@ -39,9 +39,9 @@
  * @example [blog_posts_slider posts_per_page="3" category="главное" order="ASC" items_xl="1" items_lg="1" nav="true" dots="false"] // 3 первые записи категории "главное" по одной на весь экран
  */
 
-add_shortcode('blog_posts_slider', 'codeweber_blog_posts_slider_shortcode');
+add_shortcode('blog_posts_slider', 'horizons_blog_posts_slider_shortcode');
 
-function codeweber_blog_posts_slider_shortcode($atts)
+function horizons_blog_posts_slider_shortcode($atts)
 {
    // Атрибуты по умолчанию
    $atts = shortcode_atts(array(
@@ -50,7 +50,7 @@ function codeweber_blog_posts_slider_shortcode($atts)
       'tag' => '',           // Фильтр по меткам (slug через запятую)
       'orderby' => 'date',
       'order' => 'DESC',
-      'image_size' => 'codeweber_staff',
+      'image_size' => 'horizons_staff',
       'excerpt_length' => 20,
       'items_xl' => '3',
       'items_lg' => '3',
@@ -139,7 +139,7 @@ function codeweber_blog_posts_slider_shortcode($atts)
                            <figure class="post-figure overlay overlay-1 hover-scale rounded mb-5">
                               <a href="<?php the_permalink(); ?>">
                                  <?php if (has_post_thumbnail()) : ?>
-                                 <?php
+                                    <?php
                                     $image_size = $atts['image_size'];
                                     $thumbnail = get_the_post_thumbnail(get_the_ID(), $image_size, array(
                                        'decoding' => 'async',
@@ -147,29 +147,29 @@ function codeweber_blog_posts_slider_shortcode($atts)
                                        'class' => 'post-image swiper-lazy'
                                     ));
                                     echo $thumbnail;
-                                 ?>
+                                    ?>
                                  <?php else : ?>
-                                 <img decoding="async"
-                                 src="<?php echo esc_url(get_template_directory_uri() . '/dist/assets/img/placeholder_400x400.jpg'); ?>"
-                                 alt="<?php echo esc_attr(get_the_title()); ?>"
-                                 class="post-image swiper-lazy" />
-                           <?php endif; ?>
+                                    <img decoding="async"
+                                       src="<?php echo esc_url(get_template_directory_uri() . '/dist/assets/img/placeholder_400x400.jpg'); ?>"
+                                       alt="<?php echo esc_attr(get_the_title()); ?>"
+                                       class="post-image swiper-lazy" />
+                                 <?php endif; ?>
 
-                           <!-- Всегда отображаем основную категорию -->
-                           <div class="caption-wrapper p-7">
-                              <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">
-                                 <?php
-                                 $categories = get_the_category();
-                                 if (!empty($categories)) {
-                                    echo esc_html($categories[0]->name);
-                                 }
-                                 ?>
-                              </div>
-                           </div><span class="bg"></span>
-                           </a>
-                           <figcaption>
-                              <div class="from-top mb-0 label-u"><?php echo __('Read', 'horizons'); ?></div>
-                           </figcaption>
+                                 <!-- Всегда отображаем основную категорию -->
+                                 <div class="caption-wrapper p-7">
+                                    <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">
+                                       <?php
+                                       $categories = get_the_category();
+                                       if (!empty($categories)) {
+                                          echo esc_html($categories[0]->name);
+                                       }
+                                       ?>
+                                    </div>
+                                 </div><span class="bg"></span>
+                              </a>
+                              <figcaption>
+                                 <div class="from-top mb-0 label-u"><?php echo __('Read', 'horizons'); ?></div>
+                              </figcaption>
                            </figure>
 
                            <div class="post-body mt-4">
@@ -186,7 +186,7 @@ function codeweber_blog_posts_slider_shortcode($atts)
                               </div>
 
                               <a href="<?php the_permalink(); ?>" class="hover-4 link-body label-s text-charcoal-blue me-4 post-read-more">
-                                 <?php _e('Читать полностью', 'codeweber'); ?>
+                                 <?php _e('Read more', 'horizons'); ?>
                               </a>
                            </div>
                            <!--/.post-body -->
@@ -364,3 +364,278 @@ function get_post_count_for_menu_item($menu_item)
 
    return $count;
 }
+
+function display_post_meta($args = array())
+{
+   $defaults = array(
+      'wrapper_class' => 'post-meta d-flex',
+      'show_date' => true,
+      'show_author' => true,
+      'show_comments' => true,
+      'comments_class' => 'ms-auto',
+      'comments_show_text' => true,
+      'date_format' => 'm.d.Y',
+      'author_text' => __('Author %s', 'horizons')
+   );
+
+   $args = wp_parse_args($args, $defaults);
+
+   echo '<ul class="' . esc_attr($args['wrapper_class']) . '">';
+
+   // Date
+   if ($args['show_date']) {
+      echo '<li class="post-date">';
+      echo '<i class="uil uil-calendar-alt"></i>';
+      echo '<span>' . get_the_date($args['date_format']) . '</span>';
+      echo '</li>';
+   }
+
+   // Author
+   if ($args['show_author']) {
+      echo '<li class="post-author">';
+      echo '<a href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">';
+      echo '<i class="uil uil-user"></i>';
+      echo '<span>' . sprintf($args['author_text'], get_the_author()) . '</span>';
+      echo '</a>';
+      echo '</li>';
+   }
+
+   // Comments (only if open)
+   if ($args['show_comments'] && comments_open()) {
+      // Определяем ссылку в зависимости от типа страницы
+      $comments_link = is_single() ? '#comments' : get_comments_link();
+      $comments_class = is_single() ? 'scroll' : '';
+
+      echo '<li class="post-comments ' . esc_attr($args['comments_class']) . '">';
+      echo '<a href="' . esc_url($comments_link) . '" class="' . esc_attr($comments_class) . '">';
+      echo '<i class="uil uil-comment"></i>';
+      echo $args['comments_show_text'] ? get_comments_number_text() : get_comments_number();
+      echo '</a>';
+      echo '</li>';
+   }
+
+   echo '</ul>';
+}
+
+
+// Добавляем метаполе чекбокса для записей
+function add_blog_banner_meta_box()
+{
+   add_meta_box(
+      'blog_banner_meta',
+      'Отображать на главной блога',
+      'blog_banner_meta_callback',
+      'post',
+      'side',
+      'high'
+   );
+}
+add_action('add_meta_boxes', 'add_blog_banner_meta_box');
+
+// Колбек функция для вывода чекбокса
+function blog_banner_meta_callback($post)
+{
+   wp_nonce_field('blog_banner_meta_nonce', 'blog_banner_nonce');
+   $value = get_post_meta($post->ID, '_show_on_blog_home', true);
+?>
+   <label for="show_on_blog_home">
+      <input type="checkbox" id="show_on_blog_home" name="show_on_blog_home" value="1" <?php checked($value, '1'); ?> />
+      Выводить баннер на главной блога
+   </label>
+   <?php
+}
+
+// Сохраняем значение чекбокса
+function save_blog_banner_meta($post_id)
+{
+   if (!isset($_POST['blog_banner_nonce']) || !wp_verify_nonce($_POST['blog_banner_nonce'], 'blog_banner_meta_nonce')) {
+      return;
+   }
+
+   if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+      return;
+   }
+
+   if (!current_user_can('edit_post', $post_id)) {
+      return;
+   }
+
+   $show_banner = isset($_POST['show_on_blog_home']) ? '1' : '0';
+   update_post_meta($post_id, '_show_on_blog_home', $show_banner);
+}
+add_action('save_post', 'save_blog_banner_meta');
+
+
+// Функция для вывода баннера на главной блога
+function display_blog_banner()
+{
+   // Получаем все записи с включенным чекбоксом
+   $banner_posts = get_posts(array(
+      'post_type' => 'post',
+      'meta_key' => '_show_on_blog_home',
+      'meta_value' => '1',
+      'posts_per_page' => -1,
+      'post_status' => 'publish',
+      'orderby' => 'date',
+      'order' => 'DESC'
+   ));
+
+   if (empty($banner_posts)) {
+      return;
+   }
+
+   // Если запись одна - выводим обычный баннер
+   if (count($banner_posts) === 1) {
+      $post = $banner_posts[0];
+      setup_postdata($post);
+
+      // Получаем данные поста
+      $post_id = $post->ID;
+      $title = get_the_title($post_id);
+      $excerpt = get_the_excerpt($post_id);
+      $permalink = get_permalink($post_id);
+      $categories = get_the_category($post_id);
+      $category_name = !empty($categories) ? $categories[0]->name : '';
+
+      // Получаем изображение
+      $image_url = get_the_post_thumbnail_url($post_id, 'large');
+      if (!$image_url) {
+         $image_url = get_stylesheet_directory_uri() . '/assets/images/partner-banner.jpg';
+      }
+   ?>
+
+      <section class="partners-banner">
+         <div class="col-12">
+            <div class="row wrapper g-0">
+               <div class="col-md-12 col-xl-5">
+                  <div class="card h-100 overflow-hidden bg-dusty-navy">
+                     <figure class="bg-cover wrapper image-wrapper bg-image h-100"
+                        data-image-src="<?php echo esc_url($image_url); ?>"
+                        style="background-image: url('<?php echo esc_url($image_url); ?>')">
+                     </figure>
+                  </div>
+               </div>
+               <!--/column -->
+               <div class="col-12 col-xl-7 order-lg-2">
+                  <div class="card h-100 bg-dusty-navy">
+                     <div class="p-md-15 card-body align-content-center p-8">
+                        <?php if ($category_name): ?>
+                           <div class="text-line-before label-u mb-2 text-white">
+                              <?php echo esc_html($category_name); ?>
+                           </div>
+                        <?php endif; ?>
+
+                        <h1 class="h1 mb-1 text-white mt-md-8 mb-4">
+                           <?php echo esc_html($title); ?>
+                        </h1>
+
+                        <?php if ($excerpt): ?>
+                           <blockquote class="icon body-l-r text-white mb-4">
+                              <?php echo esc_html($excerpt); ?>
+                           </blockquote>
+                        <?php endif; ?>
+
+                        <div class="mt-4">
+                           <a href="<?php echo esc_url($permalink); ?>" class="btn btn-primary">
+                              Читать далее
+                           </a>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!--/column -->
+            </div>
+         </div>
+         <!-- /.container -->
+      </section>
+
+   <?php
+      wp_reset_postdata();
+   } else {
+      // Если записей несколько - выводим Swiper
+   ?>
+
+      <div class="swiper-container mb-10" data-margin="30" data-nav="true" data-dots="false" data-items-xl="1" data-items-md="1" data-items-xs="1">
+         <div class="swiper">
+            <div class="swiper-wrapper">
+               <?php foreach ($banner_posts as $post):
+                  setup_postdata($post);
+
+                  // Получаем данные поста
+                  $post_id = $post->ID;
+                  $title = get_the_title($post_id);
+                  $excerpt = wp_trim_words(get_the_excerpt($post_id), 20, '...');
+                  $permalink = get_permalink($post_id);
+                  $categories = get_the_category($post_id);
+                  $category_name = !empty($categories) ? $categories[0]->name : '';
+
+                  // Получаем изображение
+                  $image_url = get_the_post_thumbnail_url($post_id, 'large');
+                  if (!$image_url) {
+                     $image_url = get_stylesheet_directory_uri() . '/assets/images/partner-banner.jpg';
+                  }
+               ?>
+
+                  <div class="swiper-slide">
+                     <section class="partners-banner">
+                        <div class="col-12">
+                           <div class="row wrapper g-0">
+                              <div class="col-md-12 col-xl-5">
+                                 <div class="card h-100 overflow-hidden bg-dusty-navy">
+                                    <figure class="bg-cover wrapper image-wrapper bg-image h-100"
+                                       data-image-src="<?php echo esc_url($image_url); ?>"
+                                       style="background-image: url('<?php echo esc_url($image_url); ?>')">
+                                    </figure>
+                                 </div>
+                              </div>
+                              <!--/column -->
+                              <div class="col-12 col-xl-7 order-lg-2">
+                                 <div class="card h-100 bg-dusty-navy">
+                                    <div class="p-md-15 card-body align-content-center p-8">
+                                       <?php if ($category_name): ?>
+                                          <div class="text-line-before label-u mb-2 text-white">
+                                             <?php echo esc_html($category_name); ?>
+                                          </div>
+                                       <?php endif; ?>
+
+                                       <h1 class="h1 mb-1 text-white mt-md-8 mb-4">
+                                          <?php echo esc_html($title); ?>
+                                       </h1>
+
+                                       <?php if ($excerpt): ?>
+                                          <blockquote class="icon body-l-r text-white mb-4">
+                                             <?php echo esc_html($excerpt); ?>
+                                          </blockquote>
+                                       <?php endif; ?>
+
+                                       <div class="mt-4">
+                                          <a href="<?php echo esc_url($permalink); ?>" class="btn btn-primary">
+                                             Читать далее
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!--/column -->
+                           </div>
+                        </div>
+                        <!-- /.container -->
+                     </section>
+                  </div>
+                  <!--/.swiper-slide -->
+
+               <?php endforeach; ?>
+            </div>
+            <!--/.swiper-wrapper -->
+         </div>
+         <!-- /.swiper -->
+      </div>
+      <!-- /.swiper-container -->
+
+<?php
+      wp_reset_postdata();
+   }
+}
+
+// Вешаем функцию на хук
+add_action('blog_banner', 'display_blog_banner');

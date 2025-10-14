@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-14 11:41+0000\n"
+"POT-Creation-Date: 2025-10-14 11:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -184,11 +184,6 @@ msgstr ""
 
 #: includes/metaboxes.php:1598 includes/metaboxes.php:1751
 msgid "Associated User"
-msgstr ""
-
-#: includes/blog.php:383
-#, php-format
-msgid "Author %s"
 msgstr ""
 
 #: functions/cpt/cpt-awards.php:11 functions/cpt/cpt-awards.php:38

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-10-06 10:46+0000\n"
+"PO-Revision-Date: 2025-10-14 11:42+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -186,6 +186,11 @@ msgstr "Ассоциированные Партнеры"
 #: includes/metaboxes.php:1598 includes/metaboxes.php:1751
 msgid "Associated User"
 msgstr "Связанный пользователь"
+
+#: includes/blog.php:383
+#, php-format
+msgid "Author %s"
+msgstr "Автор %s"
 
 #: functions/cpt/cpt-awards.php:11 functions/cpt/cpt-awards.php:38
 msgid "Award"
@@ -973,7 +978,7 @@ msgstr ""
 msgid "Primary Partner"
 msgstr "Основной партнер"
 
-#: includes/blog.php:159
+#: includes/blog.php:171
 msgid "Read"
 msgstr "Читать"
 
@@ -1345,6 +1350,10 @@ msgstr "Писатель"
 #: templates/content/single-practices.php:25
 msgid "Your Task"
 msgstr "Ваша задача"
+
+#: includes/blog.php:189
+msgid "Читать полностью"
+msgstr ""
 
 #: includes/metaboxes.php:1623
 msgid "— No User —"
