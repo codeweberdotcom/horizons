@@ -200,6 +200,7 @@ function codeweber_blog_posts_slider_shortcode($atts)
 }
 
 
+
 // Добавьте этот код в functions.php вашей темы
 
 // Регистрация шорткода
@@ -251,7 +252,7 @@ function custom_menu_shortcode($atts)
       $active_class = $is_active ? ' active' : '';
 
       $output .= '<li class="mt-0">';
-      $output .= '<a class="label-s text-neutral-500 position-relative' . $active_class . '" href="' . esc_url($item->url) . '">';
+      $output .= '<a class="label-s text-neutral-500 d-block position-relative' . $active_class . '" href="' . esc_url($item->url) . '">';
       $output .= esc_html($item->title) . $count;
       $output .= '</a>';
       $output .= '</li>';

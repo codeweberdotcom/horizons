@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-09-28 21:39+0000\n"
+"PO-Revision-Date: 2025-10-06 10:46+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -34,10 +34,6 @@ msgid_plural "%d practices"
 msgstr[0] "%d практика"
 msgstr[1] "%d практики"
 msgstr[2] "%d практик"
-
-#: includes/sidebars.php:499
-msgid "Active Filters"
-msgstr ""
 
 #: includes/metaboxes.php:1234
 msgid "Add Category image"
@@ -79,7 +75,7 @@ msgstr "Добавить Практику"
 msgid "Add New Region"
 msgstr "Добавить новый регион"
 
-#: functions/cpt/cpt-awards.php:121
+#: functions/cpt/cpt-awards.php:119
 msgid "Add New Tag"
 msgstr "Добавить Метку"
 
@@ -99,7 +95,7 @@ msgstr "Добавить или удалить языки"
 msgid "Add or remove regions"
 msgstr "Добавить или удалить регионы"
 
-#: functions/cpt/cpt-awards.php:126
+#: functions/cpt/cpt-awards.php:124
 msgid "Add or remove tags"
 msgstr "Добавить или удалить Метку"
 
@@ -159,7 +155,7 @@ msgstr "Все Практики"
 msgid "All Regions"
 msgstr "Все регионы"
 
-#: functions/cpt/cpt-awards.php:117
+#: functions/cpt/cpt-awards.php:115
 msgid "All Tags"
 msgstr "Все Метки"
 
@@ -203,7 +199,7 @@ msgstr "Архив наград"
 msgid "Award Attributes"
 msgstr "Атрибуты награды"
 
-#: includes/sidebars.php:417
+#: includes/sidebars.php:513
 msgid "Award Categories"
 msgstr "Категория"
 
@@ -215,7 +211,7 @@ msgstr "Подробности Награды"
 msgid "Award Image"
 msgstr "Изображение Награды"
 
-#: includes/sidebars.php:457
+#: includes/sidebars.php:553
 msgid "Award Partners"
 msgstr "Партнер"
 
@@ -223,7 +219,7 @@ msgstr "Партнер"
 msgid "Award URL"
 msgstr "URL-адрес Награды"
 
-#: includes/sidebars.php:437
+#: includes/sidebars.php:533
 msgid "Award Years"
 msgstr "Год публикации"
 
@@ -271,10 +267,6 @@ msgstr "Список Категорий"
 msgid "Categories list navigation"
 msgstr "Навигация по списку категорий"
 
-#: includes/sidebars.php:533
-msgid "Category"
-msgstr ""
-
 #: includes/metaboxes.php:1169
 msgid "Category Author"
 msgstr "Автор Направления"
@@ -299,7 +291,7 @@ msgstr ""
 msgid "Charcoal Blue (#303C42)"
 msgstr ""
 
-#: functions/cpt/cpt-awards.php:82 functions/cpt/cpt-awards.php:127
+#: functions/cpt/cpt-awards.php:82 functions/cpt/cpt-awards.php:125
 msgid "Choose from the most used"
 msgstr "Выбрать из часто используемых"
 
@@ -335,7 +327,7 @@ msgstr "Награды и достижения компании"
 msgid "Company:"
 msgstr "Компания:"
 
-#: includes/sidebars.php:349
+#: includes/sidebars.php:349 includes/sidebars.php:453
 msgid "Contact Person"
 msgstr "Контактное лицо"
 
@@ -377,6 +369,7 @@ msgid "Delete Image"
 msgstr ""
 
 #: taxonomy-practice_category.php:138 includes/sidebars.php:325
+#: includes/sidebars.php:425
 msgid "Details"
 msgstr "Детально"
 
@@ -428,7 +421,7 @@ msgstr "Редактировать Практику"
 msgid "Edit Region"
 msgstr "Редактировать регион"
 
-#: functions/cpt/cpt-awards.php:122
+#: functions/cpt/cpt-awards.php:120
 msgid "Edit Tag"
 msgstr "Редактировать Метку"
 
@@ -480,7 +473,7 @@ msgstr "Гладков Денис"
 msgid "Hold Ctrl/Cmd to select multiple partners members"
 msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескольких Партнеров."
 
-#: archive-awards.php:58 functions.php:299
+#: archive-awards.php:58 functions.php:279
 msgid "Horizons"
 msgstr ""
 
@@ -519,6 +512,10 @@ msgstr "Языки"
 #: includes/metaboxes.php:205
 msgid "Languages:"
 msgstr "Языки:"
+
+#: includes/sidebars.php:483
+msgid "Link to source"
+msgstr ""
 
 #: includes/metaboxes.php:130
 msgid "LinkedIn:"
@@ -584,7 +581,7 @@ msgstr "Новая Практика"
 msgid "New Region Name"
 msgstr "Новое название Региона"
 
-#: functions/cpt/cpt-awards.php:120
+#: functions/cpt/cpt-awards.php:118
 msgid "New Tag Name"
 msgstr "Новое имя Метки"
 
@@ -592,7 +589,7 @@ msgstr "Новое имя Метки"
 msgid "News"
 msgstr "Новости"
 
-#: archive-awards.php:122 functions.php:363
+#: archive-awards.php:122 functions.php:339
 msgid "No awards found."
 msgstr ""
 
@@ -672,11 +669,11 @@ msgstr "Регионы не найдены. Сначала добавьте ре
 msgid "No services found in this category."
 msgstr "В этой категории не найдено ни одной практики"
 
-#: functions/cpt/cpt-awards.php:131
+#: functions/cpt/cpt-awards.php:129
 msgid "No tags"
 msgstr "Нет меток"
 
-#: functions/cpt/cpt-awards.php:85 functions/cpt/cpt-awards.php:130
+#: functions/cpt/cpt-awards.php:85 functions/cpt/cpt-awards.php:128
 msgid "Not Found"
 msgstr "Не Существует"
 
@@ -733,6 +730,10 @@ msgstr "Порядковый номер"
 msgid "Organization"
 msgstr "Организация"
 
+#: templates/components/another-awards-grid.php:13
+msgid "Other publications"
+msgstr ""
+
 #: archive-vacancies.php:67
 msgid "Other Vacancies"
 msgstr "Другие вакансии"
@@ -769,11 +770,11 @@ msgstr "Родительский регион"
 msgid "Parent Region:"
 msgstr "Родительский регион:"
 
-#: functions/cpt/cpt-awards.php:118
+#: functions/cpt/cpt-awards.php:116
 msgid "Parent Tag"
 msgstr "Родительская Метка"
 
-#: functions/cpt/cpt-awards.php:119
+#: functions/cpt/cpt-awards.php:117
 msgid "Parent Tag:"
 msgstr "Родительская Метка:"
 
@@ -782,8 +783,8 @@ msgid "Part-time"
 msgstr ""
 "Неполная занятость\n"
 
-#: includes/metaboxes.php:1783 includes/sidebars.php:558
-#: functions/cpt/cpt-partners.php:10 functions/cpt/cpt-partners.php:29
+#: includes/metaboxes.php:1783 functions/cpt/cpt-partners.php:10
+#: functions/cpt/cpt-partners.php:29
 msgid "Partner"
 msgstr "Партнер"
 
@@ -884,7 +885,7 @@ msgstr "Популярные языки"
 msgid "Popular Regions"
 msgstr "Популярные регионы"
 
-#: functions/cpt/cpt-awards.php:128
+#: functions/cpt/cpt-awards.php:126
 msgid "Popular Tags"
 msgstr "Популярные метки"
 
@@ -976,6 +977,10 @@ msgstr "Основной партнер"
 msgid "Read"
 msgstr "Читать"
 
+#: templates/components/another-awards-grid.php:28
+msgid "Read More"
+msgstr ""
+
 #: functions/cpt/cpt-partners.php:200
 msgid "Regions"
 msgstr "Страны"
@@ -987,10 +992,6 @@ msgstr "Рекомендуемые новости"
 #: functions/cpt/cpt-awards.php:28
 msgid "Remove award image"
 msgstr "Удалить изображение награды"
-
-#: includes/sidebars.php:506
-msgid "Remove filter"
-msgstr ""
 
 #: functions/cpt/cpt-partners.php:25
 msgid "Remove partner image"
@@ -1007,6 +1008,10 @@ msgstr "Требования к кандидату"
 #: templates/content/single-vacancies.php:31
 msgid "Responsibilities"
 msgstr "Ключевые обязанности"
+
+#: includes/sidebars.php:479
+msgid "Return"
+msgstr ""
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"
@@ -1036,7 +1041,7 @@ msgstr "Поиск Практики"
 msgid "Search Regions"
 msgstr "Поиск Региона"
 
-#: functions/cpt/cpt-awards.php:129
+#: functions/cpt/cpt-awards.php:127
 msgid "Search Tags"
 msgstr "Поиск Тега"
 
@@ -1149,7 +1154,7 @@ msgstr "Разделяйте языки запятыми"
 msgid "Separate regions with commas"
 msgstr "Разделяйте регионы запятыми"
 
-#: functions/cpt/cpt-awards.php:125
+#: functions/cpt/cpt-awards.php:123
 msgid "Separate tags with commas"
 msgstr "Разделяйте теги запятыми."
 
@@ -1189,15 +1194,15 @@ msgstr "Заполнить заявку"
 msgid "Surname:"
 msgstr "Фамилия:"
 
-#: functions/cpt/cpt-awards.php:116
+#: functions/cpt/cpt-awards.php:114
 msgid "Tags"
 msgstr "Метки"
 
-#: functions/cpt/cpt-awards.php:132
+#: functions/cpt/cpt-awards.php:130
 msgid "Tags list"
 msgstr "Список тегов"
 
-#: functions/cpt/cpt-awards.php:133
+#: functions/cpt/cpt-awards.php:131
 msgid "Tags list navigation"
 msgstr "Навигация по списку тегов"
 
@@ -1206,7 +1211,7 @@ msgctxt "Taxonomy General Name"
 msgid "Award Categories"
 msgstr "Категории Награды"
 
-#: functions/cpt/cpt-awards.php:114
+#: functions/cpt/cpt-awards.php:112
 msgctxt "Taxonomy General Name"
 msgid "Award Tags"
 msgstr "Метки Награды"
@@ -1216,7 +1221,7 @@ msgctxt "Taxonomy Singular Name"
 msgid "Award Category"
 msgstr "Категория Награды"
 
-#: functions/cpt/cpt-awards.php:115
+#: functions/cpt/cpt-awards.php:113
 msgctxt "Taxonomy Singular Name"
 msgid "Award Tag"
 msgstr "Метка Награды"
@@ -1253,7 +1258,7 @@ msgstr "Обновить Язык"
 msgid "Update Region"
 msgstr "Обновить Регион"
 
-#: functions/cpt/cpt-awards.php:123
+#: functions/cpt/cpt-awards.php:121
 msgid "Update Tag"
 msgstr "Обновить Метку"
 
@@ -1313,7 +1318,7 @@ msgstr "Посмотреть Практики"
 msgid "View Region"
 msgstr "Просмотреть Регион"
 
-#: functions/cpt/cpt-awards.php:124
+#: functions/cpt/cpt-awards.php:122
 msgid "View Tag"
 msgstr "Показать Метку"
 
@@ -1333,15 +1338,9 @@ msgstr "Вебсайт"
 msgid "Website:"
 msgstr "Вебсайт:"
 
-#: includes/sidebars.php:313
+#: includes/sidebars.php:313 includes/sidebars.php:416
 msgid "Writer"
 msgstr "Писатель"
-
-#: includes/sidebars.php:545
-#, fuzzy
-#| msgid "Years"
-msgid "Year"
-msgstr "Года"
 
 #: templates/content/single-practices.php:25
 msgid "Your Task"

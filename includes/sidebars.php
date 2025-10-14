@@ -93,7 +93,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
                $permalink = get_permalink($post);
                $active_class = ($current_id === $post->ID) ? ' active' : '';
-               echo '<li><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url($permalink) . '">' . esc_html(get_the_title($post)) . '</a></li>';
+               echo '<li><a class="label-s text-neutral-500 d-block ' . $active_class . '" href="' . esc_url($permalink) . '">' . esc_html(get_the_title($post)) . '</a></li>';
             }
 
             echo '</ul>';
@@ -149,7 +149,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
                $permalink = get_permalink($post);
                $active_class = ($current_id === $post->ID) ? ' active' : '';
-               echo '<li><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url($permalink) . '">' . esc_html(get_the_title($post)) . '</a></li>';
+               echo '<li><a class="label-s text-neutral-500 d-block ' . $active_class . '" href="' . esc_url($permalink) . '">' . esc_html(get_the_title($post)) . '</a></li>';
             }
 
             echo '</ul>';
@@ -258,7 +258,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
                $permalink = get_permalink($post);
                $active_class = ($current_id === $post->ID) ? ' active' : '';
-               echo '<li><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url($permalink) . '">' . esc_html(get_the_title($post)) . '</a></li>';
+               echo '<li><a class="label-s text-neutral-500 d-block ' . $active_class . '" href="' . esc_url($permalink) . '">' . esc_html(get_the_title($post)) . '</a></li>';
             }
 
             echo '</ul>';
@@ -516,7 +516,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($categories as $category) {
             $active_class = is_tax('award_category', $category->term_id) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_single_filter_url('category', $category->slug)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500 d-block' . $active_class . '" href="' . esc_url(get_single_filter_url('category', $category->slug)) . '">' . esc_html($category->name) . ' <span class="text-muted">(' . $category->count . ')</span></a></li>';
          }
 
          echo '</ul>';
@@ -536,7 +536,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($years as $year_data) {
             $active_class = is_year_active($year_data['year']) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_single_filter_url('year', $year_data['year'])) . '">' . esc_html($year_data['year']) . ' <span class="text-muted">(' . $year_data['count'] . ')</span></a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500 d-block ' . $active_class . '" href="' . esc_url(get_single_filter_url('year', $year_data['year'])) . '">' . esc_html($year_data['year']) . ' <span class="text-muted">(' . $year_data['count'] . ')</span></a></li>';
          }
 
          echo '</ul>';
@@ -556,7 +556,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
 
          foreach ($partners_with_awards as $partner) {
             $active_class = is_partner_active($partner->ID) ? ' active' : '';
-            echo '<li class="mt-0"><a class="label-s text-neutral-500' . $active_class . '" href="' . esc_url(get_single_filter_url('partner', $partner->ID)) . '">' . esc_html($partner->post_title) . '</a></li>';
+            echo '<li class="mt-0"><a class="label-s text-neutral-500 d-block ' . $active_class . '" href="' . esc_url(get_single_filter_url('partner', $partner->ID)) . '">' . esc_html($partner->post_title) . '</a></li>';
          }
 
          echo '</ul>';
