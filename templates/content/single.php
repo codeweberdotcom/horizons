@@ -123,7 +123,7 @@
 
 
 			<hr />
-			<?php get_template_part('templates/components/lastpostslider-blog'); ?>
+			<?php echo do_shortcode('[blog_posts_slider posts_per_page="6" items_xl="2" items_md="2" items_sm="1"]'); ?>
 			<?php
 			if (comments_open() || get_comments_number()) { ?>
 				<hr />

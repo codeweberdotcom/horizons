@@ -78,6 +78,18 @@ function codeweber_blog_posts_slider_shortcode($atts)
    if (!empty($atts['category'])) {
       $categories = array_map('trim', explode(',', $atts['category']));
       $args['category_name'] = implode(',', $categories);
+   } else {
+      // Если категория не указана, проверяем, находимся ли мы на странице single post
+      if (is_single() && get_post_type() === 'post') {
+         $current_post_categories = get_the_category();
+         if (!empty($current_post_categories)) {
+            $category_slugs = array();
+            foreach ($current_post_categories as $category) {
+               $category_slugs[] = $category->slug;
+            }
+            $args['category_name'] = implode(',', $category_slugs);
+         }
+      }
    }
 
    // Добавляем фильтр по меткам если указан
