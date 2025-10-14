@@ -525,9 +525,9 @@ function display_blog_banner()
                            </div>
                         <?php endif; ?>
 
-                        <h1 class="h1 mb-1 text-white mt-md-8 mb-4">
+                        <h2 class="h1 mb-1 text-white mt-md-8 mb-4">
                            <?php echo esc_html($title); ?>
-                        </h1>
+                        </h2>
 
                         <?php if ($excerpt): ?>
                            <blockquote class="icon body-l-r text-white mb-4">
@@ -536,9 +536,7 @@ function display_blog_banner()
                         <?php endif; ?>
 
                         <div class="mt-4">
-                           <a href="<?php echo esc_url($permalink); ?>" class="btn btn-primary">
-                              Читать далее
-                           </a>
+                           <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo  __('Read more', 'horizons'); ?></a>
                         </div>
                      </div>
                   </div>
@@ -555,7 +553,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container mb-10" data-margin="10" data-autoplay="true" data-autoplaytime="3000" data-speed="1500" data-loop="true" data-nav="true" data-dots="false" data-items-xl="1" data-items-md="1" data-items-xs="1">
+      <div class="swiper-container mb-10" data-margin="10" data-autoplay="true" data-autoplaytime="5000" data-speed="1500" data-loop="true" data-nav="true" data-dots="false" data-items-xl="1" data-items-md="1" data-items-xs="1">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
@@ -609,9 +607,7 @@ function display_blog_banner()
                                        <?php endif; ?>
 
                                        <div class="mt-4">
-                                          <a href="<?php echo esc_url($permalink); ?>" class="btn btn-primary">
-                                             Читать далее
-                                          </a>
+                                          <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
                                        </div>
                                     </div>
                                  </div>
