@@ -555,7 +555,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container mb-10" data-margin="30" data-nav="true" data-dots="false" data-items-xl="1" data-items-md="1" data-items-xs="1">
+      <div class="swiper-container mb-10" data-margin="10" data-autoplay="true" data-autoplaytime="3000" data-speed="1500" data-loop="true" data-nav="true" data-dots="false" data-items-xl="1" data-items-md="1" data-items-xs="1">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
