@@ -562,6 +562,13 @@ function display_blog_banner()
 
                               <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
 
+                              <?php
+                              display_post_meta(array(
+                                 'wrapper_class' => 'post-meta d-md-flex mt-3',
+                                 'comments_class' => 'ms-auto',
+                                 'comments_show_text' => true
+                              ));
+                              ?>
 
                            </div>
                            <!--/column -->
