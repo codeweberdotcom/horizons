@@ -17,7 +17,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
 <section id="content-wrapper" class="wrapper">
    <div class="container">
 
-<?php do_action('blog_banner'); ?>
+      <?php do_action('blog_banner'); ?>
       <div class="row gx-lg-8 gx-xl-12">
          <?php get_sidebar('left'); ?>
          <!-- #sidebar-left -->
@@ -38,13 +38,13 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                         the_post();
                   ?>
                         <article class="item post col-md-12">
-                           <div class="post-col">
-                              <figure class="post-figure overlay overlay-1 hover-scale rounded mb-5">
+                           <div class="post-col d-md-flex shadow-lg">
+                              <figure class="post-figure overlay overlay-1 hover-scale rounded col-md-4">
                                  <a href="<?php the_permalink(); ?>">
                                     <?php if (has_post_thumbnail()) : ?>
                                        <?php
                                        // Используем значение по умолчанию если $atts не определен
-                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'codeweber_awards';
+                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'codeweber_staff';
                                        $thumbnail = get_the_post_thumbnail(get_the_ID(), $image_size, array(
                                           'decoding' => 'async',
                                           'alt' => esc_attr(get_the_title()),
@@ -54,7 +54,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                        ?>
                                     <?php else : ?>
                                        <img decoding="async"
-                                          src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/placeholder_960x600.jpg'); ?>"
+                                          src="<?php echo esc_url(get_stylesheet_directory_uri() . '/assets/images/placeholder_600x600.jpg'); ?>"
                                           alt="<?php echo esc_attr(get_the_title()); ?>"
                                           class="post-image swiper-lazy" />
                                     <?php endif; ?>
@@ -65,7 +65,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                  </figcaption>
                               </figure>
 
-                              <div class="post-body mt-4">
+                              <div class="post-body p-8 col-md-8 align-self-center">
                                  <h2 class="h4 post-title"><?php the_title(); ?></h2>
 
                                  <div class="body-l-l mb-4 post-excerpt">
@@ -82,7 +82,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                  <hr class="my-3">
                                  <?php
                                  display_post_meta(array(
-                                    'wrapper_class' => 'post-meta d-flex mb-3',
+                                    'wrapper_class' => 'post-meta d-md-flex mb-3',
                                     'comments_class' => 'ms-auto',
                                     'comments_show_text' => true
                                  ));

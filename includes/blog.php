@@ -466,6 +466,7 @@ function save_blog_banner_meta($post_id)
 add_action('save_post', 'save_blog_banner_meta');
 
 
+
 // Функция для вывода баннера на главной блога
 function display_blog_banner()
 {
@@ -494,8 +495,6 @@ function display_blog_banner()
       $title = get_the_title($post_id);
       $excerpt = get_the_excerpt($post_id);
       $permalink = get_permalink($post_id);
-      $categories = get_the_category($post_id);
-      $category_name = !empty($categories) ? $categories[0]->name : '';
 
       // Получаем изображение
       $image_url = get_the_post_thumbnail_url($post_id, 'large');
@@ -504,47 +503,25 @@ function display_blog_banner()
       }
    ?>
 
-      <section class="partners-banner">
-         <div class="col-12">
-            <div class="row wrapper g-0">
-               <div class="col-md-12 col-xl-5">
-                  <div class="card h-100 overflow-hidden bg-dusty-navy">
-                     <figure class="bg-cover wrapper image-wrapper bg-image h-100"
-                        data-image-src="<?php echo esc_url($image_url); ?>"
-                        style="background-image: url('<?php echo esc_url($image_url); ?>')">
-                     </figure>
-                  </div>
-               </div>
-               <!--/column -->
-               <div class="col-12 col-xl-7 order-lg-2">
-                  <div class="card h-100 bg-dusty-navy">
-                     <div class="p-md-15 card-body align-content-center p-8">
-                        <?php if ($category_name): ?>
-                           <div class="text-line-before label-u mb-2 text-white">
-                              <?php echo esc_html($category_name); ?>
-                           </div>
-                        <?php endif; ?>
+      <section class="h-100 bg-overlay bg-overlay-400 bg-dark" style="background-image:url(<?php echo esc_url($image_url); ?>);">
+         <div class="container h-100">
+            <div class="row h-100">
+               <div class="col-lg-8 col-xl-7 col-xxl-6 text-center text-lg-start justify-content-center align-self-center align-items-start">
+                  <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s"><?php echo esc_html($title); ?></h2>
 
-                        <h2 class="h1 mb-1 text-white mt-md-8 mb-4">
-                           <?php echo esc_html($title); ?>
-                        </h2>
+                  <?php if ($excerpt): ?>
+                     <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s"><?php echo esc_html($excerpt); ?></p>
+                  <?php endif; ?>
 
-                        <?php if ($excerpt): ?>
-                           <blockquote class="icon body-l-r text-white mb-4">
-                              <?php echo esc_html($excerpt); ?>
-                           </blockquote>
-                        <?php endif; ?>
-
-                        <div class="mt-4">
-                           <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo  __('Read more', 'horizons'); ?></a>
-                        </div>
-                     </div>
+                  <div class="animate__animated animate__slideInUp animate__delay-3s">
+                     <a href="<?php echo esc_url($permalink); ?>" class="btn btn-lg btn-outline-white rounded-pill"><?php echo __('Read more', 'horizons'); ?></a>
                   </div>
                </div>
                <!--/column -->
             </div>
+            <!--/.row -->
          </div>
-         <!-- /.container -->
+         <!--/.container -->
       </section>
 
    <?php
@@ -553,7 +530,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container mb-10" data-margin="10" data-autoplay="true" data-autoplaytime="5000" data-speed="1500" data-loop="true" data-nav="true" data-dots="false" data-items-xl="1" data-items-md="1" data-items-xs="1">
+      <div class="swiper-container dots-over swiper-hero-blog" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="2">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
@@ -564,8 +541,6 @@ function display_blog_banner()
                   $title = get_the_title($post_id);
                   $excerpt = wp_trim_words(get_the_excerpt($post_id), 20, '...');
                   $permalink = get_permalink($post_id);
-                  $categories = get_the_category($post_id);
-                  $category_name = !empty($categories) ? $categories[0]->name : '';
 
                   // Получаем изображение
                   $image_url = get_the_post_thumbnail_url($post_id, 'large');
@@ -574,49 +549,26 @@ function display_blog_banner()
                   }
                ?>
 
-                  <div class="swiper-slide">
-                     <section class="partners-banner">
-                        <div class="col-12">
-                           <div class="row wrapper g-0">
-                              <div class="col-md-12 col-xl-5">
-                                 <div class="card h-100 overflow-hidden bg-dusty-navy">
-                                    <figure class="bg-cover wrapper image-wrapper bg-image h-100"
-                                       data-image-src="<?php echo esc_url($image_url); ?>"
-                                       style="background-image: url('<?php echo esc_url($image_url); ?>')">
-                                    </figure>
-                                 </div>
-                              </div>
-                              <!--/column -->
-                              <div class="col-12 col-xl-7 order-lg-2">
-                                 <div class="card h-100 bg-dusty-navy">
-                                    <div class="p-md-15 card-body align-content-center p-8">
-                                       <?php if ($category_name): ?>
-                                          <div class="text-line-before label-u mb-2 text-white">
-                                             <?php echo esc_html($category_name); ?>
-                                          </div>
-                                       <?php endif; ?>
+                  <div class="swiper-slide p-10 h-100 bg-overlay bg-overlay-400 bg-dark" style="background-image:url(<?php echo esc_url($image_url); ?>);">
+                     <div class="container h-100">
+                        <div class="row h-100">
+                           <div class="col-12 text-center text-lg-start justify-content-center align-self-center align-items-start">
+                              <h2 class=" mb-4 text-white"><?php echo esc_html($title); ?></h2>
 
-                                       <h1 class="h1 mb-1 text-white mt-md-8 mb-4">
-                                          <?php echo esc_html($title); ?>
-                                       </h1>
+                              <?php if ($excerpt): ?>
+                                 <p class="body-l-r mb-7 text-white"><?php echo esc_html($excerpt); ?></p>
+                              <?php endif; ?>
 
-                                       <?php if ($excerpt): ?>
-                                          <blockquote class="icon body-l-r text-white mb-4">
-                                             <?php echo esc_html($excerpt); ?>
-                                          </blockquote>
-                                       <?php endif; ?>
 
-                                       <div class="mt-4">
-                                          <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <!--/column -->
+                              <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
+
+
                            </div>
+                           <!--/column -->
                         </div>
-                        <!-- /.container -->
-                     </section>
+                        <!--/.row -->
+                     </div>
+                     <!--/.container -->
                   </div>
                   <!--/.swiper-slide -->
 
