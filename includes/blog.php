@@ -539,7 +539,7 @@ function display_blog_banner()
                   // Получаем данные поста
                   $post_id = $post->ID;
                   $title = get_the_title($post_id);
-                  $excerpt = wp_trim_words(get_the_excerpt($post_id), 20, '...');
+                  $excerpt = wp_trim_words(get_the_excerpt($post_id), 10, '...');
                   $permalink = get_permalink($post_id);
 
                   // Получаем изображение
