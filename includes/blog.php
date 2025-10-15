@@ -549,7 +549,7 @@ function display_blog_banner()
                   }
                ?>
 
-                  <div class="swiper-slide p-10 h-100 bg-overlay bg-overlay-400 bg-dark" style="background-image:url(<?php echo esc_url($image_url); ?>);">
+                  <div class="swiper-slide p-5 p-md-10 h-100 bg-overlay bg-overlay-400 bg-dark" style="background-image:url(<?php echo esc_url($image_url); ?>);">
                      <div class="container h-100">
                         <div class="row h-100">
                            <div class="col-12 text-center text-lg-start justify-content-center align-self-center align-items-start">
