@@ -66,7 +66,9 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                               </figure>
 
                               <div class="post-body p-8 col-md-8 align-self-center">
-                                 <h2 class="h4 post-title"><?php the_title(); ?></h2>
+                                 <a href="<?php the_permalink(); ?>">
+                                    <h2 class="h4 post-title"><?php the_title(); ?></h2>
+                                 </a>
 
                                  <div class="body-l-l mb-4 post-excerpt">
                                     <?php
