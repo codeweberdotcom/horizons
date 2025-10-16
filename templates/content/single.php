@@ -124,7 +124,7 @@
 
 			<hr />
 
-			<?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="2" items_lg="2" items_md="2" items_sm="1" items_xs="1" items_xxs="1" image_size="codeweber_awards" excerpt_length="0" title_length = "40"]'); ?>
+			<?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="2" items_lg="2" items_md="2" items_sm="1" items_xs="1" items_xxs="1" image_size="codeweber_vacancy" excerpt_length="0" title_length = "40"]'); ?>
 			
 			<?php
 			if (comments_open() || get_comments_number()) { ?>
