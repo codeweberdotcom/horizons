@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-10-14 11:42+0000\n"
+"PO-Revision-Date: 2025-10-16 11:50+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -34,6 +34,11 @@ msgid_plural "%d practices"
 msgstr[0] "%d практика"
 msgstr[1] "%d практики"
 msgstr[2] "%d практик"
+
+#: includes/blog.php:182
+#, php-format
+msgid "%s"
+msgstr ""
 
 #: includes/metaboxes.php:1234
 msgid "Add Category image"
@@ -187,7 +192,7 @@ msgstr "Ассоциированные Партнеры"
 msgid "Associated User"
 msgstr "Связанный пользователь"
 
-#: includes/blog.php:383
+#: includes/blog.php:401
 #, php-format
 msgid "Author %s"
 msgstr "Автор %s"
@@ -978,14 +983,6 @@ msgstr ""
 msgid "Primary Partner"
 msgstr "Основной партнер"
 
-#: includes/blog.php:171
-msgid "Read"
-msgstr "Читать"
-
-#: templates/components/another-awards-grid.php:28
-msgid "Read More"
-msgstr ""
-
 #: functions/cpt/cpt-partners.php:200
 msgid "Regions"
 msgstr "Страны"
@@ -1351,7 +1348,32 @@ msgstr "Писатель"
 msgid "Your Task"
 msgstr "Ваша задача"
 
-#: includes/blog.php:189
+#: templates/components/another-awards-grid.php:28
+msgctxt "Подробнее"
+msgid "Read More"
+msgstr "Подробнее"
+
+#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
+msgctxt "Подробнее"
+msgid "Read more"
+msgstr "Подробнее"
+
+#: single.php:58
+msgctxt "Предыдущий"
+msgid "Previous"
+msgstr "Предыдущая запись"
+
+#: single.php:68
+msgctxt "Следующий"
+msgid "Next"
+msgstr "Следующая запись"
+
+#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
+msgctxt "Читать"
+msgid "Read"
+msgstr "Читать"
+
+#: templates/content/loop.php:66
 msgid "Читать полностью"
 msgstr ""
 

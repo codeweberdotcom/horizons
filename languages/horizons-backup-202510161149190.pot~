@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-14 11:37+0000\n"
+"POT-Creation-Date: 2025-10-16 11:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -33,6 +33,11 @@ msgid "%d practice"
 msgid_plural "%d practices"
 msgstr[0] ""
 msgstr[1] ""
+
+#: includes/blog.php:182
+#, php-format
+msgid "%s"
+msgstr ""
 
 #: includes/metaboxes.php:1234
 msgid "Add Category image"
@@ -186,7 +191,7 @@ msgstr ""
 msgid "Associated User"
 msgstr ""
 
-#: includes/blog.php:383
+#: includes/blog.php:401
 #, php-format
 msgid "Author %s"
 msgstr ""
@@ -322,12 +327,6 @@ msgstr ""
 #: includes/metaboxes.php:1034
 msgid "Color"
 msgstr ""
-
-#: includes/blog.php:393
-msgid "Comment"
-msgid_plural "Comments"
-msgstr[0] ""
-msgstr[1] ""
 
 #: functions/cpt/cpt-awards.php:39
 msgid "Company awards and achievements"
@@ -596,6 +595,11 @@ msgstr ""
 
 #: includes/partners.php:210 includes/practices.php:47
 msgid "News"
+msgstr ""
+
+#: single.php:68
+msgctxt "Следующий"
+msgid "Next"
 msgstr ""
 
 #: archive-awards.php:122 functions.php:339
@@ -963,6 +967,11 @@ msgstr ""
 msgid "Practices list"
 msgstr ""
 
+#: single.php:58
+msgctxt "Предыдущий"
+msgid "Previous"
+msgstr ""
+
 #: includes/metaboxes.php:1046
 msgid "Primary"
 msgstr ""
@@ -975,12 +984,16 @@ msgstr ""
 msgid "Primary Partner"
 msgstr ""
 
-#: includes/blog.php:171
+#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
 msgid "Read"
 msgstr ""
 
 #: templates/components/another-awards-grid.php:28
 msgid "Read More"
+msgstr ""
+
+#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
+msgid "Read more"
 msgstr ""
 
 #: functions/cpt/cpt-partners.php:200
@@ -1339,7 +1352,7 @@ msgstr ""
 msgid "Your Task"
 msgstr ""
 
-#: includes/blog.php:189
+#: templates/content/loop.php:66
 msgid "Читать полностью"
 msgstr ""
 
