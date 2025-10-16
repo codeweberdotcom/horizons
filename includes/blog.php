@@ -374,7 +374,7 @@ function display_post_meta($args = array())
       'show_comments' => true,
       'comments_class' => 'ms-auto',
       'comments_show_text' => true,
-      'date_format' => 'm.d.Y',
+      'date_format' => 'd.m.Y',
       'author_text' => __('Author %s', 'horizons')
    );
 
@@ -530,7 +530,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container dots-over swiper-hero-blog" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="2">
+      <div class="swiper-container dots-over swiper-hero-blog" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
@@ -553,22 +553,27 @@ function display_blog_banner()
                      <div class="container h-100">
                         <div class="row h-100">
                            <div class="col-12 text-center text-lg-start justify-content-center align-self-center align-items-start">
+
+                              <?php
+                              display_post_meta(array(
+                                 'wrapper_class' => 'post-meta d-md-flex mt-3',
+                                 'comments_class' => '',
+                                 'comments_show_text' => false
+                              ));
+                              ?>
+
+
                               <h2 class=" mb-4 text-white"><?php echo esc_html($title); ?></h2>
 
                               <?php if ($excerpt): ?>
-                                 <p class="body-l-r mb-7 text-white"><?php echo esc_html($excerpt); ?></p>
+                                 <p class="body-l-r mb-4 text-white"><?php echo esc_html($excerpt); ?></p>
                               <?php endif; ?>
 
 
                               <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
 
-                              <?php
-                              display_post_meta(array(
-                                 'wrapper_class' => 'post-meta d-md-flex mt-3',
-                                 'comments_class' => 'ms-auto',
-                                 'comments_show_text' => true
-                              ));
-                              ?>
+
+
 
                            </div>
                            <!--/column -->

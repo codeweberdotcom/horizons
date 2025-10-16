@@ -77,7 +77,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                        $excerpt = get_the_content();
                                     }
                                     // Используем значение по умолчанию если $atts не определен
-                                    $excerpt_length = isset($atts['excerpt_length']) ? intval($atts['excerpt_length']) : 20;
+                                    $excerpt_length = isset($atts['excerpt_length']) ? intval($atts['excerpt_length']) : 15;
                                     echo wp_trim_words($excerpt, $excerpt_length, '...');
                                     ?>
                                  </div>
