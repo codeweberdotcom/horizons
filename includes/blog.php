@@ -516,7 +516,7 @@ function display_blog_banner()
       // Получаем данные поста
       $post_id = $post->ID;
       $title = get_the_title($post_id);
-      $excerpt = get_the_excerpt($post_id);
+      $excerpt = wp_trim_words(get_the_excerpt($post_id), 10, '...');
       $permalink = get_permalink($post_id);
 
       // Получаем изображение
@@ -526,19 +526,27 @@ function display_blog_banner()
       }
    ?>
 
-      <section class="h-100 bg-overlay bg-overlay-400 bg-dark" style="background-image:url(<?php echo esc_url($image_url); ?>);">
+      <section class="p-5 p-md-10 mt-8 mt-md-12 wrapper swiper-hero-blog image-wrapper bg-image bg-overlay bg-overlay-400 bg-full" data-image-src="<?php echo esc_url($image_url); ?>">
          <div class="container h-100">
             <div class="row h-100">
                <div class="col-lg-8 col-xl-7 col-xxl-6 text-center text-lg-start justify-content-center align-self-center align-items-start">
-                  <h2 class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s"><?php echo esc_html($title); ?></h2>
+
+                  <?php
+                  display_post_meta(array(
+                     'wrapper_class' => 'post-meta d-md-flex mt-3',
+                     'comments_class' => '',
+                     'comments_show_text' => false
+                  ));
+                  ?>
+
+
+                  <h2 class=" mb-4 text-white"><?php echo esc_html($title); ?></h2>
 
                   <?php if ($excerpt): ?>
-                     <p class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s"><?php echo esc_html($excerpt); ?></p>
+                     <p class="body-l-r mb-4 text-white"><?php echo esc_html($excerpt); ?></p>
                   <?php endif; ?>
 
-                  <div class="animate__animated animate__slideInUp animate__delay-3s">
-                     <a href="<?php echo esc_url($permalink); ?>" class="btn btn-lg btn-outline-white rounded-pill"><?php echo __('Read more', 'horizons'); ?></a>
-                  </div>
+                  <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
                </div>
                <!--/column -->
             </div>
@@ -553,7 +561,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container dots-over swiper-hero-blog " data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
+      <div class="swiper-container dots-over swiper-hero-blog mt-8 mt-md-12" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
