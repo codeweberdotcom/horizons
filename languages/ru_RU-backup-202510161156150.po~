@@ -1,14 +1,14 @@
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-14 11:39+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: \n"
-"Language: \n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"POT-Creation-Date: 2025-09-16 09:59+0000\n"
+"PO-Revision-Date: 2025-10-16 11:55+0000\n"
+"Last-Translator: Codeweber\n"
+"Language-Team: Русский\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,274 +18,280 @@ msgstr ""
 
 #: includes/metaboxes.php:1398
 msgid "\"Advantages\" text:"
-msgstr ""
+msgstr "\"Преимущества\" текст"
 
 #: includes/metaboxes.php:1392
 msgid "\"Our solution\" text:"
-msgstr ""
+msgstr "Наше \"решение\" текст"
 
 #: includes/metaboxes.php:1386
 msgid "\"Your task\" text:"
-msgstr ""
+msgstr "Ваша \"задача\" текст"
 
 #: taxonomy-practice_category.php:152
 msgid "%d practice"
 msgid_plural "%d practices"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d практика"
+msgstr[1] "%d практики"
+msgstr[2] "%d практик"
+
+#: includes/blog.php:182
+#, php-format
+msgid "%s"
+msgstr ""
 
 #: includes/metaboxes.php:1234
 msgid "Add Category image"
-msgstr ""
+msgstr "Добавить Изображение категории"
 
 #: includes/metaboxes.php:1211
 msgid "Add Image"
-msgstr ""
+msgstr "Добавить Изображение"
 
 #: functions/cpt/cpt-awards.php:17
 msgid "Add New"
-msgstr ""
+msgstr "Добавить"
 
 #: functions/cpt/cpt-awards.php:16
 msgid "Add New Award"
-msgstr ""
+msgstr "Добавить Награду"
 
 #: functions/cpt/cpt-awards.php:76 functions/cpt/cpt-partners.php:80
 msgid "Add New Category"
-msgstr ""
+msgstr "Добавить Категорию"
 
 #: functions/cpt/cpt-partners.php:123
 msgid "Add New Country"
-msgstr ""
+msgstr "Добавить Страну"
 
 #: functions/cpt/cpt-partners.php:164
 msgid "Add New Language"
-msgstr ""
+msgstr "Добавить новый язык"
 
 #: functions/cpt/cpt-partners.php:14
 msgid "Add New Partner"
-msgstr ""
+msgstr "Добавить Партнера"
 
 #: functions/cpt/cpt-practices.php:14
 msgid "Add New Practice"
-msgstr ""
+msgstr "Добавить Практику"
 
 #: functions/cpt/cpt-partners.php:205
 msgid "Add New Region"
-msgstr ""
+msgstr "Добавить новый регион"
 
 #: functions/cpt/cpt-awards.php:119
 msgid "Add New Tag"
-msgstr ""
+msgstr "Добавить Метку"
 
 #: functions/cpt/cpt-awards.php:81 functions/cpt/cpt-partners.php:87
 msgid "Add or remove categories"
-msgstr ""
+msgstr "Добавить или удалить Категорию"
 
 #: functions/cpt/cpt-partners.php:128
 msgid "Add or remove countries"
-msgstr ""
+msgstr "Добавить или удалить страны"
 
 #: functions/cpt/cpt-partners.php:169
 msgid "Add or remove languages"
-msgstr ""
+msgstr "Добавить или удалить языки"
 
 #: functions/cpt/cpt-partners.php:212
 msgid "Add or remove regions"
-msgstr ""
+msgstr "Добавить или удалить регионы"
 
 #: functions/cpt/cpt-awards.php:124
 msgid "Add or remove tags"
-msgstr ""
+msgstr "Добавить или удалить Метку"
 
 #: functions/cpt/cpt-partners.php:13
 msgid "Add Partner"
-msgstr ""
+msgstr "Добавить Партнера"
 
 #: functions/cpt/cpt-practices.php:13
 msgid "Add Practice"
-msgstr ""
+msgstr "Добавить Практику"
 
 #: includes/metaboxes.php:10
 msgid "Additional Information"
-msgstr ""
+msgstr "Дополнительная информация"
 
 #: includes/partners.php:150 includes/partners.php:157
 msgid "Address"
-msgstr ""
+msgstr "Адрес"
 
 #: templates/content/single-practices.php:43
 msgid "Advantages"
-msgstr ""
+msgstr "Преимущества"
 
 #: includes/shortcodes.php:379 functions/cpt/cpt-awards.php:15
 msgid "All Awards"
-msgstr ""
+msgstr "Все Награды"
 
 #: functions/cpt/cpt-awards.php:72 functions/cpt/cpt-partners.php:76
 msgid "All Categories"
-msgstr ""
+msgstr "Все Категории"
 
 #: functions/cpt/cpt-partners.php:119
 msgid "All Countries"
-msgstr ""
+msgstr "Все Страны"
 
 #: functions/cpt/cpt-partners.php:160
 msgid "All Languages"
-msgstr ""
+msgstr "Все языки"
 
 #: includes/partners.php:215 includes/practices.php:52
 msgid "All News"
-msgstr ""
+msgstr "Все новости"
 
 #: functions/cpt/cpt-partners.php:12
 msgid "All Partners"
-msgstr ""
+msgstr "Все Партнеры"
 
 #: includes/shortcodes.php:252
 msgid "All Practice"
-msgstr ""
+msgstr "Все практики"
 
 #: functions/cpt/cpt-practices.php:12
 msgid "All Practices"
-msgstr ""
+msgstr "Все Практики"
 
 #: functions/cpt/cpt-partners.php:201
 msgid "All Regions"
-msgstr ""
+msgstr "Все регионы"
 
 #: functions/cpt/cpt-awards.php:115
 msgid "All Tags"
-msgstr ""
+msgstr "Все Метки"
 
 #: archive-partners.php:26
 msgid "All World"
-msgstr ""
+msgstr "Весь мир"
 
 #: includes/metaboxes.php:1633
 msgid "Already assigned"
-msgstr ""
+msgstr "Уже назначен"
 
 #: includes/metaboxes.php:1035
 msgid "Alt. Title"
-msgstr ""
+msgstr "Альтернативный Заголовок"
 
 #: includes/metaboxes.php:825 includes/metaboxes.php:871
 msgid "Alternative Title"
-msgstr ""
+msgstr "Альтернативный Заголовок"
 
 #: includes/metaboxes.php:875
 msgid "Alternative title for display purposes"
-msgstr ""
+msgstr "Альтернативное название для отображения"
 
 #: includes/metaboxes.php:488
 msgid "Associated partners Members"
-msgstr ""
+msgstr "Ассоциированные Партнеры"
 
 #: includes/metaboxes.php:1598 includes/metaboxes.php:1751
 msgid "Associated User"
-msgstr ""
+msgstr "Связанный пользователь"
 
-#: includes/blog.php:383
+#: includes/blog.php:401
 #, php-format
 msgid "Author %s"
-msgstr ""
+msgstr "Автор %s"
 
 #: functions/cpt/cpt-awards.php:11 functions/cpt/cpt-awards.php:38
 msgid "Award"
-msgstr ""
+msgstr "Награды"
 
 #: functions/cpt/cpt-awards.php:12
 msgid "Award Archives"
-msgstr ""
+msgstr "Архив наград"
 
 #: functions/cpt/cpt-awards.php:13
 msgid "Award Attributes"
-msgstr ""
+msgstr "Атрибуты награды"
 
 #: includes/sidebars.php:513
 msgid "Award Categories"
-msgstr ""
+msgstr "Категория"
 
 #: includes/metaboxes.php:426
 msgid "Award Details"
-msgstr ""
+msgstr "Подробности Награды"
 
 #: functions/cpt/cpt-awards.php:26
 msgid "Award Image"
-msgstr ""
+msgstr "Изображение Награды"
 
 #: includes/sidebars.php:553
 msgid "Award Partners"
-msgstr ""
+msgstr "Партнер"
 
 #: includes/metaboxes.php:478
 msgid "Award URL"
-msgstr ""
+msgstr "URL-адрес Награды"
 
 #: includes/sidebars.php:533
 msgid "Award Years"
-msgstr ""
+msgstr "Год публикации"
 
 #: functions/cpt/cpt-awards.php:10
 msgid "Awards"
-msgstr ""
+msgstr "Награды"
 
 #: functions/cpt/cpt-awards.php:32
 msgid "Awards list"
-msgstr ""
+msgstr "Список Наград"
 
 #: functions/cpt/cpt-awards.php:33
 msgid "Awards list navigation"
-msgstr ""
+msgstr "Навигация по списку наград"
 
 #: includes/metaboxes.php:228
 msgid "Awards:"
-msgstr ""
+msgstr "Награды:"
 
 #: includes/metaboxes.php:1404
 msgid "Blog article categories for display:"
-msgstr ""
+msgstr "Категории статей блога для отображения:"
 
 #: includes/metaboxes.php:1419
 msgid "Blog article tags for display:"
-msgstr ""
+msgstr "Теги статей блога для отображения:"
 
 #: includes/metaboxes.php:199
 msgid "Brief information about the employee"
-msgstr ""
+msgstr "Краткая информация о сотруднике"
 
 #: archive-vacancies.php:17
 msgid "Careers"
-msgstr ""
+msgstr "Карьера"
 
 #: functions/cpt/cpt-awards.php:71 functions/cpt/cpt-partners.php:75
 msgid "Categories"
-msgstr ""
+msgstr "Категории"
 
 #: functions/cpt/cpt-awards.php:87
 msgid "Categories list"
-msgstr ""
+msgstr "Список Категорий"
 
 #: functions/cpt/cpt-awards.php:88
 msgid "Categories list navigation"
-msgstr ""
+msgstr "Навигация по списку категорий"
 
 #: includes/metaboxes.php:1169
 msgid "Category Author"
-msgstr ""
+msgstr "Автор Направления"
 
 #: includes/metaboxes.php:804 includes/metaboxes.php:847
 msgid "Category Color"
-msgstr ""
+msgstr "Цвет Категории"
 
 #: includes/metaboxes.php:1207 includes/metaboxes.php:1224
 msgid "Category image"
-msgstr ""
+msgstr "Изображение Категории"
 
 #: taxonomy-practice_category.php:161
 msgid "Category Manager"
-msgstr ""
+msgstr "Менеджер направления"
 
 #: includes/metaboxes.php:1051
 msgid "Charcoal Blue"
@@ -297,75 +303,76 @@ msgstr ""
 
 #: functions/cpt/cpt-awards.php:82 functions/cpt/cpt-awards.php:125
 msgid "Choose from the most used"
-msgstr ""
+msgstr "Выбрать из часто используемых"
 
 #: functions/cpt/cpt-partners.php:88
 msgid "Choose from the most used categories"
-msgstr ""
+msgstr "Выберите из наиболее часто используемых категорий"
 
 #: functions/cpt/cpt-partners.php:129
 msgid "Choose from the most used countries"
-msgstr ""
+msgstr "Выберите из наиболее часто используемых стран"
 
 #: functions/cpt/cpt-partners.php:170
 msgid "Choose from the most used languages"
-msgstr ""
+msgstr "Выберите один из наиболее используемых языков"
 
 #: functions/cpt/cpt-partners.php:213
 msgid "Choose from the most used regions"
-msgstr ""
+msgstr "Выберите из наиболее используемых регионов"
 
 #: includes/metaboxes.php:1573
 msgid "Choose the partner this user represents."
-msgstr ""
+msgstr "Выберите партнера, которого представляет этот пользователь."
 
 #: includes/metaboxes.php:1034
 msgid "Color"
-msgstr ""
+msgstr "Цвет"
 
 #: functions/cpt/cpt-awards.php:39
 msgid "Company awards and achievements"
-msgstr ""
+msgstr "Награды и достижения компании"
 
 #: includes/metaboxes.php:109
 msgid "Company:"
-msgstr ""
+msgstr "Компания:"
 
 #: includes/sidebars.php:349 includes/sidebars.php:453
 msgid "Contact Person"
-msgstr ""
+msgstr "Контактное лицо"
 
 #: includes/partners.php:98
+#| msgid "Continent"
 msgid "Continents"
-msgstr ""
+msgstr "Регионы"
 
 #: includes/metaboxes.php:168
 msgid "Continents:"
-msgstr ""
+msgstr "Регионы:"
 
 #: includes/sidebars.php:299
 msgid "Contract"
-msgstr ""
+msgstr "Договор"
 
 #: includes/partners.php:120 functions/cpt/cpt-partners.php:118
 msgid "Countries"
-msgstr ""
+msgstr "Страны"
 
 #: includes/metaboxes.php:144
 msgid "Countries:"
-msgstr ""
+msgstr "Страны:"
 
 #: includes/metaboxes.php:1580
 msgid "Current Partner:"
-msgstr ""
+msgstr "Текущий партнер:"
 
 #: includes/metaboxes.php:1648
 msgid "Current User:"
-msgstr ""
+msgstr "Текущий пользователь:"
 
 #: includes/metaboxes.php:1235
 msgid "Delete Category image"
-msgstr ""
+msgstr "Удалить Изображение Категории"
 
 #: includes/metaboxes.php:1212
 msgid "Delete Image"
@@ -374,11 +381,11 @@ msgstr ""
 #: taxonomy-practice_category.php:138 includes/sidebars.php:325
 #: includes/sidebars.php:425
 msgid "Details"
-msgstr ""
+msgstr "Детально"
 
 #: includes/sidebars.php:377
 msgid "Download document"
-msgstr ""
+msgstr "Скачать документ"
 
 #: includes/metaboxes.php:1052
 msgid "Dusty Navy"
@@ -390,91 +397,91 @@ msgstr ""
 
 #: includes/metaboxes.php:114
 msgid "E-Mail:"
-msgstr ""
+msgstr "E-Mail:"
 
 #: includes/metaboxes.php:471
 msgid "e.g., International Design Awards"
-msgstr ""
+msgstr "например, Международная премия в области дизайна"
 
 #: functions/cpt/cpt-awards.php:19
 msgid "Edit Award"
-msgstr ""
+msgstr "Редактировать Награду"
 
 #: functions/cpt/cpt-awards.php:77 functions/cpt/cpt-partners.php:77
 msgid "Edit Category"
-msgstr ""
+msgstr "Редактировать Категорию"
 
 #: functions/cpt/cpt-partners.php:120
 msgid "Edit Country"
-msgstr ""
+msgstr "Редактировать Страну"
 
 #: functions/cpt/cpt-partners.php:161
 msgid "Edit Language"
-msgstr ""
+msgstr "Изменить язык"
 
 #: functions/cpt/cpt-partners.php:15
 msgid "Edit Partner"
-msgstr ""
+msgstr "Редактировать Партнера"
 
 #: functions/cpt/cpt-practices.php:15
 msgid "Edit Practice"
-msgstr ""
+msgstr "Редактировать Практику"
 
 #: functions/cpt/cpt-partners.php:202
 msgid "Edit Region"
-msgstr ""
+msgstr "Редактировать регион"
 
 #: functions/cpt/cpt-awards.php:120
 msgid "Edit Tag"
-msgstr ""
+msgstr "Редактировать Метку"
 
 #: includes/metaboxes.php:1437
 msgid "FAQ categories for display:"
-msgstr ""
+msgstr "Категории часто задаваемых вопросов для отображения:"
 
 #: includes/metaboxes.php:1452
 msgid "FAQ tags for display:"
-msgstr ""
+msgstr "Часто задаваемые вопросы теги для отображения:"
 
 #: includes/metaboxes.php:1381
 msgid "Filled in the standard WordPress editor above."
-msgstr ""
+msgstr "Заполнено в стандартном редакторе WordPress выше."
 
 #: functions/cpt/cpt-awards.php:34
 msgid "Filter awards list"
-msgstr ""
+msgstr "Фильтровать список наград"
 
 #: includes/metaboxes.php:193
 msgid "For example: New York, USA"
-msgstr ""
+msgstr "Например: Нью-Йорк, США"
 
 #: includes/metaboxes.php:139
 msgid "For example: Senior Financial Analyst and Investment Advisor"
-msgstr ""
+msgstr "Например: Старший финансовый аналитик и Инвестиционный консультант"
 
 #: templates/content/single-practices.php:135
 msgid "Frequently Asked Questions"
-msgstr ""
+msgstr "Часто задаваемые вопросы"
 
 #: includes/metaboxes.php:137
 msgid "Full Position Title:"
-msgstr ""
+msgstr "Заголовок Полной Должности"
 
 #: includes/sidebars.php:296
 msgid "Full-time"
-msgstr ""
+msgstr "На постоянной основе"
 
 #: includes/partners.php:139
 msgid "Get in touch"
-msgstr ""
+msgstr "Свяжитесь с нами"
 
 #. Author of the theme
 msgid "Gladkov Denis"
-msgstr ""
+msgstr "Гладков Денис"
 
 #: includes/metaboxes.php:497
 msgid "Hold Ctrl/Cmd to select multiple partners members"
-msgstr ""
+msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескольких Партнеров."
 
 #: archive-awards.php:58 functions.php:279
 msgid "Horizons"
@@ -482,11 +489,11 @@ msgstr ""
 
 #. Name of the theme
 msgid "horizons"
-msgstr ""
+msgstr "horizons"
 
 #. Author URI of the theme
 msgid "https://codeweber.com"
-msgstr ""
+msgstr "https://codeweber.ru"
 
 #: includes/metaboxes.php:126
 msgid "https://example.com"
@@ -502,19 +509,19 @@ msgstr ""
 
 #: functions/cpt/cpt-awards.php:30
 msgid "Insert into award"
-msgstr ""
+msgstr "Вставить в награду"
 
 #: includes/sidebars.php:298
 msgid "Internship"
-msgstr ""
+msgstr "Стажировка"
 
 #: includes/partners.php:73 functions/cpt/cpt-partners.php:159
 msgid "Languages"
-msgstr ""
+msgstr "Языки"
 
 #: includes/metaboxes.php:205
 msgid "Languages:"
-msgstr ""
+msgstr "Языки:"
 
 #: includes/sidebars.php:483
 msgid "Link to source"
@@ -526,23 +533,23 @@ msgstr ""
 
 #: includes/metaboxes.php:191
 msgid "Location:"
-msgstr ""
+msgstr "Адрес:"
 
 #: includes/metaboxes.php:160
 msgid "Manage countries"
-msgstr ""
+msgstr "Редактировать страны"
 
 #: includes/metaboxes.php:221
 msgid "Manage languages"
-msgstr ""
+msgstr "Редактирвоать языки"
 
 #: includes/metaboxes.php:184
 msgid "Manage regions"
-msgstr ""
+msgstr "Редактировать регионы"
 
 #: includes/shortcodes.php:243
 msgid "More details"
-msgstr ""
+msgstr "Перейти"
 
 #: includes/metaboxes.php:1050
 msgid "Muted Teal"
@@ -554,42 +561,46 @@ msgstr ""
 
 #: includes/metaboxes.php:99
 msgid "Name:"
-msgstr ""
+msgstr "Имя:"
 
 #: functions/cpt/cpt-awards.php:18
 msgid "New Award"
-msgstr ""
+msgstr "Новая Награда"
 
 #: functions/cpt/cpt-awards.php:75 functions/cpt/cpt-partners.php:81
 msgid "New Category Name"
-msgstr ""
+msgstr "Новое имя Категории"
 
 #: functions/cpt/cpt-partners.php:124
 msgid "New Country Name"
-msgstr ""
+msgstr "Новое Имя Страны"
 
 #: functions/cpt/cpt-partners.php:165
 msgid "New Language Name"
-msgstr ""
+msgstr "Новое название языка"
 
 #: functions/cpt/cpt-partners.php:16
 msgid "New Partner"
-msgstr ""
+msgstr "Новый Партнер"
 
 #: functions/cpt/cpt-practices.php:16
 msgid "New Practice"
-msgstr ""
+msgstr "Новая Практика"
 
 #: functions/cpt/cpt-partners.php:206
 msgid "New Region Name"
-msgstr ""
+msgstr "Новое название Региона"
 
 #: functions/cpt/cpt-awards.php:118
 msgid "New Tag Name"
-msgstr ""
+msgstr "Новое имя Метки"
 
 #: includes/partners.php:210 includes/practices.php:47
 msgid "News"
+msgstr "Новости"
+
+#: single.php:68
+msgid "Next"
 msgstr ""
 
 #: archive-awards.php:122 functions.php:339
@@ -598,99 +609,99 @@ msgstr ""
 
 #: functions/cpt/cpt-awards.php:86
 msgid "No categories"
-msgstr ""
+msgstr "Нет категорий"
 
 #: functions/cpt/cpt-partners.php:89
 msgid "No categories found"
-msgstr ""
+msgstr "Категории не найдены"
 
 #: archive-practices.php:119
 msgid "No categories found."
-msgstr ""
+msgstr "Категории не найдены."
 
 #: taxonomy-practice_category.php:207
 msgid "No category manager assigned"
-msgstr ""
+msgstr "Менеджер категории не назначен"
 
 #: functions/cpt/cpt-partners.php:130
 msgid "No countries found"
-msgstr ""
+msgstr "Страны не найдены"
 
 #: includes/metaboxes.php:155
 msgid "No countries found. Please add countries first."
-msgstr ""
+msgstr "Страны не найдены. Сначала добавьте страны."
 
 #: includes/shortcodes.php:364
 msgid "No image"
-msgstr ""
+msgstr "Нет изображения"
 
 #: functions/cpt/cpt-partners.php:171
 msgid "No languages found"
-msgstr ""
+msgstr "Языки не найдены"
 
 #: includes/metaboxes.php:216
 msgid "No languages found. Please add languages first."
-msgstr ""
+msgstr "Языки не найдены. Сначала добавьте языки."
 
 #: archive-partners.php:152
 msgid "No partner countries found."
-msgstr ""
+msgstr "Страны не найдены."
 
 #: functions/cpt/cpt-partners.php:20
 msgid "No Partners found"
-msgstr ""
+msgstr "Нет Партнеров"
 
 #: functions/cpt/cpt-partners.php:21
 msgid "No Partners found in Trash"
-msgstr ""
+msgstr "Нет Партнеров в корзине"
 
 #: archive-partners.php:144
 msgid "No partners found."
-msgstr ""
+msgstr "Партнеры не найдены."
 
 #: functions/cpt/cpt-practices.php:20
 msgid "No Practices found"
-msgstr ""
+msgstr "Не Практик"
 
 #: archive-practices.php:109
 msgid "No practices found in this category."
-msgstr ""
+msgstr "Практики не найдены в этой категории"
 
 #: functions/cpt/cpt-practices.php:21
 msgid "No Practices found in Trash"
-msgstr ""
+msgstr "Нет практик в корзине"
 
 #: functions/cpt/cpt-partners.php:214
 msgid "No regions found"
-msgstr ""
+msgstr "Регионы не найдены"
 
 #: includes/metaboxes.php:179
 msgid "No regions found. Please add regions first."
-msgstr ""
+msgstr "Регионы не найдены. Сначала добавьте регионы."
 
 #: taxonomy-practice_category.php:223
 msgid "No services found in this category."
-msgstr ""
+msgstr "В этой категории не найдено ни одной практики"
 
 #: functions/cpt/cpt-awards.php:129
 msgid "No tags"
-msgstr ""
+msgstr "Нет меток"
 
 #: functions/cpt/cpt-awards.php:85 functions/cpt/cpt-awards.php:128
 msgid "Not Found"
-msgstr ""
+msgstr "Не Существует"
 
 #: functions/cpt/cpt-awards.php:24
 msgid "Not found"
-msgstr ""
+msgstr "Не существует"
 
 #: functions/cpt/cpt-awards.php:25
 msgid "Not found in Trash"
-msgstr ""
+msgstr "Не найдено в корзине"
 
 #: includes/metaboxes.php:1432 includes/metaboxes.php:1465
 msgid "Note:"
-msgstr ""
+msgstr "Комментарий:"
 
 #: includes/metaboxes.php:1049
 msgid "Olive Green"
@@ -706,6 +717,9 @@ msgid ""
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
+"На внешнем интерфейсе будут отображаться статьи, относящиеся к ЛЮБОЙ из "
+"выбранных категорий И имеющие ЛЮБОЙ из выбранных тегов (логическое «И» между "
+"таксономиями, «ИЛИ» внутри них)."
 
 #: includes/metaboxes.php:1465
 msgid ""
@@ -713,19 +727,22 @@ msgid ""
 "selected categories AND have ANY of the selected tags (logical \"AND\" "
 "between taxonomies, \"OR\" within them)."
 msgstr ""
+"На внешнем интерфейсе будут отображаться элементы FAQ, которые относятся к "
+"ЛЮБОЙ из выбранных категорий И имеют ЛЮБОЙ из выбранных тегов (логическое "
+"«И» между таксономиями, «ИЛИ» внутри них)."
 
 #: includes/metaboxes.php:378 includes/metaboxes.php:1036
 msgid "Order"
-msgstr ""
+msgstr "Номер"
 
 #: includes/metaboxes.php:342 includes/metaboxes.php:355
 #: includes/metaboxes.php:831 includes/metaboxes.php:881
 msgid "Order Number"
-msgstr ""
+msgstr "Порядковый номер"
 
 #: includes/metaboxes.php:466
 msgid "Organization"
-msgstr ""
+msgstr "Организация"
 
 #: templates/components/another-awards-grid.php:13
 msgid "Other publications"
@@ -733,228 +750,233 @@ msgstr ""
 
 #: archive-vacancies.php:67
 msgid "Other Vacancies"
-msgstr ""
+msgstr "Другие вакансии"
 
 #: templates/content/single-practices.php:34
 msgid "Our Solution"
-msgstr ""
+msgstr "Наше Решение"
 
 #: functions/cpt/cpt-awards.php:14
 msgid "Parent Award:"
-msgstr ""
+msgstr "Родительская Награда"
 
 #: functions/cpt/cpt-awards.php:73 functions/cpt/cpt-partners.php:82
 msgid "Parent Category"
-msgstr ""
+msgstr "Родительская Категория"
 
 #: functions/cpt/cpt-awards.php:74 functions/cpt/cpt-partners.php:83
 msgid "Parent Category:"
-msgstr ""
+msgstr "Родительская Категория:"
 
 #: functions/cpt/cpt-partners.php:22 functions/cpt/cpt-partners.php:34
 msgid "Parent Partner"
-msgstr ""
+msgstr "Родительский Партнер"
 
 #: functions/cpt/cpt-practices.php:22 functions/cpt/cpt-practices.php:34
 msgid "Parent Practice"
-msgstr ""
+msgstr "Родительская Практика"
 
 #: functions/cpt/cpt-partners.php:207
 msgid "Parent Region"
-msgstr ""
+msgstr "Родительский регион"
 
 #: functions/cpt/cpt-partners.php:208
 msgid "Parent Region:"
-msgstr ""
+msgstr "Родительский регион:"
 
 #: functions/cpt/cpt-awards.php:116
 msgid "Parent Tag"
-msgstr ""
+msgstr "Родительская Метка"
 
 #: functions/cpt/cpt-awards.php:117
 msgid "Parent Tag:"
-msgstr ""
+msgstr "Родительская Метка:"
 
 #: includes/sidebars.php:297
 msgid "Part-time"
 msgstr ""
+"Неполная занятость\n"
 
 #: includes/metaboxes.php:1783 functions/cpt/cpt-partners.php:10
 #: functions/cpt/cpt-partners.php:29
 msgid "Partner"
-msgstr ""
+msgstr "Партнер"
 
 #: includes/metaboxes.php:1559
 msgid "Partner Association"
-msgstr ""
+msgstr "Связь с партнером"
 
 #: includes/sidebars.php:134
 msgid "Partner Biographies"
-msgstr ""
+msgstr "Биография Партнеров"
 
 #: functions/cpt/cpt-partners.php:73 functions/cpt/cpt-partners.php:93
 msgid "Partner Categories"
-msgstr ""
+msgstr "Категории Партнера"
 
 #: functions/cpt/cpt-partners.php:74
 msgid "Partner Category"
-msgstr ""
+msgstr "Категория Партнера"
 
 #: functions/cpt/cpt-partners.php:116 functions/cpt/cpt-partners.php:134
 msgid "Partner Countries"
-msgstr ""
+msgstr "Страны Пратнера"
 
 #: functions/cpt/cpt-partners.php:117
 msgid "Partner Country"
-msgstr ""
+msgstr "Страна Партнера"
 
 #: functions/cpt/cpt-partners.php:23
 msgid "Partner Image"
-msgstr ""
+msgstr "Фото партнера"
 
 #: functions/cpt/cpt-partners.php:158
 msgid "Partner Language"
-msgstr ""
+msgstr "Язык Партнера"
 
 #: functions/cpt/cpt-partners.php:157 functions/cpt/cpt-partners.php:175
 msgid "Partner Languages"
-msgstr ""
+msgstr "Языки Партнера"
 
 #: functions/cpt/cpt-partners.php:30
 msgid "Partner published"
-msgstr ""
+msgstr "Партнер опубликован"
 
 #: functions/cpt/cpt-partners.php:199
 msgid "Partner Region"
-msgstr ""
+msgstr "Регион Партнера"
 
 #: functions/cpt/cpt-partners.php:198 functions/cpt/cpt-partners.php:218
 msgid "Partner Regions"
-msgstr ""
+msgstr "Регионы Партнера"
 
 #: functions/cpt/cpt-partners.php:31
 msgid "Partner reverted to draft"
-msgstr ""
+msgstr "Партнер переведен в черновик"
 
 #: functions/cpt/cpt-partners.php:32
 msgid "Partner scheduled"
-msgstr ""
+msgstr "Партнер запланирован"
 
 #: functions/cpt/cpt-partners.php:33
 msgid "Partner updated"
-msgstr ""
+msgstr "Партнер обновлен"
 
 #: functions/cpt/cpt-partners.php:9 functions/cpt/cpt-partners.php:11
 #: functions/cpt/cpt-partners.php:38
 msgid "Partners"
-msgstr ""
+msgstr "Партнеры"
 
 #: functions/cpt/cpt-partners.php:27
 msgid "Partners archive"
-msgstr ""
+msgstr "Архив партнеров"
 
 #: functions/cpt/cpt-partners.php:28
 msgid "Partners list"
-msgstr ""
+msgstr "Список партнеров"
 
 #: includes/partners.php:165
 msgid "Phone"
-msgstr ""
+msgstr "Телефон"
 
 #: includes/metaboxes.php:119
 msgid "Phone:"
-msgstr ""
+msgstr "Телефон:"
 
 #: functions/cpt/cpt-awards.php:83 functions/cpt/cpt-partners.php:85
 msgid "Popular Categories"
-msgstr ""
+msgstr "Популярные Категории"
 
 #: functions/cpt/cpt-partners.php:126
 msgid "Popular Countries"
-msgstr ""
+msgstr "Популярные Страны"
 
 #: functions/cpt/cpt-partners.php:167
 msgid "Popular Languages"
-msgstr ""
+msgstr "Популярные языки"
 
 #: functions/cpt/cpt-partners.php:210
 msgid "Popular Regions"
-msgstr ""
+msgstr "Популярные регионы"
 
 #: functions/cpt/cpt-awards.php:126
 msgid "Popular Tags"
-msgstr ""
+msgstr "Популярные метки"
 
 #: includes/metaboxes.php:94
 msgid "Position:"
-msgstr ""
+msgstr "Должность:"
 
 #: functions/cpt/cpt-awards.php:8
 msgctxt "Post Type General Name"
 msgid "Awards"
-msgstr ""
+msgstr "Награды"
 
 #: functions/cpt/cpt-awards.php:9
 msgctxt "Post Type Singular Name"
 msgid "Award"
-msgstr ""
+msgstr "Награда"
 
 #: functions/cpt/cpt-practices.php:10 functions/cpt/cpt-practices.php:29
 msgid "Practice"
-msgstr ""
+msgstr "Практика"
 
 #: functions/cpt/cpt-practices.php:75 functions/cpt/cpt-practices.php:80
 msgid "Practice Categories"
-msgstr ""
+msgstr "Категории практики"
 
 #: functions/cpt/cpt-practices.php:76
 msgid "Practice Category"
-msgstr ""
+msgstr "Категория Практики"
 
 #: includes/metaboxes.php:1380
 msgid "Practice description (main content)"
-msgstr ""
+msgstr "Описание практики (основное содержание)"
 
 #: includes/metaboxes.php:1325
 msgid "Practice Details"
-msgstr ""
+msgstr "Подробности Практики"
 
 #: functions/cpt/cpt-practices.php:23
 msgid "Practice Image"
-msgstr ""
+msgstr "Изображение практики"
 
 #: taxonomy-practice_category.php:42
 msgid "Practice Manager"
-msgstr ""
+msgstr "Менеджер практики"
 
 #: functions/cpt/cpt-practices.php:30
 msgid "Practice published"
-msgstr ""
+msgstr "Практика опубликована"
 
 #: functions/cpt/cpt-practices.php:31
 msgid "Practice reverted to draft"
-msgstr ""
+msgstr "Практика перемещена в черновик"
 
 #: functions/cpt/cpt-practices.php:32
 msgid "Practice scheduled"
-msgstr ""
+msgstr "Практика запланирована"
 
 #: functions/cpt/cpt-practices.php:33
 msgid "Practice updated"
-msgstr ""
+msgstr "Практика обновлена"
 
 #: archive-practices.php:79 taxonomy-practice_category.php:90
 #: functions/cpt/cpt-practices.php:9 functions/cpt/cpt-practices.php:11
 #: functions/cpt/cpt-practices.php:38
 msgid "Practices"
-msgstr ""
+msgstr "Практики"
 
 #: functions/cpt/cpt-practices.php:27
 msgid "Practices archive"
-msgstr ""
+msgstr "Архив практик"
 
 #: functions/cpt/cpt-practices.php:28
 msgid "Practices list"
+msgstr "Список практик"
+
+#: single.php:58
+msgid "Previous"
 msgstr ""
 
 #: includes/metaboxes.php:1046
@@ -967,43 +989,47 @@ msgstr ""
 
 #: includes/metaboxes.php:1562
 msgid "Primary Partner"
-msgstr ""
+msgstr "Основной партнер"
 
-#: includes/blog.php:171
+#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
 msgid "Read"
-msgstr ""
+msgstr "Читать"
 
 #: templates/components/another-awards-grid.php:28
 msgid "Read More"
-msgstr ""
+msgstr "Подробнее"
+
+#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
+msgid "Read more"
+msgstr "Подробнее"
 
 #: functions/cpt/cpt-partners.php:200
 msgid "Regions"
-msgstr ""
+msgstr "Страны"
 
 #: includes/partners.php:211 includes/practices.php:48
 msgid "Related news"
-msgstr ""
+msgstr "Рекомендуемые новости"
 
 #: functions/cpt/cpt-awards.php:28
 msgid "Remove award image"
-msgstr ""
+msgstr "Удалить изображение награды"
 
 #: functions/cpt/cpt-partners.php:25
 msgid "Remove partner image"
-msgstr ""
+msgstr "Удалить изображение партнера"
 
 #: functions/cpt/cpt-practices.php:25
 msgid "Remove practice image"
-msgstr ""
+msgstr "Удалить изображение Практики"
 
 #: templates/content/single-vacancies.php:19
 msgid "Requirements"
-msgstr ""
+msgstr "Требования к кандидату"
 
 #: templates/content/single-vacancies.php:31
 msgid "Responsibilities"
-msgstr ""
+msgstr "Ключевые обязанности"
 
 #: includes/sidebars.php:479
 msgid "Return"
@@ -1011,159 +1037,168 @@ msgstr ""
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"
-msgstr ""
+msgstr "Поиск Награды"
 
 #: functions/cpt/cpt-awards.php:84 functions/cpt/cpt-partners.php:84
 msgid "Search Categories"
-msgstr ""
+msgstr "Поиск Категории"
 
 #: functions/cpt/cpt-partners.php:125
 msgid "Search Countries"
-msgstr ""
+msgstr "Поиск Страны"
 
 #: functions/cpt/cpt-partners.php:166
 msgid "Search Languages"
-msgstr ""
+msgstr "Поиск Языка"
 
 #: functions/cpt/cpt-partners.php:19
 msgid "Search Partners"
-msgstr ""
+msgstr "Поиск Партнера"
 
 #: functions/cpt/cpt-practices.php:19
 msgid "Search Practices"
-msgstr ""
+msgstr "Поиск Практики"
 
 #: functions/cpt/cpt-partners.php:209
 msgid "Search Regions"
-msgstr ""
+msgstr "Поиск Региона"
 
 #: functions/cpt/cpt-awards.php:127
 msgid "Search Tags"
-msgstr ""
+msgstr "Поиск Тега"
 
 #: includes/metaboxes.php:711
 msgid "Select awards..."
-msgstr ""
+msgstr "Выберите награды..."
 
 #: includes/metaboxes.php:729
 msgid "Select blog categories..."
-msgstr ""
+msgstr "Выберите категории блога..."
 
 #: includes/metaboxes.php:735
 msgid "Select blog tags..."
-msgstr ""
+msgstr "Выберите теги блога..."
 
 #: includes/metaboxes.php:821 includes/metaboxes.php:865
 msgid "Select color for practice category display"
-msgstr ""
+msgstr "Выберите цвет для отображения категории практики"
 
 #: includes/metaboxes.php:741
 msgid "Select faq categories..."
-msgstr ""
+msgstr "Выберите категории FAQ"
 
 #: includes/metaboxes.php:747
 msgid "Select faq tags..."
-msgstr ""
+msgstr "Выберите теги FAQ..."
 
 #: includes/metaboxes.php:1405
 msgid ""
 "Select one or more categories. Articles that belong to ANY of the selected "
 "categories will be shown."
 msgstr ""
+"Выберите одну или несколько категорий. Будут показаны статьи, относящиеся к "
+"ЛЮБОЙ из выбранных категорий."
 
 #: includes/metaboxes.php:1438
 msgid ""
 "Select one or more FAQ categories. FAQ items that belong to ANY of the "
 "selected categories will be shown."
 msgstr ""
+"Выберите одну или несколько категорий часто задаваемых вопросов. Будут "
+"показаны пункты часто задаваемых вопросов, относящиеся к ЛЮБОЙ из выбранных "
+"категорий."
 
 #: includes/metaboxes.php:1453
 msgid ""
 "Select one or more FAQ tags. FAQ items that have ANY of the selected tags "
 "will be shown."
 msgstr ""
+"Выберите один или несколько тегов часто задаваемых вопросов. Будут показаны "
+"пункты часто задаваемых вопросов, содержащие ЛЮБОЙ из выбранных тегов."
 
 #: includes/metaboxes.php:1420
 msgid ""
 "Select one or more tags. Articles that have ANY of the selected tags will be "
 "shown."
 msgstr ""
+"Выберите один или несколько тегов. Будут показаны статьи, содержащие ЛЮБОЙ "
+"из выбранных тегов."
 
 #: includes/metaboxes.php:766
 msgid "Select partners counries..."
-msgstr ""
+msgstr "Выберите страны партнера..."
 
 #: includes/metaboxes.php:723
 msgid "Select partners language..."
-msgstr ""
+msgstr "Выберите язык партнера..."
 
 #: includes/metaboxes.php:717
 msgid "Select partners members..."
-msgstr ""
+msgstr "Выберите участников-партнеров..."
 
 #: includes/metaboxes.php:760
 msgid "Select partners regions..."
-msgstr ""
+msgstr "Выберите регионы партнера..."
 
 #: includes/metaboxes.php:754
 msgid "Select related blog tags..."
-msgstr ""
+msgstr "Выберите теги блога..."
 
 #: includes/metaboxes.php:1180
 msgid "Select the author responsible for this practice category."
-msgstr ""
+msgstr "Выберите автора, ответственного за данную категорию практики."
 
 #: includes/metaboxes.php:1640
 msgid "Select the user associated with this partner."
-msgstr ""
+msgstr "Выберите пользователя, связанного с этим партнером."
 
 #: includes/metaboxes.php:808 includes/metaboxes.php:852
 msgid "Selected Color Preview:"
-msgstr ""
+msgstr "Предварительный просмотр выбранного цвета:"
 
 #: taxonomy-practice_category.php:196
 msgid "Send Email"
-msgstr ""
+msgstr "Отправить E-Mail"
 
 #: functions/cpt/cpt-awards.php:80 functions/cpt/cpt-partners.php:86
 msgid "Separate categories with commas"
-msgstr ""
+msgstr "Разделяйте категории запятыми."
 
 #: functions/cpt/cpt-partners.php:127
 msgid "Separate countries with commas"
-msgstr ""
+msgstr "Разделяйте страны запятыми"
 
 #: functions/cpt/cpt-partners.php:168
 msgid "Separate languages with commas"
-msgstr ""
+msgstr "Разделяйте языки запятыми"
 
 #: functions/cpt/cpt-partners.php:211
 msgid "Separate regions with commas"
-msgstr ""
+msgstr "Разделяйте регионы запятыми"
 
 #: functions/cpt/cpt-awards.php:123
 msgid "Separate tags with commas"
-msgstr ""
+msgstr "Разделяйте теги запятыми."
 
 #: functions/cpt/cpt-awards.php:27
 msgid "Set award image"
-msgstr ""
+msgstr "Установить изображение награды"
 
 #: includes/metaboxes.php:833 includes/metaboxes.php:885
 msgid "Set order for category display (lower numbers first)"
-msgstr ""
+msgstr "Установить порядок отображения категорий (сначала меньшие номера)"
 
 #: functions/cpt/cpt-partners.php:24
 msgid "Set partner image"
-msgstr ""
+msgstr "Установить изображение Партнера"
 
 #: functions/cpt/cpt-practices.php:24
 msgid "Set practice image"
-msgstr ""
+msgstr "Установить изображение Практики"
 
 #: includes/metaboxes.php:197
 msgid "Short Description:"
-msgstr ""
+msgstr "Краткое описание:"
 
 #: includes/metaboxes.php:1048
 msgid "Slate Gray"
@@ -1175,139 +1210,139 @@ msgstr ""
 
 #: taxonomy-practice_category.php:201 includes/sidebars.php:382
 msgid "Submit a request"
-msgstr ""
+msgstr "Заполнить заявку"
 
 #: includes/metaboxes.php:104
 msgid "Surname:"
-msgstr ""
+msgstr "Фамилия:"
 
 #: functions/cpt/cpt-awards.php:114
 msgid "Tags"
-msgstr ""
+msgstr "Метки"
 
 #: functions/cpt/cpt-awards.php:130
 msgid "Tags list"
-msgstr ""
+msgstr "Список тегов"
 
 #: functions/cpt/cpt-awards.php:131
 msgid "Tags list navigation"
-msgstr ""
+msgstr "Навигация по списку тегов"
 
 #: functions/cpt/cpt-awards.php:69
 msgctxt "Taxonomy General Name"
 msgid "Award Categories"
-msgstr ""
+msgstr "Категории Награды"
 
 #: functions/cpt/cpt-awards.php:112
 msgctxt "Taxonomy General Name"
 msgid "Award Tags"
-msgstr ""
+msgstr "Метки Награды"
 
 #: functions/cpt/cpt-awards.php:70
 msgctxt "Taxonomy Singular Name"
 msgid "Award Category"
-msgstr ""
+msgstr "Категория Награды"
 
 #: functions/cpt/cpt-awards.php:113
 msgctxt "Taxonomy Singular Name"
 msgid "Award Tag"
-msgstr ""
+msgstr "Метка Награды"
 
 #: includes/metaboxes.php:344 includes/metaboxes.php:359
 msgid "The lower the number, the higher the category will be in the list."
-msgstr ""
+msgstr "Чем меньше число, тем выше будет категория в списке."
 
 #: functions/cpt/cpt-practices.php:112
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: functions/cpt/cpt-practices.php:111 functions/cpt/cpt-practices.php:116
 msgid "Types"
-msgstr ""
+msgstr "Типы"
 
 #: functions/cpt/cpt-awards.php:20
 msgid "Update Award"
-msgstr ""
+msgstr "Обновить Награду"
 
 #: functions/cpt/cpt-awards.php:78 functions/cpt/cpt-partners.php:79
 msgid "Update Category"
-msgstr ""
+msgstr "Обновить Категорию"
 
 #: functions/cpt/cpt-partners.php:122
 msgid "Update Country"
-msgstr ""
+msgstr "Обновить Страну"
 
 #: functions/cpt/cpt-partners.php:163
 msgid "Update Language"
-msgstr ""
+msgstr "Обновить Язык"
 
 #: functions/cpt/cpt-partners.php:204
 msgid "Update Region"
-msgstr ""
+msgstr "Обновить Регион"
 
 #: functions/cpt/cpt-awards.php:121
 msgid "Update Tag"
-msgstr ""
+msgstr "Обновить Метку"
 
 #: functions/cpt/cpt-awards.php:31
 msgid "Uploaded to this award"
-msgstr ""
+msgstr "Загружено в эту награду"
 
 #: functions/cpt/cpt-awards.php:29
 msgid "Use as award image"
-msgstr ""
+msgstr "Использовать как изображение награды"
 
 #: functions/cpt/cpt-partners.php:26
 msgid "Use as partner image"
-msgstr ""
+msgstr "Использовать как изображение партнера"
 
 #: functions/cpt/cpt-practices.php:26
 msgid "Use as practice image"
-msgstr ""
+msgstr "Использовать изображение Практики"
 
 #: functions/cpt/cpt-awards.php:21
 msgid "View Award"
-msgstr ""
+msgstr "Показать Награду"
 
 #: functions/cpt/cpt-awards.php:22
 msgid "View Awards"
-msgstr ""
+msgstr "Показать Награды"
 
 #: functions/cpt/cpt-awards.php:79 functions/cpt/cpt-partners.php:78
 msgid "View Category"
-msgstr ""
+msgstr "Показать Категорию"
 
 #: functions/cpt/cpt-partners.php:121
 msgid "View Country"
-msgstr ""
+msgstr "Посмотреть страну"
 
 #: functions/cpt/cpt-partners.php:162
 msgid "View Language"
-msgstr ""
+msgstr "Просмотреть язык"
 
 #: functions/cpt/cpt-partners.php:17
 msgid "View Partner"
-msgstr ""
+msgstr "Просмотреть Партнера"
 
 #: functions/cpt/cpt-partners.php:18
 msgid "View Partners"
-msgstr ""
+msgstr "Просмотреть Партнеров"
 
 #: functions/cpt/cpt-practices.php:17
 msgid "View Practice"
-msgstr ""
+msgstr "Посмотреть Практику"
 
 #: functions/cpt/cpt-practices.php:18
 msgid "View Practices"
-msgstr ""
+msgstr "Посмотреть Практики"
 
 #: functions/cpt/cpt-partners.php:203
 msgid "View Region"
-msgstr ""
+msgstr "Просмотреть Регион"
 
 #: functions/cpt/cpt-awards.php:122
 msgid "View Tag"
-msgstr ""
+msgstr "Показать Метку"
 
 #: includes/metaboxes.php:1047
 msgid "Vintage Burgundy"
@@ -1319,32 +1354,32 @@ msgstr ""
 
 #: includes/partners.php:146
 msgid "Website"
-msgstr ""
+msgstr "Вебсайт"
 
 #: includes/metaboxes.php:124
 msgid "Website:"
-msgstr ""
+msgstr "Вебсайт:"
 
 #: includes/sidebars.php:313 includes/sidebars.php:416
 msgid "Writer"
-msgstr ""
+msgstr "Писатель"
 
 #: templates/content/single-practices.php:25
 msgid "Your Task"
-msgstr ""
+msgstr "Ваша задача"
 
-#: includes/blog.php:189
+#: templates/content/loop.php:66
 msgid "Читать полностью"
 msgstr ""
 
 #: includes/metaboxes.php:1623
 msgid "— No User —"
-msgstr ""
+msgstr "— Нет пользователя —"
 
 #: includes/metaboxes.php:1173
 msgid "— Select Author —"
-msgstr ""
+msgstr "— Выберите автора —"
 
 #: includes/metaboxes.php:1565
 msgid "— Select Partner —"
-msgstr ""
+msgstr "— Выберите партнера —"
