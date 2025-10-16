@@ -128,7 +128,7 @@ function horizons_blog_posts_slider_shortcode($atts)
    ob_start();
 ?>
 
-   <div class="swiper-container dots-closer blog grid-view mb-6" <?php echo $swiper_attrs; ?>>
+   <div class="swiper-container dots-closer blog grid-view mb-12" <?php echo $swiper_attrs; ?>>
       <div class="swiper">
          <div class="swiper-wrapper">
             <?php while ($blog_query->have_posts()) : $blog_query->the_post(); ?>
@@ -173,17 +173,26 @@ function horizons_blog_posts_slider_shortcode($atts)
                            </figure>
 
                            <div class="post-body mt-4">
+                              <?php
+                              display_post_meta(array(
+                                 'wrapper_class' => 'post-meta d-flex mb-3 fs-16',
+                                 'comments_class' => 'o',
+                                 'comments_show_text' => false
+                              ));
+                              ?>
                               <h3 class="h4 post-title"><?php the_title(); ?></h3>
-                              <div class="body-l-l mb-4 post-excerpt">
-                                 <?php
-                                 $excerpt = get_the_excerpt();
-                                 if (empty($excerpt)) {
-                                    $excerpt = get_the_content();
-                                 }
-                                 $excerpt_length = intval($atts['excerpt_length']);
-                                 echo wp_trim_words($excerpt, $excerpt_length, '...');
-                                 ?>
-                              </div>
+                              <?php if (intval($atts['excerpt_length']) > 0) : ?>
+                                 <div class="body-l-l mb-4 post-excerpt">
+                                    <?php
+                                    $excerpt = get_the_excerpt();
+                                    if (empty($excerpt)) {
+                                       $excerpt = get_the_content();
+                                    }
+                                    $excerpt_length = intval($atts['excerpt_length']);
+                                    echo wp_trim_words($excerpt, $excerpt_length, '...');
+                                    ?>
+                                 </div>
+                              <?php endif; ?>
 
                               <a href="<?php the_permalink(); ?>" class="hover-4 link-body label-s text-charcoal-blue me-4 post-read-more">
                                  <?php _e('Read more', 'horizons'); ?>
