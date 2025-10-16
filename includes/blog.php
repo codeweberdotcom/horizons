@@ -176,8 +176,9 @@ function horizons_blog_posts_slider_shortcode($atts)
                               <?php
                               display_post_meta(array(
                                  'wrapper_class' => 'post-meta d-flex mb-3 fs-16',
-                                 'comments_class' => 'o',
-                                 'comments_show_text' => false
+                                 'comments_class' => '',
+                                 'comments_show_text' => false,
+                                 'author_text' => __('%s', 'horizons'),
                               ));
                               ?>
                               <h3 class="h4 post-title"><?php the_title(); ?></h3>
