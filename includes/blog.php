@@ -11,32 +11,32 @@
  * @param array $atts {
  *     Массив атрибутов шорткода.
  *
- *     @type int    $posts_per_page Количество выводимых записей. По умолчанию 4.
- *     @type string $category       Slug категорий для фильтрации (через запятую). По умолчанию пусто.
- *     @type string $tag            Slug меток для фильтрации (через запятую). По умолчанию пусто.
- *     @type string $orderby        Поле для сортировки записей ('date', 'title', 'rand' и др.). По умолчанию 'date'.
- *     @type string $order          Направление сортировки ('ASC' или 'DESC'). По умолчанию 'DESC'.
- *     @type string $image_size     Размер изображения записи. По умолчанию 'horizons_staff'.
- *     @type int    $excerpt_length Длина текста анонса (в словах). По умолчанию 20.
- *     @type string $items_xl       Количество слайдов при разрешении ≥1200px. По умолчанию '3'.
- *     @type string $items_lg       Количество слайдов при разрешении ≥992px. По умолчанию '3'.
- *     @type string $items_md       Количество слайдов при разрешении ≥768px. По умолчанию '2'.
- *     @type string $items_sm       Количество слайдов при разрешении ≥576px. По умолчанию '2'.
- *     @type string $items_xs       Количество слайдов при разрешении <576px. По умолчанию '1'.
- *     @type string $items_xxs      Количество слайдов на очень маленьких экранах. По умолчанию '1'.
- *     @type string $margin         Отступ между слайдами в пикселях. По умолчанию '30'.
- *     @type string $dots           Отображать навигационные точки ('true' или 'false'). По умолчанию 'true'.
- *     @type string $nav         Отображать навигационные стрелки ('true' или 'false'). По умолчанию 'false'.
- *     @type string $autoplay       Включить автопрокрутку ('true' или 'false'). По умолчанию 'false'.
- *     @type string $loop           Зациклить прокрутку ('true' или 'false'). По умолчанию 'false'.
+ *     @type int    $posts_per_page   Количество выводимых записей. По умолчанию 4.
+ *     @type string $category         Slug категорий для фильтрации (через запятую). По умолчанию пусто.
+ *     @type string $tag              Slug меток для фильтрации (через запятую). По умолчанию пусто.
+ *     @type string $orderby          Поле для сортировки записей ('date', 'title', 'rand' и др.). По умолчанию 'date'.
+ *     @type string $order            Направление сортировки ('ASC' или 'DESC'). По умолчанию 'DESC'.
+ *     @type string $image_size       Размер изображения записи. По умолчанию 'horizons_staff'.
+ *     @type int    $excerpt_length   Длина текста анонса (в словах). По умолчанию 20.
+ *     @type int    $title_length     Максимальное количество символов в заголовке. По умолчанию 0 (без ограничения).
+ *     @type string $items_xl         Количество слайдов при разрешении ≥1200px. По умолчанию '3'.
+ *     @type string $items_lg         Количество слайдов при разрешении ≥992px. По умолчанию '3'.
+ *     @type string $items_md         Количество слайдов при разрешении ≥768px. По умолчанию '2'.
+ *     @type string $items_sm         Количество слайдов при разрешении ≥576px. По умолчанию '2'.
+ *     @type string $items_xs         Количество слайдов при разрешении <576px. По умолчанию '1'.
+ *     @type string $items_xxs        Количество слайдов на очень маленьких экранах. По умолчанию '1'.
+ *     @type string $margin           Отступ между слайдами в пикселях. По умолчанию '30'.
+ *     @type string $dots             Отображать навигационные точки ('true' или 'false'). По умолчанию 'true'.
+ *     @type string $nav              Отображать навигационные стрелки ('true' или 'false'). По умолчанию 'false'.
+ *     @type string $autoplay         Включить автопрокрутку ('true' или 'false'). По умолчанию 'false'.
+ *     @type string $loop             Зациклить прокрутку ('true' или 'false'). По умолчанию 'false'.
  * }
  * @return string HTML-разметка слайдера или сообщение об ошибке, если записи не найдены.
  * 
  * @example [blog_posts_slider] // Выведет слайдер с 4 последними записями
  * @example [blog_posts_slider posts_per_page="6" category="news,events" items_xl="4" autoplay="true"] // Слайдер из 6 записей категорий "news" и "events", 4 слайда в ряд с автопрокруткой
- * @example [blog_posts_slider posts_per_page="8" tag="акции" orderby="rand" items_xl="4" items_md="3" items_sm="2" margin="20" dots="false" nav="true" loop="true"] // 8 случайных записей с меткой "акции", адаптивная сетка, навигация стрелками
- * @example [blog_posts_slider posts_per_page="5" category="обзоры" image_size="large" excerpt_length="30" items_xl="3" items_xxs="1" autoplay="true"] // 5 записей категории "обзоры" с большими изображениями и длинными анонсами
- * @example [blog_posts_slider posts_per_page="3" category="главное" order="ASC" items_xl="1" items_lg="1" nav="true" dots="false"] // 3 первые записи категории "главное" по одной на весь экран
+ * @example [blog_posts_slider posts_per_page="8" tag="акции" orderby="rand" title_length="50" items_xl="4" items_md="3" items_sm="2" margin="20" dots="false" nav="true" loop="true"] // 8 случайных записей с меткой "акции", заголовки до 50 символов, адаптивная сетка
+ * @example [blog_posts_slider posts_per_page="5" category="обзоры" image_size="large" excerpt_length="30" title_length="60" items_xl="3" items_xxs="1" autoplay="true"] // 5 записей категории "обзоры" с ограничением заголовка до 60 символов
  */
 
 add_shortcode('blog_posts_slider', 'horizons_blog_posts_slider_shortcode');
@@ -52,6 +52,7 @@ function horizons_blog_posts_slider_shortcode($atts)
       'order' => 'DESC',
       'image_size' => 'horizons_staff',
       'excerpt_length' => 20,
+      'title_length' => 0,   // Максимальное количество символов в заголовке (0 - без ограничения)
       'items_xl' => '3',
       'items_lg' => '3',
       'items_md' => '2',
@@ -181,7 +182,19 @@ function horizons_blog_posts_slider_shortcode($atts)
                                  'author_text' => __('%s', 'horizons'),
                               ));
                               ?>
-                              <h3 class="h4 post-title"><?php the_title(); ?></h3>
+                              <h3 class="h4 post-title" title="<?php the_title(); ?>">
+                                 <?php
+                                 $title = get_the_title();
+                                 $title_length = intval($atts['title_length']);
+
+                                 if ($title_length > 0 && mb_strlen($title) > $title_length) {
+                                    $shortened_title = mb_substr($title, 0, $title_length) . '...';
+                                    echo esc_html($shortened_title);
+                                 } else {
+                                    echo esc_html($title);
+                                 }
+                                 ?>
+                              </h3>
                               <?php if (intval($atts['excerpt_length']) > 0) : ?>
                                  <div class="body-l-l mb-4 post-excerpt">
                                     <?php
