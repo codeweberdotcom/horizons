@@ -530,7 +530,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container dots-over swiper-hero-blog" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
+      <div class="swiper-container dots-over swiper-hero-blog " data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
@@ -549,7 +549,7 @@ function display_blog_banner()
                   }
                ?>
 
-                  <div class="swiper-slide p-5 p-md-10 h-100 bg-overlay bg-overlay-400 bg-dark" style="background-image:url(<?php echo esc_url($image_url); ?>);">
+                  <div class="swiper-slide p-5 p-md-10 h-100 wrapper image-wrapper bg-image bg-overlay bg-overlay-400 bg-full" data-image-src="<?php echo esc_url($image_url); ?>">
                      <div class="container h-100">
                         <div class="row h-100">
                            <div class="col-12 text-center text-lg-start justify-content-center align-self-center align-items-start">
