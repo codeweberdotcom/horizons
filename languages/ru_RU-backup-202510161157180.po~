@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-10-16 11:49+0000\n"
+"PO-Revision-Date: 2025-10-16 11:56+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -599,6 +599,10 @@ msgstr "Новое имя Метки"
 msgid "News"
 msgstr "Новости"
 
+#: single.php:68
+msgid "Next"
+msgstr "Следующий"
+
 #: archive-awards.php:122 functions.php:339
 msgid "No awards found."
 msgstr ""
@@ -971,6 +975,10 @@ msgstr "Архив практик"
 msgid "Practices list"
 msgstr "Список практик"
 
+#: single.php:58
+msgid "Previous"
+msgstr "Предыдущий"
+
 #: includes/metaboxes.php:1046
 msgid "Primary"
 msgstr ""
@@ -982,6 +990,18 @@ msgstr ""
 #: includes/metaboxes.php:1562
 msgid "Primary Partner"
 msgstr "Основной партнер"
+
+#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
+msgid "Read"
+msgstr "Читать"
+
+#: templates/components/another-awards-grid.php:28
+msgid "Read More"
+msgstr "Подробнее"
+
+#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
+msgid "Read more"
+msgstr "Подробнее"
 
 #: functions/cpt/cpt-partners.php:200
 msgid "Regions"
@@ -1347,31 +1367,6 @@ msgstr "Писатель"
 #: templates/content/single-practices.php:25
 msgid "Your Task"
 msgstr "Ваша задача"
-
-#: templates/components/another-awards-grid.php:28
-msgctxt "Подробнее"
-msgid "Read More"
-msgstr ""
-
-#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
-msgctxt "Подробнее"
-msgid "Read more"
-msgstr ""
-
-#: single.php:58
-msgctxt "Предыдущий"
-msgid "Previous"
-msgstr ""
-
-#: single.php:68
-msgctxt "Следующий"
-msgid "Next"
-msgstr ""
-
-#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
-msgctxt "Читать"
-msgid "Read"
-msgstr ""
 
 #: templates/content/loop.php:66
 msgid "Читать полностью"
