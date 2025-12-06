@@ -29,9 +29,18 @@ $tag_description = $current_tag ? $current_tag->description : '';
          <div id="loop-wrapper" class="<?php echo $content_class; ?> py-14">
             <div class="blog grid grid-view">
                <div class="row isotope gx-md-8 gy-8 mb-8">
+                  <?php if ($pageheader_name === '1') { ?>
+                     <h1 class="display-4 mb-10"><?php echo universal_title(); ?></h1>
+                  <?php } else { ?>
+                     <h1 class="display-4 mb-10"><?php echo esc_html($tag_name); ?></h1>
+                  <?php } ?>
+                  <!-- #title -->
                   
-                  
-                
+                  <?php if (!empty($tag_description)) : ?>
+                     <div class="body-l-r mb-6 text-neutral-600">
+                        <?php echo wp_kses_post($tag_description); ?>
+                     </div>
+                  <?php endif; ?>
 
                   <?php
                   $templateloop = Redux::get_option($opt_name, 'archive_template_select_' . $post_type);
