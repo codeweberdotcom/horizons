@@ -493,8 +493,8 @@ add_action('save_post', 'save_blog_banner_meta');
 // Функция для вывода баннера на главной блога
 function display_blog_banner()
 {
-   // Получаем все записи с включенным чекбоксом
-   $banner_posts = get_posts(array(
+   // Базовые параметры запроса
+   $args = array(
       'post_type' => 'post',
       'meta_key' => '_show_on_blog_home',
       'meta_value' => '1',
@@ -502,7 +502,26 @@ function display_blog_banner()
       'post_status' => 'publish',
       'orderby' => 'date',
       'order' => 'DESC'
-   ));
+   );
+
+   // Если мы на странице категории, фильтруем по категории
+   if (is_category()) {
+      $current_category = get_queried_object();
+      if ($current_category && !is_wp_error($current_category)) {
+         $args['cat'] = $current_category->term_id;
+      }
+   }
+
+   // Если мы на странице тега, фильтруем по тегу
+   if (is_tag()) {
+      $current_tag = get_queried_object();
+      if ($current_tag && !is_wp_error($current_tag)) {
+         $args['tag_id'] = $current_tag->term_id;
+      }
+   }
+
+   // Получаем записи с включенным чекбоксом
+   $banner_posts = get_posts($args);
 
    if (empty($banner_posts)) {
       return;
