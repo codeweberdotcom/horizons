@@ -305,7 +305,7 @@ function handle_filter_awards()
                         </a>
                         <figcaption>
                             <h2 class="from-left body-l-r mb-3"><?php the_title(); ?></h2>
-                            <div class="award-desc-group">
+                            <div class="award-desc-group d-flex flex-wrap">
                                 <?php if ($category_text) : ?>
                                     <span class="from-left mb-1  me-3 text-square-before label-u"><?php echo esc_html($category_text); ?></span>
                                 <?php endif; ?>
