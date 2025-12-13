@@ -30,12 +30,24 @@ while (have_posts()) :
 					<?php } ?>
 					<!-- #title -->
 
-				<?php
+			<?php
+			$template_loaded = false;
+
+			// ПРИОРИТЕТ: Сначала проверяем файл в дочерней теме {post_type}_1.php
+			// Если файл найден - подключаем сразу и прекращаем все проверки
+			if (is_child_theme()) {
+				$child_template_file = get_stylesheet_directory() . "/templates/singles/{$post_type_lc}/{$post_type_lc}_1.php";
+				if (file_exists($child_template_file)) {
+					get_template_part("templates/singles/{$post_type_lc}/{$post_type_lc}_1");
+					$template_loaded = true;
+				}
+			}
+
+			// Если файла нет в дочерней теме - продолжаем обычную логику
+			if (!$template_loaded) {
 				$templatesingle = Redux::get_option($opt_name, 'single_template_select_' . $post_type);
 				$template_file = "templates/singles/{$post_type_lc}/{$templatesingle}.php";
-				$template_loaded = false;
-
-				// УБИРАЕМ условие - контент выводим ВСЕГДА
+				
 				// 1. Пытаемся загрузить выбранный шаблон из Redux
 				if (!empty($templatesingle) && locate_template($template_file)) {
 					get_template_part("templates/singles/{$post_type_lc}/{$templatesingle}");
@@ -63,7 +75,8 @@ while (have_posts()) :
 				if (!$template_loaded) {
 					get_template_part("templates/content/single", '');
 				}
-				?>
+			}
+			?>
 
 					<!-- УБИРАЕМ условие - навигация выводится ВСЕГДА -->
 					<nav class="nav mt-8">

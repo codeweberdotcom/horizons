@@ -373,14 +373,21 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             </div>
 
             <?php if (!empty($vacancy_data['pdf_url'])) : ?>
-               <a href="<?php echo esc_url($vacancy_data['pdf_url']); ?>" target="_blank" class="btn btn-outline-dusty-navy has-ripple btn-lg w-100 mb-1">
+               <a href="javascript:void(0)" class="btn btn-outline-dusty-navy has-ripple btn-icon btn-icon-start btn-lg w-100 mb-1" data-bs-toggle="download" data-value="vac-<?php echo esc_attr(get_the_ID()); ?>">
+                  <i class="uil uil-file-download"></i>
                   <?php _e('Download document', 'horizons'); ?>
                </a>
             <?php endif; ?>
 
-            <button class="btn btn-dusty-navy has-ripple btn-lg w-100">
-               <?php _e('Submit a request', 'horizons'); ?>
-            </button>
+            <?php 
+            $cf7_form_id = isset($vacancy_data['cf7_form_id']) ? $vacancy_data['cf7_form_id'] : '';
+            $cf7_form_id = !empty($cf7_form_id) ? intval($cf7_form_id) : 0;
+            
+            if ($cf7_form_id > 0) : ?>
+               <a href="javascript:void(0)" class="btn btn-dusty-navy has-ripple btn-lg w-100" data-value="cf7-<?php echo esc_attr($cf7_form_id); ?>" data-bs-toggle="modal" data-bs-target="#modal">
+                  <?php _e('Submit a request', 'horizons'); ?>
+               </a>
+            <?php endif; ?>
          </div>
       </div>
       <?php

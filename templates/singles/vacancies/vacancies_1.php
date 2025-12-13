@@ -124,3 +124,4 @@ $vacancy_data_array = get_vacancy_data_array($post->ID);
    </div>
    <!-- /.classic-view -->
 </div>
+

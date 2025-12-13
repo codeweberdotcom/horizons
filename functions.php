@@ -30,6 +30,7 @@ $theme_includes = array(
     '/includes/metaboxes.php',
     '/includes/shortcodes.php',
     '/includes/add_image_sizes.php',
+    '/includes/disable-parent-widgets.php', // Отключение виджетов родительской темы (должен быть загружен до sidebars.php)
     '/includes/sidebars.php',
     '/includes/partners.php',
     '/includes/practices.php',
