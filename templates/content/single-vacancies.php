@@ -11,7 +11,7 @@ $vacancy_data_array = get_vacancy_data_array($post->ID);
             if ($vacancy_data) {
 
                if (!empty($vacancy_data['introduction'])) {
-                  echo '<div class="body-l-r mb-12">' . esc_html($vacancy_data['introduction']) . '</div>';
+                  echo '<div class="body-l-r mb-12">' . wp_kses_post($vacancy_data['introduction']) . '</div>';
                }
             ?>
                <?php if (!empty($vacancy_data['requirements']) && is_array($vacancy_data['requirements'])) : ?>
@@ -39,7 +39,7 @@ $vacancy_data_array = get_vacancy_data_array($post->ID);
 
 
                if (!empty($vacancy_data['additional_info'])) {
-                  echo '<div class="body-l-r">' . esc_html($vacancy_data['additional_info']) . '</div>';
+                  echo '<div class="body-l-r">' . wp_kses_post($vacancy_data['additional_info']) . '</div>';
                }
 
                // if (!empty($vacancy_data['location'])) {
@@ -77,6 +77,9 @@ $vacancy_data_array = get_vacancy_data_array($post->ID);
                //    if (!empty($vacancy_data['pdf_url'])) {
                //    echo '<p>' . __('PDF URL', 'horizons') . ': ' . esc_html($vacancy_data['pdf_url']) . '</p>';
                // }
+            } else {
+               // Если данных вакансии нет, выводим стандартный контент поста
+               the_content();
             }
 
             ?>

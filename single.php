@@ -30,21 +30,40 @@ while (have_posts()) :
 					<?php } ?>
 					<!-- #title -->
 
-					<?php
-					$templatesingle = Redux::get_option($opt_name, 'single_template_select_' . $post_type);
-					$template_file = "templates/singles/{$post_type_lc}/{$templatesingle}.php";
+				<?php
+				$templatesingle = Redux::get_option($opt_name, 'single_template_select_' . $post_type);
+				$template_file = "templates/singles/{$post_type_lc}/{$templatesingle}.php";
+				$template_loaded = false;
 
-					// УБИРАЕМ условие - контент выводим ВСЕГДА
-					if (!empty($templatesingle) && locate_template($template_file)) {
-						get_template_part("templates/content/single/{$post_type_lc}/{$templatesingle}");
-					} else {
-						if (locate_template("templates/content/single-{$post_type_lc}.php")) {
-							get_template_part("templates/content/single", $post_type_lc);
-						} else {
-							get_template_part("templates/content/single", '');
-						}
+				// УБИРАЕМ условие - контент выводим ВСЕГДА
+				// 1. Пытаемся загрузить выбранный шаблон из Redux
+				if (!empty($templatesingle) && locate_template($template_file)) {
+					get_template_part("templates/singles/{$post_type_lc}/{$templatesingle}");
+					$template_loaded = true;
+				}
+				
+				// 2. Если шаблон не найден, пробуем default.php для этого типа записи
+				if (!$template_loaded) {
+					$default_template = "templates/singles/{$post_type_lc}/default.php";
+					if (locate_template($default_template)) {
+						get_template_part("templates/singles/{$post_type_lc}/default");
+						$template_loaded = true;
 					}
-					?>
+				}
+				
+				// 3. Пробуем файл из дочерней темы templates/content/single-{post_type}.php
+				if (!$template_loaded) {
+					if (locate_template("templates/content/single-{$post_type_lc}.php")) {
+						get_template_part("templates/content/single", $post_type_lc);
+						$template_loaded = true;
+					}
+				}
+				
+				// 4. Последний fallback - общий шаблон для всех типов записей
+				if (!$template_loaded) {
+					get_template_part("templates/content/single", '');
+				}
+				?>
 
 					<!-- УБИРАЕМ условие - навигация выводится ВСЕГДА -->
 					<nav class="nav mt-8">
