@@ -573,7 +573,7 @@ var theme = {
    * Enables lightbox functionality
    * Requires assets/js/vendor/glightbox.js
    */
-  lightbox: GLightbox({
+  lightbox: typeof GLightbox !== 'undefined' ? GLightbox({
     selector: "*[data-glightbox]",
     touchNavigation: true,
     loop: false,
@@ -621,7 +621,7 @@ var theme = {
         },
       },
     },
-  }),
+  }) : null,
 
   /**
    * Plyr
@@ -810,6 +810,11 @@ var theme = {
       document.querySelectorAll('[data-bs-toggle="popover"]')
     );
     var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      // Проверяем и исправляем title если он null
+      var title = popoverTriggerEl.getAttribute('data-bs-title') || popoverTriggerEl.getAttribute('title');
+      if (title === null || title === 'null' || title === '') {
+        popoverTriggerEl.setAttribute('data-bs-title', '');
+      }
       return new bootstrap.Popover(popoverTriggerEl);
     });
   },
@@ -1070,6 +1075,479 @@ theme.init();
 
 // Custom.js
 
+// Phone mask library (inlined to ensure availability even if plugins.js misses it)
+if (typeof PhoneMask === "undefined") {
+  class PhoneMaskOptions {
+    trimMask = false;
+    trimUnmask = true;
+    blurMask = true;
+    mask = "+7 (___) ___-__-__";
+    softCaret = "_";
+    caret = "_";
+  }
+
+  /**
+   * @extends {PhoneMaskOptions}
+   */
+  class _PhoneMaskMagicOptions {
+    /**
+     * @type {PhoneMaskOptions}
+     * @private
+     */
+    static _baseOptions = new PhoneMaskOptions();
+
+    /**
+     * @return {number}
+     */
+    get maskMinLength() {
+      return this.mask.indexOf(this.softCaret);
+    }
+
+    /**
+     * @return {number}
+     */
+    get unmaskMaxLength() {
+      return this.mask.match(new RegExp(this.softCaret, "g")).length;
+    }
+
+    /**
+     * @return {array}
+     */
+    get maskPosMap() {
+      return Array.from(this.mask.matchAll(new RegExp(this.softCaret, "g"))).map(
+        ({ index }) => index
+      );
+    }
+
+    /**
+     * @param {PhoneMaskOptions|{}} options
+     */
+    constructor(options = {}) {
+      this._options = _PhoneMaskMagicOptions._initOptions(options);
+
+      this._initOptionAccess();
+    }
+
+    /**
+     * @private
+     */
+    _initOptionAccess() {
+      _PhoneMaskMagicOptions._fillingOptions.forEach((optionName) => {
+        Object.defineProperty(this, optionName, {
+          get: () => this._options[optionName],
+        });
+      });
+    }
+
+    /**
+     * @param {PhoneMaskOptions|{}} options
+     */
+    static override(options) {
+      Object.assign(
+        _PhoneMaskMagicOptions._baseOptions,
+        _PhoneMaskMagicOptions._initOptions(options)
+      );
+    }
+
+    static flush() {
+      _PhoneMaskMagicOptions.override(new PhoneMaskOptions());
+    }
+
+    /**
+     * @return {array}
+     * @private
+     */
+    static get _fillingOptions() {
+      return Object.keys(_PhoneMaskMagicOptions._baseOptions);
+    }
+
+    /**
+     * @param {object} options
+     * @return {object} merged options
+     * @private
+     */
+    static _initOptions(options) {
+      return _PhoneMaskMagicOptions._fillOptions(options);
+    }
+
+    /**
+     * @param {object} options
+     * @return {object} merged options
+     * @private
+     */
+    static _fillOptions(options) {
+      const interestOptionsEntries = Object.entries(options).filter(([key]) =>
+          _PhoneMaskMagicOptions._fillingOptions.includes(key)
+        ),
+        interestOptions = Object.fromEntries(interestOptionsEntries);
+
+      const newOptions = Object.assign(
+        {},
+        _PhoneMaskMagicOptions._baseOptions,
+        interestOptions
+      );
+
+      _PhoneMaskMagicOptions._validate(newOptions);
+
+      return newOptions;
+    }
+
+    /**
+     * @param {object} options
+     * @throws {Error}
+     * @private
+     */
+    static _validate(options) {
+      // Validate soft caret
+      this._checkNumberCaret(options.softCaret);
+      this._checkOneCharCaret(options.softCaret);
+      this._checkRegexCaret(options.softCaret);
+
+      // Validate user caret
+      this._checkNumberCaret(options.caret);
+
+      // Validate phone mask
+      if (new RegExp(`${options.softCaret}.*\\d`).test(options.mask)) {
+        throw new Error("Mask not support numbers after carets");
+      }
+      if (!new RegExp(`${options.softCaret}`).test(options.mask)) {
+        throw new Error("Soft caret not found in mask");
+      }
+    }
+
+    /**
+     * @param {string} caret
+     * @private
+     */
+    static _checkNumberCaret(caret) {
+      if (/\d/.test(caret)) {
+        throw new Error("Caret not support number format");
+      }
+    }
+
+    /**
+     * @param {string} caret
+     * @private
+     */
+    static _checkOneCharCaret(caret) {
+      if (caret.length !== 1) {
+        throw new Error("Caret support only one symbol");
+      }
+    }
+
+    /**
+     * @param {string} caret
+     * @private
+     */
+    static _checkRegexCaret(caret) {
+      try {
+        new RegExp(`${caret}`).test(caret);
+      } catch (e) {
+        throw new Error(`Not supported caret "${caret}" in regex, please change`);
+      }
+    }
+  }
+
+  class PhoneMask {
+    /**
+     * @extends {_PhoneMaskMagicOptions}
+     */
+    static Options = _PhoneMaskMagicOptions;
+
+    /**
+     * @type {PhoneMask.Options}
+     */
+    options;
+    /**
+     * @type {HTMLInputElement|Element}
+     * @private
+     */
+    _el;
+
+    /**
+     * @return {HTMLInputElement|Element}
+     */
+    get input() {
+      return this._el;
+    }
+
+    /**
+     * @param {HTMLInputElement|string} selector
+     * @param {PhoneMaskOptions|{}} options
+     */
+    constructor(selector, options = {}) {
+      this._init(selector);
+
+      this.options = new PhoneMask.Options(options);
+
+      this.update();
+    }
+
+    /**
+     * @private
+     */
+    _init(selector) {
+      this._el =
+        selector instanceof HTMLInputElement
+          ? selector
+          : document.querySelector(selector);
+
+      this._el.type = "tel";
+
+      this._bind();
+    }
+
+    destroy() {
+      this._unbind();
+
+      this._el = undefined;
+    }
+
+    /**
+     * Updating mask and blur status
+     */
+    update() {
+      this.updateMask();
+      this.updateBlur();
+    }
+
+    /**
+     * Updating mask
+     */
+    updateMask() {
+      this.unmask = this._trimUnmask(this.unmask);
+    }
+
+    /**
+     * Updating blur
+     */
+    updateBlur() {
+      if (this.isBlur()) {
+        if (this.options.blurMask && !this.unmask) {
+          this._el.value = "";
+        }
+      } else {
+        this.unmask = this._trimUnmask(this.unmask);
+      }
+    }
+
+    /**
+     * @return {boolean}
+     */
+    isFocus() {
+      return document.activeElement === this._el;
+    }
+
+    /**
+     * @return {boolean}
+     */
+    isBlur() {
+      return !this.isFocus();
+    }
+
+    /**
+     * @private
+     */
+    _bind() {
+      this._el.addEventListener("focus", this._onFocus);
+      this._el.addEventListener("blur", this._onBlur);
+      this._el.addEventListener("input", this._onInput);
+      this._el.addEventListener("mouseup", this._onMouseUp);
+      this._el.addEventListener("touchend", this._onMouseUp);
+    }
+
+    /**
+     * @private
+     */
+    _unbind() {
+      this._el.removeEventListener("focus", this._onFocus);
+      this._el.removeEventListener("blur", this._onBlur);
+      this._el.removeEventListener("input", this._onInput);
+      this._el.removeEventListener("mouseup", this._onMouseUp);
+      this._el.removeEventListener("touchend", this._onMouseUp);
+    }
+
+    /**
+     * @private
+     */
+    _onFocus = () => {
+      this.updateBlur();
+      this._correctPos();
+    };
+
+    /**
+     * @private
+     */
+    _onBlur = () => this.updateBlur();
+
+    /**
+     * @private
+     */
+    _onInput = () => {
+      const selectionNumberEnd = this._unmaskPos;
+
+      this.updateMask();
+
+      this._unmaskPos = selectionNumberEnd;
+    };
+
+    /**
+     * @private
+     */
+    _onMouseUp = () => {
+      this._correctPos();
+    };
+
+    /**
+     * @private
+     */
+    _correctPos() {
+      const { selectionStart, selectionEnd } = this._el;
+
+      if (selectionStart !== selectionEnd) {
+        return;
+      }
+
+      const allowRightPos =
+          Array.from(this._el.value.matchAll(/\d/g)).at(-1)?.index + 1 || 0,
+        allowLeftPos = Math.max(
+          this.options.mask.indexOf(this.options.softCaret) || 0,
+          0
+        ),
+        newPos = Math.max(Math.min(selectionStart, allowRightPos), allowLeftPos);
+
+      if (selectionStart !== newPos) {
+        this._el.selectionStart = this._el.selectionEnd = newPos;
+      }
+    }
+
+    /**
+     * @param {string} unmask
+     * @return {string}
+     * @private
+     */
+    _trimUnmask(unmask) {
+      if (unmask.length <= this.options.unmaskMaxLength) {
+        return unmask;
+      }
+
+      let newUnmask = unmask;
+
+      if (this.options.trimUnmask) {
+        newUnmask = unmask.replace(/^[87]/, "");
+      }
+
+      return newUnmask.slice(0, this.options.unmaskMaxLength);
+    }
+
+    /**
+     * @return {string} value without mask
+     * @private
+     */
+    _cleanMask(maskValue) {
+      const value = maskValue,
+        clearPatternSearch =
+          "^" +
+          this.options.mask
+            .replace(new RegExp(`([^${this.options.softCaret}\\d])`, "g"), "")
+            .replace(/(\d)/g, "$1?")
+            .replace(new RegExp(`${this.options.softCaret}+`, "g"), "(\\d*?)") +
+          "$",
+        clearPattern = new RegExp(clearPatternSearch),
+        matches = clearPattern.exec(value.replace(/\D/g, ""));
+
+      return (
+        matches &&
+        matches
+          .slice(1)
+          .map((val) => val.replace(/\D/g, ""))
+          .join("")
+      );
+    }
+
+    /**
+     * @param {string} unmask value without mask
+     * @private
+     */
+    _applyMask(unmask) {
+      const patternSearch = unmask.replace(/\d/g, "(\\d)"),
+        pattern = new RegExp(patternSearch),
+        count = Math.min(unmask.length, this.options.unmaskMaxLength);
+
+      let replaceValue = this.options.mask;
+
+      for (let i = 1; i <= count; i++) {
+        replaceValue = replaceValue.replace(
+          new RegExp(this.options.softCaret),
+          "$" + i
+        );
+      }
+
+      let maskedValue = unmask.replace(pattern, replaceValue);
+
+      if (this.options.trimMask) {
+        const minMaskLen = this.options.maskMinLength,
+          lastNumber =
+            Array.from(maskedValue.matchAll(/\d/g)).reverse()[0].index + 1;
+        maskedValue = maskedValue.slice(0, Math.max(minMaskLen, lastNumber));
+      } else if (this.options.softCaret !== this.options.caret) {
+        maskedValue = maskedValue.replace(
+          new RegExp(this.options.softCaret, "g"),
+          this.options.caret
+        );
+      }
+
+      return maskedValue;
+    }
+
+    /**
+     * @return {number}
+     * @private
+     */
+    get _unmaskPos() {
+      const maskValueToCaret = this._el.value.slice(0, this._el.selectionEnd),
+        unmaskValueToCaret = this._cleanMask(maskValueToCaret);
+
+      return unmaskValueToCaret.length;
+    }
+
+    /**
+     * @param {number} unmaskPos
+     * @private
+     */
+    set _unmaskPos(unmaskPos) {
+      const { maskPosMap } = this.options,
+        maskMaxAllowedPos = this.unmask.length,
+        unmaskPosInMap = Math.min(
+          Math.max(0, Math.min(unmaskPos, maskMaxAllowedPos) - 1)
+        ),
+        unmaskPosMapCorrect = Math.max(0, Math.min(1, unmaskPos)),
+        maskPosition = maskPosMap[unmaskPosInMap] + unmaskPosMapCorrect;
+
+      this._el.selectionStart = this._el.selectionEnd = maskPosition;
+    }
+
+    /**
+     * @return {string} value without mask
+     */
+    get unmask() {
+      return this._cleanMask(this._el.value);
+    }
+
+    /**
+     * @param {string} unmask value without mask
+     */
+    set unmask(unmask) {
+      this._el.value = this._applyMask(unmask);
+    }
+  }
+
+  // For webpack
+  if (typeof module === "object" && module.exports) {
+    module.exports = PhoneMask;
+  }
+}
+
 var custom = {
   /**
    * Theme's custom components/functions list
@@ -1080,50 +1558,56 @@ var custom = {
   init: function () {
     custom.rippleEffect();
     custom.addTelMask();
-    custom.cf7CloseAfterSent();
-    custom.formValidation();
-    custom.formSubmittingWatcher();
   },
 
-  cf7CloseAfterSent: function () {
-    // Закрываем модальное окно при успешной отправке CF7
-    document.addEventListener(
-      "wpcf7mailsent",
-      function (event) {
-        const modal = document.getElementById("modal");
-        if (modal) {
-          modal.classList.remove("show");
-
-          // Если используете Bootstrap
-          const bootstrapModal = bootstrap.Modal.getInstance(modal);
-          if (bootstrapModal) {
-            bootstrapModal.hide();
-          }
-        }
-      },
-      false
-    );
-  },
 
   addTelMask: function () {
-    const telInputs = document.querySelectorAll("input.phone-mask");
+    const telInputs = document.querySelectorAll("input[data-mask]");
 
     telInputs.forEach((input) => {
-      const placeholder = input.getAttribute("placeholder");
-      let mask;
-
-      if (placeholder && /\d/.test(placeholder)) {
-        const prefixMatch = placeholder.match(/^[^(\d]*[\d ]*/);
-        const prefix = prefixMatch ? prefixMatch[0] : "";
-        const rest = placeholder.slice(prefix.length).replace(/[0-9]/g, "_");
-        mask = prefix + rest;
-      } else {
-        mask = "+7 ___ ___-__-__";
+      // Пропускаем уже инициализированные поля
+      if (input.dataset.phoneMaskInitialized === 'true') {
+        return;
+      }
+      
+      const mask = input.dataset.mask;
+      if (!mask) {
+        return;
       }
 
-      const phoneMask = new PhoneMask(input, {
-        mask: mask,
-      });
+      const caret = input.dataset.maskCaret;
+      const softCaret = input.dataset.maskSoftCaret;
+
+      if (caret && /\d/.test(caret)) {
+        console.warn("PhoneMask: caret cannot be a digit", caret);
+        return;
+      }
+
+      const options = { mask };
+      
+      // По умолчанию blurMask = false (поле не очищается при потере фокуса)
+      // Можно явно включить через data-mask-blur="true"
+      const maskBlur = input.dataset.maskBlur;
+      if (maskBlur === 'true') {
+        options.blurMask = true;
+      } else {
+        options.blurMask = false;
+      }
+      
+      if (softCaret) {
+        options.softCaret = softCaret;
+      }
+      if (caret) {
+        options.caret = caret;
+      }
+
+      const placeholderCaret = caret || "_";
+      input.placeholder = mask.replaceAll("_", placeholderCaret);
+
+      const phoneMask = new PhoneMask(input, options);
+      
+      // Помечаем поле как инициализированное, чтобы избежать повторной инициализации
+      input.dataset.phoneMaskInitialized = 'true';
 
       // Функция проверки валидности
       const validatePhone = () => {
@@ -1162,100 +1646,6 @@ var custom = {
     });
   },
 
-  /**
-   * Form Validation
-   * Adds Bootstrap 4/5 form validation behavior
-   */
-  formValidation: function () {
-    var forms = document.getElementsByClassName("needs-validation");
-
-    Array.prototype.forEach.call(forms, function (form) {
-      form.addEventListener(
-        "submit",
-        function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  },
-
-  /**
-   * Form Submit Status Watcher
-   * Listens for 'submitting', 'invalid', 'unaccepted' and 'sent' classes on forms and updates the submit button text
-   */
-  formSubmittingWatcher: function () {
-    var forms = document.getElementsByClassName("wpcf7-form");
-
-    Array.prototype.forEach.call(forms, function (form) {
-      // Найти кнопку отправки внутри формы
-      var submitButton = form.querySelector(
-        'button[type="submit"], input[type="submit"], div[type="submit"], span[type="submit"]'
-      );
-
-      if (submitButton) {
-        // Сохраняем оригинальный текст в data-атрибут
-        if (submitButton.tagName.toLowerCase() === "input") {
-          submitButton.setAttribute("data-original-text", submitButton.value);
-        } else {
-          submitButton.setAttribute(
-            "data-original-text",
-            submitButton.innerHTML
-          );
-        }
-      }
-
-      var observer = new MutationObserver(function (mutationsList) {
-        mutationsList.forEach(function (mutation) {
-          if (mutation.attributeName === "class") {
-            if (form.classList.contains("submitting")) {
-              // Если форма отправляется — меняем текст
-              if (submitButton) {
-                var loadingText =
-                  'Отправка... <i class="uil uil-envelope-upload ms-2"></i>';
-                if (submitButton.tagName.toLowerCase() === "input") {
-                  submitButton.value = "Отправка...";
-                } else {
-                  submitButton.innerHTML = loadingText;
-                }
-              }
-            } else if (
-              form.classList.contains("invalid") ||
-              form.classList.contains("unaccepted")
-            ) {
-              // Если форма вернула invalid или unaccepted — возвращаем оригинальный текст
-              if (submitButton) {
-                var originalText =
-                  submitButton.getAttribute("data-original-text");
-                if (submitButton.tagName.toLowerCase() === "input") {
-                  submitButton.value = originalText;
-                } else {
-                  submitButton.innerHTML = originalText;
-                }
-              }
-            } else if (form.classList.contains("sent")) {
-              // Если форма успешно отправлена — меняем текст на "Отправлено"
-              if (submitButton) {
-                var successText =
-                  'Отправлено <i class="uil uil-check-circle ms-2"></i>';
-                if (submitButton.tagName.toLowerCase() === "input") {
-                  submitButton.value = "Отправлено";
-                } else {
-                  submitButton.innerHTML = successText;
-                }
-              }
-            }
-          }
-        });
-      });
-
-      observer.observe(form, { attributes: true });
-    });
-  },
 
   rippleEffect: () => {
     document.querySelectorAll(".has-ripple").forEach((button) => {
