@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-16 11:55+0000\n"
+"POT-Creation-Date: 2026-01-08 14:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -120,6 +120,7 @@ msgid "Address"
 msgstr ""
 
 #: templates/content/single-practices.php:43
+#: templates/singles/practices/practices_1.php:43
 msgid "Advantages"
 msgstr ""
 
@@ -208,7 +209,7 @@ msgstr ""
 msgid "Award Attributes"
 msgstr ""
 
-#: includes/sidebars.php:513
+#: includes/sidebars.php:520
 msgid "Award Categories"
 msgstr ""
 
@@ -220,7 +221,7 @@ msgstr ""
 msgid "Award Image"
 msgstr ""
 
-#: includes/sidebars.php:553
+#: includes/sidebars.php:560
 msgid "Award Partners"
 msgstr ""
 
@@ -228,7 +229,7 @@ msgstr ""
 msgid "Award URL"
 msgstr ""
 
-#: includes/sidebars.php:533
+#: includes/sidebars.php:540
 msgid "Award Years"
 msgstr ""
 
@@ -336,7 +337,7 @@ msgstr ""
 msgid "Company:"
 msgstr ""
 
-#: includes/sidebars.php:349 includes/sidebars.php:453
+#: includes/sidebars.php:349 includes/sidebars.php:460
 msgid "Contact Person"
 msgstr ""
 
@@ -377,11 +378,11 @@ msgid "Delete Image"
 msgstr ""
 
 #: taxonomy-practice_category.php:138 includes/sidebars.php:325
-#: includes/sidebars.php:425
+#: includes/sidebars.php:432
 msgid "Details"
 msgstr ""
 
-#: includes/sidebars.php:377
+#: includes/sidebars.php:378
 msgid "Download document"
 msgstr ""
 
@@ -458,6 +459,7 @@ msgid "For example: Senior Financial Analyst and Investment Advisor"
 msgstr ""
 
 #: templates/content/single-practices.php:135
+#: templates/singles/practices/practices_1.php:135
 msgid "Frequently Asked Questions"
 msgstr ""
 
@@ -481,7 +483,7 @@ msgstr ""
 msgid "Hold Ctrl/Cmd to select multiple partners members"
 msgstr ""
 
-#: archive-awards.php:58 functions.php:279
+#: archive-awards.php:58 functions.php:280
 msgid "Horizons"
 msgstr ""
 
@@ -521,7 +523,11 @@ msgstr ""
 msgid "Languages:"
 msgstr ""
 
-#: includes/sidebars.php:483
+#: includes/sidebars.php:725
+msgid "Legal Documents"
+msgstr ""
+
+#: includes/sidebars.php:490
 msgid "Link to source"
 msgstr ""
 
@@ -597,11 +603,11 @@ msgstr ""
 msgid "News"
 msgstr ""
 
-#: single.php:68
+#: single.php:100
 msgid "Next"
 msgstr ""
 
-#: archive-awards.php:122 functions.php:339
+#: archive-awards.php:122 functions.php:340
 msgid "No awards found."
 msgstr ""
 
@@ -745,6 +751,7 @@ msgid "Other Vacancies"
 msgstr ""
 
 #: templates/content/single-practices.php:34
+#: templates/singles/practices/practices_1.php:34
 msgid "Our Solution"
 msgstr ""
 
@@ -966,7 +973,7 @@ msgstr ""
 msgid "Practices list"
 msgstr ""
 
-#: single.php:58
+#: single.php:90
 msgid "Previous"
 msgstr ""
 
@@ -982,7 +989,8 @@ msgstr ""
 msgid "Primary Partner"
 msgstr ""
 
-#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
+#: category.php:66 home.php:64 tag.php:68 includes/blog.php:172
+#: templates/content/loop.php:37
 msgid "Read"
 msgstr ""
 
@@ -990,7 +998,7 @@ msgstr ""
 msgid "Read More"
 msgstr ""
 
-#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
+#: includes/blog.php:212 includes/blog.php:568 includes/blog.php:623
 msgid "Read more"
 msgstr ""
 
@@ -1014,15 +1022,17 @@ msgstr ""
 msgid "Remove practice image"
 msgstr ""
 
-#: templates/content/single-vacancies.php:19
+#: templates/content/single-vacancies.php:23
+#: templates/singles/vacancies/vacancies_1.php:23
 msgid "Requirements"
 msgstr ""
 
-#: templates/content/single-vacancies.php:31
+#: templates/content/single-vacancies.php:35
+#: templates/singles/vacancies/vacancies_1.php:35
 msgid "Responsibilities"
 msgstr ""
 
-#: includes/sidebars.php:479
+#: includes/sidebars.php:486
 msgid "Return"
 msgstr ""
 
@@ -1190,7 +1200,7 @@ msgstr ""
 msgid "Slate Gray (#86909B)"
 msgstr ""
 
-#: taxonomy-practice_category.php:201 includes/sidebars.php:382
+#: taxonomy-practice_category.php:201 includes/sidebars.php:388
 msgid "Submit a request"
 msgstr ""
 
@@ -1342,11 +1352,12 @@ msgstr ""
 msgid "Website:"
 msgstr ""
 
-#: includes/sidebars.php:313 includes/sidebars.php:416
+#: includes/sidebars.php:313 includes/sidebars.php:423
 msgid "Writer"
 msgstr ""
 
 #: templates/content/single-practices.php:25
+#: templates/singles/practices/practices_1.php:25
 msgid "Your Task"
 msgstr ""
 

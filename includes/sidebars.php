@@ -185,9 +185,9 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
       ]);
 
       $current_id = get_queried_object_id();
-      $accordion_id = 'practicesAccordion';
+      $accordion_id = 'partnersAccordion';
 
-      echo '<div class="accordion accordion-wrapper" id="' . $accordion_id . '">';
+      echo '<div class="accordion accordion-wrapper icon-right type-3" id="' . $accordion_id . '">';
 
       if ($categories && !is_wp_error($categories)) {
          $category_index = 0;
@@ -694,3 +694,61 @@ function is_partner_active($partner_id)
 
    return intval($_GET['partner']) === $partner_id;
 }
+
+//--------------------------------
+//LEGAL SIDEBAR MENU (переопределение со стилизацией как в custom_menu)
+//--------------------------------
+
+add_action('codeweber_after_widget', function ($sidebar_id) {
+   if ($sidebar_id !== 'legal') {
+      return;
+   }
+   
+   // Проверяем, существует ли тип записи 'legal'
+   if (!post_type_exists('legal')) {
+      return;
+   }
+
+   $legal_posts = get_posts([
+      'post_type'      => 'legal',
+      'posts_per_page' => -1,
+      'post_status'    => 'publish',
+      'orderby'        => 'menu_order',
+      'order'          => 'ASC',
+   ]);
+
+   if ($legal_posts) {
+      // Начинаем формировать HTML с правильными классами как в custom_menu
+      echo '<div class="widget mb-10">';
+      
+      // Добавляем заголовок (можно настроить или убрать)
+      echo '<div class="text-line-after label-u mb-4">' . __('Legal Documents', 'horizons') . '</div>';
+      
+      echo '<nav class="sidebar" id="awards-category-nav">';
+      echo '<ul class="list-unstyled">';
+
+      $index = 1;
+      $current_id = get_queried_object_id();
+
+      foreach ($legal_posts as $post) {
+         // Проверяем мета _hide_from_archive
+         $hide = get_post_meta($post->ID, '_hide_from_archive', true);
+         if ($hide === '1') {
+            continue; // пропускаем скрытую запись
+         }
+
+         $permalink = get_permalink($post);
+         $active_class = ($current_id === $post->ID) ? ' active' : '';
+         echo '<li class="mt-0">';
+         echo '<a class="label-s text-neutral-500 my-1 d-block position-relative' . $active_class . '" href="' . esc_url($permalink) . '">';
+         echo $index . '. ' . esc_html(get_the_title($post));
+         echo '</a>';
+         echo '</li>';
+         $index++;
+      }
+
+      echo '</ul>';
+      echo '</nav>';
+      echo '</div>';
+   }
+}, 20); // Приоритет 20, чтобы выполняться после отключения родительской функции

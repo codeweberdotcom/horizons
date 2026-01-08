@@ -14,8 +14,8 @@ function horizons_remove_parent_widgets() {
     // Отключить виджет Vacancies из родительской темы
     remove_action('codeweber_after_widget', 'codeweber_sidebar_widget_vacancies');
     
-    // Примеры отключения других виджетов (раскомментируйте при необходимости):
-    // remove_action('codeweber_after_widget', 'codeweber_sidebar_widget_legal');
+    // Отключить виджет Legal из родительской темы (используем свою версию со стилизацией как в custom_menu)
+    remove_action('codeweber_after_widget', 'codeweber_sidebar_widget_legal');
     // remove_action('codeweber_after_sidebar', 'codeweber_sidebar_widget_faq');
 }
 add_action('after_setup_theme', 'horizons_remove_parent_widgets', 20);

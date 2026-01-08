@@ -548,7 +548,7 @@ function display_blog_banner()
       <section class="p-5 p-md-10 mt-8 mt-md-12 wrapper swiper-hero-blog image-wrapper bg-image bg-overlay bg-overlay-400 bg-full" data-image-src="<?php echo esc_url($image_url); ?>">
          <div class="container h-100">
             <div class="row h-100">
-               <div class="col-lg-8 col-xl-7 col-xxl-6 text-center text-lg-start justify-content-center align-self-center align-items-start">
+               <div class="col-lg-8 col-xl-7 col-xxl-6 text-center text-lg-start justify-content-center align-self-center align-items-start zindex-1">
 
                   <?php
                   display_post_meta(array(
