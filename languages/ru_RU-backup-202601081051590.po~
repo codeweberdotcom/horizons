@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-10-16 11:56+0000\n"
+"PO-Revision-Date: 2026-01-08 10:51+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
+"X-Loco-Version: 2.8.0; wp-6.9; php-8.1.10\n"
 "X-Domain: horizons"
 
 #: includes/metaboxes.php:1398
@@ -485,7 +485,7 @@ msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескол�
 
 #: archive-awards.php:58 functions.php:279
 msgid "Horizons"
-msgstr ""
+msgstr "Хорайзонс"
 
 #. Name of the theme
 msgid "horizons"
@@ -1033,7 +1033,7 @@ msgstr "Ключевые обязанности"
 
 #: includes/sidebars.php:479
 msgid "Return"
-msgstr ""
+msgstr "Вернуться"
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"

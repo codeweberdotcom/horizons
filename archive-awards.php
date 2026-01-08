@@ -119,7 +119,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
 
                   <div class="col-12">
                      <div class="alert alert-info text-center">
-                        <p><?php _e('No awards found.', 'horizons'); ?></p>
+                        <span><?php _e('No awards found.', 'horizons'); ?></span>
                      </div>
                   </div>
 

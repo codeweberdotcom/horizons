@@ -127,17 +127,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showLoadingIndicator() {
     const gridContainer = document.getElementById("awards-grid");
-    if (gridContainer) {
-      gridContainer.style.opacity = "0.7";
-      gridContainer.style.pointerEvents = "none";
+    if (!gridContainer) return;
+
+    // Проверяем, есть ли уже спиннер
+    let loader = gridContainer.querySelector(".spinner.spinner-overlay");
+    
+    if (!loader) {
+      // Создаем спиннер, как в yandex maps
+      loader = document.createElement("div");
+      loader.className = "spinner spinner-overlay";
+      loader.id = "awards-filter-loader";
+      
+      // Убеждаемся, что контейнер имеет position: relative для правильного позиционирования overlay
+      const computedStyle = window.getComputedStyle(gridContainer);
+      if (computedStyle.position === "static") {
+        gridContainer.style.position = "relative";
+      }
+      
+      gridContainer.appendChild(loader);
+    } else {
+      // Если спиннер уже есть, просто показываем его
+      loader.classList.remove("done");
+      loader.style.display = "";
+      loader.style.opacity = "1";
+      loader.style.visibility = "visible";
     }
   }
 
   function hideLoadingIndicator() {
     const gridContainer = document.getElementById("awards-grid");
-    if (gridContainer) {
-      gridContainer.style.opacity = "1";
-      gridContainer.style.pointerEvents = "auto";
+    if (!gridContainer) return;
+
+    const loader = gridContainer.querySelector(".spinner.spinner-overlay");
+    if (loader) {
+      // Добавляем класс done для плавного скрытия (как в yandex maps)
+      loader.classList.add("done");
+      
+      // Удаляем элемент после анимации (как в yandex maps)
+      setTimeout(() => {
+        if (loader.parentNode) {
+          loader.remove();
+        }
+      }, 300);
     }
   }
 

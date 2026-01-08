@@ -144,10 +144,10 @@ function add_custom_single_banner_partners($post_type)
                                     <div class="mt-0">
                                        <?php if (!empty($website)) : ?>
                                           <a href="<?php echo esc_url($website); ?>" title="<?= __('Website', 'horizons'); ?>" target="_blank" rel="noopener noreferrer" class="label-s hover-6 text-white d-inline-flex align-items-center">
-                                             <i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
+                                             <i class="uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?>
                                           </a>
                                        <?php else : ?>
-                                          <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>"><i class="uil uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
+                                          <div class="label-s text-white d-inline-flex align-items-center" title="<?= __('Address', 'horizons'); ?>"><i class="uil uil-building fs-18 text-primary me-1"></i><?php echo esc_html($company); ?></div>
                                        <?php endif; ?>
                                     </div>
                                  <?php endif; ?>
@@ -172,15 +172,15 @@ function add_custom_single_banner_partners($post_type)
 
                               <div class="d-flex mt-3">
                                  <?php if (!empty($linkedin)) : ?>
-                                    <a href="<?php echo esc_attr($linkedin); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-linkedin"></i></a>
+                                    <a href="<?php echo esc_attr($linkedin); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil-linkedin"></i></a>
                                  <?php endif; ?>
 
                                  <?php if (!empty($email)) : ?>
-                                    <a href="mailto:<?php echo esc_attr($email); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-envelope"></i></a>
+                                    <a href="mailto:<?php echo esc_attr($email); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil-envelope"></i></a>
                                  <?php endif; ?>
 
                                  <?php if (!empty($website)) : ?>
-                                    <a href="<?php echo esc_url($website); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil uil-link"></i></a>
+                                    <a href="<?php echo esc_url($website); ?>" class="btn btn-circle btn-outline-white btn-sm me-1"><i class="uil uil-link"></i></a>
                                  <?php endif; ?>
                               </div>
                            </div>

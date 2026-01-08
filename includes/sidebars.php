@@ -22,7 +22,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
       $current_id = get_queried_object_id();
       $accordion_id = 'partnersAccordion';
 
-      echo '<div class="accordion accordion-wrapper" id="' . $accordion_id . '">';
+      echo '<div class="accordion accordion-wrapper icon-right type-3" id="' . $accordion_id . '">';
 
       if ($categories && !is_wp_error($categories)) {
          $category_index = 0;
@@ -72,7 +72,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             $show_class = $has_active_post ? 'show' : '';
             $button_class = $has_active_post ? 'accordion-button text-line-after text-uppercase fs-14' : 'collapsed accordion-button text-line-after text-uppercase fs-14';
 
-            echo '<div class="card plain accordion-item">';
+            echo '<div class="plain accordion-item">';
             echo '<div class="card-header" id="' . $heading_id . '">';
             echo '<button class="' . $button_class . '" data-bs-toggle="collapse" data-bs-target="#' . $collapse_id . '" aria-expanded="' . $is_expanded . '" aria-controls="' . $collapse_id . '">';
             echo esc_html($category->name);
@@ -128,7 +128,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             $show_class = $has_active_post ? 'show' : '';
             $button_class = $has_active_post ? 'accordion-button' : 'collapsed accordion-button';
 
-            echo '<div class="card plain accordion-item">';
+            echo '<div class="plain accordion-item">';
             echo '<div class="card-header" id="headingAllPartners">';
             echo '<button class="' . $button_class . '" data-bs-toggle="collapse" data-bs-target="#collapseAllPartners" aria-expanded="' . $is_expanded . '" aria-controls="collapseAllPartners">';
             echo __('Partner Biographies', 'horizons');
@@ -237,7 +237,7 @@ add_action('codeweber_after_widget', function ($sidebar_id) {
             $show_class = $has_active_post ? 'show' : '';
             $button_class = $has_active_post ? 'accordion-button text-line-after text-uppercase fs-14' : 'collapsed accordion-button text-line-after text-uppercase fs-14';
 
-            echo '<div class="card plain accordion-item">';
+            echo '<div class="plain accordion-item">';
             echo '<div class="card-header" id="' . $heading_id . '">';
             echo '<button class="' . $button_class . '" data-bs-toggle="collapse" data-bs-target="#' . $collapse_id . '" aria-expanded="' . $is_expanded . '" aria-controls="' . $collapse_id . '">';
             echo esc_html($category->name);

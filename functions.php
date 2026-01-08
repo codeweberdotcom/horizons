@@ -337,7 +337,7 @@ function handle_filter_awards()
         <?php else : ?>
             <div class="col-12">
                 <div class="alert alert-info text-center">
-                    <p><?php _e('No awards found.', 'horizons'); ?></p>
+                    <span><?php _e('No awards found.', 'horizons'); ?></span>
                 </div>
             </div>
         <?php endif; ?>

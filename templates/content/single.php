@@ -66,7 +66,7 @@
 				?>
 
 			</div>
-			<div class="author-info d-md-flex align-items-center">
+			<div class="author-info d-md-flex align-items-center my-5">
 				<div class="d-flex align-items-center">
 
 					<?php

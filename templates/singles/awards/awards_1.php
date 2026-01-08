@@ -24,12 +24,11 @@
                   <?php the_content(); ?>
                </div>
                <!-- /.post-content -->
-               <div class="post-footer d-md-flex flex-md-row justify-content-md-between align-items-center mt-8">
-                  <div>
-                     <?php
-                     $tags = get_the_tags();
-
-                     if ($tags) : ?>
+               <?php
+               $tags = get_the_tags();
+               if ($tags) : ?>
+                  <div class="post-footer d-md-flex flex-md-row justify-content-md-between align-items-center mt-8">
+                     <div>
                         <ul class="list-unstyled tag-list mb-0">
                            <?php foreach ($tags as $tag) : ?>
                               <li>
@@ -41,32 +40,31 @@
                               </li>
                            <?php endforeach; ?>
                         </ul>
-                     <?php endif; ?>
+                     </div>
                   </div>
-
-               </div>
-               <!-- /.post-footer -->
+                  <!-- /.post-footer -->
+               <?php endif; ?>
             </article>
             <!-- /.post -->
          </div>
          <!-- /.classic-view -->
          <hr>
-         <div>
-            <?php
-
-            wp_link_pages(
-               array(
-                  'before'        => '<nav class="nav"><span class="nav-link">' . esc_html__('Part:', 'codeweber') . '</span>',
-                  'after'         => '</nav>',
-                  'link_before'   => '<span class="nav-link">',
-                  'link_after'    => '</span>',
-               )
-            );
-
-            ?>
-
-         </div>
-         <div class="author-info d-md-flex align-items-center">
+         <?php
+         $link_pages = wp_link_pages(
+            array(
+               'before'        => '<nav class="nav"><span class="nav-link">' . esc_html__('Part:', 'codeweber') . '</span>',
+               'after'         => '</nav>',
+               'link_before'   => '<span class="nav-link">',
+               'link_after'    => '</span>',
+               'echo'          => false,
+            )
+         );
+         if (!empty($link_pages)) : ?>
+            <div>
+               <?php echo $link_pages; ?>
+            </div>
+         <?php endif; ?>
+         <div class="author-info d-md-flex align-items-center my-5">
             <div class="d-flex align-items-center">
 
                <?php
@@ -122,7 +120,7 @@
          <!-- /.author-bio -->
 
 
-         <hr />
+         <hr class="mb-5"/>
          <?php get_template_part('templates/components/another-awards-grid'); ?>
          <?php
          if (comments_open() || get_comments_number()) { ?>
