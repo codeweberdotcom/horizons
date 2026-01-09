@@ -123,7 +123,7 @@
          <hr class="mb-5"/>
          <?php get_template_part('templates/components/another-awards-grid'); ?>
          <?php
-         if (comments_open() || get_comments_number()) { ?>
+         if (post_type_supports(get_post_type(), 'comments') && (comments_open() || get_comments_number())) { ?>
             <hr />
          <?php
             comments_template();

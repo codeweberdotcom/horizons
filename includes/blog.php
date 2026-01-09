@@ -612,18 +612,13 @@ function display_blog_banner()
                               ));
                               ?>
 
-
                               <h2 class=" mb-4 text-white"><?php echo esc_html($title); ?></h2>
 
                               <?php if ($excerpt): ?>
                                  <p class="body-l-r mb-4 text-white"><?php echo esc_html($excerpt); ?></p>
                               <?php endif; ?>
 
-
                               <a href="<?php echo esc_url($permalink); ?>" class="hover-4 link-body label-s text-sub-white"><?php echo __('Read more', 'horizons'); ?></a>
-
-
-
 
                            </div>
                            <!--/column -->
@@ -633,7 +628,6 @@ function display_blog_banner()
                      <!--/.container -->
                   </div>
                   <!--/.swiper-slide -->
-
                <?php endforeach; ?>
             </div>
             <!--/.swiper-wrapper -->
