@@ -7,10 +7,6 @@ yarn-error.log*
 package-lock.json
 
 # Build artifacts
-blocks/practice-categories-grid/index.js
-blocks/practice-categories-grid/index.css
-blocks/practice-categories-grid/style-index.css
-blocks/practice-categories-grid/index.asset.php
 .temp-build-cache/
 
 # Logs

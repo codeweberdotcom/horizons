@@ -46,7 +46,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-practice-cat
 		<?php endforeach; ?>
 		<?php if ($show_all_practice_link) : ?>
 			<div class="<?php echo esc_attr($col_classes); ?>">
-				<a href="/practices" class="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
+				<a href="<?php echo esc_url(get_post_type_archive_link('practices')); ?>" class="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
 					<div class="card-body align-content-center text-center">
 						<span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Practice', 'horizons'); ?></span>
 					</div>

@@ -1,6 +1,7 @@
 import { useBlockProps } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 import { useEffect, useState } from '@wordpress/element';
+import { useSelect } from '@wordpress/data';
 import { PracticeCategoriesGridSidebar } from './sidebar';
 import apiFetch from '@wordpress/api-fetch';
 
@@ -50,6 +51,12 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	const [terms, setTerms] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const blockProps = useBlockProps({ className: `horizons-practice-categories-grid-block ${blockClass}`, 'data-block': clientId });
+	
+	// Получаем URL сайта для построения ссылки на архив practices
+	const siteUrl = useSelect((select) => {
+		const siteInfo = select('core/site')?.getSiteInfo?.();
+		return siteInfo?.url || '';
+	}, []);
 	useEffect(() => {
 		const fetchTerms = async () => {
 			setIsLoading(true);
@@ -219,7 +226,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						))}
 						{showAllPracticeLink && (
 							<div className={gridType === 'classic' ? getColClasses() : (gridType === 'columns-grid' ? 'col' : '')}>
-								<a href="/practices" className="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
+								<a href={siteUrl ? `${siteUrl}/practices` : '/practices'} className="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
 									<div className="card-body align-content-center text-center"><span className="hover-4 link-body label-s text-sub-white">{__('All Practice', 'horizons')}</span></div>
 								</a>
 							</div>
