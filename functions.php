@@ -164,6 +164,30 @@ function get_user_partner_link($user_id = null)
 }
 
 
+// Регистрация блока Practice Categories Grid
+function horizons_register_practice_categories_grid_block() {
+	$block_path = get_stylesheet_directory() . '/blocks/practice-categories-grid';
+	
+	if (!file_exists($block_path . '/block.json')) {
+		return;
+	}
+	
+	// Проверяем наличие необходимых файлов
+	if (!file_exists($block_path . '/index.js') || !file_exists($block_path . '/index.asset.php')) {
+		return;
+	}
+	
+	// Регистрируем блок напрямую через register_block_type
+	$result = register_block_type($block_path);
+	
+	if (is_wp_error($result)) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Practice Categories Grid registration error: ' . $result->get_error_message());
+		}
+	}
+}
+add_action('init', 'horizons_register_practice_categories_grid_block', 20);
+
 // Подключение скриптов для фильтрации наград
 add_action('wp_enqueue_scripts', 'enqueue_awards_filter_scripts');
 function enqueue_awards_filter_scripts()
