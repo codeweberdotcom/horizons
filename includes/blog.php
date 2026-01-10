@@ -129,7 +129,7 @@ function horizons_blog_posts_slider_shortcode($atts)
    ob_start();
 ?>
 
-   <div class="swiper-container dots-closer blog grid-view mb-12" <?php echo $swiper_attrs; ?>>
+   <div class="swiper-container dots-closer blog grid-view nav-dark mb-12" <?php echo $swiper_attrs; ?>>
       <div class="swiper">
          <div class="swiper-wrapper">
             <?php while ($blog_query->have_posts()) : $blog_query->the_post(); ?>
@@ -580,7 +580,7 @@ function display_blog_banner()
       // Если записей несколько - выводим Swiper
    ?>
 
-      <div class="swiper-container dots-over swiper-hero-blog mt-8 mt-md-12" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
+      <div class="swiper-container dots-over swiper-hero-blog nav-dark mt-8 mt-md-12" data-margin="15" data-autoplay="false" data-autoplaytime="5000" data-nav="true" data-dots="true" data-items="1" data-items-xxl="1">
          <div class="swiper">
             <div class="swiper-wrapper">
                <?php foreach ($banner_posts as $post):
