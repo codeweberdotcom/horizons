@@ -189,7 +189,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-practice-cat
 			<div class="<?php echo esc_attr($grid_type === 'classic' ? $col_classes : ($grid_type === 'columns-grid' ? 'col' : '')); ?>">
 				<a href="<?php echo esc_url($term_link); ?>" class="card h-100 practice-card" data-cue="slideInDown">
 					<div class="brand-square-xs <?php echo esc_attr($color_class); ?> opacity-0 position-absolute top-0 start-0"></div>
-					<div class="card-body p-4 p-md-8 d-flex flex-column justify-content-between">
+					<div class="card-body d-flex flex-column justify-content-between">
 						<div class="pe-none mb-5">
 							<div class="practice-card-hover brand-square-md <?php echo esc_attr($color_class); ?>"></div>
 						</div>
@@ -205,7 +205,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-practice-cat
 		<?php if ($show_all_practice_link) : ?>
 			<div class="<?php echo esc_attr($grid_type === 'classic' ? $col_classes : ($grid_type === 'columns-grid' ? 'col' : '')); ?>">
 				<a href="<?php echo esc_url(get_post_type_archive_link('practices')); ?>" class="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
-					<div class="card-body p-4 p-md-8 align-content-center text-center">
+					<div class="card-body align-content-center text-center">
 						<span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Practice', 'horizons'); ?></span>
 					</div>
 				</a>
