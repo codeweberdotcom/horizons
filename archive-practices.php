@@ -84,7 +84,7 @@ if ($categories && !is_wp_error($categories)) :
                            <article id="post-<?php the_ID(); ?>" <?php post_class('practice-item mb-0'); ?>>
                               <a class="h4 text-dark py-3 pe-2 d-flex justify-content-between align-items-center mb-0 service-link <?php echo !$is_last ? 'border-bottom' : ''; ?>" href="<?php the_permalink(); ?>">
                                  <span class="d-flex align-items-center">
-                                    <div class="brand-square-sm me-3"></div>
+                                    <div class="brand-square-sm me-3 flex-shrink-0"></div>
                                     <?php the_title(); ?>
                                  </span>
                                  <i class="uil uil-angle-right"></i>
