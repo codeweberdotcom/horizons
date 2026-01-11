@@ -74,6 +74,14 @@ function horizons_elements_scripts()
         wp_get_theme()->get('Version'),
         true
     );
+    
+    wp_enqueue_script(
+        'practice-card-mobile-hover',
+        get_stylesheet_directory_uri() . '/js/practice-card-mobile-hover.js',
+        array(),
+        wp_get_theme()->get('Version'),
+        true
+    );
 }
 add_action('wp_enqueue_scripts', 'horizons_elements_scripts');
 
