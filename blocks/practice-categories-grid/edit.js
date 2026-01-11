@@ -210,9 +210,9 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					<div className={getContainerClasses()}>
 						{terms.map((term) => (
 							<div key={term.id} className={gridType === 'classic' ? getColClasses() : (gridType === 'columns-grid' ? 'col' : '')}>
-								<a href={term.link} className="card h-100 practice-card" data-cue="slideInDown">
+								<div className="card h-100 practice-card">
 									<div className={`brand-square-xs ${term.colorClass} opacity-0 position-absolute top-0 start-0`}></div>
-									<div className="card-body d-flex flex-column justify-content-between">
+									<div className="card-body p-4 p-md-8 d-flex flex-column justify-content-between">
 										<div className="pe-none mb-5">
 											<div className={`practice-card-hover brand-square-md ${term.colorClass}`}></div>
 										</div>
@@ -221,14 +221,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											{__('More details', 'horizons')}
 										</div>
 									</div>
-								</a>
+								</div>
 							</div>
 						))}
 						{showAllPracticeLink && (
 							<div className={gridType === 'classic' ? getColClasses() : (gridType === 'columns-grid' ? 'col' : '')}>
-								<a href={siteUrl ? `${siteUrl}/practices` : '/practices'} className="card practice-card bg-dusty-navy h-100" data-cue="slideInDown">
-									<div className="card-body align-content-center text-center"><span className="hover-4 link-body label-s text-sub-white">{__('All Practice', 'horizons')}</span></div>
-								</a>
+								<div className="card practice-card bg-dusty-navy h-100">
+									<div className="card-body p-4 p-md-8 align-content-center text-center"><span className="hover-4 link-body label-s text-sub-white">{__('All Practice', 'horizons')}</span></div>
+								</div>
 							</div>
 						)}
 					</div>
