@@ -23,7 +23,7 @@ function codeweber_partners_shortcode($atts)
     $output = '';
 
     if ($query->have_posts()) {
-        
+        $output .= '<div class="row g-3 g-md-3">';
 
         while ($query->have_posts()) {
             $query->the_post();
@@ -68,7 +68,7 @@ function codeweber_partners_shortcode($atts)
             </div>';
         }
 
-        
+        $output .= '</div>';
         wp_reset_postdata();
     } else {
         $output = '<p>' . __('No employees found', 'codeweber') . '</p>';
