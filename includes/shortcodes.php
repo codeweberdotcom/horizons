@@ -98,9 +98,41 @@ function get_partner_countries_shortcode()
         $term_names[] = $term->name;
     }
 
-    return implode(', ', $term_names);
+    $countries_list = implode(', ', $term_names);
+    
+    return '<span class="typer text-primary text-uppercase fw-bold fs-48" data-delay="100" data-words="' . esc_attr($countries_list) . '"></span><span class="cursor text-primary w-bold fs-48" data-owner="typer"></span>';
 }
 add_shortcode('partner_countries', 'get_partner_countries_shortcode');
+
+
+//--------------------------------
+//TYPER
+//--------------------------------
+
+function typer_shortcode($atts)
+{
+    // Атрибуты шорткода
+    $atts = shortcode_atts(array(
+        'text' => '',  // Тексты через запятую
+        'delay' => '100',  // Задержка анимации
+        'class' => 'text-primary text-uppercase fw-bold fs-48',  // Дополнительные классы для typer
+        'cursor_class' => 'text-primary w-bold fs-48'  // Дополнительные классы для cursor
+    ), $atts);
+
+    // Проверяем наличие текста
+    if (empty($atts['text'])) {
+        return '';
+    }
+
+    // Очищаем и экранируем текст
+    $text = esc_attr(trim($atts['text']));
+    $delay = esc_attr($atts['delay']);
+    $typer_class = esc_attr($atts['class']);
+    $cursor_class = esc_attr($atts['cursor_class']);
+
+    return '<span class="typer ' . $typer_class . '" data-delay="' . $delay . '" data-words="' . $text . '"></span><span class="cursor ' . $cursor_class . '" data-owner="typer"></span>';
+}
+add_shortcode('typer', 'typer_shortcode');
 
 
 //--------------------------------

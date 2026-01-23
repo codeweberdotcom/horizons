@@ -378,7 +378,7 @@ var theme = {
    * Enables showing elements by scrolling
    * Requires assets/js/vendor/scrollCue.min.js
    */
-  scrollCue: () => {
+    scrollCue: () => {
     scrollCue.init({
       interval: -400,
       duration: 700,

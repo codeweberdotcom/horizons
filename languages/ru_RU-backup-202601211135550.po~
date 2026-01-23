@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2025-10-16 11:57+0000\n"
+"PO-Revision-Date: 2026-01-08 14:31+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.0; wp-6.8.2; php-8.1.10\n"
+"X-Loco-Version: 2.8.0; wp-6.9; php-8.1.10\n"
 "X-Domain: horizons"
 
 #: includes/metaboxes.php:1398
@@ -121,6 +121,7 @@ msgid "Address"
 msgstr "Адрес"
 
 #: templates/content/single-practices.php:43
+#: templates/singles/practices/practices_1.php:43
 msgid "Advantages"
 msgstr "Преимущества"
 
@@ -209,7 +210,7 @@ msgstr "Архив наград"
 msgid "Award Attributes"
 msgstr "Атрибуты награды"
 
-#: includes/sidebars.php:513
+#: includes/sidebars.php:520
 msgid "Award Categories"
 msgstr "Категория"
 
@@ -221,7 +222,7 @@ msgstr "Подробности Награды"
 msgid "Award Image"
 msgstr "Изображение Награды"
 
-#: includes/sidebars.php:553
+#: includes/sidebars.php:560
 msgid "Award Partners"
 msgstr "Партнер"
 
@@ -229,7 +230,7 @@ msgstr "Партнер"
 msgid "Award URL"
 msgstr "URL-адрес Награды"
 
-#: includes/sidebars.php:533
+#: includes/sidebars.php:540
 msgid "Award Years"
 msgstr "Год публикации"
 
@@ -337,7 +338,7 @@ msgstr "Награды и достижения компании"
 msgid "Company:"
 msgstr "Компания:"
 
-#: includes/sidebars.php:349 includes/sidebars.php:453
+#: includes/sidebars.php:349 includes/sidebars.php:460
 msgid "Contact Person"
 msgstr "Контактное лицо"
 
@@ -379,11 +380,11 @@ msgid "Delete Image"
 msgstr ""
 
 #: taxonomy-practice_category.php:138 includes/sidebars.php:325
-#: includes/sidebars.php:425
+#: includes/sidebars.php:432
 msgid "Details"
 msgstr "Детально"
 
-#: includes/sidebars.php:377
+#: includes/sidebars.php:378
 msgid "Download document"
 msgstr "Скачать документ"
 
@@ -460,6 +461,7 @@ msgid "For example: Senior Financial Analyst and Investment Advisor"
 msgstr "Например: Старший финансовый аналитик и Инвестиционный консультант"
 
 #: templates/content/single-practices.php:135
+#: templates/singles/practices/practices_1.php:135
 msgid "Frequently Asked Questions"
 msgstr "Часто задаваемые вопросы"
 
@@ -483,7 +485,7 @@ msgstr "Гладков Денис"
 msgid "Hold Ctrl/Cmd to select multiple partners members"
 msgstr "Удерживайте Ctrl/Cmd, чтобы выбрать нескольких Партнеров."
 
-#: archive-awards.php:58 functions.php:279
+#: archive-awards.php:58 functions.php:280
 msgid "Horizons"
 msgstr "Хорайзонс"
 
@@ -523,9 +525,13 @@ msgstr "Языки"
 msgid "Languages:"
 msgstr "Языки:"
 
-#: includes/sidebars.php:483
+#: includes/sidebars.php:725
+msgid "Legal Documents"
+msgstr "Юридические документы"
+
+#: includes/sidebars.php:490
 msgid "Link to source"
-msgstr ""
+msgstr "Ссылка на источник"
 
 #: includes/metaboxes.php:130
 msgid "LinkedIn:"
@@ -599,13 +605,13 @@ msgstr "Новое имя Метки"
 msgid "News"
 msgstr "Новости"
 
-#: single.php:68
+#: single.php:100
 msgid "Next"
 msgstr "Следующий"
 
-#: archive-awards.php:122 functions.php:339
+#: archive-awards.php:122 functions.php:340
 msgid "No awards found."
-msgstr ""
+msgstr "Награды не найдены"
 
 #: functions/cpt/cpt-awards.php:86
 msgid "No categories"
@@ -746,13 +752,14 @@ msgstr "Организация"
 
 #: templates/components/another-awards-grid.php:13
 msgid "Other publications"
-msgstr ""
+msgstr "Другие публикации"
 
 #: archive-vacancies.php:67
 msgid "Other Vacancies"
 msgstr "Другие вакансии"
 
 #: templates/content/single-practices.php:34
+#: templates/singles/practices/practices_1.php:34
 msgid "Our Solution"
 msgstr "Наше Решение"
 
@@ -975,7 +982,7 @@ msgstr "Архив практик"
 msgid "Practices list"
 msgstr "Список практик"
 
-#: single.php:58
+#: single.php:90
 msgid "Previous"
 msgstr "Предыдущий"
 
@@ -991,7 +998,8 @@ msgstr ""
 msgid "Primary Partner"
 msgstr "Основной партнер"
 
-#: home.php:64 includes/blog.php:172 templates/content/loop.php:37
+#: category.php:66 home.php:64 tag.php:68 includes/blog.php:172
+#: templates/content/loop.php:37
 msgid "Read"
 msgstr "Читать"
 
@@ -999,7 +1007,7 @@ msgstr "Читать"
 msgid "Read More"
 msgstr "Подробнее"
 
-#: includes/blog.php:212 includes/blog.php:549 includes/blog.php:604
+#: includes/blog.php:212 includes/blog.php:568 includes/blog.php:623
 msgid "Read more"
 msgstr "Подробнее"
 
@@ -1023,17 +1031,19 @@ msgstr "Удалить изображение партнера"
 msgid "Remove practice image"
 msgstr "Удалить изображение Практики"
 
-#: templates/content/single-vacancies.php:19
+#: templates/content/single-vacancies.php:23
+#: templates/singles/vacancies/vacancies_1.php:23
 msgid "Requirements"
 msgstr "Требования к кандидату"
 
-#: templates/content/single-vacancies.php:31
+#: templates/content/single-vacancies.php:35
+#: templates/singles/vacancies/vacancies_1.php:35
 msgid "Responsibilities"
 msgstr "Ключевые обязанности"
 
-#: includes/sidebars.php:479
+#: includes/sidebars.php:486
 msgid "Return"
-msgstr ""
+msgstr "Вернуться"
 
 #: functions/cpt/cpt-awards.php:23
 msgid "Search Award"
@@ -1208,7 +1218,7 @@ msgstr ""
 msgid "Slate Gray (#86909B)"
 msgstr ""
 
-#: taxonomy-practice_category.php:201 includes/sidebars.php:382
+#: taxonomy-practice_category.php:201 includes/sidebars.php:388
 msgid "Submit a request"
 msgstr "Заполнить заявку"
 
@@ -1360,11 +1370,12 @@ msgstr "Вебсайт"
 msgid "Website:"
 msgstr "Вебсайт:"
 
-#: includes/sidebars.php:313 includes/sidebars.php:416
+#: includes/sidebars.php:313 includes/sidebars.php:423
 msgid "Writer"
 msgstr "Писатель"
 
 #: templates/content/single-practices.php:25
+#: templates/singles/practices/practices_1.php:25
 msgid "Your Task"
 msgstr "Ваша задача"
 

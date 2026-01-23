@@ -391,6 +391,216 @@ function show_partner_category_order_column($content, $column_name, $term_id)
 // Делаем колонку сортируемой
 add_filter('manage_edit-partner_category_sortable_columns', 'make_partner_category_order_column_sortable');
 
+//Partner Countries
+// Добавляем поле "Координаты" для таксономии partner_country
+add_action('partner_country_add_form_fields', 'add_partner_country_coordinates_field');
+add_action('partner_country_edit_form_fields', 'edit_partner_country_coordinates_field');
+add_action('created_partner_country', 'save_partner_country_coordinates_field');
+add_action('edited_partner_country', 'save_partner_country_coordinates_field');
+
+function add_partner_country_coordinates_field()
+{
+   // Получаем API ключ Яндекс карт из Redux
+   global $opt_name;
+   if (empty($opt_name)) {
+      $opt_name = 'redux_demo';
+   }
+   $yandex_api_key = '';
+   if (class_exists('Redux')) {
+      $yandex_api_key = Redux::get_option($opt_name, 'yandexapi');
+   }
+?>
+   <div class="form-field">
+      <label for="partner_country_coordinates"><?php _e('Coordinates', 'horizons'); ?></label>
+      <div id="yandex-map-wrapper-country" style="width: 100%; height: 400px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px;"></div>
+      <input type="text" name="partner_country_coordinates" id="partner_country_coordinates" value="" placeholder="<?php _e('e.g., 55.7558, 37.6173', 'horizons'); ?>" style="width: 100%; margin-bottom: 5px;" />
+      <p class="description"><?php _e('Select a point on the map or enter coordinates manually (latitude, longitude). Example: 55.7558, 37.6173', 'horizons'); ?></p>
+      <?php if (!empty($yandex_api_key)) : ?>
+      <script src="https://api-maps.yandex.ru/2.1/?apikey=<?php echo esc_attr($yandex_api_key); ?>&lang=ru_RU"></script>
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         if (typeof ymaps !== 'undefined') {
+            ymaps.ready(function () {
+               var coordinatesField = document.getElementById('partner_country_coordinates');
+               var mapContainer = document.getElementById('yandex-map-wrapper-country');
+               
+               var coords = [55.76, 37.64]; // Москва по умолчанию
+               if (coordinatesField && coordinatesField.value) {
+                  var coordArray = coordinatesField.value.split(',').map(function(s) { return parseFloat(s.trim()); });
+                  if (coordArray.length === 2 && !isNaN(coordArray[0]) && !isNaN(coordArray[1])) {
+                     coords = coordArray;
+                  }
+               }
+
+               var map = new ymaps.Map(mapContainer, {
+                  center: coords,
+                  zoom: 10,
+                  controls: ["zoomControl", "searchControl", "typeSelector"]
+               });
+
+               var placemark = new ymaps.Placemark(coords, {}, { draggable: true });
+               map.geoObjects.add(placemark);
+
+               function updateField(coords, addressText) {
+                  var coordString = coords[0] + ", " + coords[1];
+                  if (coordinatesField) {
+                     coordinatesField.value = coordString;
+                  }
+               }
+
+               placemark.events.add("dragend", function () {
+                  var newCoords = placemark.geometry.getCoordinates();
+                  updateField(newCoords);
+               });
+
+               map.events.add("click", function (e) {
+                  var coords = e.get("coords");
+                  placemark.geometry.setCoordinates(coords);
+                  updateField(coords);
+               });
+
+               var searchControl = map.controls.get("searchControl");
+               searchControl.events.add("resultselect", function (e) {
+                  var results = searchControl.getResultsArray();
+                  var selectedIndex = e.get("index");
+                  var selectedResult = results[selectedIndex];
+
+                  if (selectedResult) {
+                     var coords = selectedResult.geometry.getCoordinates();
+                     
+                     // Устанавливаем маркер на найденную точку
+                     placemark.geometry.setCoordinates(coords);
+                     
+                     // Центрируем карту на найденной точке с зумом
+                     map.setCenter(coords, 16);
+                     
+                     // Обновляем поле координат
+                     updateField(coords, selectedResult.properties.get("name"));
+                  }
+               });
+
+               if (coordinatesField && coordinatesField.value) {
+                  updateField(coords);
+               }
+            });
+         }
+      });
+      </script>
+      <?php else : ?>
+      <p class="description" style="color: #d63638;"><?php _e('Yandex Maps API key is not configured. Please set it in Theme Options > Geo && Map > Yandex Maps Settings.', 'horizons'); ?></p>
+      <?php endif; ?>
+   </div>
+<?php
+}
+
+function edit_partner_country_coordinates_field($term)
+{
+   $coordinates = get_term_meta($term->term_id, 'partner_country_coordinates', true);
+   
+   // Получаем API ключ Яндекс карт из Redux
+   global $opt_name;
+   if (empty($opt_name)) {
+      $opt_name = 'redux_demo';
+   }
+   $yandex_api_key = '';
+   if (class_exists('Redux')) {
+      $yandex_api_key = Redux::get_option($opt_name, 'yandexapi');
+   }
+?>
+   <tr class="form-field">
+      <th scope="row">
+         <label for="partner_country_coordinates"><?php _e('Coordinates', 'horizons'); ?></label>
+      </th>
+      <td>
+         <div id="yandex-map-wrapper-country-<?php echo esc_attr($term->term_id); ?>" style="width: 100%; height: 400px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 4px;"></div>
+         <input type="text" name="partner_country_coordinates" id="partner_country_coordinates" value="<?php echo esc_attr($coordinates ? $coordinates : ''); ?>" placeholder="<?php _e('e.g., 55.7558, 37.6173', 'horizons'); ?>" style="width: 100%; margin-bottom: 5px;" />
+         <p class="description"><?php _e('Select a point on the map or enter coordinates manually (latitude, longitude). Example: 55.7558, 37.6173', 'horizons'); ?></p>
+         <?php if (!empty($yandex_api_key)) : ?>
+         <script src="https://api-maps.yandex.ru/2.1/?apikey=<?php echo esc_attr($yandex_api_key); ?>&lang=ru_RU"></script>
+         <script>
+         document.addEventListener("DOMContentLoaded", function () {
+            if (typeof ymaps !== 'undefined') {
+               ymaps.ready(function () {
+                  var coordinatesField = document.getElementById('partner_country_coordinates');
+                  var mapContainer = document.getElementById('yandex-map-wrapper-country-<?php echo esc_js($term->term_id); ?>');
+                  
+                  var coords = [55.76, 37.64]; // Москва по умолчанию
+                  if (coordinatesField && coordinatesField.value) {
+                     var coordArray = coordinatesField.value.split(',').map(function(s) { return parseFloat(s.trim()); });
+                     if (coordArray.length === 2 && !isNaN(coordArray[0]) && !isNaN(coordArray[1])) {
+                        coords = coordArray;
+                     }
+                  }
+
+                  var map = new ymaps.Map(mapContainer, {
+                     center: coords,
+                     zoom: 10,
+                     controls: ["zoomControl", "searchControl", "typeSelector"]
+                  });
+
+                  var placemark = new ymaps.Placemark(coords, {}, { draggable: true });
+                  map.geoObjects.add(placemark);
+
+                  function updateField(coords, addressText) {
+                     var coordString = coords[0] + ", " + coords[1];
+                     if (coordinatesField) {
+                        coordinatesField.value = coordString;
+                     }
+                  }
+
+                  placemark.events.add("dragend", function () {
+                     var newCoords = placemark.geometry.getCoordinates();
+                     updateField(newCoords);
+                  });
+
+                  map.events.add("click", function (e) {
+                     var coords = e.get("coords");
+                     placemark.geometry.setCoordinates(coords);
+                     updateField(coords);
+                  });
+
+                  var searchControl = map.controls.get("searchControl");
+                  searchControl.events.add("resultselect", function (e) {
+                     var results = searchControl.getResultsArray();
+                     var selectedIndex = e.get("index");
+                     var selectedResult = results[selectedIndex];
+
+                     if (selectedResult) {
+                        var coords = selectedResult.geometry.getCoordinates();
+                        
+                        // Устанавливаем маркер на найденную точку
+                        placemark.geometry.setCoordinates(coords);
+                        
+                        // Центрируем карту на найденной точке с зумом
+                        map.setCenter(coords, 16);
+                        
+                        // Обновляем поле координат
+                        updateField(coords, selectedResult.properties.get("name"));
+                     }
+                  });
+
+                  if (coordinatesField && coordinatesField.value) {
+                     updateField(coords);
+                  }
+               });
+            }
+         });
+         </script>
+         <?php else : ?>
+         <p class="description" style="color: #d63638;"><?php _e('Yandex Maps API key is not configured. Please set it in Theme Options > Geo && Map > Yandex Maps Settings.', 'horizons'); ?></p>
+         <?php endif; ?>
+      </td>
+   </tr>
+<?php
+}
+
+function save_partner_country_coordinates_field($term_id)
+{
+   if (isset($_POST['partner_country_coordinates'])) {
+      update_term_meta($term_id, 'partner_country_coordinates', sanitize_text_field($_POST['partner_country_coordinates']));
+   }
+}
+
 function make_partner_category_order_column_sortable($columns)
 {
    $columns['partner_category_order'] = 'partner_category_order';

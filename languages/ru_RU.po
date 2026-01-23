@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: horizons\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-16 09:59+0000\n"
-"PO-Revision-Date: 2026-01-08 14:31+0000\n"
+"PO-Revision-Date: 2026-01-21 11:35+0000\n"
 "Last-Translator: Codeweber\n"
 "Language-Team: Русский\n"
 "Language: ru_RU\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.0; wp-6.9; php-8.1.10\n"
+"X-Loco-Version: 2.8.1; wp-6.9; php-8.1.10\n"
 "X-Domain: horizons"
 
 #: includes/metaboxes.php:1398
@@ -1013,7 +1013,7 @@ msgstr "Подробнее"
 
 #: functions/cpt/cpt-partners.php:200
 msgid "Regions"
-msgstr "Страны"
+msgstr "Регионы"
 
 #: includes/partners.php:211 includes/practices.php:48
 msgid "Related news"

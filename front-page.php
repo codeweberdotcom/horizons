@@ -14,10 +14,7 @@
                <div class="col-lg-10 col-xl-10 text-start text-white">
                   <h1 class="display-1 fs-76 lh-1 text-white mb-3 text-uppercase fw-bold"><?php _e('Corporate Advisory Solutions for local, regional and global challenges', 'сodeweber'); ?></h1>
                   <div class="mb-3">
-                     <span class="typer text-primary text-uppercase fw-bold fs-48"
-                        data-delay="100"
-                        data-words="<?php echo do_shortcode('[partner_countries]'); ?>">
-                     </span><span class="cursor text-primary w-bold fs-48" data-owner="typer"></span>
+                     <?php echo do_shortcode('[partner_countries]'); ?>
                   </div>
                   <span><a href="#practice" class="btn btn-primary has-ripple btn-elg scroll me-2" data-ripple-initialized="true"><?php _e('Practices', 'сodeweber'); ?></a></span>
                   <span><a href="#" class="btn btn-neutral-50 has-ripple btn-elg" data-ripple-initialized="true"><?php _e('Consultation', 'сodeweber'); ?></a></span>
