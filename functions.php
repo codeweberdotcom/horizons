@@ -196,6 +196,63 @@ function horizons_register_practice_categories_grid_block() {
 }
 add_action('init', 'horizons_register_practice_categories_grid_block', 20);
 
+
+// Регистрация блока Partners Grid
+function horizons_register_partners_grid_block() {
+	$block_path = get_stylesheet_directory() . '/blocks/partners-grid';
+	
+	if (!file_exists($block_path . '/block.json')) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Partners Grid: block.json not found at ' . $block_path);
+		}
+		return;
+	}
+	
+	// Проверяем наличие необходимых файлов
+	if (!file_exists($block_path . '/index.js') || !file_exists($block_path . '/index.asset.php')) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Partners Grid: index.js or index.asset.php not found');
+		}
+		return;
+	}
+	
+	// Регистрируем блок напрямую через register_block_type
+	$result = register_block_type($block_path);
+	
+	if (is_wp_error($result)) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Partners Grid registration error: ' . $result->get_error_message());
+		}
+	} else {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Partners Grid block registered successfully');
+		}
+	}
+}
+add_action('init', 'horizons_register_partners_grid_block', 20);
+
+
+// Регистрация метаполей партнеров для REST API
+function horizons_register_partners_meta_for_rest() {
+	$meta_fields = [
+		'_partners_position',
+		'_partners_name',
+		'_partners_surname',
+		'_partners_regions',
+	];
+	
+	foreach ($meta_fields as $meta_field) {
+		register_meta('post', $meta_field, array(
+			'object_subtype' => 'partners',
+			'type' => 'string',
+			'single' => true,
+			'show_in_rest' => true,
+		));
+	}
+}
+add_action('init', 'horizons_register_partners_meta_for_rest', 10);
+
+
 // Подключение скриптов для фильтрации наград
 add_action('wp_enqueue_scripts', 'enqueue_awards_filter_scripts');
 function enqueue_awards_filter_scripts()
@@ -385,6 +442,26 @@ function handle_filter_awards()
         'html' => $html,
         'found_posts' => $awards_query->found_posts
     ));
+}
+
+/**
+ * WooCommerce: убираем обязательность поля адреса
+ */
+add_filter('woocommerce_billing_fields', 'horizons_make_address_optional');
+function horizons_make_address_optional($fields) {
+    if (isset($fields['billing_address_1'])) {
+        $fields['billing_address_1']['required'] = false;
+    }
+    return $fields;
+}
+
+// Также убираем из default_address_fields (для checkout)
+add_filter('woocommerce_default_address_fields', 'horizons_make_address_optional_default');
+function horizons_make_address_optional_default($fields) {
+    if (isset($fields['address_1'])) {
+        $fields['address_1']['required'] = false;
+    }
+    return $fields;
 }
 ?>
 

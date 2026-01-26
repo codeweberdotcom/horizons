@@ -2,8 +2,11 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const blockDir = path.join(__dirname, '../blocks/practice-categories-grid');
-const tempDir = path.join(__dirname, '../.temp-build-cache/practice-categories-grid');
+// Получаем имя блока из аргументов командной строки
+const blockName = process.argv[2] || 'practice-categories-grid';
+
+const blockDir = path.join(__dirname, `../blocks/${blockName}`);
+const tempDir = path.join(__dirname, `../.temp-build-cache/${blockName}`);
 
 // Файлы и папки для сохранения
 const filesToKeep = [
@@ -16,9 +19,17 @@ const filesToKeep = [
 	'style.scss',
 	'controls',
 	'index.src.js', // Исходный файл для сборки
+	'index.css', // Скомпилированные CSS файлы тоже сохраняем
+	'style-index.css',
 ];
 
-console.log('📦 Сохраняю исходные файлы...');
+console.log(`📦 Сохраняю исходные файлы блока ${blockName}...`);
+
+// Проверяем существование блока
+if (!fs.existsSync(blockDir)) {
+	console.error(`❌ Блок ${blockName} не найден в ${blockDir}`);
+	process.exit(1);
+}
 
 // Создаем временную директорию для исходных файлов
 if (!fs.existsSync(tempDir)) {
@@ -48,6 +59,8 @@ filesToKeep.forEach(file => {
 			fs.copyFileSync(sourcePath, destPath);
 		}
 		console.log(`✓ Сохранен: ${file}`);
+	} else {
+		console.log(`⚠️  Файл не найден (будет пропущен): ${file}`);
 	}
 });
 
@@ -73,8 +86,19 @@ function copyDirectory(src, dest) {
 console.log('🔨 Запускаю сборку...');
 
 try {
+	// Определяем команду сборки в зависимости от блока
+	let buildCommand;
+	if (blockName === 'practice-categories-grid') {
+		buildCommand = 'npm run build:block-only';
+	} else if (blockName === 'partners-grid') {
+		buildCommand = 'npm run build:partners-grid-direct';
+	} else {
+		console.error(`❌ Неизвестный блок: ${blockName}`);
+		process.exit(1);
+	}
+	
 	// Запускаем сборку
-	execSync('npm run build:block-only', { 
+	execSync(buildCommand, { 
 		cwd: path.join(__dirname, '..'),
 		stdio: 'inherit'
 	});
@@ -121,4 +145,3 @@ if (fs.existsSync(unwantedBlocksDir)) {
 // }
 
 console.log('✨ Готово! Все исходные файлы сохранены и восстановлены.');
-

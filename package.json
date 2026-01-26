@@ -3,8 +3,11 @@
 	"version": "1.0.0",
 	"description": "Horizons theme blocks",
 	"scripts": {
-		"build": "node scripts/build-block.js",
+		"build": "node scripts/build-block.js practice-categories-grid",
 		"build:block-only": "wp-scripts build blocks/practice-categories-grid/index.js --output-path=blocks/practice-categories-grid --output-filename=index.js --config webpack.config.js",
+		"build:practice-categories": "node scripts/build-block.js practice-categories-grid",
+		"build:partners-grid": "node scripts/build-block.js partners-grid",
+		"build:partners-grid-direct": "wp-scripts build blocks/partners-grid/index.src.js --output-path=blocks/partners-grid --output-filename=index.js --config webpack.config.js",
 		"start": "wp-scripts start blocks/practice-categories-grid/index.js --output-path=blocks/practice-categories-grid --output-filename=index.js --config webpack.config.js"
 	},
 	"devDependencies": {
