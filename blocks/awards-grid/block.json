@@ -1,0 +1,30 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "horizons-blocks/awards-grid",
+  "version": "1.0.0",
+  "title": "Awards Grid",
+  "category": "codeweber-gutenberg-elements",
+  "icon": "awards",
+  "description": "Display awards in a grid layout",
+  "keywords": ["awards", "grid", "prizes"],
+  "supports": {"html": false, "customClassName": false},
+  "textdomain": "horizons",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": false,
+  "render": "file:./render.php",
+  "attributes": {
+    "postsPerPage": {"type": "number", "default": 7},
+    "orderBy": {"type": "string", "default": "date"},
+    "order": {"type": "string", "default": "DESC"},
+    "gridColumns": {"type": "string", "default": "4"},
+    "gridColumnsMd": {"type": "string", "default": "4"},
+    "gridColumnsSm": {"type": "string", "default": "2"},
+    "showAllAwardsLink": {"type": "boolean", "default": true},
+    "blockClass": {"type": "string", "default": ""},
+    "blockId": {"type": "string", "default": ""},
+    "blockData": {"type": "string", "default": ""}
+  }
+}

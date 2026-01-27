@@ -43,6 +43,25 @@ module.exports = {
 					return true;
 				}
 				
+				// Сохраняем ВСЕ исходные файлы блоков awards-grid
+				if (normalizedPath.includes('blocks/awards-grid/')) {
+					const basename = path.basename(filename);
+					// Защищаем ВСЕ исходные файлы
+					if (/^(block\.json|render\.php|edit\.js|save\.js|sidebar\.js|editor\.scss|style\.scss|index\.src\.js)$/.test(basename)) {
+						return true;
+					}
+					// Защищаем папку controls и все файлы внутри
+					if (basename === 'controls' || normalizedPath.includes('blocks/awards-grid/controls/')) {
+						return true;
+					}
+					// Защищаем скомпилированные файлы
+					if (/^(index\.js|index\.asset\.php|index\.css|style-index\.css|index\.src\.css|style-index\.src\.css)$/.test(basename)) {
+						return true;
+					}
+					// По умолчанию для awards-grid сохраняем все
+					return true;
+				}
+				
 				// Удаляем только файлы из blocks/post-grid (это артефакты)
 				if (normalizedPath.includes('blocks/post-grid')) {
 					return false;

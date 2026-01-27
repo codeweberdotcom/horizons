@@ -232,6 +232,41 @@ function horizons_register_partners_grid_block() {
 add_action('init', 'horizons_register_partners_grid_block', 20);
 
 
+// Регистрация блока Awards Grid
+function horizons_register_awards_grid_block() {
+	$block_path = get_stylesheet_directory() . '/blocks/awards-grid';
+	
+	if (!file_exists($block_path . '/block.json')) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Awards Grid: block.json not found at ' . $block_path);
+		}
+		return;
+	}
+	
+	// Проверяем наличие необходимых файлов
+	if (!file_exists($block_path . '/index.js') || !file_exists($block_path . '/index.asset.php')) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Awards Grid: index.js or index.asset.php not found');
+		}
+		return;
+	}
+	
+	// Регистрируем блок напрямую через register_block_type
+	$result = register_block_type($block_path);
+	
+	if (is_wp_error($result)) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Awards Grid registration error: ' . $result->get_error_message());
+		}
+	} else {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Awards Grid block registered successfully');
+		}
+	}
+}
+add_action('init', 'horizons_register_awards_grid_block', 20);
+
+
 // Регистрация метаполей партнеров для REST API
 function horizons_register_partners_meta_for_rest() {
 	$meta_fields = [

@@ -85,17 +85,19 @@ function copyDirectory(src, dest) {
 
 console.log('🔨 Запускаю сборку...');
 
-try {
-	// Определяем команду сборки в зависимости от блока
-	let buildCommand;
-	if (blockName === 'practice-categories-grid') {
-		buildCommand = 'npm run build:block-only';
-	} else if (blockName === 'partners-grid') {
-		buildCommand = 'npm run build:partners-grid-direct';
-	} else {
-		console.error(`❌ Неизвестный блок: ${blockName}`);
-		process.exit(1);
-	}
+	try {
+		// Определяем команду сборки в зависимости от блока
+		let buildCommand;
+		if (blockName === 'practice-categories-grid') {
+			buildCommand = 'npm run build:block-only';
+		} else if (blockName === 'partners-grid') {
+			buildCommand = 'npm run build:partners-grid-direct';
+		} else if (blockName === 'awards-grid') {
+			buildCommand = 'npm run build:awards-grid-direct';
+		} else {
+			console.error(`❌ Неизвестный блок: ${blockName}`);
+			process.exit(1);
+		}
 	
 	// Запускаем сборку
 	execSync(buildCommand, { 
