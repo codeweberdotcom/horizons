@@ -23,6 +23,8 @@
     "gridColumnsMd": {"type": "string", "default": "4"},
     "gridColumnsSm": {"type": "string", "default": "2"},
     "showAllAwardsLink": {"type": "boolean", "default": true},
+    "awardCategory": {"type": "array", "default": [], "items": {"type": "number"}},
+    "awardTags": {"type": "array", "default": [], "items": {"type": "number"}},
     "blockClass": {"type": "string", "default": ""},
     "blockId": {"type": "string", "default": ""},
     "blockData": {"type": "string", "default": ""}

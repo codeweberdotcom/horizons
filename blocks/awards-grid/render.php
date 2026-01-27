@@ -9,6 +9,8 @@ $grid_columns = $attributes['gridColumns'] ?? '4';
 $grid_columns_md = $attributes['gridColumnsMd'] ?? '4';
 $grid_columns_sm = $attributes['gridColumnsSm'] ?? '2';
 $show_all_awards_link = isset($attributes['showAllAwardsLink']) ? $attributes['showAllAwardsLink'] : true;
+$award_category = isset($attributes['awardCategory']) && is_array($attributes['awardCategory']) ? array_map('intval', array_filter($attributes['awardCategory'])) : array();
+$award_tags = isset($attributes['awardTags']) && is_array($attributes['awardTags']) ? array_map('intval', array_filter($attributes['awardTags'])) : array();
 $block_class = $attributes['blockClass'] ?? '';
 
 // Аргументы для WP_Query
@@ -19,6 +21,31 @@ $args = array(
     'order' => $order,
     'post_status' => 'publish'
 );
+
+if (!empty($award_category) || !empty($award_tags)) {
+    $tax_queries = array();
+    if (!empty($award_category)) {
+        $tax_queries[] = array(
+            'taxonomy' => 'award_category',
+            'field'    => 'term_id',
+            'terms'    => $award_category,
+            'operator' => 'IN',
+        );
+    }
+    if (!empty($award_tags)) {
+        $tax_queries[] = array(
+            'taxonomy' => 'award_tags',
+            'field'    => 'term_id',
+            'terms'    => $award_tags,
+            'operator' => 'IN',
+        );
+    }
+    if (count($tax_queries) > 1) {
+        $args['tax_query'] = array('relation' => 'AND', $tax_queries);
+    } else {
+        $args['tax_query'] = $tax_queries;
+    }
+}
 
 $query = new WP_Query($args);
 $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-awards-grid-block ' . $block_class]);

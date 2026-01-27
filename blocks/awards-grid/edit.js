@@ -5,7 +5,7 @@ import { AwardsGridSidebar } from './sidebar';
 import apiFetch from '@wordpress/api-fetch';
 
 export default function Edit({ attributes, setAttributes, clientId }) {
-	const { postsPerPage = 7, orderBy = 'date', order = 'DESC', gridColumns = '4', gridColumnsMd = '4', gridColumnsSm = '2', showAllAwardsLink = true, blockClass = '' } = attributes;
+	const { postsPerPage = 7, orderBy = 'date', order = 'DESC', gridColumns = '4', gridColumnsMd = '4', gridColumnsSm = '2', showAllAwardsLink = true, awardCategory = [], awardTags = [], blockClass = '' } = attributes;
 	const [posts, setPosts] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const blockProps = useBlockProps({ className: `horizons-awards-grid-block ${blockClass}`, 'data-block': clientId });
@@ -15,10 +15,14 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			setIsLoading(true);
 			try {
 				const perPage = postsPerPage || 7;
-				// REST API требует order в нижнем регистре (asc/desc)
 				const orderLower = (order || 'DESC').toLowerCase();
-				const apiPath = `/wp/v2/awards?per_page=${perPage}&orderby=${orderBy}&order=${orderLower}&_embed`;
-				
+				let apiPath = `/wp/v2/awards?per_page=${perPage}&orderby=${orderBy}&order=${orderLower}&_embed`;
+				if ((awardCategory || []).length) {
+					apiPath += '&award_category=' + awardCategory.join(',');
+				}
+				if ((awardTags || []).length) {
+					apiPath += '&award_tags=' + awardTags.join(',');
+				}
 				const fetchedPosts = await apiFetch({ path: apiPath });
 				
 				if (!Array.isArray(fetchedPosts)) {
@@ -52,7 +56,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 			}
 		};
 		fetchPosts();
-	}, [postsPerPage, orderBy, order]);
+	}, [postsPerPage, orderBy, order, awardCategory, awardTags]);
 	
 	const getColumnClasses = () => {
 		return `row row-cols-2 row-cols-sm-${gridColumnsSm} row-cols-md-${gridColumnsMd} row-cols-lg-${gridColumns} gx-3 gy-3`;
