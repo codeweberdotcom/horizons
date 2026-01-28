@@ -33,7 +33,7 @@ function codeweber_partners_shortcode($atts)
             $position = get_post_meta($post_id, '_partners_position', true);
             $name = get_post_meta($post_id, '_partners_name', true);
             $surname = get_post_meta($post_id, '_partners_surname', true);
-            $regions = get_post_meta($post_id, '_partners_regions', true);
+            $full_position = get_post_meta($post_id, '_partners_full_position', true);
             $thumbnail = get_the_post_thumbnail_url($post_id, 'full');
 
             // Формируем полное имя
@@ -58,8 +58,8 @@ function codeweber_partners_shortcode($atts)
                     <div class="team-item-content text-dark mt-4">
                         <h3 class="h4">' . $full_name . '</h3>';
 
-            if ($regions) {
-                $output .= '<div class="label-u">' . esc_html($regions) . '</div>';
+            if ($full_position) {
+                $output .= '<div class="label-u">' . esc_html($full_position) . '</div>';
             }
 
             $output .= '

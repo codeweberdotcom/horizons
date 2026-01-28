@@ -32,11 +32,11 @@ if ($query->have_posts()) :
             <?php while ($query->have_posts()) : $query->the_post();
                 $post_id = get_the_ID();
                 
-                // Получаем метаданные
+                // Получаем метаданные (Заголовок полной должности — для подписи под именем)
                 $position = get_post_meta($post_id, '_partners_position', true);
                 $name = get_post_meta($post_id, '_partners_name', true);
                 $surname = get_post_meta($post_id, '_partners_surname', true);
-                $regions = get_post_meta($post_id, '_partners_regions', true);
+                $full_position = get_post_meta($post_id, '_partners_full_position', true) ?: '';
                 $thumbnail = get_the_post_thumbnail_url($post_id, 'full');
                 
                 // Формируем полное имя
@@ -57,8 +57,8 @@ if ($query->have_posts()) :
                         </figure>
                         <div class="team-item-content text-dark mt-4">
                             <h3 class="h4"><?php echo $full_name; ?></h3>
-                            <?php if ($regions) : ?>
-                                <div class="label-u"><?php echo esc_html($regions); ?></div>
+                            <?php if ($full_position) : ?>
+                                <div class="label-u"><?php echo esc_html($full_position); ?></div>
                             <?php endif; ?>
                         </div>
                     </a>

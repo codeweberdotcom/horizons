@@ -274,6 +274,7 @@ function horizons_register_partners_meta_for_rest() {
 		'_partners_name',
 		'_partners_surname',
 		'_partners_regions',
+		'_partners_full_position',
 	];
 	
 	foreach ($meta_fields as $meta_field) {

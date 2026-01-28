@@ -33,7 +33,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 					const position = post.meta?._partners_position || '';
 					const name = post.meta?._partners_name || '';
 					const surname = post.meta?._partners_surname || '';
-					const regions = post.meta?._partners_regions || '';
+					const fullPosition = post.meta?._partners_full_position || '';
 					
 					// Получаем изображение
 					let thumbnail = '';
@@ -50,7 +50,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						position,
 						name,
 						surname,
-						regions,
+						fullPosition,
 						thumbnail,
 						fullName,
 					};
@@ -116,8 +116,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 									</figure>
 									<div className="team-item-content text-dark mt-4">
 										<h3 className="h4">{post.fullName || post.title}</h3>
-										{post.regions && (
-											<div className="label-u">{post.regions}</div>
+										{post.fullPosition && (
+											<div className="label-u">{post.fullPosition}</div>
 										)}
 									</div>
 								</div>
