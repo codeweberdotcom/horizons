@@ -89,7 +89,7 @@ if ($query->have_posts()) :
                 <!-- Кнопка "All Awards" отображается ВСЕГДА -->
                 <div class="col">
                     <a href="<?php echo esc_url(get_post_type_archive_link('awards')); ?>" class="card h-100 bg-dusty-navy">
-                        <div class="card-body align-content-center text-center">
+                        <div class="card-body py-15 py-md-5 align-content-center text-center">
                             <span class="hover-4 link-body label-s text-sub-white"><?php echo __('All Awards', 'horizons'); ?></span>
                         </div>
                         <!--/.card-body -->

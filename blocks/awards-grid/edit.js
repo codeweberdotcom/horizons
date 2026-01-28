@@ -96,7 +96,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 						{showAllAwardsLink && (
 							<div className="col">
 								<div className="card h-100 bg-dusty-navy">
-									<div className="card-body align-content-center text-center">
+									<div className="card-body py-15 py-md-5 align-content-center text-center">
 										<span className="hover-4 link-body label-s text-sub-white">{__('All Awards', 'horizons')}</span>
 									</div>
 								</div>
