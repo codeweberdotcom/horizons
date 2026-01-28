@@ -55,7 +55,7 @@ function codeweber_partners_shortcode($atts)
                             <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2">' . esc_html($position) . '</div>
                         </div>
                     </figure>
-                    <div class="team-item-content text-dark mt-4">
+                    <div class="team-item-content text-dark mt-3 mb-5 mb-md-0">
                         <h3 class="h4">' . $full_name . '</h3>';
 
             if ($full_position) {

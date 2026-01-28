@@ -114,7 +114,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 											</div>
 										</div>
 									</figure>
-									<div className="team-item-content text-dark mt-4">
+									<div className="team-item-content text-dark mt-3 mb-5 mb-md-0">
 										<h3 className="h4">{post.fullName || post.title}</h3>
 										{post.fullPosition && (
 											<div className="label-u">{post.fullPosition}</div>

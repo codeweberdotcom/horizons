@@ -55,7 +55,7 @@ if ($query->have_posts()) :
                                 <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2"><?php echo esc_html($position); ?></div>
                             </div>
                         </figure>
-                        <div class="team-item-content text-dark mt-4">
+                        <div class="team-item-content text-dark mt-3 mb-5 mb-md-0">
                             <h3 class="h4"><?php echo $full_name; ?></h3>
                             <?php if ($full_position) : ?>
                                 <div class="label-u"><?php echo esc_html($full_position); ?></div>
