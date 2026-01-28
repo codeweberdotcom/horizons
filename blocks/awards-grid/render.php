@@ -53,7 +53,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-awards-grid-
 if ($query->have_posts()) :
     // Формируем классы для сетки (используем row-cols как в шорткоде)
     $column_classes = sprintf(
-        'row row-cols-2 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
+        'row row-cols-1 row-cols-sm-%d row-cols-md-%d row-cols-lg-%d gx-3 gy-3',
         intval($grid_columns_sm),
         intval($grid_columns_md),
         intval($grid_columns)

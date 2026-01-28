@@ -59,7 +59,7 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 	}, [postsPerPage, orderBy, order, awardCategory, awardTags]);
 	
 	const getColumnClasses = () => {
-		return `row row-cols-2 row-cols-sm-${gridColumnsSm} row-cols-md-${gridColumnsMd} row-cols-lg-${gridColumns} gx-3 gy-3`;
+		return `row row-cols-1 row-cols-sm-${gridColumnsSm} row-cols-md-${gridColumnsMd} row-cols-lg-${gridColumns} gx-3 gy-3`;
 	};
 	
 	return (
