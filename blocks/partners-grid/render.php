@@ -51,7 +51,7 @@ if ($query->have_posts()) :
                                 <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/placeholder.jpg'); ?>" alt="<?php echo esc_attr($full_name); ?>" />
                             <?php endif; ?>
                             
-                            <div class="caption-wrapper p-7">
+                            <div class="caption-wrapper-1 p-7">
                                 <div class="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2"><?php echo esc_html($position); ?></div>
                             </div>
                         </figure>
