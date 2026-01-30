@@ -4,7 +4,7 @@
   "name": "horizons-blocks/partners-grid",
   "version": "1.0.0",
   "title": "Partners Grid",
-  "category": "codeweber-gutenberg-elements",
+  "category": "horizons-blocks",
   "icon": "groups",
   "description": "Display partners in a grid layout",
   "keywords": ["partners", "grid", "team"],

@@ -4,7 +4,7 @@
   "name": "horizons-blocks/awards-grid",
   "version": "1.0.0",
   "title": "Awards Grid",
-  "category": "codeweber-gutenberg-elements",
+  "category": "horizons-blocks",
   "icon": "awards",
   "description": "Display awards in a grid layout",
   "keywords": ["awards", "grid", "prizes"],

@@ -86,6 +86,17 @@ function horizons_elements_scripts()
 add_action('wp_enqueue_scripts', 'horizons_elements_scripts');
 
 
+// Категория «Horizons Blocks» в редакторе Гутенберг — первой в списке
+function horizons_register_block_category($block_categories, $block_editor_context) {
+	$horizons = array(
+		'slug'  => 'horizons-blocks',
+		'title' => __('Horizons Blocks', 'horizons'),
+		'icon'  => null,
+		'description' => __('Partners Grid, Practice Grid, Award Grid.', 'horizons'),
+	);
+	return array_merge(array($horizons), $block_categories);
+}
+add_filter('block_categories_all', 'horizons_register_block_category', 10, 2);
 
 
 function modify_cpt_args($args, $post_type)
