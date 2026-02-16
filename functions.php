@@ -85,7 +85,6 @@ function horizons_elements_scripts()
 }
 add_action('wp_enqueue_scripts', 'horizons_elements_scripts');
 
-
 // Категория «Horizons Blocks» в редакторе Гутенберг — первой в списке
 function horizons_register_block_category($block_categories, $block_editor_context) {
 	$horizons = array(
