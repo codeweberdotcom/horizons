@@ -58,7 +58,6 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                           alt="<?php echo esc_attr(get_the_title()); ?>"
                                           class="post-image swiper-lazy" />
                                     <?php endif; ?>
-                                    <span class="bg"></span>
                                  </a>
                                  <figcaption>
                                     <div class="from-top mb-0 label-u"><?php echo __('Read', 'horizons'); ?></div>
