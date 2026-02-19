@@ -6,6 +6,7 @@ function my_child_theme_image_sizes()
    add_image_size('codeweber_awards', 960, 600, true);
    add_image_size('codeweber_staff_800', 800, 800, true);
    add_image_size('codeweber_vacancy', 800, 600, true);
+   add_image_size('horizons_post_400-400', 400, 400, true);
 }
 add_action('after_setup_theme', 'my_child_theme_image_sizes', 20);
 
@@ -15,7 +16,7 @@ function my_child_theme_allowed_sizes($sizes)
 {
    // Для нового типа записи 'awards'
    $sizes['awards'] = ['codeweber_awards'];
-   $sizes['post'] = ['codeweber_staff','codeweber_awards'];
+   $sizes['post'] = ['codeweber_staff', 'codeweber_awards', 'horizons_post_400-400'];
    $sizes['vacancies'] = ['codeweber_vacancy','thumbnail'];
    $sizes['partners'] = ['codeweber_staff','codeweber_staff_800','woocommerce_gallery_thumbnail'];
    return $sizes;
