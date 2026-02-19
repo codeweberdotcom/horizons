@@ -645,6 +645,18 @@ a.card:hover .hover-4::before {
     background: $primary;
 }
 
+.service-link .brand-square-sm {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition: all .3s ease;
+}
+
+.service-link:hover .brand-square-sm {
+  opacity: 1;
+  width: 16px;
+}
+
 .w-48{
     width: 48px;
 }
@@ -729,6 +741,21 @@ a.card:hover .hover-4::before {
 padding-left: 20px;
 }
 
+
+#partnersAccordion button {
+  font-weight: 400 !important;
+}
+
+#partnersAccordion.type-3 button:not(.collapsed)::before {
+  right: 1.3rem !important;
+}
+
+#partnersAccordion .accordion-button::before {
+  font-size: 17px;
+  width: 17px;
+  height: 17px;
+  line-height: 1;
+}
 
 
 //START IMPORT FONTS

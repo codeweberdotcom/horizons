@@ -70,7 +70,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                      ?>
 
                      <div class="project item col-6 col-xl-6">
-                        <figure class="overlay overlay-3 hover-scale card">
+                        <figure class="overlay overlay-5 hover-scale card">
                            <a href="<?php the_permalink(); ?>">
                               <?php if (has_post_thumbnail()) : ?>
                                  <?php the_post_thumbnail('codeweber_awards', array(

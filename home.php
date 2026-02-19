@@ -44,7 +44,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                     <?php if (has_post_thumbnail()) : ?>
                                        <?php
                                        // Используем значение по умолчанию если $atts не определен
-                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'codeweber_staff';
+                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'codeweber_post_600-600';
                                        $thumbnail = get_the_post_thumbnail(get_the_ID(), $image_size, array(
                                           'decoding' => 'async',
                                           'alt' => esc_attr(get_the_title()),
