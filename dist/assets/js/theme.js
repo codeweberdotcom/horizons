@@ -80,6 +80,9 @@ var theme = {
       const CLASS_NAME = "has-child-dropdown-show";
       $bs.Dropdown.prototype.toggle = (function (_original) {
         return function () {
+          if (this._element && this._element.closest && this._element.closest(".cwgb-search-block")) {
+            return _original.call(this);
+          }
           document.querySelectorAll("." + CLASS_NAME).forEach(function (e) {
             e.classList.remove(CLASS_NAME);
           });
