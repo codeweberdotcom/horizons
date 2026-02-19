@@ -406,7 +406,48 @@ a.hover-5:hover:before {
 cubic-bezier(.4, 1, .8, 1);
 }
 
-
+// more1 — стрелка вправо (как hover more)
+.more1 {
+    font-weight: 700;
+    letter-spacing: -0.01rem;
+    display: inline-block;
+    &:after {
+        line-height: 1;
+        font-family: Unicons;
+        content: "\e931";
+        padding-left: .05rem;
+        font-size: .9rem;
+        font-weight: normal;
+        vertical-align: -3px;
+        margin-right: -.25rem;
+        display: inline-block;
+    }
+}
+// подчёркивание .hover.more1 / .hover.more1-left — цвет $primary
+a.hover.more1::before,
+a.hover.more1-left::before {
+    background: $primary;
+}
+// more1-left — стрелка влево (как hover more-left)
+.more1-left {
+    font-weight: 700;
+    letter-spacing: -0.01rem;
+    display: inline-block;
+    position: relative;
+    padding-left: 1rem;
+    &::after {
+        content: "\e92f";
+        font-family: Unicons;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        line-height: 1;
+        font-size: .9rem;
+        font-weight: normal;
+        display: inline-block;
+    }
+}
 
 a.hover-6 {
     position: relative;

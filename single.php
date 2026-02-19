@@ -85,7 +85,7 @@ while (have_posts()) :
 						$previous_post = get_adjacent_post(false, '', true);
 						if ($previous_post) {
 							printf(
-								'<a href="%s" class="hover-5 left label-u text-charcoal-blue me-4 mb-5">%s</a>',
+								'<a href="%s" class="hover more1-left label-u text-charcoal-blue me-4 mb-5">%s</a>',
 								get_permalink($previous_post->ID),
 								__('Previous', 'horizons')
 							);
@@ -95,7 +95,7 @@ while (have_posts()) :
 						$next_post = get_adjacent_post(false, '', false);
 						if ($next_post) {
 							printf(
-								'<a href="%s" class="hover-5 right label-u text-charcoal-blue ms-auto mb-5">%s</a>',
+								'<a href="%s" class="hover more1 label-u text-charcoal-blue ms-auto mb-5">%s</a>',
 								get_permalink($next_post->ID),
 								__('Next', 'horizons')
 							);

@@ -229,7 +229,7 @@
                <h2 class="h2"><?php _e('Horizons News', 'сodeweber'); ?></h2>
             </div>
             <div class="col text-md-end">
-               <a href="/blog" class="hover-5 label-u right text-charcoal-blue mb-5"><?php _e('All news', 'сodeweber'); ?></a>
+               <a href="/blog" class="hover more1 label-u text-charcoal-blue mb-5"><?php _e('All news', 'сodeweber'); ?></a>
             </div>
             <!-- /column -->
          </div>

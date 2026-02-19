@@ -211,7 +211,7 @@ function add_news_section_after_partner($post_type)
                   <h2 class="h2"><?php echo esc_html__('Related news', 'horizons'); ?></h2>
                </div>
                <div class="col text-md-end">
-                  <a href="<?php echo esc_url(home_url('/blog')); ?>" class="hover-5 label-u right text-charcoal-blue mb-5">
+                  <a href="<?php echo esc_url(home_url('/blog')); ?>" class="hover more1 label-u text-charcoal-blue mb-5">
                      <?php echo esc_html__('All News', 'horizons'); ?>
                   </a>
                </div>
