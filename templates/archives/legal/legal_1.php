@@ -26,7 +26,7 @@
             <p><?php the_excerpt(); ?></p>
          </div>
          <!-- /.post-content -->
-         <a href="<?php the_permalink(); ?>" class="hover more1 label-u text-charcoal-blue mb-5"><?php esc_html_e('Go', 'codeweber'); ?></a>
+         <a href="<?php the_permalink(); ?>" class="hover-4 link-body label-s text-charcoal-blue"><?php esc_html_e('Go', 'codeweber'); ?></a>
       </div>
    </div>
 </article> <!-- #post-<?php the_ID(); ?> -->
