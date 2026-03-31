@@ -14,6 +14,7 @@ var theme = {
     theme.offCanvas();
     theme.isotope();
     theme.onepageHeaderOffset();
+    theme.sectionHeaderOffset();
     theme.spyScroll();
     theme.anchorSmoothScroll();
     theme.svgInject();
@@ -163,6 +164,7 @@ var theme = {
         var grid = g.querySelector(".isotope");
         var filtersElem = g.querySelector(".isotope-filter");
         var buttonGroups = g.querySelectorAll(".isotope-filter");
+        grid.style.opacity = "0";
         var iso = new Isotope(grid, {
           itemSelector: ".item",
           layoutMode: "masonry",
@@ -172,14 +174,19 @@ var theme = {
           percentPosition: true,
           transitionDuration: "0.7s",
         });
-        imagesLoaded(grid).on("progress", function () {
-          iso.layout({
-            masonry: {
-              columnWidth: grid.offsetWidth / 12,
-            },
+        imagesLoaded(grid)
+          .on("progress", function () {
+            iso.layout({
+              masonry: {
+                columnWidth: grid.offsetWidth / 12,
+              },
+            });
+          })
+          .on("always", function () {
+            grid.style.transition = "opacity 0.4s";
+            grid.style.opacity = "1";
           });
-        }),
-          window.addEventListener(
+        window.addEventListener(
             "resize",
             function () {
               iso.arrange({
@@ -235,6 +242,29 @@ var theme = {
       first_section.style.paddingTop = header_height + "px";
       first_section.style.marginTop = "-" + header_height + "px";
     }
+  },
+  /**
+   * Section Header Offset
+   * Adjusts the first min-vh-* section's padding/margin on pages
+   * where the navbar is positioned absolutely or fixed (overlaps content).
+   */
+  sectionHeaderOffset: () => {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    const pos = getComputedStyle(navbar).position;
+    if (pos !== 'absolute' && pos !== 'fixed') return;
+    if (!document.querySelector('.codeweber-top-header')) return;
+    const first = document.querySelector(
+      '.wp-block-codeweber-blocks-section[class*="min-vh-"]'
+    );
+    if (!first) return;
+    const apply = () => {
+      const h = navbar.offsetHeight;
+      first.style.paddingTop = h + 'px';
+      first.style.marginTop  = '-' + h + 'px';
+    };
+    apply();
+    window.addEventListener('resize', apply);
   },
   /**
    * Spy Scroll
@@ -895,7 +925,7 @@ var theme = {
           bootstrap.Modal.prototype.show = function() {
             // Если cookie modal открыт, блокируем открытие других модальных окон
             if (cookieModal.classList.contains('show') && this._element && this._element.id !== 'cookieModal') {
-              console.log('[Modal Priority] Blocked opening modal ' + (this._element.id || 'unknown') + ' because cookie modal is open');
+
               return;
             }
             // Вызываем оригинальную функцию
@@ -1026,7 +1056,7 @@ var theme = {
                         }
                       })
                       .catch((err) => {
-                        console.log(err);
+                        console.error(err);
                       });
                   }
                 }
@@ -1640,10 +1670,21 @@ var custom = {
   init: function () {
     custom.rippleEffect();
     custom.addTelMask();
+    custom.qtyInput();
   },
 
 
   addTelMask: function () {
+    // Для полей с data-mask-use-theme="true" подставляем маску из настроек темы
+    const themeMask = (window.codeweberTheme && window.codeweberTheme.phoneMask) || '';
+    if (themeMask) {
+      document.querySelectorAll('input[data-mask-use-theme="true"]').forEach((input) => {
+        if (!input.dataset.phoneMaskInitialized) {
+          input.dataset.mask = themeMask;
+        }
+      });
+    }
+
     const telInputs = document.querySelectorAll("input[data-mask]");
 
     telInputs.forEach((input) => {
@@ -1728,6 +1769,29 @@ var custom = {
     });
   },
 
+
+  /**
+   * Qty Input (+/- buttons)
+   * Handles cw-qty-v and cw-qty-h quantity input components.
+   * Reads data-min / data-max from the input element.
+   */
+  qtyInput: () => {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-qty-inc],[data-qty-dec]');
+      if (!btn) return;
+      var wrap = btn.closest('.input-group, .cw-qty-v');
+      if (!wrap) return;
+      var input = wrap.querySelector('input');
+      if (!input) return;
+      var val = parseInt(input.value, 10) || 1;
+      var min = parseInt(input.dataset.min, 10) || 1;
+      var max = parseInt(input.dataset.max, 10) || Infinity;
+      if (btn.hasAttribute('data-qty-inc')) val = Math.min(max, val + 1);
+      if (btn.hasAttribute('data-qty-dec')) val = Math.max(min, val - 1);
+      input.value = val;
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+  },
 
   rippleEffect: () => {
     document.querySelectorAll(".has-ripple").forEach((button) => {
