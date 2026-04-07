@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<section class="wrapper bg-light">
+<section class="wrapper">
 	<div class="container pt-12 pt-md-14 pb-14 pb-md-16">
 		<div class="row">
 

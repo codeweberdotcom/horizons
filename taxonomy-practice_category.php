@@ -110,7 +110,7 @@ if ($current_term && !is_wp_error($current_term)) {
 <!-- /section -->
 
 <?php if ($current_term && $posts && $posts->have_posts()) : ?>
-   <section class="wrapper bg-white">
+   <section class="wrapper">
       <div class="container">
          <div class="row">
             <div class="col-lg-8 py-14">
@@ -214,7 +214,7 @@ if ($current_term && !is_wp_error($current_term)) {
       </div>
    </section>
 <?php elseif ($current_term) : ?>
-   <section class="wrapper bg-white">
+   <section class="wrapper">
       <div class="container py-14 py-md-16">
          <div class="row">
             <div class="col-lg-8 mx-auto text-center">
