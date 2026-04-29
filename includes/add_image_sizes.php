@@ -11,18 +11,6 @@ function my_child_theme_image_sizes()
 add_action('after_setup_theme', 'my_child_theme_image_sizes', 20);
 
 
-// Добавляем разрешённые размеры для нового типа записи
-function my_child_theme_allowed_sizes($sizes)
-{
-   // Для нового типа записи 'awards'
-   $sizes['awards'] = ['codeweber_awards'];
-   $sizes['post'] = ['codeweber_staff', 'codeweber_awards', 'horizons_post_400-400'];
-   $sizes['vacancies'] = ['codeweber_vacancy','thumbnail'];
-   $sizes['partners'] = ['codeweber_staff','codeweber_staff_800','woocommerce_gallery_thumbnail'];
-   return $sizes;
-}
-add_filter('codeweber_allowed_image_sizes', 'my_child_theme_allowed_sizes');
-
 
 // Добавляем размер изображения для категорий
 add_image_size('practice_category_image', 720, 850, true);

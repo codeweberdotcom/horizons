@@ -50,7 +50,7 @@ function horizons_blog_posts_slider_shortcode($atts)
       'tag' => '',           // Фильтр по меткам (slug через запятую)
       'orderby' => 'date',
       'order' => 'DESC',
-      'image_size' => 'horizons_staff',
+      'image_size' => 'horizons_post_400-400',
       'excerpt_length' => 20,
       'title_length' => 0,   // Максимальное количество символов в заголовке (0 - без ограничения)
       'items_xl' => '3',

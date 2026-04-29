@@ -468,7 +468,10 @@ var theme = {
           : Number(sliderItemsLg); // 1200 - end
         var sliderItemsXxl = slider1.getAttribute("data-items-xxl")
           ? slider1.getAttribute("data-items-xxl")
-          : Number(sliderItemsXl); // 1500 - end
+          : Number(sliderItemsXl); // 1400 - 1920
+        var sliderItemsXxxl = slider1.getAttribute("data-items-xxxl")
+          ? slider1.getAttribute("data-items-xxxl")
+          : Number(sliderItemsXxl); // 1921 - end
         var slidesPerViewInit = sliderItems;
         var breakpointsInit = {
           0: {
@@ -488,6 +491,9 @@ var theme = {
           },
           1400: {
             slidesPerView: Number(sliderItemsXxl),
+          },
+          1921: {
+            slidesPerView: Number(sliderItemsXxxl),
           },
         };
       }
@@ -509,14 +515,14 @@ var theme = {
         : 30;
       var sliderLoop = slider1.getAttribute("data-loop") === "true";
       var sliderCentered = slider1.getAttribute("data-centered") === "true";
-      var swiper = slider1.querySelector(".swiper:not(.swiper-thumbs)");
-      var swiperTh = slider1.querySelector(".swiper-thumbs");
-      var thumbsDirection = slider1.getAttribute("data-thumbs-direction") || "horizontal";
-      var thumbsItems = slider1.getAttribute("data-thumbs-items")
+      let swiper = slider1.querySelector(".swiper:not(.swiper-thumbs)");
+      let swiperTh = slider1.querySelector(".swiper-thumbs");
+      let thumbsDirection = slider1.getAttribute("data-thumbs-direction") || "horizontal";
+      let thumbsItems = slider1.getAttribute("data-thumbs-items")
         ? Number(slider1.getAttribute("data-thumbs-items"))
         : 5;
-      var thumbsMousewheel = slider1.getAttribute("data-thumbs-mousewheel") === "true";
-      var sliderTh = new Swiper(swiperTh, {
+      let thumbsMousewheel = slider1.getAttribute("data-thumbs-mousewheel") === "true";
+      let sliderTh = new Swiper(swiperTh, {
         slidesPerView: thumbsItems,
         spaceBetween: 10,
         loop: false,
