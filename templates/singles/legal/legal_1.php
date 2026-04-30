@@ -35,7 +35,7 @@
                               <li>
                                  <a
                                     href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>"
-                                    class="btn btn-soft-ash btn-sm mb-0<?php echo getThemeButton(); ?>">
+                                    class="btn btn-soft-ash btn-sm mb-0<?php echo Codeweber_Options::style('button'); ?>">
                                     <?php echo esc_html($tag->name); ?>
                                  </a>
                               </li>
