@@ -85,6 +85,21 @@ function horizons_elements_scripts()
 }
 add_action('wp_enqueue_scripts', 'horizons_elements_scripts');
 
+// Register awards card templates in Post Grid registry
+add_filter( 'codeweber_post_card_templates_registry', function ( $registry ) {
+	$registry['awards'] = [
+		'dir'       => 'awards',
+		'templates' => [
+			'card' => [
+				'label'       => __( 'Card', 'horizons' ),
+				'description' => __( 'Overlay-5 card with organization, date and partners', 'horizons' ),
+				'supports'    => [ 'title', 'date', 'category' ],
+			],
+		],
+	];
+	return $registry;
+} );
+
 // Категория «Horizons Blocks» в редакторе Гутенберг — первой в списке
 function horizons_register_block_category($block_categories, $block_editor_context) {
 	$horizons = array(
