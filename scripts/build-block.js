@@ -20,7 +20,6 @@ const filesToKeep = [
 	'controls',
 	'index.src.js', // Исходный файл для сборки
 	'index.css', // Скомпилированные CSS файлы тоже сохраняем
-	'style-index.css',
 ];
 
 console.log(`📦 Сохраняю исходные файлы блока ${blockName}...`);
@@ -106,6 +105,15 @@ console.log('🔨 Запускаю сборку...');
 	});
 	
 	console.log('✅ Сборка завершена');
+
+	// wp-scripts names CSS output after the JS entry (index.src → style-index.src.css).
+	// Copy it to the name block.json expects: style-index.css.
+	const builtSrc = path.join(blockDir, 'style-index.src.css');
+	const builtDest = path.join(blockDir, 'style-index.css');
+	if (fs.existsSync(builtSrc)) {
+		fs.copyFileSync(builtSrc, builtDest);
+		console.log('✓ style-index.src.css → style-index.css');
+	}
 } catch (error) {
 	console.error('❌ Ошибка при сборке:', error.message);
 	process.exit(1);
