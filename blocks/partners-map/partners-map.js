@@ -62,6 +62,27 @@
 
         /* Markers */
         var allMarkerObjects = [];
+        var markerEls = []; /* {dot, label} refs for zoom scaling */
+        var baseZoom = zoom;
+
+        function calcScale(currentZoom) {
+            var delta = currentZoom - baseZoom;
+            var s = Math.pow(1.18, delta);
+            return Math.max(1, s); /* never shrink below base size */
+        }
+
+        function applyScale(s) {
+            markerEls.forEach(function (refs) {
+                var sz = Math.round(size * s);
+                refs.dot.style.width  = sz + 'px';
+                refs.dot.style.height = sz + 'px';
+                refs.dot.style.fontSize = Math.round(sz * 0.3) + 'px';
+                refs.dot.style.borderRadius = shape === 'square' ? '0' : '50%';
+                if (refs.label) {
+                    refs.label.style.fontSize = Math.round(labelSize * s) + 'px';
+                }
+            });
+        }
 
         function makeMarkerEl(m) {
             var wrap = document.createElement('div');
@@ -84,6 +105,7 @@
                 'font-size:' + Math.round(size * 0.3) + 'px',
                 'font-weight:700',
                 'user-select:none',
+                'transition:width .15s,height .15s,font-size .15s',
             ].join(';');
 
             if (showCount) {
@@ -92,11 +114,12 @@
 
             wrap.appendChild(dot);
 
+            var labelEl = null;
             if (showLabel) {
-                var label = document.createElement('span');
-                label.className = 'hpm-marker-label';
-                label.textContent = m.title;
-                label.style.cssText = [
+                labelEl = document.createElement('span');
+                labelEl.className = 'hpm-marker-label';
+                labelEl.textContent = m.title;
+                labelEl.style.cssText = [
                     'font-size:' + labelSize + 'px',
                     'font-weight:800',
                     'text-transform:uppercase',
@@ -104,10 +127,12 @@
                     'color:' + labelColor,
                     'white-space:nowrap',
                     'pointer-events:none',
+                    'transition:font-size .15s',
                 ].join(';');
-                wrap.appendChild(label);
+                wrap.appendChild(labelEl);
             }
 
+            markerEls.push({ dot: dot, label: labelEl });
             return wrap;
         }
 
@@ -121,6 +146,15 @@
             allMarkerObjects.push({ marker: marker, data: m, inMap: true });
             map.addChild(marker);
         });
+
+        /* Scale markers on zoom */
+        map.addChild(new ymaps3.YMapListener({
+            onUpdate: function (update) {
+                if (update.location && update.location.zoom !== undefined) {
+                    applyScale(calcScale(update.location.zoom));
+                }
+            },
+        }));
 
         /* Auto fit bounds */
         if (autoFitBounds && markers.length > 1) {
