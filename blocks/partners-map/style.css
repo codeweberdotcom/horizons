@@ -16,21 +16,21 @@
 }
 
 .horizons-partners-map__canvas {
-    flex: 1;
-    min-width: 0;
     position: relative;
+    width: 100%;
     height: 100%;
 }
 
-.horizons-partners-map--sidebar-right {
-    flex-direction: row-reverse;
-}
-
-/* Sidebar */
+/* Sidebar — overlays the map canvas for frosted-glass effect */
 .horizons-partners-map__sidebar {
-    flex: 0 0 260px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
     width: 260px;
-    background-color: rgb(48, 60, 66);
+    background: rgba(30, 38, 42, 0.72);
+    backdrop-filter: blur(12px) saturate(160%);
+    -webkit-backdrop-filter: blur(12px) saturate(160%);
     border-right: 1px solid rgba(255, 255, 255, .1);
     display: flex;
     flex-direction: column;
@@ -39,6 +39,8 @@
 }
 
 .horizons-partners-map--sidebar-right .horizons-partners-map__sidebar {
+    left: auto;
+    right: 0;
     border-right: none;
     border-left: 1px solid rgba(255, 255, 255, .1);
 }
@@ -240,21 +242,21 @@
 
 /* Responsive */
 @container (max-width: 640px) {
-    .horizons-partners-map {
-        flex-direction: column;
-    }
-
     .horizons-partners-map__sidebar {
-        flex: none;
+        left: 0;
+        right: 0;
+        bottom: auto;
         width: 100%;
-        max-height: 200px;
+        max-height: 180px;
         border-right: none;
-        border-bottom: 1px solid #ece9e4;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
     }
 
     .horizons-partners-map--sidebar-right .horizons-partners-map__sidebar {
+        left: 0;
+        right: 0;
         border-left: none;
-        border-bottom: 1px solid #ece9e4;
+        border-bottom: 1px solid rgba(255, 255, 255, .1);
     }
 
     .horizons-partners-map__sidebar-inner {
