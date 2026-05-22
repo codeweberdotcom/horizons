@@ -1,7 +1,7 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-// Check Yandex Maps integration
+// Check Yandex Maps
 if (!class_exists('Codeweber_Yandex_Maps') || !Codeweber_Yandex_Maps::get_instance()->has_api_key()) {
     if (defined('WP_DEBUG') && WP_DEBUG) {
         echo '<p style="padding:16px;border:1px solid #e00;">' . esc_html__('Partners Map: Yandex Maps API key not configured.', 'horizons') . '</p>';
@@ -9,12 +9,31 @@ if (!class_exists('Codeweber_Yandex_Maps') || !Codeweber_Yandex_Maps::get_instan
     return;
 }
 
-// Attributes
-$data_source = $attributes['dataSource'] ?? 'both';
-$height      = max(300, (int) ($attributes['height'] ?? 600));
-$zoom        = max(1, min(19, (int) ($attributes['zoom'] ?? 4)));
-$center_lat  = (float) ($attributes['centerLat'] ?? 55.76);
-$center_lng  = (float) ($attributes['centerLng'] ?? 37.64);
+// ── Attributes ────────────────────────────────────────────────────────────────
+$data_source      = $attributes['dataSource']      ?? 'both';
+$height           = max(300, (int) ($attributes['height']    ?? 600));
+$zoom             = max(1, min(19, (int) ($attributes['zoom'] ?? 4)));
+$center_lat       = (float) ($attributes['centerLat']        ?? 55.76);
+$center_lng       = (float) ($attributes['centerLng']        ?? 37.64);
+$map_type         = $attributes['mapType']         ?? 'normal';
+$scroll_zoom      = (bool)  ($attributes['scrollZoom']       ?? false);
+$auto_fit_bounds  = (bool)  ($attributes['autoFitBounds']    ?? true);
+$marker_color     = $attributes['markerColor']     ?? '#C8A96E';
+$marker_size      = max(20, min(80, (int) ($attributes['markerSize'] ?? 40)));
+$clusterer        = (bool)  ($attributes['clustererEnabled'] ?? false);
+$sidebar_enabled  = (bool)  ($attributes['sidebarEnabled']   ?? true);
+$sidebar_position = $attributes['sidebarPosition'] ?? 'left';
+$sidebar_title    = $attributes['sidebarTitle']    ?? '';
+$style_json       = $attributes['styleJson']       ?? '';
+
+// Validate styleJson
+$style_json_valid = '';
+if ($style_json) {
+    $decoded = json_decode($style_json);
+    if (json_last_error() === JSON_ERROR_NONE) {
+        $style_json_valid = $style_json;
+    }
+}
 
 // ── 1. Collect region terms with coordinates ──────────────────────────────────
 $region_terms = [];
@@ -57,13 +76,13 @@ if (in_array($data_source, ['both', 'countries'], true)) {
 }
 
 if (empty($region_terms) && empty($country_terms)) {
-    echo '<p class="py-4 text-center">' . esc_html__('No partner locations with coordinates found. Please add latitude and longitude to partner regions or countries.', 'horizons') . '</p>';
+    echo '<p class="py-4 text-center">' . esc_html__('No partner locations with coordinates found. Add latitude and longitude to partner regions or countries.', 'horizons') . '</p>';
     return;
 }
 
-// ── 3. Query partners, build per-term lists and region→country map ────────────
-$partners_by_term  = []; // term_id → [post_id, ...]
-$region_to_country = []; // region_term_id → country_term_id
+// ── 3. Query partners → build per-term lists and region→country map ───────────
+$partners_by_term  = [];
+$region_to_country = [];
 
 $partners_query = new WP_Query([
     'post_type'      => 'partners',
@@ -79,7 +98,6 @@ foreach ($partners_query->posts as $partner_id) {
     if (is_wp_error($p_countries)) $p_countries = [];
     if (is_wp_error($p_regions))   $p_regions   = [];
 
-    // Build region → country mapping
     foreach ($p_regions as $rid) {
         if (!isset($region_to_country[$rid])) {
             foreach ($p_countries as $cid) {
@@ -89,7 +107,6 @@ foreach ($partners_query->posts as $partner_id) {
         }
     }
 
-    // Assign to the most specific term that has coordinates
     $assigned = false;
     foreach ($p_regions as $rid) {
         if (isset($region_terms[$rid])) {
@@ -107,9 +124,9 @@ foreach ($partners_query->posts as $partner_id) {
 }
 wp_reset_postdata();
 
-// ── 4. Build markers JSON ─────────────────────────────────────────────────────
+// ── 4. Build markers JSON (+ operator preserves numeric keys, array_merge reindexes) ──
 $markers_json = [];
-$all_term_data = array_merge($region_terms, $country_terms);
+$all_term_data = $region_terms + $country_terms;
 
 foreach ($all_term_data as $term_id => $tdata) {
     $partner_ids = $partners_by_term[$term_id] ?? [];
@@ -126,17 +143,17 @@ foreach ($all_term_data as $term_id => $tdata) {
 }
 
 // ── 5. Build sidebar tree: country → regions ──────────────────────────────────
-$total_count     = 0;
-$sidebar_items   = []; // for PHP rendering
+$total_count   = 0;
+$sidebar_items = [];
 
 foreach ($country_terms as $cid => $cdata) {
     $c_count = count($partners_by_term[$cid] ?? []);
     $sidebar_items[$cid] = [
-        'term_id'  => $cid,
-        'name'     => $cdata['term']->name,
-        'count'    => $c_count,
-        'type'     => 'country',
-        'regions'  => [],
+        'term_id' => $cid,
+        'name'    => $cdata['term']->name,
+        'count'   => $c_count,
+        'type'    => 'country',
+        'regions' => [],
     ];
     $total_count += $c_count;
 }
@@ -156,7 +173,6 @@ foreach ($region_terms as $rid => $rdata) {
         ];
         $sidebar_items[$cid]['count'] += $r_count;
     } else {
-        // Region without a known country — show as top-level
         $sidebar_items['r-' . $rid] = [
             'term_id' => $rid,
             'name'    => $rdata['term']->name,
@@ -167,41 +183,57 @@ foreach ($region_terms as $rid => $rdata) {
     }
 }
 
-// Remove items with 0 partners
 $sidebar_items = array_filter($sidebar_items, fn($item) => $item['count'] > 0);
 
 // ── 6. Enqueue scripts ────────────────────────────────────────────────────────
-wp_enqueue_script('yandex-maps-api-v3'); // registered by parent theme
+wp_enqueue_script('yandex-maps-api-v3');
 wp_enqueue_script(
     'horizons-partners-map',
     get_stylesheet_directory_uri() . '/blocks/partners-map/partners-map.js',
     ['yandex-maps-api-v3'],
-    '1.0.0',
+    '1.1.0',
     true
 );
 
-// ── 7. Output ─────────────────────────────────────────────────────────────────
-$unique_id    = 'partners-map-' . wp_unique_id();
-$map_config   = wp_json_encode([
-    'center'      => [$center_lng, $center_lat],
-    'zoom'        => $zoom,
-    'markers'     => $markers_json,
-    'markerColor' => '#C8A96E',
+// ── 7. Build map config ───────────────────────────────────────────────────────
+$map_config = wp_json_encode([
+    'center'          => [$center_lng, $center_lat],
+    'zoom'            => $zoom,
+    'mapType'         => $map_type,
+    'scrollZoom'      => $scroll_zoom,
+    'autoFitBounds'   => $auto_fit_bounds,
+    'markers'         => $markers_json,
+    'markerColor'     => $marker_color,
+    'markerSize'      => $marker_size,
+    'clusterer'       => $clusterer,
+    'styleJson'       => $style_json_valid,
 ]);
+
+// ── 8. Output ─────────────────────────────────────────────────────────────────
+$wrapper_classes = 'horizons-partners-map';
+if (!$sidebar_enabled)           $wrapper_classes .= ' horizons-partners-map--no-sidebar';
+if ($sidebar_position === 'right') $wrapper_classes .= ' horizons-partners-map--sidebar-right';
 
 $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map-block']);
 ?>
 <div <?php echo $wrapper_attrs; ?>>
-    <div class="horizons-partners-map"
-         id="<?php echo esc_attr($unique_id); ?>"
+    <div class="<?php echo esc_attr($wrapper_classes); ?>"
          data-map-config="<?php echo esc_attr($map_config); ?>">
 
         <?php /* ── Sidebar ── */ ?>
-        <aside class="horizons-partners-map__sidebar" aria-label="<?php esc_attr_e('Filter partners by location', 'horizons'); ?>">
+        <?php if ($sidebar_enabled) : ?>
+        <aside class="horizons-partners-map__sidebar"
+               aria-label="<?php esc_attr_e('Filter partners by location', 'horizons'); ?>">
+
+            <?php if ($sidebar_title) : ?>
+            <div class="horizons-partners-map__sidebar-title">
+                <?php echo esc_html($sidebar_title); ?>
+            </div>
+            <?php endif; ?>
+
             <div class="horizons-partners-map__sidebar-inner">
 
-                <button class="horizons-partners-map__filter-btn is-active"
-                        data-filter="all">
+                <button class="horizons-partners-map__filter-btn is-active" data-filter="all">
                     <?php esc_html_e('All partners', 'horizons'); ?>
                     <span class="horizons-partners-map__badge"><?php echo (int) $total_count; ?></span>
                 </button>
@@ -245,8 +277,9 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
             </div>
         </aside>
+        <?php endif; ?>
 
-        <?php /* ── Map canvas (partners loaded async per-marker click) ── */ ?>
+        <?php /* ── Map canvas ── */ ?>
         <div class="horizons-partners-map__canvas"
              style="height:<?php echo (int) $height; ?>px;"
              aria-label="<?php esc_attr_e('Partners map', 'horizons'); ?>">

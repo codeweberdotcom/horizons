@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "horizons-blocks/partners-map",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "title": "Partners Map",
   "category": "horizons-blocks",
   "icon": "location",
@@ -14,6 +14,7 @@
   },
   "textdomain": "horizons",
   "editorScript": "file:./index.js",
+  "style": "file:./style.css",
   "render": "file:./render.php",
   "attributes": {
     "dataSource": {
@@ -35,6 +36,46 @@
     "centerLng": {
       "type": "number",
       "default": 37.64
+    },
+    "mapType": {
+      "type": "string",
+      "default": "normal"
+    },
+    "scrollZoom": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoFitBounds": {
+      "type": "boolean",
+      "default": true
+    },
+    "markerColor": {
+      "type": "string",
+      "default": "#C8A96E"
+    },
+    "markerSize": {
+      "type": "number",
+      "default": 40
+    },
+    "clustererEnabled": {
+      "type": "boolean",
+      "default": false
+    },
+    "sidebarEnabled": {
+      "type": "boolean",
+      "default": true
+    },
+    "sidebarPosition": {
+      "type": "string",
+      "default": "left"
+    },
+    "sidebarTitle": {
+      "type": "string",
+      "default": ""
+    },
+    "styleJson": {
+      "type": "string",
+      "default": ""
     }
   }
 }
