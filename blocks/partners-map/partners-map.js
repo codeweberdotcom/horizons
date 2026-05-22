@@ -397,7 +397,7 @@
             var pill = makePill();
             var inner = document.createElement('div');
             inner.className = 'author-info d-flex align-items-center';
-            inner.style.cssText = 'position:relative;padding:2px;';
+            inner.style.cssText = 'position:relative;padding:4px 12px 4px 4px;';
             inner.innerHTML = imgTag
                 + '<div class="avatar-info mt-0 overflow-hidden">'
                 +   '<a href="' + href + '" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0 text-truncate" target="_blank" rel="noopener">' + name + '</a>'
