@@ -343,25 +343,21 @@ export default function Edit({ attributes, setAttributes }) {
 							<div className="horizons-partners-map__sidebar-inner">
 								<button className="horizons-partners-map__filter-btn is-active" disabled>
 									{__('All partners', 'horizons')}
-									<span className="horizons-partners-map__badge">{totalCount}</span>
 								</button>
 								{sidebar.map((item) => item.type === 'region' ? (
 									<button key={item.term_id} className="horizons-partners-map__filter-btn horizons-partners-map__filter-region" disabled>
 										{item.name}
-										<span className="horizons-partners-map__badge">{item.count}</span>
 									</button>
 								) : (
 									<div key={item.term_id} className="horizons-partners-map__country-group">
 										<button className="horizons-partners-map__filter-btn horizons-partners-map__filter-country" disabled>
 											{item.name}
-											<span className="horizons-partners-map__badge">{item.count}</span>
 										</button>
 										{item.regions && item.regions.length > 0 && (
 											<div className="horizons-partners-map__regions">
 												{item.regions.map((r) => (
 													<button key={r.term_id} className="horizons-partners-map__filter-btn horizons-partners-map__filter-region" disabled>
 														{r.name}
-														<span className="horizons-partners-map__badge">{r.count}</span>
 													</button>
 												))}
 											</div>

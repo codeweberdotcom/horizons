@@ -254,7 +254,6 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
                 <button class="horizons-partners-map__filter-btn label-u text-neutral-50 is-active" data-filter="all">
                     <?php esc_html_e('All partners', 'horizons'); ?>
-                    <span class="horizons-partners-map__badge"><?php echo (int) $total_count; ?></span>
                 </button>
 
                 <?php foreach ($sidebar_items as $item) : ?>
@@ -264,7 +263,6 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                                 data-filter="term"
                                 data-term-id="<?php echo (int) $item['term_id']; ?>">
                             <?php echo esc_html($item['name']); ?>
-                            <span class="horizons-partners-map__badge"><?php echo (int) $item['count']; ?></span>
                         </button>
 
                     <?php else : ?>
@@ -274,7 +272,6 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                                     data-filter="term"
                                     data-term-id="<?php echo (int) $item['term_id']; ?>">
                                 <?php echo esc_html($item['name']); ?>
-                                <span class="horizons-partners-map__badge"><?php echo (int) $item['count']; ?></span>
                             </button>
 
                             <?php if (!empty($item['regions'])) : ?>
@@ -284,7 +281,6 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                                                 data-filter="term"
                                                 data-term-id="<?php echo (int) $region['term_id']; ?>">
                                             <?php echo esc_html($region['name']); ?>
-                                            <span class="horizons-partners-map__badge"><?php echo (int) $region['count']; ?></span>
                                         </button>
                                     <?php endforeach; ?>
                                 </div>
