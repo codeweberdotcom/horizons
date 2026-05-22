@@ -47,9 +47,17 @@
             } catch (e) {}
         }
 
+        /* Sidebar margin so markers are never hidden behind the panel */
+        var hasSidebar   = !wrapper.classList.contains('horizons-partners-map--no-sidebar');
+        var sidebarRight = wrapper.classList.contains('horizons-partners-map--sidebar-right');
+        var mapMargin = hasSidebar
+            ? (sidebarRight ? [0, 270, 0, 0] : [0, 0, 0, 270])
+            : [0, 0, 0, 0];
+
         /* Create map */
         var map = new ymaps3.YMap(canvas, {
             location: { center: center, zoom: zoom },
+            margin: mapMargin,
             behaviors: scrollZoom
                 ? ['drag', 'scrollZoom', 'pinchZoom', 'dblClick']
                 : ['drag', 'pinchZoom', 'dblClick'],
@@ -221,8 +229,9 @@
                 /* Close existing popup when switching filter */
                 if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
 
-                if (autoFitBounds) {
-                    if (filter === 'all' && markers.length > 1) {
+                if (filter === 'all') {
+                    /* Always refit to all markers on explicit "All" click */
+                    if (markers.length > 1) {
                         var alllngs = markers.map(function (m) { return m.lng; });
                         var alllats = markers.map(function (m) { return m.lat; });
                         map.setLocation({
@@ -232,8 +241,11 @@
                             ],
                             duration: 400,
                         });
-                    } else if (filter !== 'all') {
-                        var visible = allMarkerObjects.filter(function (o) { return o.data.termId === termId; });
+                    }
+                } else {
+                    var visible = allMarkerObjects.filter(function (o) { return o.data.termId === termId; });
+
+                    if (autoFitBounds) {
                         if (visible.length === 1) {
                             map.setLocation({ center: [visible[0].data.lng, visible[0].data.lat], zoom: 6, duration: 400 });
                         } else if (visible.length > 1) {
@@ -247,12 +259,12 @@
                                 duration: 400,
                             });
                         }
+                    }
 
-                        /* Open popup for the clicked term marker */
-                        if (visible.length >= 1) {
-                            var target = visible[0];
-                            openPopup(map, target.data, [target.data.lng, target.data.lat], color, size);
-                        }
+                    /* Open popup for the clicked term marker */
+                    if (visible.length >= 1) {
+                        var target = visible[0];
+                        openPopup(map, target.data, [target.data.lng, target.data.lat], color, size);
                     }
                 }
             });
@@ -273,12 +285,13 @@
         var container = document.createElement('div');
         container.style.cssText = [
             'background:#fff',
-            'border-radius:8px',
+            'border-radius:50px',
             'box-shadow:0 4px 24px rgba(0,0,0,.18)',
             'min-width:260px',
             'max-width:320px',
             'overflow:hidden',
             'font-family:inherit',
+            'padding:12px',
             'margin-top:' + offset + 'px',
         ].join(';');
 
