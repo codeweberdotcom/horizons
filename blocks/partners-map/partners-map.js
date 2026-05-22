@@ -141,7 +141,7 @@
             var marker = new ymaps3.YMapMarker({ coordinates: [m.lng, m.lat] }, el);
             el.addEventListener('click', function (e) {
                 e.stopPropagation();
-                openPopup(map, m, [m.lng, m.lat], color);
+                openPopup(map, m, [m.lng, m.lat], color, size);
             });
             allMarkerObjects.push({ marker: marker, data: m, inMap: true });
             map.addChild(marker);
@@ -246,40 +246,46 @@
     /* Popup */
     var currentPopup = null;
 
-    function openPopup(map, markerData, coords, accentColor) {
+    function openPopup(map, markerData, coords, accentColor, markerSize) {
         if (currentPopup) {
             map.removeChild(currentPopup);
             currentPopup = null;
         }
 
-        var container = document.createElement('div');
-        container.style.cssText = 'background:#fff;border-radius:8px;box-shadow:0 4px 24px rgba(0,0,0,.18);min-width:260px;max-width:320px;overflow:hidden;font-family:inherit;';
+        var offset = (markerSize || 40) + 8;
 
-        var header = document.createElement('div');
-        header.className = 'hpm-popup__header';
-        header.style.position = 'relative';
-        header.textContent = markerData.title;
+        var container = document.createElement('div');
+        container.style.cssText = [
+            'background:#fff',
+            'border-radius:8px',
+            'box-shadow:0 4px 24px rgba(0,0,0,.18)',
+            'min-width:260px',
+            'max-width:320px',
+            'overflow:hidden',
+            'font-family:inherit',
+            'margin-top:' + offset + 'px',
+        ].join(';');
 
         var closeBtn = document.createElement('button');
-        closeBtn.style.cssText = 'position:absolute;top:50%;right:10px;transform:translateY(-50%);background:none;border:none;font-size:20px;cursor:pointer;color:#aaa;line-height:1;padding:0;';
+        closeBtn.style.cssText = 'position:absolute;top:6px;right:8px;background:none;border:none;font-size:18px;cursor:pointer;color:#aaa;line-height:1;padding:0;z-index:1;';
         closeBtn.textContent = '×';
         closeBtn.addEventListener('click', function () {
             if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
         });
-        header.appendChild(closeBtn);
 
         var body = document.createElement('div');
         body.className = 'hpm-popup__body';
+        body.style.position = 'relative';
         body.innerHTML = '<div style="padding:16px;text-align:center;color:#aaa;font-size:13px;">Loading…</div>';
+        body.appendChild(closeBtn);
 
-        container.appendChild(header);
         container.appendChild(body);
 
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
         currentPopup = popup;
 
-        var url = '/wp-json/wp/v2/partners?per_page=100&_fields=id,title,link,meta&partner_' + markerData.termType + '=' + markerData.termId;
+        var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media&partner_' + markerData.termType + '=' + markerData.termId;
 
         fetch(url)
             .then(function (r) { return r.json(); })
@@ -301,8 +307,24 @@
         shown.forEach(function (p) {
             var name = p.title && p.title.rendered ? p.title.rendered : '—';
             var pos  = p.meta && p.meta._partner_position ? p.meta._partner_position : '';
+
+            var photo = '';
+            var media = p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0];
+            if (media && !media.code) {
+                var sizes = media.media_details && media.media_details.sizes;
+                var src = (sizes && (sizes.thumbnail || sizes.medium))
+                    ? (sizes.thumbnail || sizes.medium).source_url
+                    : media.source_url;
+                if (src) {
+                    photo = '<img class="hpm-partner-card__photo" src="' + src + '" alt="' + name + '" loading="lazy">';
+                }
+            }
+            if (!photo) {
+                photo = '<div class="hpm-partner-card__avatar">👤</div>';
+            }
+
             html += '<a href="' + (p.link || '#') + '" class="hpm-partner-card" target="_blank" rel="noopener">'
-                + '<div class="hpm-partner-card__avatar">👤</div>'
+                + photo
                 + '<div class="hpm-partner-card__info">'
                 + '<span class="hpm-partner-card__name">' + name + '</span>'
                 + (pos ? '<span class="hpm-partner-card__pos">' + pos + '</span>' : '')
