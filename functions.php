@@ -289,6 +289,112 @@ function horizons_partners_map_editor_assets() {
 }
 add_action('enqueue_block_editor_assets', 'horizons_partners_map_editor_assets');
 
+// REST API endpoint for partners-map editor preview
+function horizons_partners_map_rest_data(WP_REST_Request $request) {
+	$data_source = sanitize_text_field($request->get_param('dataSource') ?? 'both');
+
+	$region_terms  = [];
+	$country_terms = [];
+
+	if (in_array($data_source, ['both', 'regions'], true)) {
+		$terms = get_terms(['taxonomy' => 'partner_region', 'hide_empty' => true, 'number' => 0]);
+		if (!is_wp_error($terms)) {
+			foreach ($terms as $term) {
+				$lat = get_term_meta($term->term_id, 'partner_lat', true);
+				$lng = get_term_meta($term->term_id, 'partner_lng', true);
+				if ($lat !== '' && $lng !== '') {
+					$region_terms[$term->term_id] = ['term' => $term, 'lat' => (float)$lat, 'lng' => (float)$lng, 'type' => 'region'];
+				}
+			}
+		}
+	}
+
+	if (in_array($data_source, ['both', 'countries'], true)) {
+		$terms = get_terms(['taxonomy' => 'partner_country', 'hide_empty' => true, 'number' => 0]);
+		if (!is_wp_error($terms)) {
+			foreach ($terms as $term) {
+				$lat = get_term_meta($term->term_id, 'partner_lat', true);
+				$lng = get_term_meta($term->term_id, 'partner_lng', true);
+				if ($lat !== '' && $lng !== '') {
+					$country_terms[$term->term_id] = ['term' => $term, 'lat' => (float)$lat, 'lng' => (float)$lng, 'type' => 'country'];
+				}
+			}
+		}
+	}
+
+	$partners_by_term  = [];
+	$region_to_country = [];
+
+	$q = new WP_Query(['post_type' => 'partners', 'posts_per_page' => -1, 'post_status' => 'publish', 'fields' => 'ids', 'no_found_rows' => true]);
+	foreach ($q->posts as $pid) {
+		$p_countries = wp_get_post_terms($pid, 'partner_country', ['fields' => 'ids']);
+		$p_regions   = wp_get_post_terms($pid, 'partner_region',  ['fields' => 'ids']);
+		if (is_wp_error($p_countries)) $p_countries = [];
+		if (is_wp_error($p_regions))   $p_regions   = [];
+
+		foreach ($p_regions as $rid) {
+			if (!isset($region_to_country[$rid]) && !empty($p_countries)) {
+				$region_to_country[$rid] = $p_countries[0];
+			}
+		}
+
+		$assigned = false;
+		foreach ($p_regions as $rid) {
+			if (isset($region_terms[$rid])) { $partners_by_term[$rid][] = $pid; $assigned = true; }
+		}
+		if (!$assigned) {
+			foreach ($p_countries as $cid) {
+				if (isset($country_terms[$cid])) $partners_by_term[$cid][] = $pid;
+			}
+		}
+	}
+	wp_reset_postdata();
+
+	// Markers
+	$markers = [];
+	foreach (($region_terms + $country_terms) as $tid => $tdata) {
+		$ids = $partners_by_term[$tid] ?? [];
+		if (empty($ids)) continue;
+		$markers[] = ['termId' => $tid, 'termType' => $tdata['type'], 'lat' => $tdata['lat'], 'lng' => $tdata['lng'], 'title' => $tdata['term']->name, 'count' => count($ids)];
+	}
+
+	// Sidebar tree
+	$total        = 0;
+	$sidebar      = [];
+
+	foreach ($country_terms as $cid => $cdata) {
+		$c_count = count($partners_by_term[$cid] ?? []);
+		$sidebar[$cid] = ['term_id' => $cid, 'name' => $cdata['term']->name, 'count' => $c_count, 'type' => 'country', 'regions' => []];
+		$total += $c_count;
+	}
+	foreach ($region_terms as $rid => $rdata) {
+		$r_count = count($partners_by_term[$rid] ?? []);
+		if (!$r_count) continue;
+		$total += $r_count;
+		$cid = $region_to_country[$rid] ?? null;
+		if ($cid && isset($sidebar[$cid])) {
+			$sidebar[$cid]['regions'][] = ['term_id' => $rid, 'name' => $rdata['term']->name, 'count' => $r_count];
+			$sidebar[$cid]['count'] += $r_count;
+		} else {
+			$sidebar['r-' . $rid] = ['term_id' => $rid, 'name' => $rdata['term']->name, 'count' => $r_count, 'type' => 'region', 'regions' => []];
+		}
+	}
+	$sidebar = array_values(array_filter($sidebar, fn($i) => $i['count'] > 0));
+
+	return rest_ensure_response(['markers' => $markers, 'sidebar' => $sidebar, 'total' => $total]);
+}
+
+add_action('rest_api_init', function () {
+	register_rest_route('horizons/v1', '/partners-map-data', [
+		'methods'             => 'GET',
+		'callback'            => 'horizons_partners_map_rest_data',
+		'permission_callback' => function () { return current_user_can('edit_posts'); },
+		'args'                => [
+			'dataSource' => ['default' => 'both', 'sanitize_callback' => 'sanitize_text_field'],
+		],
+	]);
+});
+
 
 // Регистрация блока Awards Grid
 function horizons_register_awards_grid_block() {

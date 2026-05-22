@@ -1,6 +1,7 @@
 ﻿import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { useEffect, useRef } from '@wordpress/element';
+import { useEffect, useRef, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
+import apiFetch from '@wordpress/api-fetch';
 import {
 	PanelBody,
 	SelectControl,
@@ -34,25 +35,38 @@ export default function Edit({ attributes, setAttributes }) {
 		styleJson,
 	} = attributes;
 
-	const mapRef = useRef(null);
+	const mapRef        = useRef(null);
 	const mapInstanceRef = useRef(null);
+	const markersRef    = useRef([]);
+	const [mapData, setMapData] = useState(null);
+
 	const blockProps = useBlockProps({ className: 'horizons-partners-map-editor' });
 
-	/* Live map preview in editor */
+	/* Fetch markers + sidebar from REST */
+	useEffect(() => {
+		apiFetch({ path: '/horizons/v1/partners-map-data?dataSource=' + dataSource })
+			.then((data) => setMapData(data))
+			.catch(() => {});
+	}, [dataSource]);
+
+	/* Init / reinit map */
 	useEffect(() => {
 		const el = mapRef.current;
 		if (!el) return;
 
 		function destroyMap() {
+			markersRef.current.forEach((m) => {
+				try { mapInstanceRef.current && mapInstanceRef.current.removeChild(m); } catch (e) {}
+			});
+			markersRef.current = [];
 			if (mapInstanceRef.current) {
 				try { mapInstanceRef.current.destroy(); } catch (e) {}
 				mapInstanceRef.current = null;
 			}
 		}
 
-		function initEditorMap() {
+		function buildMap() {
 			if (typeof window.ymaps3 === 'undefined') return;
-
 			destroyMap();
 
 			const typeId = mapType === 'satellite' ? 'satellite' : mapType === 'hybrid' ? 'hybrid' : 'normal';
@@ -68,34 +82,86 @@ export default function Edit({ attributes, setAttributes }) {
 			map.addChild(new window.ymaps3.YMapDefaultSchemeLayer(schemeOptions));
 			map.addChild(new window.ymaps3.YMapDefaultFeaturesLayer());
 			mapInstanceRef.current = map;
+
+			/* Place markers */
+			const markers = (mapData && mapData.markers) || [];
+			const size  = markerSize || 40;
+			const color = markerColor || '#C8A96E';
+			const shape = markerShape || 'circle';
+			const labelSz = markerLabelSize || 11;
+
+			markers.forEach((m) => {
+				const wrap = document.createElement('div');
+				wrap.style.cssText = 'display:flex;align-items:center;gap:7px;pointer-events:none;';
+
+				const dot = document.createElement('div');
+				dot.style.cssText = [
+					'width:' + size + 'px',
+					'height:' + size + 'px',
+					'border-radius:' + (shape === 'square' ? '0' : '50%'),
+					'background:' + color,
+					'flex-shrink:0',
+					'display:flex',
+					'align-items:center',
+					'justify-content:center',
+					'color:#fff',
+					'font-size:' + Math.round(size * 0.3) + 'px',
+					'font-weight:700',
+					'box-shadow:0 2px 8px rgba(0,0,0,.25)',
+				].join(';');
+				if (markerShowCount) dot.textContent = m.count;
+				wrap.appendChild(dot);
+
+				if (markerShowLabel) {
+					const lbl = document.createElement('span');
+					lbl.textContent = m.title;
+					lbl.style.cssText = 'font-size:' + labelSz + 'px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;white-space:nowrap;';
+					wrap.appendChild(lbl);
+				}
+
+				const marker = new window.ymaps3.YMapMarker({ coordinates: [m.lng, m.lat] }, wrap);
+				map.addChild(marker);
+				markersRef.current.push(marker);
+			});
+
+			/* Auto fit */
+			if (markers.length > 1) {
+				const lngs = markers.map((m) => m.lng);
+				const lats = markers.map((m) => m.lat);
+				map.setLocation({
+					bounds: [
+						[Math.min(...lngs), Math.min(...lats)],
+						[Math.max(...lngs), Math.max(...lats)],
+					],
+					duration: 0,
+				});
+			}
 		}
 
 		if (typeof window.ymaps3 !== 'undefined') {
-			window.ymaps3.ready.then(initEditorMap);
+			window.ymaps3.ready.then(buildMap);
 		} else {
-			/* wait for ymaps3 to load (script is enqueued via PHP) */
-			const interval = setInterval(() => {
+			const iv = setInterval(() => {
 				if (typeof window.ymaps3 !== 'undefined') {
-					clearInterval(interval);
-					window.ymaps3.ready.then(initEditorMap);
+					clearInterval(iv);
+					window.ymaps3.ready.then(buildMap);
 				}
-			}, 200);
-			return () => { clearInterval(interval); destroyMap(); };
+			}, 300);
+			return () => { clearInterval(iv); destroyMap(); };
 		}
 
 		return destroyMap;
-	}, [centerLat, centerLng, zoom, mapType, styleJson, height]);
+	}, [centerLat, centerLng, zoom, mapType, styleJson, height,
+		markerColor, markerSize, markerShape, markerShowCount, markerShowLabel, markerLabelSize,
+		mapData]);
 
-	const mapTypeLabel =
-		mapType === 'satellite' ? __('Satellite', 'horizons') :
-		mapType === 'hybrid'    ? __('Hybrid', 'horizons') :
-		__('Normal', 'horizons');
+	const sidebar      = (mapData && mapData.sidebar) || [];
+	const totalCount   = (mapData && mapData.total)   || 0;
 
 	return (
 		<>
 			<InspectorControls>
 
-				{/* Map Settings */}
 				<PanelBody title={__('Map Settings', 'horizons')} initialOpen>
 					<SelectControl
 						label={__('Data source', 'horizons')}
@@ -148,23 +214,18 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 					<ToggleControl
 						label={__('Scroll zoom', 'horizons')}
-						help={__('Allow zooming the map with mouse scroll', 'horizons')}
 						checked={scrollZoom}
 						onChange={(val) => setAttributes({ scrollZoom: val })}
 					/>
 					<ToggleControl
 						label={__('Auto fit bounds', 'horizons')}
-						help={__('Automatically zoom to show all markers on load', 'horizons')}
 						checked={autoFitBounds}
 						onChange={(val) => setAttributes({ autoFitBounds: val })}
 					/>
 				</PanelBody>
 
-				{/* Markers */}
 				<PanelBody title={__('Markers', 'horizons')} initialOpen={false}>
-					<p style={{ marginBottom: 8, fontSize: 12, color: '#555' }}>
-						{__('Marker color', 'horizons')}
-					</p>
+					<p style={{ marginBottom: 8, fontSize: 12, color: '#555' }}>{__('Marker color', 'horizons')}</p>
 					<ColorPicker
 						color={markerColor}
 						onChange={(val) => setAttributes({ markerColor: val })}
@@ -189,13 +250,11 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 					<ToggleControl
 						label={__('Show count', 'horizons')}
-						help={__('Display partner count number on marker', 'horizons')}
 						checked={markerShowCount}
 						onChange={(val) => setAttributes({ markerShowCount: val })}
 					/>
 					<ToggleControl
 						label={__('Show country label', 'horizons')}
-						help={__('Display country/region name next to marker', 'horizons')}
 						checked={markerShowLabel}
 						onChange={(val) => setAttributes({ markerShowLabel: val })}
 					/>
@@ -203,7 +262,7 @@ export default function Edit({ attributes, setAttributes }) {
 						<RangeControl
 							label={__('Label font size (px)', 'horizons')}
 							value={markerLabelSize}
-							min={8}
+							min={1}
 							max={24}
 							step={1}
 							onChange={(val) => setAttributes({ markerLabelSize: val })}
@@ -211,13 +270,11 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 					<ToggleControl
 						label={__('Enable clusterer', 'horizons')}
-						help={__('Group nearby markers into clusters', 'horizons')}
 						checked={clustererEnabled}
 						onChange={(val) => setAttributes({ clustererEnabled: val })}
 					/>
 				</PanelBody>
 
-				{/* Sidebar */}
 				<PanelBody title={__('Sidebar', 'horizons')} initialOpen={false}>
 					<ToggleControl
 						label={__('Show sidebar', 'horizons')}
@@ -245,11 +302,7 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				{/* Style JSON */}
 				<PanelBody title={__('Custom map style (JSON)', 'horizons')} initialOpen={false}>
-					<p style={{ marginBottom: 8, fontSize: 12, color: '#555' }}>
-						{__('Paste Yandex Maps v3 customization JSON array here.', 'horizons')}
-					</p>
 					<TextareaControl
 						value={styleJson}
 						rows={8}
@@ -267,15 +320,51 @@ export default function Edit({ attributes, setAttributes }) {
 
 			<div {...blockProps}>
 				<div
-					ref={mapRef}
-					style={{
-						width: '100%',
-						height: height + 'px',
-						borderRadius: '8px',
-						overflow: 'hidden',
-						background: '#e8e4de',
-					}}
-				/>
+					className={'horizons-partners-map' + (!sidebarEnabled ? ' horizons-partners-map--no-sidebar' : '') + (sidebarPosition === 'right' ? ' horizons-partners-map--sidebar-right' : '')}
+					style={{ height: height + 'px', display: 'flex', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 2px 16px rgba(0,0,0,.12)' }}
+				>
+					{sidebarEnabled && (
+						<aside className="horizons-partners-map__sidebar">
+							{sidebarTitle && (
+								<div className="horizons-partners-map__sidebar-title">{sidebarTitle}</div>
+							)}
+							<div className="horizons-partners-map__sidebar-inner">
+								<button className="horizons-partners-map__filter-btn is-active" disabled>
+									{__('All partners', 'horizons')}
+									<span className="horizons-partners-map__badge">{totalCount}</span>
+								</button>
+								{sidebar.map((item) => item.type === 'region' ? (
+									<button key={item.term_id} className="horizons-partners-map__filter-btn horizons-partners-map__filter-region" disabled>
+										{item.name}
+										<span className="horizons-partners-map__badge">{item.count}</span>
+									</button>
+								) : (
+									<div key={item.term_id} className="horizons-partners-map__country-group">
+										<button className="horizons-partners-map__filter-btn horizons-partners-map__filter-country" disabled>
+											{item.name}
+											<span className="horizons-partners-map__badge">{item.count}</span>
+										</button>
+										{item.regions && item.regions.length > 0 && (
+											<div className="horizons-partners-map__regions">
+												{item.regions.map((r) => (
+													<button key={r.term_id} className="horizons-partners-map__filter-btn horizons-partners-map__filter-region" disabled>
+														{r.name}
+														<span className="horizons-partners-map__badge">{r.count}</span>
+													</button>
+												))}
+											</div>
+										)}
+									</div>
+								))}
+							</div>
+						</aside>
+					)}
+					<div
+						ref={mapRef}
+						className="horizons-partners-map__canvas"
+						style={{ flex: 1, minWidth: 0, position: 'relative' }}
+					/>
+				</div>
 			</div>
 		</>
 	);
