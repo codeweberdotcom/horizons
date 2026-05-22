@@ -229,6 +229,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 ?>
 <div <?php echo $wrapper_attrs; ?>>
     <div class="<?php echo esc_attr($wrapper_classes); ?>"
+         style="height:<?php echo (int) $height; ?>px;"
          data-map-config="<?php echo esc_attr($map_config); ?>">
 
         <?php /* ── Sidebar ── */ ?>
@@ -241,6 +242,13 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                 <?php echo esc_html($sidebar_title); ?>
             </div>
             <?php endif; ?>
+
+            <div class="horizons-partners-map__sidebar-search">
+                <input type="search"
+                       class="horizons-partners-map__search-input"
+                       placeholder="<?php esc_attr_e('Search country…', 'horizons'); ?>"
+                       aria-label="<?php esc_attr_e('Search countries', 'horizons'); ?>">
+            </div>
 
             <div class="horizons-partners-map__sidebar-inner">
 
@@ -292,7 +300,6 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
         <?php /* ── Map canvas ── */ ?>
         <div class="horizons-partners-map__canvas"
-             style="height:<?php echo (int) $height; ?>px;"
              aria-label="<?php esc_attr_e('Partners map', 'horizons'); ?>">
         </div>
 

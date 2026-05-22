@@ -135,6 +135,26 @@
             });
         }
 
+        /* Sidebar search */
+        var searchInput = wrapper.querySelector('.horizons-partners-map__search-input');
+        if (searchInput) {
+            searchInput.addEventListener('input', function () {
+                var q = searchInput.value.trim().toLowerCase();
+                var groups = wrapper.querySelectorAll('.horizons-partners-map__country-group');
+                groups.forEach(function (group) {
+                    var btn = group.querySelector('.horizons-partners-map__filter-btn');
+                    var name = btn ? btn.textContent.trim().toLowerCase() : '';
+                    group.style.display = (!q || name.indexOf(q) !== -1) ? '' : 'none';
+                });
+                /* standalone region buttons */
+                var regionBtns = wrapper.querySelectorAll('.horizons-partners-map__sidebar-inner > .horizons-partners-map__filter-region');
+                regionBtns.forEach(function (btn) {
+                    var name = btn.textContent.trim().toLowerCase();
+                    btn.style.display = (!q || name.indexOf(q) !== -1) ? '' : 'none';
+                });
+            });
+        }
+
         /* Sidebar filter */
         var buttons = wrapper.querySelectorAll('.horizons-partners-map__filter-btn');
 
