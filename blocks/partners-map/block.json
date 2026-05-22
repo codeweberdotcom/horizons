@@ -1,0 +1,40 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "horizons-blocks/partners-map",
+  "version": "1.0.0",
+  "title": "Partners Map",
+  "category": "horizons-blocks",
+  "icon": "location",
+  "description": "Display partners on a Yandex Map grouped by region and country",
+  "keywords": ["partners", "map", "yandex", "regions", "countries"],
+  "supports": {
+    "html": false,
+    "customClassName": false
+  },
+  "textdomain": "horizons",
+  "editorScript": "file:./index.js",
+  "render": "file:./render.php",
+  "attributes": {
+    "dataSource": {
+      "type": "string",
+      "default": "both"
+    },
+    "height": {
+      "type": "number",
+      "default": 600
+    },
+    "zoom": {
+      "type": "number",
+      "default": 4
+    },
+    "centerLat": {
+      "type": "number",
+      "default": 55.76
+    },
+    "centerLng": {
+      "type": "number",
+      "default": 37.64
+    }
+  }
+}

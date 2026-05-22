@@ -33,6 +33,7 @@ $theme_includes = array(
     '/includes/disable-parent-widgets.php', // Отключение виджетов родительской темы (должен быть загружен до sidebars.php)
     '/includes/sidebars.php',
     '/includes/partners.php',
+    '/includes/partners-map-terms.php',
     '/includes/practices.php',
     '/includes/blog.php',
     '/includes/vacancies.php',
@@ -255,6 +256,30 @@ function horizons_register_partners_grid_block() {
 	}
 }
 add_action('init', 'horizons_register_partners_grid_block', 20);
+
+
+// Регистрация блока Partners Map
+function horizons_register_partners_map_block() {
+	$block_path = get_stylesheet_directory() . '/blocks/partners-map';
+
+	if (!file_exists($block_path . '/block.json')) {
+		return;
+	}
+
+	if (!file_exists($block_path . '/index.js') || !file_exists($block_path . '/index.asset.php')) {
+		if (defined('WP_DEBUG') && WP_DEBUG) {
+			error_log('Partners Map: index.js or index.asset.php not found — run npm run build:partners-map');
+		}
+		return;
+	}
+
+	$result = register_block_type($block_path);
+
+	if (is_wp_error($result) && defined('WP_DEBUG') && WP_DEBUG) {
+		error_log('Partners Map registration error: ' . $result->get_error_message());
+	}
+}
+add_action('init', 'horizons_register_partners_map_block', 20);
 
 
 // Регистрация блока Awards Grid

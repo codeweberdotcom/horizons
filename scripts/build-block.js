@@ -93,6 +93,8 @@ console.log('🔨 Запускаю сборку...');
 			buildCommand = 'npm run build:partners-grid-direct';
 		} else if (blockName === 'awards-grid') {
 			buildCommand = 'npm run build:awards-grid-direct';
+		} else if (blockName === 'partners-map') {
+			buildCommand = 'npm run build:partners-map-direct';
 		} else {
 			console.error(`❌ Неизвестный блок: ${blockName}`);
 			process.exit(1);
