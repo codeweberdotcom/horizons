@@ -307,29 +307,30 @@
         shown.forEach(function (p) {
             var name = p.title && p.title.rendered ? p.title.rendered : '—';
             var pos  = p.meta && p.meta._partner_position ? p.meta._partner_position : '';
+            var href = p.link || '#';
 
-            var photo = '';
-            var media = p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0];
+            var imgTag = '';
+            var media  = p._embedded && p._embedded['wp:featuredmedia'] && p._embedded['wp:featuredmedia'][0];
             if (media && !media.code) {
                 var sizes = media.media_details && media.media_details.sizes;
-                var src = (sizes && (sizes.thumbnail || sizes.medium))
+                var src   = (sizes && (sizes.thumbnail || sizes.medium))
                     ? (sizes.thumbnail || sizes.medium).source_url
                     : media.source_url;
                 if (src) {
-                    photo = '<img class="hpm-partner-card__photo" src="' + src + '" alt="' + name + '" loading="lazy">';
+                    imgTag = '<img decoding="async" loading="lazy" class="w-48 h-48 me-3 rounded-circle" src="' + src + '" alt="' + name + '">';
                 }
             }
-            if (!photo) {
-                photo = '<div class="hpm-partner-card__avatar">👤</div>';
+            if (!imgTag) {
+                imgTag = '<div class="w-48 h-48 me-3 rounded-circle bg-light d-flex align-items-center justify-content-center flex-shrink-0" style="font-size:20px;">👤</div>';
             }
 
-            html += '<a href="' + (p.link || '#') + '" class="hpm-partner-card" target="_blank" rel="noopener">'
-                + photo
-                + '<div class="hpm-partner-card__info">'
-                + '<span class="hpm-partner-card__name">' + name + '</span>'
-                + (pos ? '<span class="hpm-partner-card__pos">' + pos + '</span>' : '')
-                + '</div>'
-                + '</a>';
+            html += '<div class="author-info d-flex align-items-center px-3 py-2 border-bottom hpm-card-row">'
+                +   imgTag
+                +   '<div class="avatar-info mt-0 overflow-hidden">'
+                +     '<a href="' + href + '" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0 text-truncate" target="_blank" rel="noopener">' + name + '</a>'
+                +     (pos ? '<span class="body-s lh-0 text-neutral-500 d-block mt-1 text-truncate">' + pos + '</span>' : '')
+                +   '</div>'
+                + '</div>';
         });
 
         body.innerHTML = html;

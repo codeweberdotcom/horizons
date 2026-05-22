@@ -219,69 +219,13 @@
     max-height: 340px;
 }
 
-/* Partner card in popup */
-.hpm-partner-card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    text-decoration: none;
-    color: inherit;
-    border-bottom: 1px solid #f8f6f3;
-    transition: background .15s;
+/* Partner card row in popup */
+.hpm-card-row:last-child {
+    border-bottom: none !important;
 }
 
-.hpm-partner-card:last-child {
-    border-bottom: none;
-}
-
-.hpm-partner-card:hover {
+.hpm-card-row:hover {
     background: #faf8f5;
-}
-
-.hpm-partner-card__photo {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    flex-shrink: 0;
-}
-
-.hpm-partner-card__avatar {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    background: #e8e0d4;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-    color: #b09070;
-}
-
-.hpm-partner-card__info {
-    overflow: hidden;
-}
-
-.hpm-partner-card__name {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    color: #1a1a1a;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.hpm-partner-card__pos {
-    display: block;
-    font-size: 11px;
-    color: #999;
-    margin-top: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .hpm-popup__more {
