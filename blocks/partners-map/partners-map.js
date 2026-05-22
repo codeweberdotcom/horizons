@@ -126,20 +126,32 @@
                     }
                 });
 
-                if (filter !== 'all' && autoFitBounds) {
-                    var visible = allMarkerObjects.filter(function (o) { return o.data.termId === termId; });
-                    if (visible.length === 1) {
-                        map.setLocation({ center: [visible[0].data.lng, visible[0].data.lat], zoom: 6, duration: 400 });
-                    } else if (visible.length > 1) {
-                        var vlngs = visible.map(function (o) { return o.data.lng; });
-                        var vlats = visible.map(function (o) { return o.data.lat; });
+                if (autoFitBounds) {
+                    if (filter === 'all' && markers.length > 1) {
+                        var alllngs = markers.map(function (m) { return m.lng; });
+                        var alllats = markers.map(function (m) { return m.lat; });
                         map.setLocation({
                             bounds: [
-                                [Math.min.apply(null, vlngs), Math.min.apply(null, vlats)],
-                                [Math.max.apply(null, vlngs), Math.max.apply(null, vlats)],
+                                [Math.min.apply(null, alllngs), Math.min.apply(null, alllats)],
+                                [Math.max.apply(null, alllngs), Math.max.apply(null, alllats)],
                             ],
                             duration: 400,
                         });
+                    } else if (filter !== 'all') {
+                        var visible = allMarkerObjects.filter(function (o) { return o.data.termId === termId; });
+                        if (visible.length === 1) {
+                            map.setLocation({ center: [visible[0].data.lng, visible[0].data.lat], zoom: 6, duration: 400 });
+                        } else if (visible.length > 1) {
+                            var vlngs = visible.map(function (o) { return o.data.lng; });
+                            var vlats = visible.map(function (o) { return o.data.lat; });
+                            map.setLocation({
+                                bounds: [
+                                    [Math.min.apply(null, vlngs), Math.min.apply(null, vlats)],
+                                    [Math.max.apply(null, vlngs), Math.max.apply(null, vlats)],
+                                ],
+                                duration: 400,
+                            });
+                        }
                     }
                 }
             });
