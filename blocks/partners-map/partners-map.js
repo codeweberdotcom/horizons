@@ -218,6 +218,9 @@
                     }
                 });
 
+                /* Close existing popup when switching filter */
+                if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
+
                 if (autoFitBounds) {
                     if (filter === 'all' && markers.length > 1) {
                         var alllngs = markers.map(function (m) { return m.lng; });
@@ -244,6 +247,12 @@
                                 duration: 400,
                             });
                         }
+
+                        /* Open popup for the clicked term marker */
+                        if (visible.length >= 1) {
+                            var target = visible[0];
+                            openPopup(map, target.data, [target.data.lng, target.data.lat], color, size);
+                        }
                     }
                 }
             });
@@ -259,7 +268,7 @@
             currentPopup = null;
         }
 
-        var offset = (markerSize || 40) + 8;
+        var offset = (markerSize || 40) + 24;
 
         var container = document.createElement('div');
         container.style.cssText = [
@@ -292,7 +301,7 @@
         map.addChild(popup);
         currentPopup = popup;
 
-        var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media&partner_' + markerData.termType + '=' + markerData.termId;
+        var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media,_links&partner_' + markerData.termType + '=' + markerData.termId;
 
         fetch(url)
             .then(function (r) { return r.json(); })
