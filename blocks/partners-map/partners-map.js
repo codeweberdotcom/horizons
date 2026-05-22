@@ -303,7 +303,7 @@
             'font-family:inherit',
             'display:flex',
             'flex-direction:column',
-            'gap:8px',
+            'gap:2px',
             'margin-top:' + offset + 'px',
         ].join(';');
 
