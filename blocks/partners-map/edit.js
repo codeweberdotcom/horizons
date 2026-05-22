@@ -1,4 +1,5 @@
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+﻿import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { useEffect, useRef } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import {
 	PanelBody,
@@ -8,7 +9,6 @@ import {
 	TextControl,
 	TextareaControl,
 	ColorPicker,
-	__experimentalNumberControl as NumberControl,
 } from '@wordpress/components';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -26,6 +26,7 @@ export default function Edit({ attributes, setAttributes }) {
 		markerShape,
 		markerShowCount,
 		markerShowLabel,
+		markerLabelSize,
 		clustererEnabled,
 		sidebarEnabled,
 		sidebarPosition,
@@ -33,7 +34,57 @@ export default function Edit({ attributes, setAttributes }) {
 		styleJson,
 	} = attributes;
 
+	const mapRef = useRef(null);
+	const mapInstanceRef = useRef(null);
 	const blockProps = useBlockProps({ className: 'horizons-partners-map-editor' });
+
+	/* Live map preview in editor */
+	useEffect(() => {
+		const el = mapRef.current;
+		if (!el) return;
+
+		function destroyMap() {
+			if (mapInstanceRef.current) {
+				try { mapInstanceRef.current.destroy(); } catch (e) {}
+				mapInstanceRef.current = null;
+			}
+		}
+
+		function initEditorMap() {
+			if (typeof window.ymaps3 === 'undefined') return;
+
+			destroyMap();
+
+			const typeId = mapType === 'satellite' ? 'satellite' : mapType === 'hybrid' ? 'hybrid' : 'normal';
+			const schemeOptions = { theme: typeId };
+			if (styleJson) {
+				try { schemeOptions.customization = JSON.parse(styleJson); } catch (e) {}
+			}
+
+			const map = new window.ymaps3.YMap(el, {
+				location: { center: [centerLng, centerLat], zoom },
+				behaviors: [],
+			});
+			map.addChild(new window.ymaps3.YMapDefaultSchemeLayer(schemeOptions));
+			map.addChild(new window.ymaps3.YMapDefaultFeaturesLayer());
+			mapInstanceRef.current = map;
+		}
+
+		if (typeof window.ymaps3 !== 'undefined') {
+			window.ymaps3.ready.then(initEditorMap);
+		} else {
+			/* wait for ymaps3 to load (script is enqueued via PHP) */
+			const interval = setInterval(() => {
+				if (typeof window.ymaps3 !== 'undefined') {
+					clearInterval(interval);
+					window.ymaps3.ready.then(initEditorMap);
+				}
+			}, 200);
+			return () => { clearInterval(interval); destroyMap(); };
+		}
+
+		return destroyMap;
+	}, [centerLat, centerLng, zoom, mapType, styleJson, height]);
 
 	const mapTypeLabel =
 		mapType === 'satellite' ? __('Satellite', 'horizons') :
@@ -44,7 +95,7 @@ export default function Edit({ attributes, setAttributes }) {
 		<>
 			<InspectorControls>
 
-				{/* ── Map Settings ── */}
+				{/* Map Settings */}
 				<PanelBody title={__('Map Settings', 'horizons')} initialOpen>
 					<SelectControl
 						label={__('Data source', 'horizons')}
@@ -109,7 +160,7 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				{/* ── Markers ── */}
+				{/* Markers */}
 				<PanelBody title={__('Markers', 'horizons')} initialOpen={false}>
 					<p style={{ marginBottom: 8, fontSize: 12, color: '#555' }}>
 						{__('Marker color', 'horizons')}
@@ -122,9 +173,9 @@ export default function Edit({ attributes, setAttributes }) {
 					<RangeControl
 						label={__('Marker size (px)', 'horizons')}
 						value={markerSize}
-						min={20}
+						min={1}
 						max={80}
-						step={4}
+						step={1}
 						onChange={(val) => setAttributes({ markerSize: val })}
 					/>
 					<SelectControl
@@ -144,10 +195,20 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 					<ToggleControl
 						label={__('Show country label', 'horizons')}
-						help={__('Display country/region name next to marker (uppercase bold)', 'horizons')}
+						help={__('Display country/region name next to marker', 'horizons')}
 						checked={markerShowLabel}
 						onChange={(val) => setAttributes({ markerShowLabel: val })}
 					/>
+					{markerShowLabel && (
+						<RangeControl
+							label={__('Label font size (px)', 'horizons')}
+							value={markerLabelSize}
+							min={8}
+							max={24}
+							step={1}
+							onChange={(val) => setAttributes({ markerLabelSize: val })}
+						/>
+					)}
 					<ToggleControl
 						label={__('Enable clusterer', 'horizons')}
 						help={__('Group nearby markers into clusters', 'horizons')}
@@ -156,7 +217,7 @@ export default function Edit({ attributes, setAttributes }) {
 					/>
 				</PanelBody>
 
-				{/* ── Sidebar ── */}
+				{/* Sidebar */}
 				<PanelBody title={__('Sidebar', 'horizons')} initialOpen={false}>
 					<ToggleControl
 						label={__('Show sidebar', 'horizons')}
@@ -184,7 +245,7 @@ export default function Edit({ attributes, setAttributes }) {
 					)}
 				</PanelBody>
 
-				{/* ── Style JSON ── */}
+				{/* Style JSON */}
 				<PanelBody title={__('Custom map style (JSON)', 'horizons')} initialOpen={false}>
 					<p style={{ marginBottom: 8, fontSize: 12, color: '#555' }}>
 						{__('Paste Yandex Maps v3 customization JSON array here.', 'horizons')}
@@ -205,26 +266,16 @@ export default function Edit({ attributes, setAttributes }) {
 			</InspectorControls>
 
 			<div {...blockProps}>
-				<div style={{
-					padding: '40px 20px',
-					background: '#f7f6f5',
-					textAlign: 'center',
-					border: '2px dashed #ccc',
-					borderRadius: '8px',
-				}}>
-					<div style={{ fontSize: '36px', marginBottom: '8px' }}>📍</div>
-					<p style={{ margin: '0 0 4px', fontWeight: '600', fontSize: '15px' }}>
-						{__('Partners Map', 'horizons')}
-					</p>
-					<p style={{ margin: 0, color: '#888', fontSize: '13px' }}>
-						{__('Yandex Map with partner locations. Configure in the sidebar panel.', 'horizons')}
-					</p>
-					<p style={{ margin: '12px 0 0', color: '#aaa', fontSize: '12px' }}>
-						{height}px · {__('zoom', 'horizons')} {zoom} · {mapTypeLabel}
-						{sidebarEnabled ? ' · ' + __('sidebar', 'horizons') + ' ' + sidebarPosition : ''}
-						{clustererEnabled ? ' · ' + __('clusterer', 'horizons') : ''}
-					</p>
-				</div>
+				<div
+					ref={mapRef}
+					style={{
+						width: '100%',
+						height: height + 'px',
+						borderRadius: '8px',
+						overflow: 'hidden',
+						background: '#e8e4de',
+					}}
+				/>
 			</div>
 		</>
 	);

@@ -17,9 +17,11 @@ const filesToKeep = [
 	'sidebar.js',
 	'editor.scss',
 	'style.scss',
+	'style.css',
 	'controls',
 	'index.src.js', // Исходный файл для сборки
 	'index.css', // Скомпилированные CSS файлы тоже сохраняем
+	'partners-map.js',
 ];
 
 console.log(`📦 Сохраняю исходные файлы блока ${blockName}...`);

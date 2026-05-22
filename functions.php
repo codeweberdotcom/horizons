@@ -281,6 +281,14 @@ function horizons_register_partners_map_block() {
 }
 add_action('init', 'horizons_register_partners_map_block', 20);
 
+// Enqueue Yandex Maps API in the block editor for the partners-map live preview
+function horizons_partners_map_editor_assets() {
+	if (class_exists('Codeweber_Yandex_Maps') && Codeweber_Yandex_Maps::get_instance()->has_api_key()) {
+		wp_enqueue_script('yandex-maps-api-v3');
+	}
+}
+add_action('enqueue_block_editor_assets', 'horizons_partners_map_editor_assets');
+
 
 // Регистрация блока Awards Grid
 function horizons_register_awards_grid_block() {

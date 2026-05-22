@@ -196,9 +196,10 @@ wp_enqueue_script(
 );
 
 // ── 7. Build map config ───────────────────────────────────────────────────────
-$marker_shape      = $attributes['markerShape']     ?? 'circle';
-$marker_show_count = (bool) ($attributes['markerShowCount'] ?? true);
-$marker_show_label = (bool) ($attributes['markerShowLabel'] ?? false);
+$marker_shape      = $attributes['markerShape']      ?? 'circle';
+$marker_show_count = (bool) ($attributes['markerShowCount']  ?? true);
+$marker_show_label = (bool) ($attributes['markerShowLabel']  ?? false);
+$marker_label_size = max(1, (int) ($attributes['markerLabelSize'] ?? 11));
 
 $map_config = wp_json_encode([
     'center'          => [$center_lng, $center_lat],
@@ -212,6 +213,7 @@ $map_config = wp_json_encode([
     'markerShape'     => $marker_shape,
     'markerShowCount' => $marker_show_count,
     'markerShowLabel' => $marker_show_label,
+    'markerLabelSize' => $marker_label_size,
     'clusterer'       => $clusterer,
     'styleJson'       => $style_json_valid,
 ]);
