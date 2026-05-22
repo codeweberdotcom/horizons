@@ -234,7 +234,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
         <?php /* ── Sidebar ── */ ?>
         <?php if ($sidebar_enabled) : ?>
-        <aside class="horizons-partners-map__sidebar bg-matte-color"
+        <aside class="horizons-partners-map__sidebar"
                aria-label="<?php esc_attr_e('Filter partners by location', 'horizons'); ?>">
 
             <?php if ($sidebar_title) : ?>
