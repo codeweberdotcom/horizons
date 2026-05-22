@@ -92,6 +92,10 @@
     "markerLabelSize": {
       "type": "number",
       "default": 11
+    },
+    "markerLabelColor": {
+      "type": "string",
+      "default": "#1a1a1a"
     }
   }
 }

@@ -26,8 +26,9 @@
         var size      = cfg.markerSize   || 40;
         var shape     = cfg.markerShape  || 'circle';
         var showCount = cfg.markerShowCount !== undefined ? cfg.markerShowCount : true;
-        var showLabel = cfg.markerShowLabel || false;
-        var labelSize = cfg.markerLabelSize || 11;
+        var showLabel  = cfg.markerShowLabel  || false;
+        var labelSize  = cfg.markerLabelSize  || 11;
+        var labelColor = cfg.markerLabelColor || '#1a1a1a';
         var styleJson = cfg.styleJson   || '';
         var scrollZoom    = cfg.scrollZoom    || false;
         var autoFitBounds = cfg.autoFitBounds !== undefined ? cfg.autoFitBounds : true;
@@ -100,9 +101,8 @@
                     'font-weight:800',
                     'text-transform:uppercase',
                     'letter-spacing:.04em',
-                    'color:#1a1a1a',
+                    'color:' + labelColor,
                     'white-space:nowrap',
-                    'text-shadow:0 1px 3px rgba(255,255,255,.9),0 0 6px rgba(255,255,255,.7)',
                     'pointer-events:none',
                 ].join(';');
                 wrap.appendChild(label);

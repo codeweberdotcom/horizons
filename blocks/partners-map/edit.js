@@ -28,6 +28,7 @@ export default function Edit({ attributes, setAttributes }) {
 		markerShowCount,
 		markerShowLabel,
 		markerLabelSize,
+		markerLabelColor,
 		clustererEnabled,
 		sidebarEnabled,
 		sidebarPosition,
@@ -85,10 +86,11 @@ export default function Edit({ attributes, setAttributes }) {
 
 			/* Place markers */
 			const markers = (mapData && mapData.markers) || [];
-			const size  = markerSize || 40;
-			const color = markerColor || '#C8A96E';
-			const shape = markerShape || 'circle';
-			const labelSz = markerLabelSize || 11;
+			const size     = markerSize      || 40;
+			const color    = markerColor     || '#C8A96E';
+			const shape    = markerShape     || 'circle';
+			const labelSz  = markerLabelSize || 11;
+			const labelClr = markerLabelColor || '#1a1a1a';
 
 			markers.forEach((m) => {
 				const wrap = document.createElement('div');
@@ -115,7 +117,7 @@ export default function Edit({ attributes, setAttributes }) {
 				if (markerShowLabel) {
 					const lbl = document.createElement('span');
 					lbl.textContent = m.title;
-					lbl.style.cssText = 'font-size:' + labelSz + 'px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:#1a1a1a;white-space:nowrap;';
+					lbl.style.cssText = 'font-size:' + labelSz + 'px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;color:' + labelClr + ';white-space:nowrap;';
 					wrap.appendChild(lbl);
 				}
 
@@ -152,7 +154,7 @@ export default function Edit({ attributes, setAttributes }) {
 
 		return destroyMap;
 	}, [centerLat, centerLng, zoom, mapType, styleJson, height,
-		markerColor, markerSize, markerShape, markerShowCount, markerShowLabel, markerLabelSize,
+		markerColor, markerSize, markerShape, markerShowCount, markerShowLabel, markerLabelSize, markerLabelColor,
 		mapData]);
 
 	const sidebar      = (mapData && mapData.sidebar) || [];
@@ -259,14 +261,24 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(val) => setAttributes({ markerShowLabel: val })}
 					/>
 					{markerShowLabel && (
-						<RangeControl
-							label={__('Label font size (px)', 'horizons')}
-							value={markerLabelSize}
-							min={1}
-							max={24}
-							step={1}
-							onChange={(val) => setAttributes({ markerLabelSize: val })}
-						/>
+						<>
+							<RangeControl
+								label={__('Label font size (px)', 'horizons')}
+								value={markerLabelSize}
+								min={1}
+								max={24}
+								step={1}
+								onChange={(val) => setAttributes({ markerLabelSize: val })}
+							/>
+							<p style={{ marginTop: 12, marginBottom: 6, fontSize: 12, color: '#555' }}>
+								{__('Label color', 'horizons')}
+							</p>
+							<ColorPicker
+								color={markerLabelColor}
+								onChange={(val) => setAttributes({ markerLabelColor: val })}
+								enableAlpha={false}
+							/>
+						</>
 					)}
 					<ToggleControl
 						label={__('Enable clusterer', 'horizons')}
