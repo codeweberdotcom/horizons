@@ -156,7 +156,7 @@
             var marker = new ymaps3.YMapMarker({ coordinates: [m.lng, m.lat] }, el);
             el.addEventListener('click', function (e) {
                 e.stopPropagation();
-                openPopup(map, m, [m.lng, m.lat], color, size);
+                openPopup(map, canvas, m, [m.lng, m.lat], color, size);
             });
             allMarkerObjects.push({ marker: marker, data: m, inMap: true });
             map.addChild(marker);
@@ -264,7 +264,7 @@
                     /* Open popup for the clicked term marker */
                     if (visible.length >= 1) {
                         var target = visible[0];
-                        openPopup(map, target.data, [target.data.lng, target.data.lat], color, size);
+                        openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size);
                     }
                 }
             });
@@ -274,7 +274,7 @@
     /* Popup */
     var currentPopup = null;
 
-    function openPopup(map, markerData, coords, accentColor, markerSize) {
+    function openPopup(map, canvas, markerData, coords, accentColor, markerSize) {
         if (currentPopup) {
             map.removeChild(currentPopup);
             currentPopup = null;
@@ -291,7 +291,7 @@
             'max-width:320px',
             'overflow:hidden',
             'font-family:inherit',
-            'padding:12px',
+            'padding:4px',
             'margin-top:' + offset + 'px',
         ].join(';');
 
@@ -313,6 +313,29 @@
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
         currentPopup = popup;
+
+        /* Auto-pan if popup goes outside canvas bounds */
+        setTimeout(function () {
+            if (!currentPopup || !canvas) return;
+            var cr = canvas.getBoundingClientRect();
+            var pr = container.getBoundingClientRect();
+            var dx = 0, dy = 0;
+            if (pr.right  > cr.right  - 8) dx = pr.right  - cr.right  + 8;
+            if (pr.bottom > cr.bottom - 8) dy = pr.bottom - cr.bottom + 8;
+            if (pr.left   < cr.left   + 8) dx = pr.left   - cr.left   - 8;
+            if (pr.top    < cr.top    + 8) dy = pr.top    - cr.top    - 8;
+            if (dx === 0 && dy === 0) return;
+            var z   = map.location.zoom;
+            var c   = map.location.center;
+            var dpp = 360 / (256 * Math.pow(2, z));
+            map.setLocation({
+                center: [
+                    c[0] + dx * dpp,
+                    c[1] - dy * dpp * Math.cos(c[1] * Math.PI / 180),
+                ],
+                duration: 300,
+            });
+        }, 80);
 
         var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media,_links&partner_' + markerData.termType + '=' + markerData.termId;
 
