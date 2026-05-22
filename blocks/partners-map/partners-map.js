@@ -97,6 +97,8 @@
         var map = new ymaps3.YMap(canvas, {
             location: { center: center, zoom: zoom },
             margin: mapMargin,
+            zoomRange: { min: 2, max: 19 },
+            restrictMapArea: [[-180, -85], [180, 85]],
             behaviors: scrollZoom
                 ? ['drag', 'scrollZoom', 'pinchZoom', 'dblClick']
                 : ['drag', 'pinchZoom', 'dblClick'],
