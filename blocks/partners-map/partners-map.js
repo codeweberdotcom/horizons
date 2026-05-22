@@ -58,6 +58,13 @@
         map.addChild(new ymaps3.YMapDefaultSchemeLayer(schemeOptions));
         map.addChild(new ymaps3.YMapDefaultFeaturesLayer());
 
+        /* Close popup on map click */
+        map.addChild(new ymaps3.YMapListener({
+            onClick: function () {
+                if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
+            },
+        }));
+
         if (!markers.length) return;
 
         /* Markers */
