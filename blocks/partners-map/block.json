@@ -76,6 +76,18 @@
     "styleJson": {
       "type": "string",
       "default": ""
+    },
+    "markerShape": {
+      "type": "string",
+      "default": "circle"
+    },
+    "markerShowCount": {
+      "type": "boolean",
+      "default": true
+    },
+    "markerShowLabel": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

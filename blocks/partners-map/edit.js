@@ -23,6 +23,9 @@ export default function Edit({ attributes, setAttributes }) {
 		autoFitBounds,
 		markerColor,
 		markerSize,
+		markerShape,
+		markerShowCount,
+		markerShowLabel,
 		clustererEnabled,
 		sidebarEnabled,
 		sidebarPosition,
@@ -123,6 +126,27 @@ export default function Edit({ attributes, setAttributes }) {
 						max={80}
 						step={4}
 						onChange={(val) => setAttributes({ markerSize: val })}
+					/>
+					<SelectControl
+						label={__('Marker shape', 'horizons')}
+						value={markerShape}
+						options={[
+							{ label: __('Circle', 'horizons'), value: 'circle' },
+							{ label: __('Square', 'horizons'), value: 'square' },
+						]}
+						onChange={(val) => setAttributes({ markerShape: val })}
+					/>
+					<ToggleControl
+						label={__('Show count', 'horizons')}
+						help={__('Display partner count number on marker', 'horizons')}
+						checked={markerShowCount}
+						onChange={(val) => setAttributes({ markerShowCount: val })}
+					/>
+					<ToggleControl
+						label={__('Show country label', 'horizons')}
+						help={__('Display country/region name next to marker (uppercase bold)', 'horizons')}
+						checked={markerShowLabel}
+						onChange={(val) => setAttributes({ markerShowLabel: val })}
 					/>
 					<ToggleControl
 						label={__('Enable clusterer', 'horizons')}
