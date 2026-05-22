@@ -73,7 +73,7 @@
             dot.style.cssText = [
                 'width:'  + size + 'px',
                 'height:' + size + 'px',
-                'border-radius:' + (shape === 'square' ? '6px' : '50%'),
+                'border-radius:' + (shape === 'square' ? '0' : '50%'),
                 'background:' + color,
                 'flex-shrink:0',
                 'display:flex',
