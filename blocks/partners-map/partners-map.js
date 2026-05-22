@@ -313,14 +313,7 @@
         var loadText = document.createElement('span');
         loadText.style.cssText = 'color:#aaa;font-size:13px;';
         loadText.textContent = 'Loading…';
-        var closeBtn = document.createElement('button');
-        closeBtn.style.cssText = 'background:none;border:none;font-size:18px;cursor:pointer;color:#aaa;line-height:1;padding:0;flex-shrink:0;margin-left:8px;';
-        closeBtn.textContent = '×';
-        closeBtn.addEventListener('click', function () {
-            if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
-        });
         loadPill.appendChild(loadText);
-        loadPill.appendChild(closeBtn);
         container.appendChild(loadPill);
 
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
@@ -403,24 +396,13 @@
 
             var pill = makePill();
             var inner = document.createElement('div');
-            inner.className = 'author-info d-flex align-items-center px-3 py-2';
-            inner.style.cssText = 'position:relative;padding-right:' + (idx === 0 ? '32px' : '12px') + '!important;';
+            inner.className = 'author-info d-flex align-items-center';
+            inner.style.cssText = 'position:relative;padding:2px;';
             inner.innerHTML = imgTag
                 + '<div class="avatar-info mt-0 overflow-hidden">'
                 +   '<a href="' + href + '" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0 text-truncate" target="_blank" rel="noopener">' + name + '</a>'
                 +   (pos ? '<span class="body-s lh-0 text-neutral-500 d-block mt-1 text-truncate">' + pos + '</span>' : '')
                 + '</div>';
-
-            /* Close button only on the first pill */
-            if (idx === 0) {
-                var closeBtn = document.createElement('button');
-                closeBtn.style.cssText = 'position:absolute;top:50%;right:10px;transform:translateY(-50%);background:none;border:none;font-size:18px;cursor:pointer;color:#aaa;line-height:1;padding:0;';
-                closeBtn.textContent = '×';
-                closeBtn.addEventListener('click', function () {
-                    if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
-                });
-                inner.appendChild(closeBtn);
-            }
 
             pill.appendChild(inner);
             container.appendChild(pill);
