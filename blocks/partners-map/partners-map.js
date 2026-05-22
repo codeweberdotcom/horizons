@@ -274,6 +274,19 @@
     /* Popup */
     var currentPopup = null;
 
+    function makePill() {
+        var el = document.createElement('div');
+        el.style.cssText = [
+            'background:#fff',
+            'border-radius:50px',
+            'box-shadow:0 4px 24px rgba(0,0,0,.18)',
+            'overflow:hidden',
+            'min-width:260px',
+            'max-width:320px',
+        ].join(';');
+        return el;
+    }
+
     function openPopup(map, canvas, markerData, coords, accentColor, markerSize) {
         if (currentPopup) {
             map.removeChild(currentPopup);
@@ -282,40 +295,40 @@
 
         var offset = (markerSize || 40) + 24;
 
+        /* Transparent stack — each partner gets its own pill */
         var container = document.createElement('div');
         container.style.cssText = [
-            'background:#fff',
-            'border-radius:50px',
-            'box-shadow:0 4px 24px rgba(0,0,0,.18)',
             'min-width:260px',
             'max-width:320px',
-            'overflow:hidden',
             'font-family:inherit',
-            'padding:4px',
+            'display:flex',
+            'flex-direction:column',
+            'gap:8px',
             'margin-top:' + offset + 'px',
         ].join(';');
 
+        /* Loading pill */
+        var loadPill = makePill();
+        loadPill.style.cssText += ';display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 20px;';
+        var loadText = document.createElement('span');
+        loadText.style.cssText = 'color:#aaa;font-size:13px;';
+        loadText.textContent = 'Loading…';
         var closeBtn = document.createElement('button');
-        closeBtn.style.cssText = 'position:absolute;top:6px;right:8px;background:none;border:none;font-size:18px;cursor:pointer;color:#aaa;line-height:1;padding:0;z-index:1;';
+        closeBtn.style.cssText = 'background:none;border:none;font-size:18px;cursor:pointer;color:#aaa;line-height:1;padding:0;flex-shrink:0;margin-left:8px;';
         closeBtn.textContent = '×';
         closeBtn.addEventListener('click', function () {
             if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
         });
-
-        var body = document.createElement('div');
-        body.className = 'hpm-popup__body';
-        body.style.position = 'relative';
-        body.innerHTML = '<div style="padding:16px;text-align:center;color:#aaa;font-size:13px;">Loading…</div>';
-        body.appendChild(closeBtn);
-
-        container.appendChild(body);
+        loadPill.appendChild(loadText);
+        loadPill.appendChild(closeBtn);
+        container.appendChild(loadPill);
 
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
         currentPopup = popup;
 
-        /* Auto-pan if popup goes outside canvas bounds */
-        setTimeout(function () {
+        /* Auto-pan if container goes outside canvas */
+        function autoPan() {
             if (!currentPopup || !canvas) return;
             var cr = canvas.getBoundingClientRect();
             var pr = container.getBoundingClientRect();
@@ -335,28 +348,40 @@
                 ],
                 duration: 300,
             });
-        }, 80);
+        }
+        setTimeout(autoPan, 80);
 
         var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media,_links&partner_' + markerData.termType + '=' + markerData.termId;
 
         fetch(url)
             .then(function (r) { return r.json(); })
-            .then(function (partners) { renderPartners(body, partners); })
+            .then(function (partners) {
+                renderPartners(container, partners, map);
+                setTimeout(autoPan, 80);
+            })
             .catch(function () {
-                body.innerHTML = '<div style="padding:16px;color:#c00;font-size:13px;">Failed to load partners.</div>';
+                container.innerHTML = '';
+                var errPill = makePill();
+                errPill.style.cssText += ';padding:14px 20px;color:#c00;font-size:13px;';
+                errPill.textContent = 'Failed to load partners.';
+                container.appendChild(errPill);
             });
     }
 
-    function renderPartners(body, partners) {
+    function renderPartners(container, partners, map) {
+        container.innerHTML = '';
+
         if (!partners || !partners.length) {
-            body.innerHTML = '<div style="padding:16px;text-align:center;color:#aaa;font-size:13px;">No partners found.</div>';
+            var emptyPill = makePill();
+            emptyPill.style.cssText += ';padding:14px 20px;text-align:center;color:#aaa;font-size:13px;';
+            emptyPill.textContent = 'No partners found.';
+            container.appendChild(emptyPill);
             return;
         }
 
         var shown = partners.slice(0, 8);
-        var html = '';
 
-        shown.forEach(function (p) {
+        shown.forEach(function (p, idx) {
             var name = p.title && p.title.rendered ? p.title.rendered : '—';
             var pos  = p.meta && p.meta._partner_position ? p.meta._partner_position : '';
             var href = p.link || '#';
@@ -376,23 +401,47 @@
                 imgTag = '<div class="w-48 h-48 me-3 rounded-circle bg-light d-flex align-items-center justify-content-center flex-shrink-0" style="font-size:20px;">👤</div>';
             }
 
-            html += '<div class="author-info d-flex align-items-center px-3 py-2 border-bottom hpm-card-row">'
-                +   imgTag
-                +   '<div class="avatar-info mt-0 overflow-hidden">'
-                +     '<a href="' + href + '" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0 text-truncate" target="_blank" rel="noopener">' + name + '</a>'
-                +     (pos ? '<span class="body-s lh-0 text-neutral-500 d-block mt-1 text-truncate">' + pos + '</span>' : '')
-                +   '</div>'
+            var pill = makePill();
+            var inner = document.createElement('div');
+            inner.className = 'author-info d-flex align-items-center px-3 py-2';
+            inner.style.cssText = 'position:relative;padding-right:' + (idx === 0 ? '32px' : '12px') + '!important;';
+            inner.innerHTML = imgTag
+                + '<div class="avatar-info mt-0 overflow-hidden">'
+                +   '<a href="' + href + '" class="hover-7 link-body label-u text-charcoal-blue d-block lh-0 text-truncate" target="_blank" rel="noopener">' + name + '</a>'
+                +   (pos ? '<span class="body-s lh-0 text-neutral-500 d-block mt-1 text-truncate">' + pos + '</span>' : '')
                 + '</div>';
+
+            /* Close button only on the first pill */
+            if (idx === 0) {
+                var closeBtn = document.createElement('button');
+                closeBtn.style.cssText = 'position:absolute;top:50%;right:10px;transform:translateY(-50%);background:none;border:none;font-size:18px;cursor:pointer;color:#aaa;line-height:1;padding:0;';
+                closeBtn.textContent = '×';
+                closeBtn.addEventListener('click', function () {
+                    if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
+                });
+                inner.appendChild(closeBtn);
+            }
+
+            pill.appendChild(inner);
+            container.appendChild(pill);
         });
 
-        body.innerHTML = html;
-
         if (partners.length > 8) {
-            var more = document.createElement('a');
-            more.className = 'hpm-popup__more';
-            more.href = '/partners/';
-            more.textContent = 'All partners (' + partners.length + ')';
-            body.parentNode.appendChild(more);
+            var morePill = document.createElement('a');
+            morePill.href = '/partners/';
+            morePill.style.cssText = [
+                'display:block',
+                'background:#fff',
+                'border-radius:50px',
+                'box-shadow:0 4px 24px rgba(0,0,0,.18)',
+                'padding:10px 20px',
+                'text-align:center',
+                'font-size:12px',
+                'color:#c8a96e',
+                'text-decoration:none',
+            ].join(';');
+            morePill.textContent = 'All partners (' + partners.length + ')';
+            container.appendChild(morePill);
         }
     }
 })();
