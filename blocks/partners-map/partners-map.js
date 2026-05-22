@@ -1,7 +1,46 @@
-﻿/* Partners Map — frontend script (Yandex Maps API v3) */
+/* Partners Map — frontend script (Yandex Maps API v3) */
 (function () {
     'use strict';
 
+    /* ── Partner data cache (15-min TTL) ──────────────────────────────────── */
+    var partnersCache = {};
+    var CACHE_TTL = 15 * 60 * 1000;
+
+    function cacheKey(termType, termId) {
+        return termType + '_' + termId;
+    }
+
+    function getCached(key) {
+        var entry = partnersCache[key];
+        if (!entry) return null;
+        if (Date.now() - entry.ts > CACHE_TTL) { delete partnersCache[key]; return null; }
+        return entry.data;
+    }
+
+    function setCache(key, data) {
+        partnersCache[key] = { data: data, ts: Date.now() };
+    }
+
+    function fetchPartners(termType, termId) {
+        var key = cacheKey(termType, termId);
+        var hit = getCached(key);
+        if (hit) return Promise.resolve(hit);
+        var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media,_links&partner_' + termType + '=' + termId;
+        return fetch(url)
+            .then(function (r) { return r.json(); })
+            .then(function (data) { setCache(key, data); return data; });
+    }
+
+    /* Preload all markers' partners in the background after map init */
+    function preloadAllPartners(markers) {
+        markers.forEach(function (m) {
+            var key = cacheKey(m.termType, m.termId);
+            if (getCached(key)) return;
+            fetchPartners(m.termType, m.termId).catch(function () {});
+        });
+    }
+
+    /* ── Map init ─────────────────────────────────────────────────────────── */
     document.querySelectorAll('.horizons-partners-map').forEach(function (wrapper) {
         var raw = wrapper.getAttribute('data-map-config');
         if (!raw) return;
@@ -77,13 +116,13 @@
 
         /* Markers */
         var allMarkerObjects = [];
-        var markerEls = []; /* {dot, label} refs for zoom scaling */
+        var markerEls = [];
         var baseZoom = zoom;
 
         function calcScale(currentZoom) {
             var delta = currentZoom - baseZoom;
             var s = Math.pow(1.18, delta);
-            return Math.max(1, s); /* never shrink below base size */
+            return Math.max(1, s);
         }
 
         function applyScale(s) {
@@ -162,6 +201,9 @@
             map.addChild(marker);
         });
 
+        /* Preload all partner data in background */
+        preloadAllPartners(markers);
+
         /* Scale markers on zoom */
         map.addChild(new ymaps3.YMapListener({
             onUpdate: function (update) {
@@ -195,7 +237,6 @@
                     var name = btn ? btn.textContent.trim().toLowerCase() : '';
                     group.style.display = (!q || name.indexOf(q) !== -1) ? '' : 'none';
                 });
-                /* standalone region buttons */
                 var regionBtns = wrapper.querySelectorAll('.horizons-partners-map__sidebar-inner > .horizons-partners-map__filter-region');
                 regionBtns.forEach(function (btn) {
                     var name = btn.textContent.trim().toLowerCase();
@@ -226,11 +267,9 @@
                     }
                 });
 
-                /* Close existing popup when switching filter */
                 if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
 
                 if (filter === 'all') {
-                    /* Always refit to all markers on explicit "All" click */
                     if (markers.length > 1) {
                         var alllngs = markers.map(function (m) { return m.lng; });
                         var alllats = markers.map(function (m) { return m.lat; });
@@ -261,7 +300,6 @@
                         }
                     }
 
-                    /* Open popup for the clicked term marker */
                     if (visible.length >= 1) {
                         var target = visible[0];
                         openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size);
@@ -271,7 +309,7 @@
         });
     }
 
-    /* Popup */
+    /* ── Popup ────────────────────────────────────────────────────────────── */
     var currentPopup = null;
 
     function makePill() {
@@ -295,7 +333,6 @@
 
         var offset = (markerSize || 40) + 24;
 
-        /* Transparent stack — each partner gets its own pill */
         var container = document.createElement('div');
         container.style.cssText = [
             'min-width:260px',
@@ -307,20 +344,10 @@
             'margin-top:' + offset + 'px',
         ].join(';');
 
-        /* Loading pill */
-        var loadPill = makePill();
-        loadPill.style.cssText += ';display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 20px;';
-        var loadText = document.createElement('span');
-        loadText.style.cssText = 'color:#aaa;font-size:13px;';
-        loadText.textContent = 'Loading…';
-        loadPill.appendChild(loadText);
-        container.appendChild(loadPill);
-
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
         currentPopup = popup;
 
-        /* Auto-pan if container goes outside canvas */
         function autoPan() {
             if (!currentPopup || !canvas) return;
             var cr = canvas.getBoundingClientRect();
@@ -342,12 +369,28 @@
                 duration: 300,
             });
         }
+
+        var key = cacheKey(markerData.termType, markerData.termId);
+        var cached = getCached(key);
+
+        if (cached) {
+            /* Instant render from cache */
+            renderPartners(container, cached, map);
+            setTimeout(autoPan, 80);
+            return;
+        }
+
+        /* Show loading pill while fetching */
+        var loadPill = makePill();
+        loadPill.style.cssText += ';display:flex;align-items:center;padding:10px 12px 10px 20px;';
+        var loadText = document.createElement('span');
+        loadText.style.cssText = 'color:#aaa;font-size:13px;';
+        loadText.textContent = 'Loading…';
+        loadPill.appendChild(loadText);
+        container.appendChild(loadPill);
         setTimeout(autoPan, 80);
 
-        var url = '/wp-json/wp/v2/partners?per_page=100&_embed=wp:featuredmedia&_fields=id,title,link,meta,_embedded,featured_media,_links&partner_' + markerData.termType + '=' + markerData.termId;
-
-        fetch(url)
-            .then(function (r) { return r.json(); })
+        fetchPartners(markerData.termType, markerData.termId)
             .then(function (partners) {
                 renderPartners(container, partners, map);
                 setTimeout(autoPan, 80);
@@ -374,7 +417,7 @@
 
         var shown = partners.slice(0, 8);
 
-        shown.forEach(function (p, idx) {
+        shown.forEach(function (p) {
             var name = p.title && p.title.rendered ? p.title.rendered : '—';
             var pos  = p.meta && p.meta._partner_position ? p.meta._partner_position : '';
             var href = p.link || '#';
