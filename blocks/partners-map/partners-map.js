@@ -116,7 +116,10 @@
                 btn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     if (!map.location) return;
-                    map.setLocation({ zoom: map.location.zoom + (i === 0 ? 1 : -1), duration: 200 });
+                    var minZ = cfg.zoomMin || 2;
+                    var maxZ = cfg.zoomMax || 19;
+                    var newZ = Math.max(minZ, Math.min(maxZ, map.location.zoom + (i === 0 ? 1 : -1)));
+                    map.setLocation({ zoom: newZ, duration: 200 });
                 });
                 zoomWrap.appendChild(btn);
             });
