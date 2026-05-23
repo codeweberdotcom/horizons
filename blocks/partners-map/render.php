@@ -268,7 +268,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                        aria-label="<?php esc_attr_e('Search countries', 'horizons'); ?>">
             </div>
 
-            <div class="horizons-partners-map__sidebar-inner">
+            <div class="horizons-partners-map__sidebar-inner p-md-10">
 
                 <button class="horizons-partners-map__filter-btn label-u fs-12 text-neutral-50 is-active" data-filter="all">
                     <?php esc_html_e('All partners', 'horizons'); ?>
