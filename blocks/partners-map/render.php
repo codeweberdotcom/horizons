@@ -237,8 +237,8 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
         <?php if ($sidebar_enabled) : ?>
         <button class="horizons-partners-map__toggle-btn"
                 aria-label="<?php esc_attr_e('Toggle countries list', 'horizons'); ?>">
-            <span class="horizons-partners-map__toggle-icon">&#9776;</span>
-            <span class="horizons-partners-map__toggle-label"><?php esc_html_e('Countries', 'horizons'); ?></span>
+            <i class="uil uil-bars horizons-partners-map__toggle-icon-open"></i>
+            <i class="uil uil-times horizons-partners-map__toggle-icon-close"></i>
         </button>
         <?php endif; ?>
 

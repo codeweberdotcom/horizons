@@ -90,7 +90,7 @@
         var hasSidebar   = !wrapper.classList.contains('horizons-partners-map--no-sidebar');
         var sidebarRight = wrapper.classList.contains('horizons-partners-map--sidebar-right');
         var mapMargin = hasSidebar
-            ? (sidebarRight ? [0, 270, 0, 0] : [0, 0, 0, 270])
+            ? (sidebarRight ? [56, 280, 12, 0] : [56, 0, 12, 280])
             : [0, 0, 0, 0];
 
         /* Create map */
@@ -290,7 +290,7 @@
 
                         if (regionTargets.length === 1) {
                             map.setLocation({ center: [regionTargets[0].data.lng, regionTargets[0].data.lat], zoom: 6, duration: 400 });
-                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size);
+                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size, 450);
                         } else {
                             var rlngs = regionTargets.map(function (o) { return o.data.lng; });
                             var rlats = regionTargets.map(function (o) { return o.data.lat; });
@@ -306,7 +306,7 @@
                     }
 
                     map.setLocation({ center: [target.data.lng, target.data.lat], zoom: 6, duration: 400 });
-                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size);
+                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size, 450);
                 }
             });
         });
@@ -328,7 +328,7 @@
         return el;
     }
 
-    function openPopup(map, canvas, markerData, coords, accentColor, markerSize) {
+    function openPopup(map, canvas, markerData, coords, accentColor, markerSize, autoPanDelay) {
         if (currentPopup) {
             map.removeChild(currentPopup);
             currentPopup = null;
@@ -379,7 +379,7 @@
         if (cached) {
             /* Instant render from cache */
             renderPartners(container, cached, map);
-            setTimeout(autoPan, 80);
+            setTimeout(autoPan, autoPanDelay || 80);
             return;
         }
 
@@ -391,12 +391,12 @@
         loadText.textContent = 'Loading…';
         loadPill.appendChild(loadText);
         container.appendChild(loadPill);
-        setTimeout(autoPan, 80);
+        setTimeout(autoPan, autoPanDelay || 80);
 
         fetchPartners(markerData.termType, markerData.termId)
             .then(function (partners) {
                 renderPartners(container, partners, map);
-                setTimeout(autoPan, 80);
+                setTimeout(autoPan, autoPanDelay || 80);
             })
             .catch(function () {
                 container.innerHTML = '';

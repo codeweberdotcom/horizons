@@ -21,25 +21,27 @@
     height: 100%;
 }
 
-/* Sidebar toggle button */
+/* Sidebar toggle button — fixed at top-left of map */
 .horizons-partners-map__toggle-btn {
     position: absolute;
     top: 12px;
-    left: 260px;
+    left: 12px;
     z-index: 20;
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 6px 10px 6px 8px;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
     background: rgba(30, 38, 42, 0.82);
     backdrop-filter: blur(8px) saturate(160%);
     -webkit-backdrop-filter: blur(8px) saturate(160%);
     border: 1px solid rgba(255, 255, 255, .12);
-    border-radius: 0 6px 6px 0;
-    color: rgba(255, 255, 255, .85);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, .9);
     cursor: pointer;
-    transition: left .3s ease, background .15s, color .15s;
-    white-space: nowrap;
+    font-size: 20px;
+    line-height: 1;
+    transition: background .15s, color .15s;
 }
 
 .horizons-partners-map__toggle-btn:hover {
@@ -47,45 +49,31 @@
     color: #fff;
 }
 
-.horizons-partners-map__toggle-icon {
-    font-size: 14px;
-    line-height: 1;
-}
+/* Icon toggle: open = bars, close = times */
+.horizons-partners-map__toggle-icon-open  { display: inline-flex; }
+.horizons-partners-map__toggle-icon-close { display: none; }
 
-.horizons-partners-map__toggle-label {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-}
+.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-open  { display: none; }
+.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-close { display: inline-flex; }
 
-.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-btn {
-    left: 0;
-    border-radius: 0 6px 6px 0;
-}
-
-/* Right sidebar: flip toggle to left edge of sidebar */
+/* Right sidebar: mirror button to top-right */
 .horizons-partners-map--sidebar-right .horizons-partners-map__toggle-btn {
     left: auto;
-    right: 260px;
-    border-radius: 6px 0 0 6px;
+    right: 12px;
 }
 
-.horizons-partners-map--sidebar-right.is-sidebar-collapsed .horizons-partners-map__toggle-btn {
-    right: 0;
-}
-
-/* Sidebar — overlays the map canvas for frosted-glass effect */
+/* Sidebar — floats over map with offsets on all sides */
 .horizons-partners-map__sidebar {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
+    top: 56px;
+    left: 12px;
+    bottom: 12px;
     width: 260px;
+    border-radius: 10px;
     background: rgba(30, 38, 42, 0.72);
     backdrop-filter: blur(12px) saturate(160%);
     -webkit-backdrop-filter: blur(12px) saturate(160%);
-    border-right: 1px solid rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, .1);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -94,11 +82,16 @@
 }
 
 .horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__sidebar {
-    transform: translateX(-260px);
+    transform: translateX(calc(-100% - 24px));
+}
+
+.horizons-partners-map--sidebar-right .horizons-partners-map__sidebar {
+    left: auto;
+    right: 12px;
 }
 
 .horizons-partners-map--sidebar-right.is-sidebar-collapsed .horizons-partners-map__sidebar {
-    transform: translateX(260px);
+    transform: translateX(calc(100% + 24px));
 }
 
 .horizons-partners-map--sidebar-right .horizons-partners-map__sidebar {
