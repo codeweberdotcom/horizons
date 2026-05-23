@@ -138,20 +138,12 @@
             }
         }
 
-        function makeMarkerEl(m) {
-            var wrap = document.createElement('div');
-            wrap.className = 'hpm-marker-wrap';
-            wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;transform:translate(0,-50%);';
-            wrap.title = m.title;
-
-            var dot = document.createElement('div');
-            dot.className = 'hpm-dot';
-            dot.style.cssText = [
+        function makeDotCss() {
+            return [
                 'width:'  + size + 'px',
                 'height:' + size + 'px',
                 'border-radius:' + (shape === 'square' ? '0' : '50%'),
                 'background:' + color,
-                'flex-shrink:0',
                 'display:flex',
                 'align-items:center',
                 'justify-content:center',
@@ -161,33 +153,153 @@
                 'user-select:none',
                 'transition:width .15s,height .15s,font-size .15s',
             ].join(';');
+        }
+
+        function makeLabelCss(offsetX, offsetY, alignRight) {
+            return [
+                'position:absolute',
+                'left:' + offsetX + 'px',
+                'top:' + offsetY + 'px',
+                'transform:' + (alignRight ? 'translate(-100%,-50%)' : 'translateY(-50%)'),
+                'font-size:' + labelSize + 'px',
+                'font-weight:800',
+                'text-transform:uppercase',
+                'letter-spacing:.04em',
+                'color:' + labelColor,
+                'white-space:nowrap',
+                'pointer-events:none',
+            ].join(';');
+        }
+
+        function makeMarkerEl(m) {
+            var wrap = document.createElement('div');
+            wrap.className = 'hpm-marker-wrap';
+            wrap.title = m.title;
+
+            var dot = document.createElement('div');
+            dot.className = 'hpm-dot';
 
             if (showCount) {
                 dot.textContent = m.count;
             }
 
-            wrap.appendChild(dot);
-
             var labelEl = null;
+
             if (showLabel) {
+                /* Anchor layout: wrap is a zero-size anchor at the coordinate point */
+                wrap.style.cssText = 'position:relative;width:0;height:0;cursor:pointer;';
+                dot.style.cssText = makeDotCss() + ';position:absolute;transform:translate(-50%,-50%);flex-shrink:0;';
+                wrap.appendChild(dot);
+
                 labelEl = document.createElement('span');
                 labelEl.className = 'hpm-marker-label';
                 labelEl.textContent = m.title;
-                labelEl.style.cssText = [
-                    'font-size:' + labelSize + 'px',
-                    'font-weight:800',
-                    'text-transform:uppercase',
-                    'letter-spacing:.04em',
-                    'color:' + labelColor,
-                    'white-space:nowrap',
-                    'pointer-events:none',
-                    'transition:font-size .15s',
-                ].join(';');
+                labelEl.style.cssText = makeLabelCss(size / 2 + 6, 0, false);
                 wrap.appendChild(labelEl);
+            } else {
+                /* Flex layout (dot only, no label) */
+                wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;transform:translate(0,-50%);';
+                dot.style.cssText = makeDotCss() + ';flex-shrink:0;';
+                wrap.appendChild(dot);
             }
 
-            markerEls.push({ dot: dot, label: labelEl });
+            markerEls.push({ dot: dot, label: labelEl, svg: null });
             return wrap;
+        }
+
+        function applyLeaderLines() {
+            if (!showLabel || !map.location) return;
+            var z  = map.location.zoom;
+            var cx = map.location.center[0];
+            var cy = map.location.center[1];
+            var cw = canvas.offsetWidth  || 400;
+            var ch = canvas.offsetHeight || 400;
+            var worldPx = 256 * Math.pow(2, z);
+
+            function lngPx(lng) {
+                var diff = lng - cx;
+                while (diff >  180) diff -= 360;
+                while (diff < -180) diff += 360;
+                return diff / 360 * worldPx + cw / 2;
+            }
+            function mercY(lat) {
+                var sin = Math.sin(lat * Math.PI / 180);
+                return (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * worldPx;
+            }
+            function latPx(lat) { return mercY(lat) - mercY(cy) + ch / 2; }
+
+            var pos = markers.map(function (m) {
+                return { x: lngPx(m.lng), y: latPx(m.lat) };
+            });
+
+            /* Estimate label bounding box: dot-right edge + 6px gap + ~0.65*labelSize per char */
+            var lw = markers.map(function (m) {
+                return size / 2 + 6 + m.title.length * Math.round(labelSize * 0.65) + 8;
+            });
+            var lh = labelSize + 4;
+
+            /* Detect label bbox overlaps */
+            var side = new Array(markers.length).fill(0); /* 0=none, -1=left, +1=right */
+
+            for (var i = 0; i < markers.length; i++) {
+                for (var j = i + 1; j < markers.length; j++) {
+                    /* Default label box for i: from pos[i].x to pos[i].x + lw[i], y ± lh/2 */
+                    var xi1 = pos[i].x, xi2 = pos[i].x + lw[i];
+                    var yi1 = pos[i].y - lh / 2, yi2 = pos[i].y + lh / 2;
+                    var xj1 = pos[j].x, xj2 = pos[j].x + lw[j];
+                    var yj1 = pos[j].y - lh / 2, yj2 = pos[j].y + lh / 2;
+
+                    if (xi1 < xj2 && xi2 > xj1 && yi1 < yj2 && yi2 > yj1) {
+                        /* i is left of j → i goes left-up, j stays right */
+                        if (pos[i].x <= pos[j].x) {
+                            if (!side[i]) side[i] = -1;
+                        } else {
+                            if (!side[j]) side[j] = -1;
+                        }
+                    }
+                }
+            }
+
+            var lineLen = 50;
+
+            markers.forEach(function (m, idx) {
+                var refs = markerEls[idx];
+                if (!refs || !refs.label) return;
+                var wrap = refs.dot.parentNode;
+                if (!wrap) return;
+
+                /* Remove previous SVG */
+                if (refs.svg) {
+                    try { wrap.removeChild(refs.svg); } catch (e) {}
+                    refs.svg = null;
+                }
+
+                var dir = side[idx]; /* -1=upper-left, 0=no leader, +1 unused (label stays right) */
+
+                if (dir === -1) {
+                    var ldx = -lineLen;
+                    var ldy = -lineLen;
+
+                    /* SVG leader line */
+                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    svg.style.cssText = 'position:absolute;overflow:visible;left:0;top:0;pointer-events:none;';
+                    svg.setAttribute('width', '0');
+                    svg.setAttribute('height', '0');
+                    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', '0'); line.setAttribute('y1', '0');
+                    line.setAttribute('x2', String(ldx)); line.setAttribute('y2', String(ldy));
+                    line.setAttribute('stroke', 'rgba(255,255,255,0.75)');
+                    line.setAttribute('stroke-width', '1.5');
+                    svg.appendChild(line);
+                    wrap.insertBefore(svg, refs.dot);
+                    refs.svg = svg;
+
+                    refs.label.style.cssText = makeLabelCss(ldx - 4, ldy, true);
+                } else {
+                    /* Default: label to the right of dot */
+                    refs.label.style.cssText = makeLabelCss(size / 2 + 6, 0, false);
+                }
+            });
         }
 
         markers.forEach(function (m) {
@@ -204,14 +316,22 @@
         /* Preload all partner data in background */
         preloadAllPartners(markers);
 
-        /* Scale markers on zoom */
+        /* Scale markers on zoom + re-check leader lines */
+        var leaderDebounce = null;
         map.addChild(new ymaps3.YMapListener({
             onUpdate: function (update) {
                 if (update.location && update.location.zoom !== undefined) {
                     applyScale(calcScale(update.location.zoom));
+                    if (showLabel) {
+                        clearTimeout(leaderDebounce);
+                        leaderDebounce = setTimeout(applyLeaderLines, 300);
+                    }
                 }
             },
         }));
+
+        /* Initial leader lines after autoFitBounds animation settles */
+        if (showLabel) { setTimeout(applyLeaderLines, 600); }
 
         /* Auto fit bounds */
         if (autoFitBounds && markers.length > 1) {
