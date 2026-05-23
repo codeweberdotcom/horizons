@@ -124,6 +124,14 @@
     "zoomMax": {
       "type": "number",
       "default": 19
+    },
+    "labelLatThreshold": {
+      "type": "number",
+      "default": 5
+    },
+    "labelDistThreshold": {
+      "type": "number",
+      "default": 120
     }
   }
 }

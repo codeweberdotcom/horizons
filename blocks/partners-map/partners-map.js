@@ -211,6 +211,53 @@
             return wrap;
         }
 
+        function applyLabelOffsets() {
+            if (!showLabel) return;
+            var canvasRect = canvas.getBoundingClientRect();
+            if (!canvasRect.width) return;
+
+            var latThresh  = cfg.labelLatThreshold  != null ? cfg.labelLatThreshold  : 5;
+            var distThresh = cfg.labelDistThreshold != null ? cfg.labelDistThreshold : 120;
+            var shift      = Math.round(size / 2) + 4;
+
+            /* Reset all labels first */
+            markerEls.forEach(function (refs) {
+                if (refs.label) refs.label.style.transform = '';
+            });
+
+            /* Get dot pixel centres */
+            var pos = markers.map(function (m, idx) {
+                var refs = markerEls[idx];
+                if (!refs || !refs.dot) return null;
+                var r = refs.dot.getBoundingClientRect();
+                if (!r.width && !r.height) return null;
+                return { x: r.left + r.width / 2 - canvasRect.left, y: r.top + r.height / 2 - canvasRect.top };
+            });
+
+            for (var i = 0; i < markers.length; i++) {
+                if (!pos[i] || !markerEls[i] || !markerEls[i].label) continue;
+                for (var j = i + 1; j < markers.length; j++) {
+                    if (!pos[j] || !markerEls[j] || !markerEls[j].label) continue;
+
+                    var latDiff  = Math.abs(markers[i].lat - markers[j].lat);
+                    var dx       = pos[i].x - pos[j].x;
+                    var dy       = pos[i].y - pos[j].y;
+                    var pixDist  = Math.sqrt(dx * dx + dy * dy);
+
+                    if (latDiff < latThresh && pixDist < distThresh) {
+                        /* i is higher on screen (smaller y) → shift its label up */
+                        if (pos[i].y <= pos[j].y) {
+                            markerEls[i].label.style.transform = 'translateY(-' + shift + 'px)';
+                            markerEls[j].label.style.transform = 'translateY(' + shift + 'px)';
+                        } else {
+                            markerEls[i].label.style.transform = 'translateY(' + shift + 'px)';
+                            markerEls[j].label.style.transform = 'translateY(-' + shift + 'px)';
+                        }
+                    }
+                }
+            }
+        }
+
         markers.forEach(function (m) {
             var el = makeMarkerEl(m);
             var marker = new ymaps3.YMapMarker({ coordinates: [m.lng, m.lat] }, el);
@@ -225,14 +272,22 @@
         /* Preload all partner data in background */
         preloadAllPartners(markers);
 
-        /* Scale markers on zoom */
+        /* Scale markers on zoom + re-check label offsets */
+        var offsetDebounce = null;
         map.addChild(new ymaps3.YMapListener({
             onUpdate: function (update) {
                 if (update.location && update.location.zoom !== undefined) {
                     applyScale(calcScale(update.location.zoom));
+                    if (showLabel) {
+                        clearTimeout(offsetDebounce);
+                        offsetDebounce = setTimeout(applyLabelOffsets, 300);
+                    }
                 }
             },
         }));
+
+        /* Initial offset after map settles */
+        if (showLabel) { setTimeout(applyLabelOffsets, 600); }
 
         /* Auto fit bounds */
         if (autoFitBounds && markers.length > 1) {
