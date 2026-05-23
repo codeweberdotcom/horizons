@@ -97,9 +97,30 @@
 
         /* Zoom control buttons */
         if (cfg.zoomControl !== false) {
-            ymaps3.import('@yandex/ymaps3-default-ui-theme').then(function (pkg) {
-                map.addChild(new pkg.YMapZoomControl({}));
+            var zoomWrap = document.createElement('div');
+            zoomWrap.style.cssText = 'position:absolute;right:12px;bottom:80px;z-index:20;display:flex;flex-direction:column;gap:4px;pointer-events:auto;';
+            var zoomBtnCss = [
+                'width:36px','height:36px',
+                'background:rgba(30,38,42,0.82)',
+                'backdrop-filter:blur(8px) saturate(160%)',
+                '-webkit-backdrop-filter:blur(8px) saturate(160%)',
+                'border:1px solid rgba(255,255,255,.12)',
+                'color:rgba(255,255,255,.9)',
+                'font-size:22px','font-weight:300','line-height:1',
+                'cursor:pointer','display:flex','align-items:center','justify-content:center',
+            ].join(';');
+            ['+', '−'].forEach(function (label, i) {
+                var btn = document.createElement('button');
+                btn.textContent = label;
+                btn.style.cssText = zoomBtnCss;
+                btn.addEventListener('click', function (e) {
+                    e.stopPropagation();
+                    if (!map.location) return;
+                    map.setLocation({ zoom: map.location.zoom + (i === 0 ? 1 : -1), duration: 200 });
+                });
+                zoomWrap.appendChild(btn);
             });
+            canvas.appendChild(zoomWrap);
         }
 
         /* Close popup on map click */
@@ -167,7 +188,7 @@
                 'letter-spacing:.04em',
                 'color:' + labelColor,
                 'white-space:nowrap',
-                'pointer-events:none',
+                'cursor:pointer',
             ].join(';');
         }
 
@@ -187,8 +208,8 @@
 
             if (showLabel) {
                 /* Anchor layout: wrap is a zero-size anchor at the coordinate point */
-                wrap.style.cssText = 'position:relative;width:0;height:0;cursor:pointer;';
-                dot.style.cssText = makeDotCss() + ';position:absolute;transform:translate(-50%,-50%);flex-shrink:0;';
+                wrap.style.cssText = 'position:relative;width:0;height:0;cursor:pointer;display:block;';
+                dot.style.cssText = makeDotCss() + ';position:absolute;transform:translate(-50%,-50%);';
                 wrap.appendChild(dot);
 
                 labelEl = document.createElement('span');
@@ -196,6 +217,10 @@
                 labelEl.textContent = m.title;
                 labelEl.style.cssText = makeLabelCss(size / 2 + 6, 0, false);
                 wrap.appendChild(labelEl);
+
+                /* Hover: combine translate + scale because CSS rule would overwrite translate */
+                wrap.addEventListener('mouseover', function () { dot.style.transform = 'translate(-50%,-50%) scale(1.15)'; });
+                wrap.addEventListener('mouseout',  function () { dot.style.transform = 'translate(-50%,-50%)'; });
             } else {
                 /* Flex layout (dot only, no label) */
                 wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;transform:translate(0,-50%);';
@@ -208,35 +233,24 @@
         }
 
         function applyLeaderLines() {
-            if (!showLabel || !map.location) return;
-            var z  = map.location.zoom;
-            var cx = map.location.center[0];
-            var cy = map.location.center[1];
-            var cw = canvas.offsetWidth  || 400;
-            var ch = canvas.offsetHeight || 400;
-            var worldPx = 256 * Math.pow(2, z);
+            if (!showLabel) return;
+            var canvasRect = canvas.getBoundingClientRect();
+            if (!canvasRect.width || !canvasRect.height) return;
 
-            function lngPx(lng) {
-                var diff = lng - cx;
-                while (diff >  180) diff -= 360;
-                while (diff < -180) diff += 360;
-                return diff / 360 * worldPx + cw / 2;
-            }
-            function mercY(lat) {
-                var sin = Math.sin(lat * Math.PI / 180);
-                return (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * worldPx;
-            }
-            function latPx(lat) { return mercY(lat) - mercY(cy) + ch / 2; }
-
-            var pos = markers.map(function (m) {
-                return { x: lngPx(m.lng), y: latPx(m.lat) };
+            /* Real pixel positions via DOM — no tile-math */
+            var pos = markerEls.map(function (refs) {
+                if (!refs || !refs.dot) return null;
+                var r = refs.dot.getBoundingClientRect();
+                if (!r.width && !r.height) return null;
+                return { x: r.left + r.width / 2 - canvasRect.left, y: r.top + r.height / 2 - canvasRect.top };
             });
 
-            /* Estimate label bounding box: dot-right edge + 6px gap + ~0.65*labelSize per char */
-            var lw = markers.map(function (m) {
-                return size / 2 + 6 + m.title.length * Math.round(labelSize * 0.65) + 8;
+            var lw = markerEls.map(function (refs, idx) {
+                if (!refs || !refs.dot) return 0;
+                var dotW = refs.dot.getBoundingClientRect().width || size;
+                return dotW / 2 + 6 + markers[idx].title.length * Math.ceil(labelSize * 0.65) + 8;
             });
-            var lh = labelSize + 4;
+            var lh = labelSize + 6;
 
             /* Detect label bbox overlaps */
             var side = new Array(markers.length).fill(0); /* 0=none, -1=left, +1=right */
@@ -307,7 +321,7 @@
             var marker = new ymaps3.YMapMarker({ coordinates: [m.lng, m.lat] }, el);
             el.addEventListener('click', function (e) {
                 e.stopPropagation();
-                openPopup(map, canvas, m, [m.lng, m.lat], color, size, undefined, cfg.routeButton);
+                openPopup(map, canvas, m, [m.lng, m.lat], color, size);
             });
             allMarkerObjects.push({ marker: marker, data: m, inMap: true });
             map.addChild(marker);
@@ -415,7 +429,7 @@
 
                         if (regionTargets.length === 1) {
                             map.setLocation({ center: [regionTargets[0].data.lng, regionTargets[0].data.lat], zoom: 6, duration: 400 });
-                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size, 450, cfg.routeButton);
+                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size, 450, false);
                         } else {
                             var rlngs = regionTargets.map(function (o) { return o.data.lng; });
                             var rlats = regionTargets.map(function (o) { return o.data.lat; });
@@ -431,7 +445,7 @@
                     }
 
                     map.setLocation({ center: [target.data.lng, target.data.lat], zoom: 6, duration: 400 });
-                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size, 450, cfg.routeButton);
+                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size, 450, false);
                 }
             });
         });
@@ -454,7 +468,7 @@
         return el;
     }
 
-    function openPopup(map, canvas, markerData, coords, accentColor, markerSize, autoPanDelay, showRoute) {
+    function openPopup(map, canvas, markerData, coords, accentColor, markerSize, autoPanDelay) {
         if (currentPopup) {
             map.removeChild(currentPopup);
             currentPopup = null;
@@ -513,7 +527,7 @@
 
         if (cached) {
             /* Instant render from cache */
-            renderPartners(container, cached, map, showRoute, markerData);
+            renderPartners(container, cached, map);
             setTimeout(autoPan, autoPanDelay || 200);
             return;
         }
@@ -530,7 +544,7 @@
 
         fetchPartners(markerData.termType, markerData.termId)
             .then(function (partners) {
-                renderPartners(container, partners, map, showRoute, markerData);
+                renderPartners(container, partners, map);
                 setTimeout(autoPan, autoPanDelay || 200);
             })
             .catch(function () {
@@ -542,7 +556,7 @@
             });
     }
 
-    function renderPartners(container, partners, map, showRoute, markerData) {
+    function renderPartners(container, partners, map) {
         container.innerHTML = '';
 
         if (!partners || !partners.length) {
@@ -607,29 +621,5 @@
             container.appendChild(morePill);
         }
 
-        if (showRoute && markerData && markerData.lat && markerData.lng) {
-            var routePill = document.createElement('a');
-            routePill.href = 'https://yandex.ru/maps/?rtext=~' + markerData.lat + ',' + markerData.lng + '&z=15';
-            routePill.target = '_blank';
-            routePill.rel = 'noopener noreferrer';
-            routePill.style.cssText = [
-                'display:flex',
-                'align-items:center',
-                'justify-content:center',
-                'gap:6px',
-                'background:#fff',
-                'border-radius:50px',
-                'box-shadow:0 4px 24px rgba(0,0,0,.18)',
-                'padding:10px 20px',
-                'text-align:center',
-                'font-size:12px',
-                'font-weight:600',
-                'color:#c8a96e',
-                'text-decoration:none',
-                'transition:color .15s',
-            ].join(';');
-            routePill.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Build route';
-            container.appendChild(routePill);
-        }
     }
 })();
