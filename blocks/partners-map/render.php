@@ -222,7 +222,7 @@ $map_config = wp_json_encode([
 ]);
 
 // ── 8. Output ─────────────────────────────────────────────────────────────────
-$wrapper_classes = 'horizons-partners-map is-sidebar-collapsed';
+$wrapper_classes = 'horizons-partners-map is-sidebar-collapsed bg-navy';
 if (!$sidebar_enabled)           $wrapper_classes .= ' horizons-partners-map--no-sidebar';
 if ($sidebar_position === 'right') $wrapper_classes .= ' horizons-partners-map--sidebar-right';
 
