@@ -69,7 +69,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                                     <h2 class="h4 post-title"><?php the_title(); ?></h2>
                                  </a>
 
-                                 <div class="body-l-l mb-4 post-excerpt">
+                                 <div class="body-l-l post-excerpt">
                                     <?php
                                     $excerpt = get_the_excerpt();
                                     if (empty($excerpt)) {
