@@ -179,145 +179,36 @@
             ].join(';');
         }
 
-        function makeLabelCss(offsetX, offsetY, alignRight) {
-            return [
-                'position:absolute',
-                'left:' + offsetX + 'px',
-                'top:' + offsetY + 'px',
-                'transform:' + (alignRight ? 'translate(-100%,-50%)' : 'translateY(-50%)'),
-                'font-size:' + labelSize + 'px',
-                'font-weight:800',
-                'text-transform:uppercase',
-                'letter-spacing:.04em',
-                'color:' + labelColor,
-                'white-space:nowrap',
-                'cursor:pointer',
-            ].join(';');
-        }
-
         function makeMarkerEl(m) {
             var wrap = document.createElement('div');
             wrap.className = 'hpm-marker-wrap';
             wrap.title = m.title;
+            wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;transform:translate(0,-50%);';
 
             var dot = document.createElement('div');
             dot.className = 'hpm-dot';
-
-            if (showCount) {
-                dot.textContent = m.count;
-            }
+            dot.style.cssText = makeDotCss() + ';flex-shrink:0;';
+            if (showCount) dot.textContent = m.count;
+            wrap.appendChild(dot);
 
             var labelEl = null;
-
             if (showLabel) {
-                /* Anchor layout: wrap is a zero-size anchor at the coordinate point */
-                wrap.style.cssText = 'position:relative;width:0;height:0;cursor:pointer;display:block;';
-                dot.style.cssText = makeDotCss() + ';position:absolute;transform:translate(-50%,-50%);';
-                wrap.appendChild(dot);
-
                 labelEl = document.createElement('span');
                 labelEl.className = 'hpm-marker-label';
                 labelEl.textContent = m.title;
-                labelEl.style.cssText = makeLabelCss(size / 2 + 6, 0, false);
+                labelEl.style.cssText = [
+                    'font-size:' + labelSize + 'px',
+                    'font-weight:800',
+                    'text-transform:uppercase',
+                    'letter-spacing:.04em',
+                    'color:' + labelColor,
+                    'white-space:nowrap',
+                ].join(';');
                 wrap.appendChild(labelEl);
-
-                /* Hover: combine translate + scale because CSS rule would overwrite translate */
-                wrap.addEventListener('mouseover', function () { dot.style.transform = 'translate(-50%,-50%) scale(1.15)'; });
-                wrap.addEventListener('mouseout',  function () { dot.style.transform = 'translate(-50%,-50%)'; });
-            } else {
-                /* Flex layout (dot only, no label) */
-                wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;transform:translate(0,-50%);';
-                dot.style.cssText = makeDotCss() + ';flex-shrink:0;';
-                wrap.appendChild(dot);
             }
 
-            markerEls.push({ dot: dot, label: labelEl, svg: null });
+            markerEls.push({ dot: dot, label: labelEl });
             return wrap;
-        }
-
-        function applyLeaderLines() {
-            if (!showLabel) return;
-            var canvasRect = canvas.getBoundingClientRect();
-            if (!canvasRect.width || !canvasRect.height) return;
-
-            /* Real pixel positions via DOM — no tile-math */
-            var pos = markerEls.map(function (refs) {
-                if (!refs || !refs.dot) return null;
-                var r = refs.dot.getBoundingClientRect();
-                if (!r.width && !r.height) return null;
-                return { x: r.left + r.width / 2 - canvasRect.left, y: r.top + r.height / 2 - canvasRect.top };
-            });
-
-            var lineLen = cfg.leaderLineLen || 40;
-            var pad     = cfg.leaderSensitivity || 0;
-
-            var lw = markerEls.map(function (refs, idx) {
-                if (!refs || !refs.dot) return 0;
-                var dotW = refs.dot.getBoundingClientRect().width || size;
-                return dotW / 2 + 6 + markers[idx].title.length * Math.ceil(labelSize * 0.65) + 8;
-            });
-            var lh = labelSize + 6;
-
-            /* Detect label-box overlaps (pad = sensitivity extra pixels) */
-            var side = new Array(markers.length).fill(0); /* 0=none, -1=upper-left, +1=upper-right */
-
-            for (var i = 0; i < markers.length; i++) {
-                if (!pos[i]) continue;
-                for (var j = i + 1; j < markers.length; j++) {
-                    if (!pos[j]) continue;
-                    var xi1 = pos[i].x - pad,        xi2 = pos[i].x + lw[i] + pad;
-                    var yi1 = pos[i].y - lh/2 - pad,  yi2 = pos[i].y + lh/2 + pad;
-                    var xj1 = pos[j].x - pad,        xj2 = pos[j].x + lw[j] + pad;
-                    var yj1 = pos[j].y - lh/2 - pad,  yj2 = pos[j].y + lh/2 + pad;
-
-                    if (xi1 < xj2 && xi2 > xj1 && yi1 < yj2 && yi2 > yj1) {
-                        if (pos[i].x <= pos[j].x) {
-                            if (!side[i]) side[i] = -1; /* left  → upper-left  */
-                            if (!side[j]) side[j] =  1; /* right → upper-right */
-                        } else {
-                            if (!side[i]) side[i] =  1;
-                            if (!side[j]) side[j] = -1;
-                        }
-                    }
-                }
-            }
-
-            function addLeaderSvg(wrap, dot, dx, dy) {
-                var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                svg.style.cssText = 'position:absolute;overflow:visible;left:0;top:0;pointer-events:none;';
-                svg.setAttribute('width', '0');
-                svg.setAttribute('height', '0');
-                var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                ln.setAttribute('x1', '0'); ln.setAttribute('y1', '0');
-                ln.setAttribute('x2', String(dx)); ln.setAttribute('y2', String(dy));
-                ln.setAttribute('stroke', 'rgba(255,255,255,0.75)');
-                ln.setAttribute('stroke-width', '1.5');
-                svg.appendChild(ln);
-                wrap.insertBefore(svg, dot);
-                return svg;
-            }
-
-            markers.forEach(function (m, idx) {
-                var refs = markerEls[idx];
-                if (!refs || !refs.label) return;
-                var wrap = refs.dot.parentNode;
-                if (!wrap) return;
-
-                if (refs.svg) {
-                    try { wrap.removeChild(refs.svg); } catch (e) {}
-                    refs.svg = null;
-                }
-
-                if (side[idx] === -1) {
-                    refs.svg = addLeaderSvg(wrap, refs.dot, -lineLen, -lineLen);
-                    refs.label.style.cssText = makeLabelCss(-lineLen - 4, -lineLen, true);
-                } else if (side[idx] === 1) {
-                    refs.svg = addLeaderSvg(wrap, refs.dot, lineLen, -lineLen);
-                    refs.label.style.cssText = makeLabelCss(lineLen + 4, -lineLen, false);
-                } else {
-                    refs.label.style.cssText = makeLabelCss(size / 2 + 6, 0, false);
-                }
-            });
         }
 
         markers.forEach(function (m) {
@@ -334,22 +225,14 @@
         /* Preload all partner data in background */
         preloadAllPartners(markers);
 
-        /* Scale markers on zoom + re-check leader lines */
-        var leaderDebounce = null;
+        /* Scale markers on zoom */
         map.addChild(new ymaps3.YMapListener({
             onUpdate: function (update) {
                 if (update.location && update.location.zoom !== undefined) {
                     applyScale(calcScale(update.location.zoom));
-                    if (showLabel) {
-                        clearTimeout(leaderDebounce);
-                        leaderDebounce = setTimeout(applyLeaderLines, 300);
-                    }
                 }
             },
         }));
-
-        /* Initial leader lines after autoFitBounds animation settles */
-        if (showLabel) { setTimeout(applyLeaderLines, 600); }
 
         /* Auto fit bounds */
         if (autoFitBounds && markers.length > 1) {
