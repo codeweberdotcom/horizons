@@ -86,10 +86,14 @@
         }
 
         /* Create map */
+        var behaviors = ['drag', 'pinchZoom', 'dblClick'];
+        if (cfg.scrollZoom) behaviors.push('scrollZoom');
+        console.log('[partners-map] scrollZoom:', cfg.scrollZoom, '| zoomMin:', cfg.zoomMin, '| zoomMax:', cfg.zoomMax, '| behaviors:', behaviors);
+
         var map = new ymaps3.YMap(canvas, {
             location: { center: center, zoom: zoom },
             zoomRange: { min: cfg.zoomMin || 2, max: cfg.zoomMax || 19 },
-            behaviors: ['drag', 'scrollZoom', 'pinchZoom', 'dblClick'],
+            behaviors: behaviors,
         });
 
         map.addChild(new ymaps3.YMapDefaultSchemeLayer(schemeOptions));
@@ -280,8 +284,9 @@
             onUpdate: function (update) {
                 if (update.location && update.location.zoom !== undefined) {
                     var z = update.location.zoom;
-                    if (z > maxZ) { map.setLocation({ zoom: maxZ, duration: 0 }); return; }
-                    if (z < minZ) { map.setLocation({ zoom: minZ, duration: 0 }); return; }
+                    console.log('[partners-map] onUpdate zoom:', z, '| range:', minZ, '-', maxZ);
+                    if (z > maxZ) { console.log('[partners-map] CLAMP to max', maxZ); map.setLocation({ zoom: maxZ, duration: 0 }); return; }
+                    if (z < minZ) { console.log('[partners-map] CLAMP to min', minZ); map.setLocation({ zoom: minZ, duration: 0 }); return; }
                     applyScale(calcScale(z));
                     if (showLabel) {
                         clearTimeout(offsetDebounce);
