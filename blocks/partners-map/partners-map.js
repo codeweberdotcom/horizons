@@ -360,6 +360,7 @@
                 if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; currentPopupContainer = null; }
 
                 if (filter === 'all') {
+                    if (searchInput) { searchInput.value = ''; searchInput.dispatchEvent(new Event('input')); }
                     if (markers.length > 1) {
                         var alllngs = markers.map(function (m) { return m.lng; });
                         var alllats = markers.map(function (m) { return m.lat; });
