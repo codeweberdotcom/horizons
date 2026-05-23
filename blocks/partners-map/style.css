@@ -1,7 +1,6 @@
 ﻿/* Partners Map Block */
 
 .horizons-partners-map-block {
-    container-type: inline-size;
 }
 
 /* Layout */
@@ -300,7 +299,7 @@
 }
 
 /* Multi-column responsive */
-@container (min-width: 768px) {
+@media (min-width: 768px) {
     .horizons-partners-map__sidebar {
         width: min(calc(var(--cols-md, var(--cols-sm, 1)) * 240px), calc(100% - 24px));
     }
@@ -309,7 +308,7 @@
     }
 }
 
-@container (min-width: 1024px) {
+@media (min-width: 1024px) {
     .horizons-partners-map__sidebar {
         width: min(calc(var(--cols-lg, var(--cols-md, var(--cols-sm, 1))) * 240px), calc(100% - 24px));
     }
@@ -319,7 +318,7 @@
 }
 
 /* Responsive */
-@container (max-width: 640px) {
+@media (max-width: 640px) {
     .horizons-partners-map__sidebar {
         left: 0;
         right: 0;
