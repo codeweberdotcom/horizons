@@ -103,7 +103,7 @@
         /* Close popup on map click */
         map.addChild(new ymaps3.YMapListener({
             onClick: function () {
-                if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
+                if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; currentPopupContainer = null; }
             },
         }));
 
@@ -131,12 +131,15 @@
                     refs.label.style.fontSize = Math.round(labelSize * s) + 'px';
                 }
             });
+            if (currentPopupContainer) {
+                currentPopupContainer.style.marginTop = (Math.round(size * s / 2) + 16) + 'px';
+            }
         }
 
         function makeMarkerEl(m) {
             var wrap = document.createElement('div');
             wrap.className = 'hpm-marker-wrap';
-            wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;';
+            wrap.style.cssText = 'display:flex;align-items:center;gap:7px;cursor:pointer;transform:translate(0,-50%);';
             wrap.title = m.title;
 
             var dot = document.createElement('div');
@@ -188,7 +191,7 @@
         function spreadMarkers(mkrs, z, markerSizePx) {
             var tileSize = 256;
             var worldPx = tileSize * Math.pow(2, z);
-            var threshold = markerSizePx * 2.5;
+            var threshold = Math.max(markerSizePx * 5, 120);
 
             function lngToX(lng) { return (lng + 180) / 360 * worldPx; }
             function latToY(lat) {
@@ -205,7 +208,7 @@
                 return { x: lngToX(m.lng), y: latToY(m.lat) };
             });
 
-            for (var iter = 0; iter < 5; iter++) {
+            for (var iter = 0; iter < 10; iter++) {
                 for (var i = 0; i < items.length; i++) {
                     for (var j = i + 1; j < items.length; j++) {
                         var dx = items[i].x - items[j].x;
@@ -213,8 +216,8 @@
                         var dist = Math.sqrt(dx * dx + dy * dy);
                         if (dist < threshold) {
                             var push = dist < 0.01 ? threshold / 2 : (threshold - dist) / 2 + 1;
-                            var nx = dist < 0.01 ? Math.cos(i * 2 * Math.PI / mkrs.length) : dx / dist;
-                            var ny = dist < 0.01 ? Math.sin(i * 2 * Math.PI / mkrs.length) : dy / dist;
+                            var nx = dist < 0.01 ? 1 : dx / dist;
+                            var ny = dist < 0.01 ? 0 : dy / dist;
                             items[i].x += nx * push;
                             items[i].y += ny * push;
                             items[j].x -= nx * push;
@@ -306,7 +309,7 @@
                 var filter = btn.getAttribute('data-filter');
                 var termId = parseInt(btn.getAttribute('data-term-id') || '0', 10);
 
-                if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
+                if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; currentPopupContainer = null; }
 
                 if (filter === 'all') {
                     if (markers.length > 1) {
@@ -354,6 +357,7 @@
 
     /* ── Popup ────────────────────────────────────────────────────────────── */
     var currentPopup = null;
+    var currentPopupContainer = null;
 
     function makePill() {
         var el = document.createElement('div');
@@ -372,9 +376,10 @@
         if (currentPopup) {
             map.removeChild(currentPopup);
             currentPopup = null;
+            currentPopupContainer = null;
         }
 
-        var offset = (markerSize || 40) + 24;
+        var offset = Math.round((markerSize || 40) / 2) + 16;
 
         var container = document.createElement('div');
         container.style.cssText = [
@@ -390,6 +395,7 @@
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
         currentPopup = popup;
+        currentPopupContainer = container;
 
         function autoPan() {
             if (!currentPopup || !canvas || !map.location) return;
