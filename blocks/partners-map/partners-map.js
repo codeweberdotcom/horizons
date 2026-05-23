@@ -258,17 +258,6 @@
                 var filter = btn.getAttribute('data-filter');
                 var termId = parseInt(btn.getAttribute('data-term-id') || '0', 10);
 
-                allMarkerObjects.forEach(function (obj) {
-                    var show = filter === 'all' || obj.data.termId === termId;
-                    if (show && !obj.inMap) {
-                        map.addChild(obj.marker);
-                        obj.inMap = true;
-                    } else if (!show && obj.inMap) {
-                        map.removeChild(obj.marker);
-                        obj.inMap = false;
-                    }
-                });
-
                 if (currentPopup) { map.removeChild(currentPopup); currentPopup = null; }
 
                 if (filter === 'all') {
@@ -284,28 +273,11 @@
                         });
                     }
                 } else {
-                    var visible = allMarkerObjects.filter(function (o) { return o.data.termId === termId; });
+                    var target = allMarkerObjects.filter(function (o) { return o.data.termId === termId; })[0];
+                    if (!target) return;
 
-                    if (autoFitBounds) {
-                        if (visible.length === 1) {
-                            map.setLocation({ center: [visible[0].data.lng, visible[0].data.lat], zoom: 6, duration: 400 });
-                        } else if (visible.length > 1) {
-                            var vlngs = visible.map(function (o) { return o.data.lng; });
-                            var vlats = visible.map(function (o) { return o.data.lat; });
-                            map.setLocation({
-                                bounds: [
-                                    [Math.min.apply(null, vlngs), Math.min.apply(null, vlats)],
-                                    [Math.max.apply(null, vlngs), Math.max.apply(null, vlats)],
-                                ],
-                                duration: 400,
-                            });
-                        }
-                    }
-
-                    if (visible.length >= 1) {
-                        var target = visible[0];
-                        openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size);
-                    }
+                    map.setLocation({ center: [target.data.lng, target.data.lat], zoom: 6, duration: 400 });
+                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size);
                 }
             });
         });
@@ -351,7 +323,7 @@
         currentPopup = popup;
 
         function autoPan() {
-            if (!currentPopup || !canvas) return;
+            if (!currentPopup || !canvas || !map.location) return;
             var cr = canvas.getBoundingClientRect();
             var pr = container.getBoundingClientRect();
             var dx = 0, dy = 0;

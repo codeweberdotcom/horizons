@@ -252,14 +252,14 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
             <div class="horizons-partners-map__sidebar-inner">
 
-                <button class="horizons-partners-map__filter-btn label-u text-neutral-50 is-active" data-filter="all">
+                <button class="horizons-partners-map__filter-btn label-u fs-12 text-neutral-50 is-active" data-filter="all">
                     <?php esc_html_e('All partners', 'horizons'); ?>
                 </button>
 
                 <?php foreach ($sidebar_items as $item) : ?>
                     <?php if ($item['type'] === 'region') : ?>
 
-                        <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-region label-u text-neutral-50"
+                        <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-region label-u fs-12 text-neutral-50"
                                 data-filter="term"
                                 data-term-id="<?php echo (int) $item['term_id']; ?>">
                             <?php echo esc_html($item['name']); ?>
@@ -268,7 +268,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                     <?php else : ?>
 
                         <div class="horizons-partners-map__country-group">
-                            <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-country label-u text-neutral-50"
+                            <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-country label-u fs-12 text-neutral-50"
                                     data-filter="term"
                                     data-term-id="<?php echo (int) $item['term_id']; ?>">
                                 <?php echo esc_html($item['name']); ?>
@@ -277,7 +277,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                             <?php if (!empty($item['regions'])) : ?>
                                 <div class="horizons-partners-map__regions">
                                     <?php foreach ($item['regions'] as $region) : ?>
-                                        <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-region label-u text-neutral-50"
+                                        <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-region label-u fs-12 text-neutral-50"
                                                 data-filter="term"
                                                 data-term-id="<?php echo (int) $region['term_id']; ?>">
                                             <?php echo esc_html($region['name']); ?>
