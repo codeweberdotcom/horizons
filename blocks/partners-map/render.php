@@ -248,7 +248,6 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
         <?php /* ── Sidebar ── */ ?>
         <?php if ($sidebar_enabled) : ?>
         <aside class="horizons-partners-map__sidebar"
-               style="--cols-sm:<?php echo (int) $sidebar_cols_sm; ?>;--cols-md:<?php echo (int) $sidebar_cols_md; ?>;--cols-lg:<?php echo (int) $sidebar_cols_lg; ?>;"
                aria-label="<?php esc_attr_e('Filter partners by location', 'horizons'); ?>">
 
             <?php if ($sidebar_title) : ?>
@@ -264,7 +263,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                        aria-label="<?php esc_attr_e('Search countries', 'horizons'); ?>">
             </div>
 
-            <div class="horizons-partners-map__sidebar-inner">
+            <div class="horizons-partners-map__sidebar-inner row row-cols-<?php echo (int) $sidebar_cols_sm; ?> row-cols-md-<?php echo (int) $sidebar_cols_md; ?> row-cols-lg-<?php echo (int) $sidebar_cols_lg; ?> g-0">
 
                 <button class="horizons-partners-map__filter-btn label-u fs-12 text-neutral-50 is-active" data-filter="all">
                     <?php esc_html_e('All partners', 'horizons'); ?>
@@ -281,7 +280,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
                     <?php else : ?>
 
-                        <div class="horizons-partners-map__country-group">
+                        <div class="horizons-partners-map__country-group col">
                             <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-country label-u fs-12 text-neutral-50"
                                     data-filter="term"
                                     data-term-id="<?php echo (int) $item['term_id']; ?>">
