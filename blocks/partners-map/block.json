@@ -116,6 +116,10 @@
     "routeButton": {
       "type": "boolean",
       "default": false
+    },
+    "zoomMin": {
+      "type": "number",
+      "default": 2
     }
   }
 }

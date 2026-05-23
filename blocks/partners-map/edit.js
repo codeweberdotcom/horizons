@@ -39,6 +39,7 @@ export default function Edit({ attributes, setAttributes }) {
 		styleJson,
 		zoomControl,
 		routeButton,
+		zoomMin,
 	} = attributes;
 
 	const mapRef        = useRef(null);
@@ -228,6 +229,13 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Auto fit bounds', 'horizons')}
 						checked={autoFitBounds}
 						onChange={(val) => setAttributes({ autoFitBounds: val })}
+					/>
+					<RangeControl
+						label={__('Min zoom (world repeat fix)', 'horizons')}
+						value={zoomMin}
+						min={1}
+						max={6}
+						onChange={(val) => setAttributes({ zoomMin: val })}
 					/>
 					<ToggleControl
 						label={__('Zoom control buttons', 'horizons')}
