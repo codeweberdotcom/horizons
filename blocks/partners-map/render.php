@@ -240,12 +240,11 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
          style="height:<?php echo (int) $height; ?>px;--sw-sm:<?php echo $sw_sm; ?>px;--sw-md:<?php echo $sw_md; ?>px;--sw-lg:<?php echo $sw_lg; ?>px;--cols-sm:<?php echo $sidebar_cols_sm; ?>;--cols-md:<?php echo $sidebar_cols_md; ?>;--cols-lg:<?php echo $sidebar_cols_lg; ?>;"
          data-map-config="<?php echo esc_attr($map_config); ?>">
 
-        <?php /* ── Sidebar toggle button ── */ ?>
+        <?php /* ── Open button (visible only when sidebar collapsed) ── */ ?>
         <?php if ($sidebar_enabled) : ?>
         <button class="horizons-partners-map__toggle-btn"
-                aria-label="<?php esc_attr_e('Toggle countries list', 'horizons'); ?>">
-            <i class="uil uil-bars horizons-partners-map__toggle-icon-open"></i>
-            <i class="uil uil-times horizons-partners-map__toggle-icon-close"></i>
+                aria-label="<?php esc_attr_e('Open countries list', 'horizons'); ?>">
+            <i class="uil uil-bars"></i>
         </button>
         <?php endif; ?>
 
@@ -254,11 +253,13 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
         <aside class="horizons-partners-map__sidebar"
                aria-label="<?php esc_attr_e('Filter partners by location', 'horizons'); ?>">
 
-            <?php if ($sidebar_title) : ?>
             <div class="horizons-partners-map__sidebar-title">
-                <?php echo esc_html($sidebar_title); ?>
+                <span><?php echo $sidebar_title ? esc_html($sidebar_title) : esc_html__('Countries', 'horizons'); ?></span>
+                <button class="horizons-partners-map__sidebar-close-btn"
+                        aria-label="<?php esc_attr_e('Close sidebar', 'horizons'); ?>">
+                    <i class="uil uil-times"></i>
+                </button>
             </div>
-            <?php endif; ?>
 
             <div class="horizons-partners-map__sidebar-search">
                 <input type="search"

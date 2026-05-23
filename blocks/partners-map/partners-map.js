@@ -279,6 +279,13 @@
             });
         }
 
+        var closeBtn = wrapper.querySelector('.horizons-partners-map__sidebar-close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function () {
+                wrapper.classList.add('is-sidebar-collapsed');
+            });
+        }
+
         /* Sidebar search */
         var searchInput = wrapper.querySelector('.horizons-partners-map__search-input');
         if (searchInput) {

@@ -1,6 +1,7 @@
 /* Partners Map Block */
 
 .horizons-partners-map-block {
+    border-radius: 0 !important;
 }
 
 
@@ -10,6 +11,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
+    border-radius: 0 !important;
     box-shadow: 0 2px 16px rgba(0, 0, 0, .12);
     align-items: stretch;
 }
@@ -21,13 +23,13 @@
     background: #0b0d0e;
 }
 
-/* Sidebar toggle button */
+/* Open button — visible only when sidebar is collapsed */
 .horizons-partners-map__toggle-btn {
     position: absolute;
     top: 12px;
     left: 12px;
     z-index: 20;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 36px;
@@ -41,24 +43,11 @@
     cursor: pointer;
     font-size: 20px;
     line-height: 1;
-    transition: background .15s, color .15s, left .3s ease;
+    transition: background .15s, color .15s;
 }
 
-/* When sidebar is open — shift button to right edge of sidebar */
-.horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
-    left: calc(var(--sw-sm, 200px) + 8px);
-}
-
-@media (min-width: 768px) {
-    .horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
-        left: calc(var(--sw-md, 200px) + 8px);
-    }
-}
-
-@media (min-width: 992px) {
-    .horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
-        left: calc(var(--sw-lg, 200px) + 8px);
-    }
+.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-btn {
+    display: flex;
 }
 
 .horizons-partners-map__toggle-btn:hover {
@@ -66,35 +55,10 @@
     color: #fff;
 }
 
-/* Icon toggle: bars when collapsed, times when open */
-.horizons-partners-map__toggle-icon-open  { display: none; }
-.horizons-partners-map__toggle-icon-close { display: inline-flex; }
-
-.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-open  { display: inline-flex; }
-.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-close { display: none; }
-
-/* Right sidebar */
+/* Right sidebar: open button on right */
 .horizons-partners-map--sidebar-right .horizons-partners-map__toggle-btn {
     left: auto;
     right: 12px;
-    transition: background .15s, color .15s, right .3s ease;
-}
-
-.horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
-    right: calc(var(--sw-sm, 200px) + 8px);
-    left: auto;
-}
-
-@media (min-width: 768px) {
-    .horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
-        right: calc(var(--sw-md, 200px) + 8px);
-    }
-}
-
-@media (min-width: 992px) {
-    .horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
-        right: calc(var(--sw-lg, 200px) + 8px);
-    }
 }
 
 /* Sidebar — full height, flush to edge, width scales with columns */
@@ -145,7 +109,12 @@
 }
 
 .horizons-partners-map__sidebar-title {
-    padding: 16px 16px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px 0 16px;
+    min-height: 48px;
+    flex-shrink: 0;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: .08em;
@@ -154,10 +123,31 @@
     border-bottom: 1px solid rgba(255, 255, 255, .1);
 }
 
+.horizons-partners-map__sidebar-close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, .5);
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 6px;
+    transition: background .15s, color .15s;
+}
+
+.horizons-partners-map__sidebar-close-btn:hover {
+    background: rgba(255, 255, 255, .1);
+    color: #fff;
+}
+
 .horizons-partners-map__sidebar-inner {
     flex: 1;
     overflow-y: auto;
-    padding: 8px 0;
+    padding: 12px 0;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, .3) transparent;
     display: grid;
