@@ -21,7 +21,7 @@ function horizons_register_partner_term_meta() {
 add_action('init', 'horizons_register_partner_term_meta');
 
 // Yandex Maps v3 coordinate picker widget (shared by add and edit forms)
-function horizons_partner_term_map_widget($lat_value, $lng_value, $map_id) {
+function horizons_partner_term_map_widget($map_id) {
     global $opt_name;
     if (empty($opt_name)) $opt_name = 'redux_demo';
     $api_key = class_exists('Redux') ? Redux::get_option($opt_name, 'yandexapi') : '';
@@ -35,7 +35,7 @@ function horizons_partner_term_map_widget($lat_value, $lng_value, $map_id) {
 
     static $script_loaded = false;
     ?>
-    <div style="margin-top:10px;">
+    <div style="margin-top:10px;width:800px;max-width:100%;">
         <div style="position:relative;margin-bottom:8px;">
             <input type="text" id="<?php echo esc_attr($map_id); ?>-search"
                    placeholder="<?php esc_attr_e('Search address...', 'horizons'); ?>"
@@ -182,7 +182,7 @@ function horizons_partner_term_add_form_fields() {
         <p><?php esc_html_e('Map marker longitude (e.g. 37.6176)', 'horizons'); ?></p>
     </div>
     <div class="form-field">
-        <?php horizons_partner_term_map_widget('', '', 'partner-term-map-add'); ?>
+        <?php horizons_partner_term_map_widget('partner-term-map-add'); ?>
     </div>
     <?php
 }
@@ -214,7 +214,7 @@ function horizons_partner_term_edit_form_fields($term) {
     </tr>
     <tr>
         <td colspan="2">
-            <?php horizons_partner_term_map_widget($lat, $lng, 'partner-term-map-' . $term->term_id); ?>
+            <?php horizons_partner_term_map_widget('partner-term-map-' . $term->term_id); ?>
         </td>
     </tr>
     <?php
