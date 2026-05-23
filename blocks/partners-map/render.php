@@ -25,6 +25,9 @@ $sidebar_enabled  = (bool)  ($attributes['sidebarEnabled']   ?? true);
 $sidebar_position = $attributes['sidebarPosition'] ?? 'left';
 $sidebar_title    = $attributes['sidebarTitle']    ?? '';
 $style_json       = $attributes['styleJson']       ?? '';
+$sidebar_cols_sm  = max(1, min(5, (int) ($attributes['sidebarColsSm'] ?? 1)));
+$sidebar_cols_md  = max(1, min(5, (int) ($attributes['sidebarColsMd'] ?? 1)));
+$sidebar_cols_lg  = max(1, min(5, (int) ($attributes['sidebarColsLg'] ?? 1)));
 
 // Validate styleJson
 $style_json_valid = '';
@@ -192,7 +195,7 @@ wp_enqueue_script(
     'horizons-partners-map',
     get_stylesheet_directory_uri() . '/blocks/partners-map/partners-map.js',
     ['yandex-maps-api-v3'],
-    '1.3.0',
+    '1.3.1',
     true
 );
 
@@ -245,6 +248,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
         <?php /* ── Sidebar ── */ ?>
         <?php if ($sidebar_enabled) : ?>
         <aside class="horizons-partners-map__sidebar"
+               style="--cols-sm:<?php echo (int) $sidebar_cols_sm; ?>;--cols-md:<?php echo (int) $sidebar_cols_md; ?>;--cols-lg:<?php echo (int) $sidebar_cols_lg; ?>;"
                aria-label="<?php esc_attr_e('Filter partners by location', 'horizons'); ?>">
 
             <?php if ($sidebar_title) : ?>

@@ -33,6 +33,9 @@ export default function Edit({ attributes, setAttributes }) {
 		sidebarEnabled,
 		sidebarPosition,
 		sidebarTitle,
+		sidebarColsSm,
+		sidebarColsMd,
+		sidebarColsLg,
 		styleJson,
 	} = attributes;
 
@@ -309,6 +312,27 @@ export default function Edit({ attributes, setAttributes }) {
 								value={sidebarTitle}
 								placeholder={__('e.g. Our partners', 'horizons')}
 								onChange={(val) => setAttributes({ sidebarTitle: val })}
+							/>
+							<RangeControl
+								label={__('Columns (base)', 'horizons')}
+								value={sidebarColsSm}
+								min={1}
+								max={5}
+								onChange={(val) => setAttributes({ sidebarColsSm: val })}
+							/>
+							<RangeControl
+								label={__('Columns (≥768px)', 'horizons')}
+								value={sidebarColsMd}
+								min={1}
+								max={5}
+								onChange={(val) => setAttributes({ sidebarColsMd: val })}
+							/>
+							<RangeControl
+								label={__('Columns (≥1024px)', 'horizons')}
+								value={sidebarColsLg}
+								min={1}
+								max={5}
+								onChange={(val) => setAttributes({ sidebarColsLg: val })}
 							/>
 						</>
 					)}

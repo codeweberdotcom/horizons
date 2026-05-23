@@ -96,6 +96,18 @@
     "markerLabelColor": {
       "type": "string",
       "default": "#1a1a1a"
+    },
+    "sidebarColsSm": {
+      "type": "number",
+      "default": 1
+    },
+    "sidebarColsMd": {
+      "type": "number",
+      "default": 1
+    },
+    "sidebarColsLg": {
+      "type": "number",
+      "default": 1
     }
   }
 }
