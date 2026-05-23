@@ -245,6 +245,9 @@
                 return { x: r.left + r.width / 2 - canvasRect.left, y: r.top + r.height / 2 - canvasRect.top };
             });
 
+            var lineLen = cfg.leaderLineLen || 40;
+            var pad     = cfg.leaderSensitivity || 0;
+
             var lw = markerEls.map(function (refs, idx) {
                 if (!refs || !refs.dot) return 0;
                 var dotW = refs.dot.getBoundingClientRect().width || size;
@@ -252,29 +255,44 @@
             });
             var lh = labelSize + 6;
 
-            /* Detect label bbox overlaps */
-            var side = new Array(markers.length).fill(0); /* 0=none, -1=left, +1=right */
+            /* Detect label-box overlaps (pad = sensitivity extra pixels) */
+            var side = new Array(markers.length).fill(0); /* 0=none, -1=upper-left, +1=upper-right */
 
             for (var i = 0; i < markers.length; i++) {
+                if (!pos[i]) continue;
                 for (var j = i + 1; j < markers.length; j++) {
-                    /* Default label box for i: from pos[i].x to pos[i].x + lw[i], y ± lh/2 */
-                    var xi1 = pos[i].x, xi2 = pos[i].x + lw[i];
-                    var yi1 = pos[i].y - lh / 2, yi2 = pos[i].y + lh / 2;
-                    var xj1 = pos[j].x, xj2 = pos[j].x + lw[j];
-                    var yj1 = pos[j].y - lh / 2, yj2 = pos[j].y + lh / 2;
+                    if (!pos[j]) continue;
+                    var xi1 = pos[i].x - pad,        xi2 = pos[i].x + lw[i] + pad;
+                    var yi1 = pos[i].y - lh/2 - pad,  yi2 = pos[i].y + lh/2 + pad;
+                    var xj1 = pos[j].x - pad,        xj2 = pos[j].x + lw[j] + pad;
+                    var yj1 = pos[j].y - lh/2 - pad,  yj2 = pos[j].y + lh/2 + pad;
 
                     if (xi1 < xj2 && xi2 > xj1 && yi1 < yj2 && yi2 > yj1) {
-                        /* i is left of j → i goes left-up, j stays right */
                         if (pos[i].x <= pos[j].x) {
-                            if (!side[i]) side[i] = -1;
+                            if (!side[i]) side[i] = -1; /* left  → upper-left  */
+                            if (!side[j]) side[j] =  1; /* right → upper-right */
                         } else {
+                            if (!side[i]) side[i] =  1;
                             if (!side[j]) side[j] = -1;
                         }
                     }
                 }
             }
 
-            var lineLen = 50;
+            function addLeaderSvg(wrap, dot, dx, dy) {
+                var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                svg.style.cssText = 'position:absolute;overflow:visible;left:0;top:0;pointer-events:none;';
+                svg.setAttribute('width', '0');
+                svg.setAttribute('height', '0');
+                var ln = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                ln.setAttribute('x1', '0'); ln.setAttribute('y1', '0');
+                ln.setAttribute('x2', String(dx)); ln.setAttribute('y2', String(dy));
+                ln.setAttribute('stroke', 'rgba(255,255,255,0.75)');
+                ln.setAttribute('stroke-width', '1.5');
+                svg.appendChild(ln);
+                wrap.insertBefore(svg, dot);
+                return svg;
+            }
 
             markers.forEach(function (m, idx) {
                 var refs = markerEls[idx];
@@ -282,35 +300,18 @@
                 var wrap = refs.dot.parentNode;
                 if (!wrap) return;
 
-                /* Remove previous SVG */
                 if (refs.svg) {
                     try { wrap.removeChild(refs.svg); } catch (e) {}
                     refs.svg = null;
                 }
 
-                var dir = side[idx]; /* -1=upper-left, 0=no leader, +1 unused (label stays right) */
-
-                if (dir === -1) {
-                    var ldx = -lineLen;
-                    var ldy = -lineLen;
-
-                    /* SVG leader line */
-                    var svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.style.cssText = 'position:absolute;overflow:visible;left:0;top:0;pointer-events:none;';
-                    svg.setAttribute('width', '0');
-                    svg.setAttribute('height', '0');
-                    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-                    line.setAttribute('x1', '0'); line.setAttribute('y1', '0');
-                    line.setAttribute('x2', String(ldx)); line.setAttribute('y2', String(ldy));
-                    line.setAttribute('stroke', 'rgba(255,255,255,0.75)');
-                    line.setAttribute('stroke-width', '1.5');
-                    svg.appendChild(line);
-                    wrap.insertBefore(svg, refs.dot);
-                    refs.svg = svg;
-
-                    refs.label.style.cssText = makeLabelCss(ldx - 4, ldy, true);
+                if (side[idx] === -1) {
+                    refs.svg = addLeaderSvg(wrap, refs.dot, -lineLen, -lineLen);
+                    refs.label.style.cssText = makeLabelCss(-lineLen - 4, -lineLen, true);
+                } else if (side[idx] === 1) {
+                    refs.svg = addLeaderSvg(wrap, refs.dot, lineLen, -lineLen);
+                    refs.label.style.cssText = makeLabelCss(lineLen + 4, -lineLen, false);
                 } else {
-                    /* Default: label to the right of dot */
                     refs.label.style.cssText = makeLabelCss(size / 2 + 6, 0, false);
                 }
             });

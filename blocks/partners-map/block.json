@@ -124,6 +124,14 @@
     "zoomMax": {
       "type": "number",
       "default": 19
+    },
+    "leaderLineLen": {
+      "type": "number",
+      "default": 40
+    },
+    "leaderSensitivity": {
+      "type": "number",
+      "default": 10
     }
   }
 }

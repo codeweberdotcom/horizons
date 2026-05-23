@@ -211,8 +211,10 @@ $marker_label_size  = max(1, (int) ($attributes['markerLabelSize']  ?? 11));
 $marker_label_color = $attributes['markerLabelColor'] ?? '#1a1a1a';
 $zoom_control       = (bool) ($attributes['zoomControl']  ?? true);
 $route_button       = (bool) ($attributes['routeButton']  ?? false);
-$zoom_min           = max(1, min(19, (int) ($attributes['zoomMin'] ?? 2)));
-$zoom_max           = max(1, min(19, (int) ($attributes['zoomMax'] ?? 19)));
+$zoom_min             = max(1, min(19, (int) ($attributes['zoomMin'] ?? 2)));
+$zoom_max             = max(1, min(19, (int) ($attributes['zoomMax'] ?? 19)));
+$leader_line_len      = max(10, min(200, (int) ($attributes['leaderLineLen'] ?? 40)));
+$leader_sensitivity   = max(0, min(100, (int) ($attributes['leaderSensitivity'] ?? 10)));
 
 $map_config = wp_json_encode([
     'center'          => [$center_lng, $center_lat],
@@ -232,8 +234,10 @@ $map_config = wp_json_encode([
     'styleJson'       => $style_json_valid,
     'zoomControl'     => $zoom_control,
     'routeButton'     => $route_button,
-    'zoomMin'         => $zoom_min,
-    'zoomMax'         => $zoom_max,
+    'zoomMin'           => $zoom_min,
+    'zoomMax'           => $zoom_max,
+    'leaderLineLen'     => $leader_line_len,
+    'leaderSensitivity' => $leader_sensitivity,
 ]);
 
 // ── 8. Output ─────────────────────────────────────────────────────────────────
