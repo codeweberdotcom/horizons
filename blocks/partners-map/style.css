@@ -48,12 +48,12 @@
     color: #fff;
 }
 
-/* Icon toggle: open = bars, close = times */
-.horizons-partners-map__toggle-icon-open  { display: inline-flex; }
-.horizons-partners-map__toggle-icon-close { display: none; }
+/* Icon toggle: bars when collapsed, times when open */
+.horizons-partners-map__toggle-icon-open  { display: none; }
+.horizons-partners-map__toggle-icon-close { display: inline-flex; }
 
-.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-open  { display: none; }
-.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-close { display: inline-flex; }
+.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-open  { display: inline-flex; }
+.horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-close { display: none; }
 
 /* Right sidebar: mirror button to top-right */
 .horizons-partners-map--sidebar-right .horizons-partners-map__toggle-btn {
