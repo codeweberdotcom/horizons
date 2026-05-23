@@ -207,7 +207,7 @@
                 wrap.appendChild(labelEl);
             }
 
-            markerEls.push({ dot: dot, label: labelEl });
+            markerEls.push({ dot: dot, label: labelEl, wrap: wrap });
             return wrap;
         }
 
@@ -220,9 +220,9 @@
             var distThresh = cfg.labelDistThreshold != null ? cfg.labelDistThreshold : 120;
             var shift      = Math.round(size / 2) + 4;
 
-            /* Reset all labels first */
+            /* Reset all wraps first */
             markerEls.forEach(function (refs) {
-                if (refs.label) refs.label.style.transform = '';
+                if (refs.wrap) refs.wrap.style.transform = 'translate(0,-50%)';
             });
 
             /* Get dot pixel centres */
@@ -245,13 +245,13 @@
                     var pixDist  = Math.sqrt(dx * dx + dy * dy);
 
                     if (latDiff < latThresh && pixDist < distThresh) {
-                        /* i is higher on screen (smaller y) → shift its label up */
+                        /* i is higher on screen (smaller y) → shift it up, j down */
                         if (pos[i].y <= pos[j].y) {
-                            markerEls[i].label.style.transform = 'translateY(-' + shift + 'px)';
-                            markerEls[j].label.style.transform = 'translateY(' + shift + 'px)';
+                            markerEls[i].wrap.style.transform = 'translate(0,calc(-50% - ' + shift + 'px))';
+                            markerEls[j].wrap.style.transform = 'translate(0,calc(-50% + ' + shift + 'px))';
                         } else {
-                            markerEls[i].label.style.transform = 'translateY(' + shift + 'px)';
-                            markerEls[j].label.style.transform = 'translateY(-' + shift + 'px)';
+                            markerEls[i].wrap.style.transform = 'translate(0,calc(-50% + ' + shift + 'px))';
+                            markerEls[j].wrap.style.transform = 'translate(0,calc(-50% - ' + shift + 'px))';
                         }
                     }
                 }
