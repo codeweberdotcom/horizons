@@ -388,18 +388,6 @@
 
         var offset = Math.round((markerSize || 40) / 2) + 16;
 
-        /* Decide immediately which side to open popup on */
-        var flipLeft = false;
-        if (canvas && map.location) {
-            var canvasW = canvas.offsetWidth || 400;
-            var z0 = map.location.zoom || 4;
-            var worldPx0 = 256 * Math.pow(2, z0);
-            var markerPx0 = (coords[0] + 180) / 360 * worldPx0;
-            var centerPx0 = (map.location.center[0] + 180) / 360 * worldPx0;
-            var relX = (markerPx0 - centerPx0) + canvasW / 2;
-            flipLeft = relX > canvasW * 0.55;
-        }
-
         var container = document.createElement('div');
         container.style.cssText = [
             'min-width:220px',
@@ -409,8 +397,7 @@
             'flex-direction:column',
             'gap:2px',
             'margin-top:' + offset + 'px',
-            flipLeft ? 'transform:translateX(-100%)' : '',
-        ].filter(Boolean).join(';');
+        ].join(';');
 
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
@@ -422,8 +409,8 @@
             var cr = canvas.getBoundingClientRect();
             var pr = container.getBoundingClientRect();
 
-            /* If still overflows right, flip (in case initial guess was wrong) */
-            if (pr.right > cr.right - 8 && !flipLeft) {
+            /* If overflows right, flip popup to open leftward */
+            if (pr.right > cr.right - 8) {
                 container.style.transform = 'translateX(-100%)';
                 pr = container.getBoundingClientRect();
             }
@@ -452,7 +439,7 @@
         if (cached) {
             /* Instant render from cache */
             renderPartners(container, cached, map);
-            setTimeout(autoPan, autoPanDelay || 80);
+            setTimeout(autoPan, autoPanDelay || 200);
             return;
         }
 
@@ -464,12 +451,12 @@
         loadText.textContent = 'Loading…';
         loadPill.appendChild(loadText);
         container.appendChild(loadPill);
-        setTimeout(autoPan, autoPanDelay || 80);
+        setTimeout(autoPan, autoPanDelay || 200);
 
         fetchPartners(markerData.termType, markerData.termId)
             .then(function (partners) {
                 renderPartners(container, partners, map);
-                setTimeout(autoPan, autoPanDelay || 80);
+                setTimeout(autoPan, autoPanDelay || 200);
             })
             .catch(function () {
                 container.innerHTML = '';
