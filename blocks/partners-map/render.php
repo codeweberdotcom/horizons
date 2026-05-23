@@ -192,7 +192,7 @@ wp_enqueue_script(
     'horizons-partners-map',
     get_stylesheet_directory_uri() . '/blocks/partners-map/partners-map.js',
     ['yandex-maps-api-v3'],
-    '1.1.0',
+    '1.3.0',
     true
 );
 
