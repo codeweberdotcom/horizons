@@ -37,6 +37,8 @@ export default function Edit({ attributes, setAttributes }) {
 		sidebarColsMd,
 		sidebarColsLg,
 		styleJson,
+		zoomControl,
+		routeButton,
 	} = attributes;
 
 	const mapRef        = useRef(null);
@@ -226,6 +228,16 @@ export default function Edit({ attributes, setAttributes }) {
 						label={__('Auto fit bounds', 'horizons')}
 						checked={autoFitBounds}
 						onChange={(val) => setAttributes({ autoFitBounds: val })}
+					/>
+					<ToggleControl
+						label={__('Zoom control buttons', 'horizons')}
+						checked={zoomControl}
+						onChange={(val) => setAttributes({ zoomControl: val })}
+					/>
+					<ToggleControl
+						label={__('Route button in popup', 'horizons')}
+						checked={routeButton}
+						onChange={(val) => setAttributes({ routeButton: val })}
 					/>
 				</PanelBody>
 

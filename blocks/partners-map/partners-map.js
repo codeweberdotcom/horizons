@@ -96,9 +96,11 @@
         map.addChild(new ymaps3.YMapDefaultFeaturesLayer());
 
         /* Zoom control buttons */
-        ymaps3.import('@yandex/ymaps3-default-ui-theme').then(function (pkg) {
-            map.addChild(new pkg.YMapZoomControl({}));
-        });
+        if (cfg.zoomControl !== false) {
+            ymaps3.import('@yandex/ymaps3-default-ui-theme').then(function (pkg) {
+                map.addChild(new pkg.YMapZoomControl({}));
+            });
+        }
 
         /* Close popup on map click */
         map.addChild(new ymaps3.YMapListener({
@@ -240,7 +242,7 @@
             var marker = new ymaps3.YMapMarker({ coordinates: [vc.lng, vc.lat] }, el);
             el.addEventListener('click', function (e) {
                 e.stopPropagation();
-                openPopup(map, canvas, m, [vc.lng, vc.lat], color, size);
+                openPopup(map, canvas, m, [vc.lng, vc.lat], color, size, undefined, cfg.routeButton);
             });
             allMarkerObjects.push({ marker: marker, data: m, inMap: true, vc: vc });
             map.addChild(marker);
@@ -340,7 +342,7 @@
 
                         if (regionTargets.length === 1) {
                             map.setLocation({ center: [regionTargets[0].data.lng, regionTargets[0].data.lat], zoom: 6, duration: 400 });
-                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size, 450);
+                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size, 450, cfg.routeButton);
                         } else {
                             var rlngs = regionTargets.map(function (o) { return o.data.lng; });
                             var rlats = regionTargets.map(function (o) { return o.data.lat; });
@@ -356,7 +358,7 @@
                     }
 
                     map.setLocation({ center: [target.data.lng, target.data.lat], zoom: 6, duration: 400 });
-                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size, 450);
+                    openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size, 450, cfg.routeButton);
                 }
             });
         });
@@ -379,7 +381,7 @@
         return el;
     }
 
-    function openPopup(map, canvas, markerData, coords, accentColor, markerSize, autoPanDelay) {
+    function openPopup(map, canvas, markerData, coords, accentColor, markerSize, autoPanDelay, showRoute) {
         if (currentPopup) {
             map.removeChild(currentPopup);
             currentPopup = null;
@@ -438,7 +440,7 @@
 
         if (cached) {
             /* Instant render from cache */
-            renderPartners(container, cached, map);
+            renderPartners(container, cached, map, showRoute, markerData);
             setTimeout(autoPan, autoPanDelay || 200);
             return;
         }
@@ -455,7 +457,7 @@
 
         fetchPartners(markerData.termType, markerData.termId)
             .then(function (partners) {
-                renderPartners(container, partners, map);
+                renderPartners(container, partners, map, showRoute, markerData);
                 setTimeout(autoPan, autoPanDelay || 200);
             })
             .catch(function () {
@@ -467,7 +469,7 @@
             });
     }
 
-    function renderPartners(container, partners, map) {
+    function renderPartners(container, partners, map, showRoute, markerData) {
         container.innerHTML = '';
 
         if (!partners || !partners.length) {
@@ -530,6 +532,31 @@
             ].join(';');
             morePill.textContent = 'All partners (' + partners.length + ')';
             container.appendChild(morePill);
+        }
+
+        if (showRoute && markerData && markerData.lat && markerData.lng) {
+            var routePill = document.createElement('a');
+            routePill.href = 'https://yandex.ru/maps/?rtext=~' + markerData.lat + ',' + markerData.lng + '&z=15';
+            routePill.target = '_blank';
+            routePill.rel = 'noopener noreferrer';
+            routePill.style.cssText = [
+                'display:flex',
+                'align-items:center',
+                'justify-content:center',
+                'gap:6px',
+                'background:#fff',
+                'border-radius:50px',
+                'box-shadow:0 4px 24px rgba(0,0,0,.18)',
+                'padding:10px 20px',
+                'text-align:center',
+                'font-size:12px',
+                'font-weight:600',
+                'color:#c8a96e',
+                'text-decoration:none',
+                'transition:color .15s',
+            ].join(';');
+            routePill.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg> Build route';
+            container.appendChild(routePill);
         }
     }
 })();

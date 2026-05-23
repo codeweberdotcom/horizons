@@ -209,6 +209,8 @@ $marker_show_count = (bool) ($attributes['markerShowCount']  ?? true);
 $marker_show_label = (bool) ($attributes['markerShowLabel']  ?? false);
 $marker_label_size  = max(1, (int) ($attributes['markerLabelSize']  ?? 11));
 $marker_label_color = $attributes['markerLabelColor'] ?? '#1a1a1a';
+$zoom_control       = (bool) ($attributes['zoomControl']  ?? true);
+$route_button       = (bool) ($attributes['routeButton']  ?? false);
 
 $map_config = wp_json_encode([
     'center'          => [$center_lng, $center_lat],
@@ -226,6 +228,8 @@ $map_config = wp_json_encode([
     'markerLabelColor' => $marker_label_color,
     'clusterer'       => $clusterer,
     'styleJson'       => $style_json_valid,
+    'zoomControl'     => $zoom_control,
+    'routeButton'     => $route_button,
 ]);
 
 // ── 8. Output ─────────────────────────────────────────────────────────────────

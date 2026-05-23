@@ -108,6 +108,14 @@
     "sidebarColsLg": {
       "type": "number",
       "default": 1
+    },
+    "zoomControl": {
+      "type": "boolean",
+      "default": true
+    },
+    "routeButton": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
