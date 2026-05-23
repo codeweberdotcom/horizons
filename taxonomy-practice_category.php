@@ -74,7 +74,7 @@ if ($current_term && !is_wp_error($current_term)) {
    $category_image_id = get_term_meta($current_term->term_id, 'practice_category_image', true);
 
    if ($category_image_id) {
-      $image_url = wp_get_attachment_image_src($category_image_id, 'codeweber_awards');
+      $image_url = wp_get_attachment_image_src($category_image_id, 'cw_landscape_lg');
       if ($image_url) {
          $image_src = $image_url[0];
       }

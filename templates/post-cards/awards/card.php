@@ -11,7 +11,7 @@ if ( ! isset( $post_data ) || ! $post_data ) {
 
 $display      = cw_get_post_card_display_settings( $display_settings ?? [] );
 $template_args = wp_parse_args( $template_args ?? [], [
-	'image_size'   => 'codeweber_awards',
+	'image_size'   => 'cw_landscape_lg',
 	'border_radius' => 'rounded',
 ] );
 

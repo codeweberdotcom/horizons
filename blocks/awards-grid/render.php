@@ -90,7 +90,7 @@ $row_classes = implode( ' ', array_filter( [
 			$post_id    = get_the_ID();
 			$post_link  = get_permalink();
 			$post_title = get_the_title();
-			$image_url  = get_the_post_thumbnail_url( $post_id, 'codeweber_awards' );
+			$image_url  = get_the_post_thumbnail_url( $post_id, 'cw_landscape_lg' );
 			if ( ! $image_url ) {
 				$image_url = get_the_post_thumbnail_url( $post_id, 'full' );
 			}

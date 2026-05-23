@@ -73,7 +73,7 @@ $show_universal_title = ($pageheader_name === '1' && $archive_pageheader_id !== 
                         <figure class="overlay overlay-5 hover-scale card">
                            <a href="<?php the_permalink(); ?>">
                               <?php if (has_post_thumbnail()) : ?>
-                                 <?php the_post_thumbnail('codeweber_awards', array(
+                                 <?php the_post_thumbnail('cw_landscape_lg', array(
                                     'class' => 'img-fluid w-100',
                                     'alt' => get_the_title()
                                  )); ?>

@@ -3,10 +3,8 @@
 // Добавляем новый размер изображения (если нужно)
 function my_child_theme_image_sizes()
 {
-   add_image_size('codeweber_awards', 960, 600, true);
    add_image_size('codeweber_staff_800', 800, 800, true);
    add_image_size('codeweber_vacancy', 800, 600, true);
-   add_image_size('horizons_post_400-400', 400, 400, true);
 }
 add_action('after_setup_theme', 'my_child_theme_image_sizes', 20);
 
@@ -48,11 +46,6 @@ function limit_image_sizes_by_context($sizes, $metadata)
          'codeweber_staff_800' => array(
             'width' => 800,
             'height' => 800,
-            'crop' => true
-         ),
-         'codeweber_awards' => array(
-            'width' => 960,
-            'height' => 600,
             'crop' => true
          ),
       );
