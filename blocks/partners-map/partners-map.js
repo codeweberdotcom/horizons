@@ -185,14 +185,61 @@
             return wrap;
         }
 
-        markers.forEach(function (m) {
+        function spreadMarkers(mkrs, z, markerSizePx) {
+            var tileSize = 256;
+            var worldPx = tileSize * Math.pow(2, z);
+            var threshold = markerSizePx * 2.5;
+
+            function lngToX(lng) { return (lng + 180) / 360 * worldPx; }
+            function latToY(lat) {
+                var sinLat = Math.sin(lat * Math.PI / 180);
+                return (0.5 - Math.log((1 + sinLat) / (1 - sinLat)) / (4 * Math.PI)) * worldPx;
+            }
+            function xToLng(x) { return x / worldPx * 360 - 180; }
+            function yToLat(y) {
+                var n = Math.PI - 2 * Math.PI * y / worldPx;
+                return 180 / Math.PI * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+            }
+
+            var items = mkrs.map(function (m) {
+                return { x: lngToX(m.lng), y: latToY(m.lat) };
+            });
+
+            for (var iter = 0; iter < 5; iter++) {
+                for (var i = 0; i < items.length; i++) {
+                    for (var j = i + 1; j < items.length; j++) {
+                        var dx = items[i].x - items[j].x;
+                        var dy = items[i].y - items[j].y;
+                        var dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < threshold) {
+                            var push = dist < 0.01 ? threshold / 2 : (threshold - dist) / 2 + 1;
+                            var nx = dist < 0.01 ? Math.cos(i * 2 * Math.PI / mkrs.length) : dx / dist;
+                            var ny = dist < 0.01 ? Math.sin(i * 2 * Math.PI / mkrs.length) : dy / dist;
+                            items[i].x += nx * push;
+                            items[i].y += ny * push;
+                            items[j].x -= nx * push;
+                            items[j].y -= ny * push;
+                        }
+                    }
+                }
+            }
+
+            return items.map(function (item) {
+                return { lng: xToLng(item.x), lat: yToLat(item.y) };
+            });
+        }
+
+        var visualCoords = spreadMarkers(markers, zoom, size);
+
+        markers.forEach(function (m, idx) {
+            var vc = visualCoords[idx];
             var el = makeMarkerEl(m);
-            var marker = new ymaps3.YMapMarker({ coordinates: [m.lng, m.lat] }, el);
+            var marker = new ymaps3.YMapMarker({ coordinates: [vc.lng, vc.lat] }, el);
             el.addEventListener('click', function (e) {
                 e.stopPropagation();
-                openPopup(map, canvas, m, [m.lng, m.lat], color, size);
+                openPopup(map, canvas, m, [vc.lng, vc.lat], color, size);
             });
-            allMarkerObjects.push({ marker: marker, data: m, inMap: true });
+            allMarkerObjects.push({ marker: marker, data: m, inMap: true, vc: vc });
             map.addChild(marker);
         });
 
