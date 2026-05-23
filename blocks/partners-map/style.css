@@ -21,7 +21,7 @@
     background: #0b0d0e;
 }
 
-/* Sidebar toggle button — fixed at top-left of map */
+/* Sidebar toggle button */
 .horizons-partners-map__toggle-btn {
     position: absolute;
     top: 12px;
@@ -41,7 +41,24 @@
     cursor: pointer;
     font-size: 20px;
     line-height: 1;
-    transition: background .15s, color .15s;
+    transition: background .15s, color .15s, left .3s ease;
+}
+
+/* When sidebar is open — shift button to right edge of sidebar */
+.horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+    left: calc(var(--sw-sm, 200px) + 8px);
+}
+
+@media (min-width: 768px) {
+    .horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+        left: calc(var(--sw-md, 200px) + 8px);
+    }
+}
+
+@media (min-width: 992px) {
+    .horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+        left: calc(var(--sw-lg, 200px) + 8px);
+    }
 }
 
 .horizons-partners-map__toggle-btn:hover {
@@ -56,19 +73,37 @@
 .horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-open  { display: inline-flex; }
 .horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__toggle-icon-close { display: none; }
 
-/* Right sidebar: mirror button to top-right */
+/* Right sidebar */
 .horizons-partners-map--sidebar-right .horizons-partners-map__toggle-btn {
     left: auto;
     right: 12px;
+    transition: background .15s, color .15s, right .3s ease;
 }
 
-/* Sidebar — full height, flush to edge */
+.horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+    right: calc(var(--sw-sm, 200px) + 8px);
+    left: auto;
+}
+
+@media (min-width: 768px) {
+    .horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+        right: calc(var(--sw-md, 200px) + 8px);
+    }
+}
+
+@media (min-width: 992px) {
+    .horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+        right: calc(var(--sw-lg, 200px) + 8px);
+    }
+}
+
+/* Sidebar — full height, flush to edge, width scales with columns */
 .horizons-partners-map__sidebar {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
-    width: 280px;
+    width: var(--sw-sm, 200px);
     border-radius: 0;
     background: rgba(30, 38, 42, 0.72);
     backdrop-filter: blur(12px) saturate(160%);
@@ -79,7 +114,19 @@
     flex-direction: column;
     overflow: hidden;
     z-index: 10;
-    transition: transform .3s ease;
+    transition: transform .3s ease, width .3s ease;
+}
+
+@media (min-width: 768px) {
+    .horizons-partners-map__sidebar {
+        width: var(--sw-md, 200px);
+    }
+}
+
+@media (min-width: 992px) {
+    .horizons-partners-map__sidebar {
+        width: var(--sw-lg, 200px);
+    }
 }
 
 .horizons-partners-map.is-sidebar-collapsed .horizons-partners-map__sidebar {
@@ -113,7 +160,21 @@
     padding: 8px 0;
     scrollbar-width: thin;
     scrollbar-color: rgba(255, 255, 255, .3) transparent;
+    display: grid;
+    grid-template-columns: repeat(var(--cols-sm, 1), 1fr);
     align-content: start;
+}
+
+@media (min-width: 768px) {
+    .horizons-partners-map__sidebar-inner {
+        grid-template-columns: repeat(var(--cols-md, 1), 1fr);
+    }
+}
+
+@media (min-width: 992px) {
+    .horizons-partners-map__sidebar-inner {
+        grid-template-columns: repeat(var(--cols-lg, 1), 1fr);
+    }
 }
 
 .horizons-partners-map__sidebar-inner::-webkit-scrollbar {
@@ -141,6 +202,10 @@
     line-height: 1.3;
     gap: 8px;
     overflow: hidden;
+}
+
+.horizons-partners-map__filter-btn[data-filter="all"] {
+    grid-column: 1 / -1;
 }
 
 .horizons-partners-map__filter-btn::before {
@@ -173,7 +238,7 @@
 }
 
 
-/* Country group — no dividers */
+/* Country group */
 .horizons-partners-map__country-group {
 }
 
@@ -306,14 +371,14 @@
 }
 
 
-/* Responsive */
+/* Responsive — mobile: sidebar becomes top bar */
 @media (max-width: 640px) {
     .horizons-partners-map__sidebar {
         top: 0;
         left: 0;
         right: 0;
         bottom: auto;
-        width: 100%;
+        width: 100% !important;
         max-height: 180px;
         border-right: none;
         border-bottom: 1px solid rgba(255, 255, 255, .1);
@@ -326,6 +391,12 @@
         border-bottom: 1px solid rgba(255, 255, 255, .1);
     }
 
+    .horizons-partners-map:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn,
+    .horizons-partners-map--sidebar-right:not(.is-sidebar-collapsed) .horizons-partners-map__toggle-btn {
+        left: 12px;
+        right: auto;
+    }
+
     .horizons-partners-map__sidebar-inner {
         display: flex;
         flex-direction: row;
@@ -334,6 +405,7 @@
         overflow-y: hidden;
         padding: 8px;
         gap: 4px;
+        grid-template-columns: none;
     }
 
     .horizons-partners-map__filter-btn {

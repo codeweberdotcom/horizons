@@ -28,6 +28,10 @@ $style_json       = $attributes['styleJson']       ?? '';
 $sidebar_cols_sm  = max(1, min(5, (int) ($attributes['sidebarColsSm'] ?? 1)));
 $sidebar_cols_md  = max(1, min(5, (int) ($attributes['sidebarColsMd'] ?? 1)));
 $sidebar_cols_lg  = max(1, min(5, (int) ($attributes['sidebarColsLg'] ?? 1)));
+$col_px           = 200;
+$sw_sm            = $sidebar_cols_sm * $col_px;
+$sw_md            = $sidebar_cols_md * $col_px;
+$sw_lg            = $sidebar_cols_lg * $col_px;
 
 // Validate styleJson
 $style_json_valid = '';
@@ -233,7 +237,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 ?>
 <div <?php echo $wrapper_attrs; ?>>
     <div class="<?php echo esc_attr($wrapper_classes); ?>"
-         style="height:<?php echo (int) $height; ?>px;"
+         style="height:<?php echo (int) $height; ?>px;--sw-sm:<?php echo $sw_sm; ?>px;--sw-md:<?php echo $sw_md; ?>px;--sw-lg:<?php echo $sw_lg; ?>px;--cols-sm:<?php echo $sidebar_cols_sm; ?>;--cols-md:<?php echo $sidebar_cols_md; ?>;--cols-lg:<?php echo $sidebar_cols_lg; ?>;"
          data-map-config="<?php echo esc_attr($map_config); ?>">
 
         <?php /* ── Sidebar toggle button ── */ ?>
@@ -263,7 +267,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
                        aria-label="<?php esc_attr_e('Search countries', 'horizons'); ?>">
             </div>
 
-            <div class="horizons-partners-map__sidebar-inner row row-cols-<?php echo (int) $sidebar_cols_sm; ?> row-cols-md-<?php echo (int) $sidebar_cols_md; ?> row-cols-lg-<?php echo (int) $sidebar_cols_lg; ?> g-0">
+            <div class="horizons-partners-map__sidebar-inner">
 
                 <button class="horizons-partners-map__filter-btn label-u fs-12 text-neutral-50 is-active" data-filter="all">
                     <?php esc_html_e('All partners', 'horizons'); ?>
@@ -280,7 +284,7 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
 
                     <?php else : ?>
 
-                        <div class="horizons-partners-map__country-group col">
+                        <div class="horizons-partners-map__country-group">
                             <button class="horizons-partners-map__filter-btn horizons-partners-map__filter-country label-u fs-12 text-neutral-50"
                                     data-filter="term"
                                     data-term-id="<?php echo (int) $item['term_id']; ?>">
