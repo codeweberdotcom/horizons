@@ -388,6 +388,18 @@
 
         var offset = Math.round((markerSize || 40) / 2) + 16;
 
+        /* Decide immediately which side to open popup on */
+        var flipLeft = false;
+        if (canvas && map.location) {
+            var canvasW = canvas.offsetWidth || 400;
+            var z0 = map.location.zoom || 4;
+            var worldPx0 = 256 * Math.pow(2, z0);
+            var markerPx0 = (coords[0] + 180) / 360 * worldPx0;
+            var centerPx0 = (map.location.center[0] + 180) / 360 * worldPx0;
+            var relX = (markerPx0 - centerPx0) + canvasW / 2;
+            flipLeft = relX > canvasW * 0.55;
+        }
+
         var container = document.createElement('div');
         container.style.cssText = [
             'min-width:220px',
@@ -397,7 +409,8 @@
             'flex-direction:column',
             'gap:2px',
             'margin-top:' + offset + 'px',
-        ].join(';');
+            flipLeft ? 'transform:translateX(-100%)' : '',
+        ].filter(Boolean).join(';');
 
         var popup = new ymaps3.YMapMarker({ coordinates: coords }, container);
         map.addChild(popup);
@@ -407,11 +420,10 @@
         function autoPan() {
             if (!currentPopup || !canvas || !map.location) return;
             var cr = canvas.getBoundingClientRect();
-
-            /* Flip popup to left side if it overflows right edge */
-            container.style.transform = '';
             var pr = container.getBoundingClientRect();
-            if (pr.right > cr.right - 8) {
+
+            /* If still overflows right, flip (in case initial guess was wrong) */
+            if (pr.right > cr.right - 8 && !flipLeft) {
                 container.style.transform = 'translateX(-100%)';
                 pr = container.getBoundingClientRect();
             }
