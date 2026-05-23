@@ -390,8 +390,8 @@
 
         var container = document.createElement('div');
         container.style.cssText = [
-            'min-width:260px',
-            'max-width:320px',
+            'min-width:220px',
+            'max-width:min(320px,calc(100vw - 24px))',
             'font-family:inherit',
             'display:flex',
             'flex-direction:column',
@@ -407,7 +407,15 @@
         function autoPan() {
             if (!currentPopup || !canvas || !map.location) return;
             var cr = canvas.getBoundingClientRect();
+
+            /* Flip popup to left side if it overflows right edge */
+            container.style.transform = '';
             var pr = container.getBoundingClientRect();
+            if (pr.right > cr.right - 8) {
+                container.style.transform = 'translateX(-100%)';
+                pr = container.getBoundingClientRect();
+            }
+
             var dx = 0, dy = 0;
             if (pr.right  > cr.right  - 8) dx = pr.right  - cr.right  + 8;
             if (pr.bottom > cr.bottom - 8) dy = pr.bottom - cr.bottom + 8;
