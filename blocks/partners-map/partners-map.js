@@ -99,6 +99,9 @@
         map.addChild(new ymaps3.YMapDefaultSchemeLayer(schemeOptions));
         map.addChild(new ymaps3.YMapDefaultFeaturesLayer());
 
+        /* Track current zoom for buttons (map.location unavailable in v3) */
+        var currentZoom = zoom;
+
         /* Zoom control buttons */
         if (cfg.zoomControl !== false) {
             var zoomWrap = document.createElement('div');
@@ -119,10 +122,8 @@
                 btn.style.cssText = zoomBtnCss;
                 btn.addEventListener('click', function (e) {
                     e.stopPropagation();
-                    if (!map.location) return;
-                    var minZ = cfg.zoomMin || 2;
-                    var maxZ = cfg.zoomMax || 19;
-                    var newZ = Math.max(minZ, Math.min(maxZ, map.location.zoom + (i === 0 ? 1 : -1)));
+                    var newZ = Math.max(minZ, Math.min(maxZ, currentZoom + (i === 0 ? 1 : -1)));
+                    console.log('[partners-map] btn click | currentZoom:', currentZoom, '→', newZ);
                     map.setLocation({ zoom: newZ, duration: 200 });
                 });
                 zoomWrap.appendChild(btn);
@@ -287,6 +288,7 @@
                     console.log('[partners-map] onUpdate zoom:', z, '| range:', minZ, '-', maxZ);
                     if (z > maxZ) { console.log('[partners-map] CLAMP to max', maxZ); map.setLocation({ zoom: maxZ, duration: 0 }); return; }
                     if (z < minZ) { console.log('[partners-map] CLAMP to min', minZ); map.setLocation({ zoom: minZ, duration: 0 }); return; }
+                    currentZoom = z;
                     applyScale(calcScale(z));
                     if (showLabel) {
                         clearTimeout(offsetDebounce);
