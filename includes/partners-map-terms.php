@@ -8,13 +8,13 @@ function horizons_register_partner_term_meta() {
             'type'              => 'number',
             'single'            => true,
             'show_in_rest'      => true,
-            'sanitize_callback' => 'floatval',
+            'sanitize_callback' => fn($v) => (float) $v,
         ]);
         register_term_meta($taxonomy, 'partner_lng', [
             'type'              => 'number',
             'single'            => true,
             'show_in_rest'      => true,
-            'sanitize_callback' => 'floatval',
+            'sanitize_callback' => fn($v) => (float) $v,
         ]);
     }
 }
