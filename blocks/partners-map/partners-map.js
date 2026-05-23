@@ -228,6 +228,14 @@
             });
         }
 
+        /* Sidebar toggle */
+        var toggleBtn = wrapper.querySelector('.horizons-partners-map__toggle-btn');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', function () {
+                wrapper.classList.toggle('is-sidebar-collapsed');
+            });
+        }
+
         /* Sidebar search */
         var searchInput = wrapper.querySelector('.horizons-partners-map__search-input');
         if (searchInput) {
@@ -274,7 +282,28 @@
                     }
                 } else {
                     var target = allMarkerObjects.filter(function (o) { return o.data.termId === termId; })[0];
-                    if (!target) return;
+
+                    if (!target) {
+                        /* Country with no direct marker — fit to its region markers */
+                        var regionTargets = allMarkerObjects.filter(function (o) { return o.data.parentId === termId; });
+                        if (!regionTargets.length) return;
+
+                        if (regionTargets.length === 1) {
+                            map.setLocation({ center: [regionTargets[0].data.lng, regionTargets[0].data.lat], zoom: 6, duration: 400 });
+                            openPopup(map, canvas, regionTargets[0].data, [regionTargets[0].data.lng, regionTargets[0].data.lat], color, size);
+                        } else {
+                            var rlngs = regionTargets.map(function (o) { return o.data.lng; });
+                            var rlats = regionTargets.map(function (o) { return o.data.lat; });
+                            map.setLocation({
+                                bounds: [
+                                    [Math.min.apply(null, rlngs), Math.min.apply(null, rlats)],
+                                    [Math.max.apply(null, rlngs), Math.max.apply(null, rlats)],
+                                ],
+                                duration: 400,
+                            });
+                        }
+                        return;
+                    }
 
                     map.setLocation({ center: [target.data.lng, target.data.lat], zoom: 6, duration: 400 });
                     openPopup(map, canvas, target.data, [target.data.lng, target.data.lat], color, size);

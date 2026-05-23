@@ -139,6 +139,7 @@ foreach ($all_term_data as $term_id => $tdata) {
         'lng'      => $tdata['lng'],
         'title'    => $tdata['term']->name,
         'count'    => count($partner_ids),
+        'parentId' => ($tdata['type'] === 'region' && isset($region_to_country[$term_id])) ? $region_to_country[$term_id] : null,
     ];
 }
 
@@ -231,6 +232,15 @@ $wrapper_attrs = get_block_wrapper_attributes(['class' => 'horizons-partners-map
     <div class="<?php echo esc_attr($wrapper_classes); ?>"
          style="height:<?php echo (int) $height; ?>px;"
          data-map-config="<?php echo esc_attr($map_config); ?>">
+
+        <?php /* ── Sidebar toggle button ── */ ?>
+        <?php if ($sidebar_enabled) : ?>
+        <button class="horizons-partners-map__toggle-btn"
+                aria-label="<?php esc_attr_e('Toggle countries list', 'horizons'); ?>">
+            <span class="horizons-partners-map__toggle-icon">&#9776;</span>
+            <span class="horizons-partners-map__toggle-label"><?php esc_html_e('Countries', 'horizons'); ?></span>
+        </button>
+        <?php endif; ?>
 
         <?php /* ── Sidebar ── */ ?>
         <?php if ($sidebar_enabled) : ?>
