@@ -40,6 +40,7 @@ export default function Edit({ attributes, setAttributes }) {
 		zoomControl,
 		routeButton,
 		zoomMin,
+		zoomMax,
 	} = attributes;
 
 	const mapRef        = useRef(null);
@@ -231,11 +232,18 @@ export default function Edit({ attributes, setAttributes }) {
 						onChange={(val) => setAttributes({ autoFitBounds: val })}
 					/>
 					<RangeControl
-						label={__('Min zoom (world repeat fix)', 'horizons')}
+						label={__('Min zoom', 'horizons')}
 						value={zoomMin}
 						min={1}
-						max={6}
+						max={10}
 						onChange={(val) => setAttributes({ zoomMin: val })}
+					/>
+					<RangeControl
+						label={__('Max zoom', 'horizons')}
+						value={zoomMax}
+						min={5}
+						max={19}
+						onChange={(val) => setAttributes({ zoomMax: val })}
 					/>
 					<ToggleControl
 						label={__('Zoom control buttons', 'horizons')}

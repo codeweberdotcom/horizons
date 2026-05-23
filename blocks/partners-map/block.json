@@ -120,6 +120,10 @@
     "zoomMin": {
       "type": "number",
       "default": 2
+    },
+    "zoomMax": {
+      "type": "number",
+      "default": 19
     }
   }
 }

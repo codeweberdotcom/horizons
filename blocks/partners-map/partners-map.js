@@ -88,7 +88,7 @@
         /* Create map */
         var map = new ymaps3.YMap(canvas, {
             location: { center: center, zoom: zoom },
-            zoomRange: { min: cfg.zoomMin || 2, max: 19 },
+            zoomRange: { min: cfg.zoomMin || 2, max: cfg.zoomMax || 19 },
             behaviors: ['drag', 'scrollZoom', 'pinchZoom', 'dblClick'],
         });
 
