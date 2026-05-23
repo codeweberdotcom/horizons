@@ -272,12 +272,17 @@
         /* Preload all partner data in background */
         preloadAllPartners(markers);
 
-        /* Scale markers on zoom + re-check label offsets */
+        /* Scale markers on zoom + enforce zoomMin/zoomMax + re-check label offsets */
         var offsetDebounce = null;
+        var minZ = cfg.zoomMin || 2;
+        var maxZ = cfg.zoomMax || 19;
         map.addChild(new ymaps3.YMapListener({
             onUpdate: function (update) {
                 if (update.location && update.location.zoom !== undefined) {
-                    applyScale(calcScale(update.location.zoom));
+                    var z = update.location.zoom;
+                    if (z > maxZ) { map.setLocation({ zoom: maxZ, duration: 0 }); return; }
+                    if (z < minZ) { map.setLocation({ zoom: minZ, duration: 0 }); return; }
+                    applyScale(calcScale(z));
                     if (showLabel) {
                         clearTimeout(offsetDebounce);
                         offsetDebounce = setTimeout(applyLabelOffsets, 300);
