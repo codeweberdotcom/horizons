@@ -69,7 +69,6 @@
         var labelSize  = cfg.markerLabelSize  || 11;
         var labelColor = cfg.markerLabelColor || '#1a1a1a';
         var styleJson = cfg.styleJson   || '';
-        var scrollZoom    = cfg.scrollZoom    || false;
         var autoFitBounds = cfg.autoFitBounds !== undefined ? cfg.autoFitBounds : true;
 
         /* Map type */
@@ -86,26 +85,20 @@
             } catch (e) {}
         }
 
-        /* Sidebar margin so markers are never hidden behind the panel */
-        var hasSidebar   = !wrapper.classList.contains('horizons-partners-map--no-sidebar');
-        var sidebarRight = wrapper.classList.contains('horizons-partners-map--sidebar-right');
-        var mapMargin = hasSidebar
-            ? (sidebarRight ? [56, 280, 12, 0] : [56, 0, 12, 280])
-            : [0, 0, 0, 0];
-
         /* Create map */
         var map = new ymaps3.YMap(canvas, {
             location: { center: center, zoom: zoom },
-            margin: mapMargin,
             zoomRange: { min: 2, max: 19 },
-            restrictMapArea: [[-180, -85], [180, 85]],
-            behaviors: scrollZoom
-                ? ['drag', 'scrollZoom', 'pinchZoom', 'dblClick']
-                : ['drag', 'pinchZoom', 'dblClick'],
+            behaviors: ['drag', 'scrollZoom', 'pinchZoom', 'dblClick'],
         });
 
         map.addChild(new ymaps3.YMapDefaultSchemeLayer(schemeOptions));
         map.addChild(new ymaps3.YMapDefaultFeaturesLayer());
+
+        /* Zoom control buttons */
+        ymaps3.import('@yandex/ymaps3-default-ui-theme').then(function (pkg) {
+            map.addChild(new pkg.YMapZoomControl({}));
+        });
 
         /* Close popup on map click */
         map.addChild(new ymaps3.YMapListener({
