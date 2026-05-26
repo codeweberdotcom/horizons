@@ -1,0 +1,271 @@
+archive-awards.php:                                 <?php the_post_thumbnail('codeweber_awards', array(
+archive-partners.php:                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_staff_800');
+archive-practices1.php:// Получаем все категории таксономии practice_category
+archive-practices1.php:   'taxonomy' => 'practice_category',
+archive-practices1.php:      $color = get_term_meta($category->term_id, 'practice_category_color', true);
+archive-practices1.php:      $category_image_id = get_term_meta($category->term_id, 'practice_category_image', true);
+archive-practices1.php:               'taxonomy' => 'practice_category',
+archive-practices1.php:                        $category_image_url = wp_get_attachment_image_src($category_image_id, 'codeweber_staff_800');
+archive-practices1.php:                        $category_image = wp_get_attachment_image($category_image_id, 'practice_category_image', false, array(
+archive-vacancies.php:         <?php codeweber_posts_pagination(); ?>
+blocks/awards-grid/blocks/post-grid/render.php:					$image_size = 'codeweber_clients_300-200';
+blocks/awards-grid/blocks/post-grid/render.php:					$image_size = 'codeweber_staff';
+blocks/awards-grid/render.php:			$image_url  = get_the_post_thumbnail_url( $post_id, 'codeweber_awards' );
+blocks/practice-categories-grid/render.php:$args = ['taxonomy' => 'practice_category', 'hide_empty' => false, 'orderby' => $order_by, 'order' => $order];
+blocks/practice-categories-grid/render.php:	$args['meta_key'] = 'practice_category_order';
+blocks/practice-categories-grid/render.php:		$order_a = intval(get_term_meta($a->term_id, 'practice_category_order', true) ?: 0);
+blocks/practice-categories-grid/render.php:		$order_b = intval(get_term_meta($b->term_id, 'practice_category_order', true) ?: 0);
+blocks/practice-categories-grid/render.php:			$color = get_term_meta($term->term_id, 'practice_category_color', true);
+blocks/practice-categories-grid/render.php:			if ($use_alt_title && ($alt_title = get_term_meta($term->term_id, 'practice_category_alt_title', true))) {
+category.php:                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'codeweber_staff';
+category.php:               <?php codeweber_posts_pagination(); ?>
+front-page_1.php:               <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_staff" excerpt_length="0" title_length = "40"]'); ?>
+functions/cpt/cpt-practices.php:function cptui_register_my_taxes_practice_category()
+functions/cpt/cpt-practices.php:		"rewrite" => ['slug' => 'practice_category', 'with_front' => true],
+functions/cpt/cpt-practices.php:		"rest_base" => "practice_category",
+functions/cpt/cpt-practices.php:	register_taxonomy("practice_category", ["practices"], $args);
+functions/cpt/cpt-practices.php:add_action('init', 'cptui_register_my_taxes_practice_category');
+functions/cpt/cpt-practices.php:function add_practice_category_filter()
+functions/cpt/cpt-practices.php:		$taxonomy = 'practice_category';
+functions/cpt/cpt-practices.php:add_action('restrict_manage_posts', 'add_practice_category_filter');
+functions/cpt/cpt-practices.php:function practice_category_filter_query($query)
+functions/cpt/cpt-practices.php:	$taxonomy = 'practice_category';
+functions/cpt/cpt-practices.php:add_filter('parse_query', 'practice_category_filter_query');
+functions.php:add_action('wp_enqueue_scripts', 'horizons_enqueue_styles');
+functions.php:function horizons_enqueue_styles()
+functions.php:function horizons_theme_setup()
+functions.php:add_action('after_setup_theme', 'horizons_theme_setup'); // ← ДОБАВЬТЕ ЭТУ СТРОЧКУ!
+functions.php:function horizons_custom_mce_buttons($buttons)
+functions.php:    array_push($buttons, 'horizons_elements_menu');
+functions.php:add_filter('mce_buttons', 'horizons_custom_mce_buttons');
+functions.php:function horizons_custom_mce_plugin($plugin_array)
+functions.php:    $plugin_array['horizons_mce'] = get_stylesheet_directory_uri() . '/js/mce-horizons-menu.js';
+functions.php:add_filter('mce_external_plugins', 'horizons_custom_mce_plugin');
+functions.php:function horizons_elements_scripts()
+functions.php:add_action('wp_enqueue_scripts', 'horizons_elements_scripts');
+functions.php:add_filter( 'codeweber_post_card_templates_registry', function ( $registry ) {
+functions.php:function horizons_register_block_category($block_categories, $block_editor_context) {
+functions.php:add_filter('block_categories_all', 'horizons_register_block_category', 10, 2);
+functions.php:function horizons_register_practice_categories_grid_block() {
+functions.php:add_action('init', 'horizons_register_practice_categories_grid_block', 20);
+functions.php:function horizons_register_partners_grid_block() {
+functions.php:add_action('init', 'horizons_register_partners_grid_block', 20);
+functions.php:function horizons_register_partners_map_block() {
+functions.php:add_action('init', 'horizons_register_partners_map_block', 20);
+functions.php:function horizons_partners_map_editor_assets() {
+functions.php:add_action('enqueue_block_editor_assets', 'horizons_partners_map_editor_assets');
+functions.php:function horizons_partners_map_rest_data(WP_REST_Request $request) {
+functions.php:		'callback'            => 'horizons_partners_map_rest_data',
+functions.php:function horizons_register_awards_grid_block() {
+functions.php:add_action('init', 'horizons_register_awards_grid_block', 20);
+functions.php:function horizons_register_partners_meta_for_rest() {
+functions.php:add_action('init', 'horizons_register_partners_meta_for_rest', 10);
+functions.php:                                <?php the_post_thumbnail('codeweber_awards', array(
+functions.php:add_filter('woocommerce_billing_fields', 'horizons_make_address_optional');
+functions.php:function horizons_make_address_optional($fields) {
+functions.php:add_filter('woocommerce_default_address_fields', 'horizons_make_address_optional_default');
+functions.php:function horizons_make_address_optional_default($fields) {
+home.php:                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'horizons_post_400-400';
+home.php:               <?php codeweber_posts_pagination(); ?>
+includes/add_image_sizes.php:   add_image_size('codeweber_awards', 960, 600, true);
+includes/add_image_sizes.php:   add_image_size('codeweber_staff_800', 800, 800, true);
+includes/add_image_sizes.php:   add_image_size('codeweber_vacancy', 800, 600, true);
+includes/add_image_sizes.php:   add_image_size('horizons_post_400-400', 400, 400, true);
+includes/add_image_sizes.php:add_image_size('practice_category_image', 720, 850, true);
+includes/add_image_sizes.php:   if (!empty($_REQUEST['taxonomy']) && $_REQUEST['taxonomy'] === 'practice_category') {
+includes/add_image_sizes.php:      $context = 'practice_category';
+includes/add_image_sizes.php:   elseif (!empty($_SERVER['HTTP_REFERER']) && strpos($_SERVER['HTTP_REFERER'], 'taxonomy=practice_category') !== false) {
+includes/add_image_sizes.php:      $context = 'practice_category';
+includes/add_image_sizes.php:      $context = 'practice_category';
+includes/add_image_sizes.php:   // Если это загрузка для practice_category, ограничиваем размеры
+includes/add_image_sizes.php:   if ($context === 'practice_category') {
+includes/add_image_sizes.php:         'practice_category_image' => array(
+includes/add_image_sizes.php:         'codeweber_staff_800' => array(
+includes/add_image_sizes.php:         'codeweber_awards' => array(
+includes/blog.php: *     @type string $image_size       Размер изображения записи. По умолчанию 'horizons_staff'.
+includes/blog.php:add_shortcode('blog_posts_slider', 'horizons_blog_posts_slider_shortcode');
+includes/blog.php:function horizons_blog_posts_slider_shortcode($atts)
+includes/blog.php:      'image_size' => 'horizons_post_400-400',
+includes/disable-parent-widgets.php: * - codeweber_sidebar_widget_legal (Legal)
+includes/disable-parent-widgets.php: * - codeweber_sidebar_widget_vacancies (Vacancies)
+includes/disable-parent-widgets.php: * - codeweber_sidebar_widget_faq (FAQ)
+includes/disable-parent-widgets.php:function horizons_remove_parent_widgets() {
+includes/disable-parent-widgets.php:    remove_action('codeweber_after_widget', 'codeweber_sidebar_widget_vacancies');
+includes/disable-parent-widgets.php:    remove_action('codeweber_after_widget', 'codeweber_sidebar_widget_legal');
+includes/disable-parent-widgets.php:    // remove_action('codeweber_after_sidebar', 'codeweber_sidebar_widget_faq');
+includes/disable-parent-widgets.php:add_action('after_setup_theme', 'horizons_remove_parent_widgets', 20);
+includes/metaboxes.php:function codeweber_add_partners_additional_meta_boxes()
+includes/metaboxes.php:      'codeweber_partners_additional_meta_box_callback',
+includes/metaboxes.php:add_action('add_meta_boxes', 'codeweber_add_partners_additional_meta_boxes');
+includes/metaboxes.php:function codeweber_partners_additional_meta_box_callback($post)
+includes/metaboxes.php:function codeweber_save_partners_additional_meta($post_id)
+includes/metaboxes.php:add_action('save_post_partners', 'codeweber_save_partners_additional_meta');
+includes/metaboxes.php:function codeweber_enqueue_select2()
+includes/metaboxes.php:add_action('admin_enqueue_scripts', 'codeweber_enqueue_select2');
+includes/metaboxes.php:add_action('practice_category_add_form_fields', 'add_practice_category_fields', 10, 2);
+includes/metaboxes.php:add_action('practice_category_edit_form_fields', 'edit_practice_category_fields', 10, 2);
+includes/metaboxes.php:add_action('created_practice_category', 'save_practice_category_meta', 10, 2);
+includes/metaboxes.php:add_action('edited_practice_category', 'save_practice_category_meta', 10, 2);
+includes/metaboxes.php:function add_practice_category_fields($taxonomy)
+includes/metaboxes.php:      <label for="practice_category_color"><?php _e('Category Color', 'horizons'); ?></label>
+includes/metaboxes.php:      <select name="practice_category_color" id="practice_category_color" class="color-select">
+includes/metaboxes.php:      <label for="practice_category_alt_title"><?php _e('Alternative Title', 'horizons'); ?></label>
+includes/metaboxes.php:      <input type="text" name="practice_category_alt_title" id="practice_category_alt_title" value="">
+includes/metaboxes.php:      <label for="practice_category_order"><?php _e('Order Number', 'horizons'); ?></label>
+includes/metaboxes.php:      <input type="number" name="practice_category_order" id="practice_category_order" value="0" min="0">
+includes/metaboxes.php:function edit_practice_category_fields($term, $taxonomy)
+includes/metaboxes.php:   $color = get_term_meta($term->term_id, 'practice_category_color', true);
+includes/metaboxes.php:   $alt_title = get_term_meta($term->term_id, 'practice_category_alt_title', true);
+includes/metaboxes.php:   $order = get_term_meta($term->term_id, 'practice_category_order', true);
+includes/metaboxes.php:         <label for="practice_category_color"><?php _e('Category Color', 'horizons'); ?></label>
+includes/metaboxes.php:         <select name="practice_category_color" id="practice_category_color" class="color-select">
+includes/metaboxes.php:         <label for="practice_category_alt_title"><?php _e('Alternative Title', 'horizons'); ?></label>
+includes/metaboxes.php:         <input type="text" name="practice_category_alt_title" id="practice_category_alt_title" value="<?php echo esc_attr($alt_title); ?>">
+includes/metaboxes.php:         <label for="practice_category_order"><?php _e('Order Number', 'horizons'); ?></label>
+includes/metaboxes.php:         <input type="number" name="practice_category_order" id="practice_category_order" value="<?php echo esc_attr($order); ?>" min="0">
+includes/metaboxes.php:function save_practice_category_meta($term_id)
+includes/metaboxes.php:   if (isset($_POST['practice_category_color'])) {
+includes/metaboxes.php:         'practice_category_color',
+includes/metaboxes.php:         sanitize_text_field($_POST['practice_category_color'])
+includes/metaboxes.php:   if (isset($_POST['practice_category_alt_title'])) {
+includes/metaboxes.php:         'practice_category_alt_title',
+includes/metaboxes.php:         $_POST['practice_category_alt_title']
+includes/metaboxes.php:   if (isset($_POST['practice_category_order'])) {
+includes/metaboxes.php:         'practice_category_order',
+includes/metaboxes.php:         intval($_POST['practice_category_order'])
+includes/metaboxes.php:add_action('admin_enqueue_scripts', 'practice_category_admin_styles_scripts');
+includes/metaboxes.php:function practice_category_admin_styles_scripts()
+includes/metaboxes.php:   if ($screen->taxonomy === 'practice_category') {
+includes/metaboxes.php:add_filter('manage_edit-practice_category_columns', 'add_practice_category_columns');
+includes/metaboxes.php:add_filter('manage_practice_category_custom_column', 'show_practice_category_columns', 10, 3);
+includes/metaboxes.php:function add_practice_category_columns($columns)
+includes/metaboxes.php:function show_practice_category_columns($content, $column_name, $term_id)
+includes/metaboxes.php:      $color = get_term_meta($term_id, 'practice_category_color', true);
+includes/metaboxes.php:      $alt_title = get_term_meta($term_id, 'practice_category_alt_title', true);
+includes/metaboxes.php:      $order = get_term_meta($term_id, 'practice_category_order', true);
+includes/metaboxes.php:      'taxonomy' => 'practice_category',
+includes/metaboxes.php:      'meta_key' => 'practice_category_order',
+includes/metaboxes.php:add_action('pre_get_posts', 'practice_category_alt_title_pre_get_posts');
+includes/metaboxes.php:function practice_category_alt_title_pre_get_posts($query)
+includes/metaboxes.php:   if ($query->is_main_query() && $query->is_tax('practice_category')) {
+includes/metaboxes.php:         $alt_title = get_term_meta($term->term_id, 'practice_category_alt_title', true);
+includes/metaboxes.php:function get_practice_category_color_html($term_id = null)
+includes/metaboxes.php:      if (is_tax('practice_category') || is_category()) {
+includes/metaboxes.php:         $terms = get_the_terms(get_the_ID(), 'practice_category');
+includes/metaboxes.php:   $color = get_term_meta($term_id, 'practice_category_color', true);
+includes/metaboxes.php:function get_practice_category_alt_title($term_id = null)
+includes/metaboxes.php:      if (is_tax('practice_category')) {
+includes/metaboxes.php:      $alt_title = get_term_meta($term_id, 'practice_category_alt_title', true);
+includes/metaboxes.php:// Добавляем метаполе для выбора автора в таксономии practice_category
+includes/metaboxes.php:add_action('practice_category_edit_form_fields', 'add_practice_category_author_field', 10, 2);
+includes/metaboxes.php:add_action('practice_category_add_form_fields', 'add_practice_category_author_field', 10, 2);
+includes/metaboxes.php:function add_practice_category_author_field($term)
+includes/metaboxes.php:   $author_id = get_term_meta($term->term_id, 'practice_category_author', true);
+includes/metaboxes.php:         <label for="practice_category_author"><?php _e('Category Author', 'horizons'); ?></label>
+includes/metaboxes.php:         <select name="practice_category_author" id="practice_category_author" class="postform">
+includes/metaboxes.php:add_action('edited_practice_category', 'save_practice_category_author');
+includes/metaboxes.php:add_action('created_practice_category', 'save_practice_category_author');
+includes/metaboxes.php:function save_practice_category_author($term_id)
+includes/metaboxes.php:   if (isset($_POST['practice_category_author'])) {
+includes/metaboxes.php:      update_term_meta($term_id, 'practice_category_author', sanitize_text_field($_POST['practice_category_author']));
+includes/metaboxes.php:// Добавляем поле изображения для таксономии practice_category
+includes/metaboxes.php:add_action('practice_category_add_form_fields', 'add_practice_category_image_field', 10, 2);
+includes/metaboxes.php:add_action('practice_category_edit_form_fields', 'edit_practice_category_image_field', 10, 2);
+includes/metaboxes.php:function add_practice_category_image_field($taxonomy)
+includes/metaboxes.php:      <label for="practice_category_image"><?php _e('Category image', 'horizons'); ?></label>
+includes/metaboxes.php:      <input type="hidden" id="practice_category_image" name="practice_category_image" class="custom_media_url" value="">
+includes/metaboxes.php:function edit_practice_category_image_field($term, $taxonomy)
+includes/metaboxes.php:   $image_id = get_term_meta($term->term_id, 'practice_category_image', true);
+includes/metaboxes.php:         <label for="practice_category_image"><?php _e('Category image', 'horizons'); ?></label>
+includes/metaboxes.php:         <input type="hidden" id="practice_category_image" name="practice_category_image" value="<?php echo esc_attr($image_id); ?>">
+includes/metaboxes.php:add_action('created_practice_category', 'save_practice_category_image', 10, 2);
+includes/metaboxes.php:add_action('edited_practice_category', 'save_practice_category_image', 10, 2);
+includes/metaboxes.php:function save_practice_category_image($term_id, $tt_id)
+includes/metaboxes.php:   if (isset($_POST['practice_category_image']) && '' !== $_POST['practice_category_image']) {
+includes/metaboxes.php:      $image = sanitize_text_field($_POST['practice_category_image']);
+includes/metaboxes.php:      update_term_meta($term_id, 'practice_category_image', $image);
+includes/metaboxes.php:      delete_term_meta($term_id, 'practice_category_image');
+includes/metaboxes.php:                        $('#practice_category_image').val(attachment.id);
+includes/metaboxes.php:               $('#practice_category_image').val('');
+includes/partners-map-terms.php:function horizons_register_partner_term_meta() {
+includes/partners-map-terms.php:add_action('init', 'horizons_register_partner_term_meta');
+includes/partners-map-terms.php:function horizons_partner_term_add_form_fields() {
+includes/partners-map-terms.php:function horizons_partner_term_edit_form_fields($term) {
+includes/partners-map-terms.php:function horizons_save_partner_term_meta($term_id) {
+includes/partners-map-terms.php:    add_action("{$_taxonomy}_add_form_fields",  'horizons_partner_term_add_form_fields');
+includes/partners-map-terms.php:    add_action("{$_taxonomy}_edit_form_fields", 'horizons_partner_term_edit_form_fields');
+includes/partners-map-terms.php:    add_action("created_{$_taxonomy}",          'horizons_save_partner_term_meta');
+includes/partners-map-terms.php:    add_action("edited_{$_taxonomy}",           'horizons_save_partner_term_meta');
+includes/partners.php:         $thumbnail_url = get_the_post_thumbnail_url($post->ID, 'codeweber_staff_800');
+includes/partners.php:                  <?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_staff" excerpt_length="15"]'); ?>
+includes/practices.php:      $shortcode_atts = 'posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="4" items_lg="3" items_md="2" items_sm="2" items_xs="1" items_xxs="1" image_size="codeweber_staff" excerpt_length="15"';
+includes/shortcodes.php:function codeweber_partners_shortcode($atts)
+includes/shortcodes.php:add_shortcode('partners_grid', 'codeweber_partners_shortcode');
+includes/shortcodes.php:        'taxonomy' => 'practice_category',
+includes/shortcodes.php:        $args['meta_key'] = 'practice_category_order';
+includes/shortcodes.php:            $order_a = get_term_meta($a->term_id, 'practice_category_order', true);
+includes/shortcodes.php:            $order_b = get_term_meta($b->term_id, 'practice_category_order', true);
+includes/shortcodes.php:            $color = get_term_meta($term->term_id, 'practice_category_color', true);
+includes/shortcodes.php:                $alt_title = get_term_meta($term->term_id, 'practice_category_alt_title', true);
+includes/sidebars.php:add_action('codeweber_after_widget', function ($sidebar_id) {
+includes/sidebars.php:add_action('codeweber_after_widget', function ($sidebar_id) {
+includes/sidebars.php:         'taxonomy'   => 'practice_category',
+includes/sidebars.php:                     'taxonomy' => 'practice_category',
+includes/sidebars.php:add_action('codeweber_after_widget', function ($sidebar_id) {
+includes/sidebars.php:         <?php $image_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_vacancy'); ?>
+includes/sidebars.php:add_action('codeweber_after_widget', function ($sidebar_id) {
+includes/sidebars.php:add_action('codeweber_after_widget', function ($sidebar_id) {
+index.php:							codeweber_posts_pagination();
+sidebar-left.php:         do_action('codeweber_before_sidebar', 'sidebar-1');
+sidebar-left.php:         do_action('codeweber_after_sidebar', 'sidebar-1');
+sidebar-left.php:            do_action('codeweber_before_sidebar', $post_type);
+sidebar-left.php:            do_action('codeweber_after_sidebar', $post_type);
+sidebar-left.php:            <?php do_action('codeweber_after_widget', $post_type); ?>
+sidebar-right.php:         do_action('codeweber_before_sidebar', 'sidebar-1');
+sidebar-right.php:         do_action('codeweber_after_sidebar', 'sidebar-1');
+sidebar-right.php:            do_action('codeweber_before_sidebar', $post_type);
+sidebar-right.php:            do_action('codeweber_after_sidebar', $post_type);
+sidebar-right.php:            <?php do_action('codeweber_after_widget', $post_type); ?>
+src/blocks/post-grid/render.php:					$image_size = 'codeweber_clients_300-200';
+src/blocks/post-grid/render.php:					$image_size = 'codeweber_staff';
+tag.php:                                       $image_size = isset($atts['image_size']) ? $atts['image_size'] : 'codeweber_staff';
+tag.php:               <?php codeweber_posts_pagination(); ?>
+taxonomy-practice_category.php:   $category_author_id = get_term_meta($current_term->term_id, 'practice_category_author', true);
+taxonomy-practice_category.php:$color = get_term_meta($current_term->term_id, 'practice_category_color', true);
+taxonomy-practice_category.php:   $category_image_id = get_term_meta($current_term->term_id, 'practice_category_image', true);
+taxonomy-practice_category.php:      $image_url = wp_get_attachment_image_src($category_image_id, 'codeweber_awards');
+templates/archives/legal/legal_1.php:               'codeweber_single',
+templates/archives/partners/partners_1.php:                     $thumbnail_url = get_the_post_thumbnail_url(get_the_ID(), 'codeweber_staff_800');
+templates/archives/practices/practices_1.php:// Получаем все категории таксономии practice_category
+templates/archives/practices/practices_1.php:   'taxonomy' => 'practice_category',
+templates/archives/practices/practices_1.php:      $color = get_term_meta($category->term_id, 'practice_category_color', true);
+templates/archives/practices/practices_1.php:      $category_image_id = get_term_meta($category->term_id, 'practice_category_image', true);
+templates/archives/practices/practices_1.php:               'taxonomy' => 'practice_category',
+templates/archives/practices/practices_1.php:                        $category_image_url = wp_get_attachment_image_src($category_image_id, 'codeweber_staff_800');
+templates/archives/practices/practices_1.php:                        $category_image = wp_get_attachment_image($category_image_id, 'practice_category_image', false, array(
+templates/archives/practices/practices_2.php:// Получаем все категории таксономии practice_category
+templates/archives/practices/practices_2.php:   'taxonomy' => 'practice_category',
+templates/archives/practices/practices_2.php:      $color = get_term_meta($category->term_id, 'practice_category_color', true);
+templates/archives/practices/practices_2.php:      $category_image_id = get_term_meta($category->term_id, 'practice_category_image', true);
+templates/archives/practices/practices_2.php:               'taxonomy' => 'practice_category',
+templates/archives/practices/practices_2.php:      $category_video = get_term_meta($category->term_id, 'practice_category_video', true);
+templates/components/another-awards-grid.php:                        <img src="<?php echo get_the_post_thumbnail_url($post_single->ID, 'codeweber_single'); ?>" alt=""><span class="bg"></span></a>
+templates/content/single-awards.php:         $large_image_url = wp_get_attachment_image_src($thumbnail_id, 'codeweber_extralarge');
+templates/content/single-awards.php:               <?php the_post_thumbnail('codeweber_extralarge', array('class' => 'img-fluid')); ?>
+templates/content/single-awards.php:               <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+templates/content/single-legal.php:         $large_image_url = wp_get_attachment_image_src($thumbnail_id, 'codeweber_extralarge');
+templates/content/single-legal.php:               <?php the_post_thumbnail('codeweber_extralarge', array('class' => 'img-fluid')); ?>
+templates/content/single-legal.php:                  <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+templates/content/single-vacancies.php:               <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+templates/content/single.php:			$large_image_url = wp_get_attachment_image_src($thumbnail_id, 'codeweber_extralarge');
+templates/content/single.php:					<?php the_post_thumbnail('codeweber_extralarge', array('class' => 'img-fluid')); ?>
+templates/content/single.php:					<?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+templates/content/single.php:			<?php echo do_shortcode('[blog_posts_slider posts_per_page="6" order="ASC" nav="true" dots="true" margin="24" items_xl="2" items_lg="2" items_md="2" items_sm="1" items_xs="1" items_xxs="1" image_size="codeweber_vacancy" excerpt_length="0" title_length = "40"]'); ?>
+templates/post-cards/awards/card.php:	'image_size'   => 'codeweber_awards',
+templates/singles/awards/awards_1.php:         $large_image_url = wp_get_attachment_image_src($thumbnail_id, 'codeweber_extralarge');
+templates/singles/awards/awards_1.php:               <?php the_post_thumbnail('codeweber_extralarge', array('class' => 'img-fluid')); ?>
+templates/singles/awards/awards_1.php:               <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+templates/singles/legal/legal_1.php:         $large_image_url = wp_get_attachment_image_src($thumbnail_id, 'codeweber_extralarge');
+templates/singles/legal/legal_1.php:               <?php the_post_thumbnail('codeweber_extralarge', array('class' => 'img-fluid')); ?>
+templates/singles/legal/legal_1.php:                  <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
+templates/singles/vacancies/vacancies_1.php:               <?php codeweber_share_page(['region' => 'eu', 'button_class' => 'btn btn-dusty-navy has-ripple btn-xs btn-icon btn-icon-start dropdown-toggle mb-0 me-0']); ?>
