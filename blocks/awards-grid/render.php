@@ -103,9 +103,9 @@ $row_classes = implode( ' ', array_filter( [
 								<img decoding="async"
 								     src="<?php echo esc_url( $image_url ); ?>"
 								     alt="<?php echo esc_attr( $post_title ); ?>"
-								     style="width:100%;height:auto">
+								     class="w-100 h-auto">
 							<?php else : ?>
-								<div style="width:100%;height:200px;background:#f0f0f0;display:flex;align-items:center;justify-content:center">
+								<div class="w-100 d-flex align-items-center justify-content-center bg-light" style="height:200px">
 									<span><?php echo esc_html( $post_title ); ?></span>
 								</div>
 							<?php endif; ?>

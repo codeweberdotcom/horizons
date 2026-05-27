@@ -108,8 +108,8 @@ export default function Edit({ attributes, setAttributes, clientId }) {
 												<span>{__('No image', 'horizons')}</span>
 											</div>
 										)}
-										<div className="caption-wrapper-1 p-7" style={{ position: 'relative' }}>
-											<div className="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2" style={{ display: 'inline-block' }}>
+										<div className="caption-wrapper-1 p-7">
+											<div className="caption bg-matte-color mt-auto label-u text-neutral-50 px-4 py-2 d-inline-block">
 												{post.position || __('Position', 'horizons')}
 											</div>
 										</div>
